@@ -1,4 +1,4 @@
-$("#form1").on("submit", (e) => {
+$("#formLogin").on("submit", (e) => {
     e.preventDefault();
 
     let dataForm = {
@@ -7,10 +7,11 @@ $("#form1").on("submit", (e) => {
     };
 
     $.ajax({
-        url: "controller/login/",
+        url: $(this).attr('action'),
         type: "POST",
         data: JSON.stringify(dataForm),
         success: function (data) {
+            alert('success')
             Swal.fire({
                 icon: data.icon,
                 title: data.title,
@@ -18,6 +19,6 @@ $("#form1").on("submit", (e) => {
             }).then(() => {
                 window.location.href = data.redirect;
             });
-    }
+        }
     });
 });

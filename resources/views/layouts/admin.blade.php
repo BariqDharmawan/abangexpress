@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
+    @include('admin.partials.meta')
     <title>Admin - @yield('title')</title>
-    <link rel="stylesheet" href="{{ asset('admin/css/admin.css') }}">
-    <script src="{{ asset('admin/js/vendor.js') }}"></script>
-
+    @include('admin.partials.styles')
     @stack('styles')
 </head>
 <body>
@@ -51,23 +44,6 @@
 
         @include('admin.partials.btn-back-to-top')
     </div>
-    <script src="{{ asset('admin/js/admin.js') }}"></script>
-    @stack('scripts')
-    {{--
-            <!-- Bootstrap core JavaScript-->
-            <script src="vendor/jquery/jquery.min.js"></script>
-            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <!-- Core plugin JavaScript-->
-            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-            <!-- Custom scripts for all pages-->
-            <script src="js/sb-admin-2.min.js"></script>
-
-            <!-- Page level plugins -->
-            <script src="vendor/chart.js/Chart.min.js"></script>
-
-            <script src="js/prosesJS/auth/login.js"></script>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    --}}
+    @include('admin.partials.script')
 </body>
 </html>
