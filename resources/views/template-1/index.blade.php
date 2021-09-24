@@ -1,0 +1,333 @@
+@extends('layouts.template-1')
+@section('content')
+<!-- ======= Header ======= -->
+<header id="header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+
+        <div id="logo">
+            <h1 class="fs-3">
+                <a href="index.html">
+                    {{ strtok($aboutUs->our_name, ' ') }}
+                    <span>
+                        {{ Str::after(
+                            $aboutUs->our_name, strtok($aboutUs->our_name, ' ')
+                        ) }}
+                    </span>
+                </a>
+            </h1>
+            {{-- Uncomment below if you prefer to use an image logo
+            <a href="index.html"><img src="{{ asset('template1/img/logo.png') }}" alt=""></a> --}}
+        </div>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                @foreach ($menus as $menu)
+                <li>
+                    <a href="{{ $menu->url }}" 
+                        class="nav-link scrollto @if($loop->first) active @endif">
+                        {{ $menu->text }}
+                    </a>
+                </li>
+                @endforeach
+                <li>
+                    <a href="/landingTemplate/admin/login" style="cursor: pointer;"
+                        class="border border-dark text-center mx-2 py-2 px-4 rounded-50"> 
+                        Masuk
+                    </a>
+                </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+
+<!-- ======= hero Section ======= -->
+<section id="hero">
+
+    <div class="hero-content" data-aos="fade-up">
+        <h2>Making <span>your ideas</span><br>happen!</h2>
+        <div>
+            <a href="#about" class="btn-get-started scrollto">Get Started</a>
+            <a href="#portfolio" class="btn-projects scrollto">Our Projects</a>
+        </div>
+    </div>
+
+    <div class="hero-slider swiper-container">
+        <div class="swiper-wrapper">
+            @foreach ($heroCarousel as $carousel)
+                <div class="swiper-slide" 
+                style="background-image: url('{{ asset($carousel->img) }}"></div>    
+            @endforeach
+        </div>
+    </div>
+
+</section><!-- End Hero Section -->
+
+<main id="main">
+    <!-- ======= About Section ======= -->
+    <section id="about">
+        <div class="container" data-aos="fade-up">
+            <div class="row">
+                <div class="col-lg-6 about-img">
+                    <img src="{{ asset('template1/img/about-img.jpg') }}" alt="">
+                </div>
+
+                <div class="col-lg-6 content">
+                    <h2>Tentang Kami</h2>
+                    <ul>
+                        Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet
+                        veniam enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute
+                        nulla ipsum velit export irure minim illum fore.
+                    </ul>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg">
+                            <h5 class="fw-bold text-primary">Visi Kami</h5>
+                            <p>{{ $aboutUs['vision'] }}</p>
+                        </div>
+                        <div class="col-lg">
+                            <h5 class="fw-bold text-primary">Misi Kami</h5>
+                            {!! $aboutUs['mission']  !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Layanan Kami</h2>
+            </div>
+
+            <div class="row gy-4">
+                @foreach ($ourService as $service)
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="box">
+                        <div class="icon">
+                            <img src="{{ $service->icon }}" height="64px"
+                            alt="{{ $aboutUs->our_name . ' ' . 'Service' }}" >
+                        </div>
+                        <h4 class="title">{{ $service->title }}</h4>
+                        <p class="description">{{ $service->desc }}</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ======= Call To Action Section ======= -->
+    <section id="call-to-action">
+        <div class="container" data-aos="zoom-out">
+            <div class="row">
+                <div class="col-lg-9 text-center text-lg-start">
+                    <h3 class="cta-title">Hubungi Kami</h3>
+                    <p class="cta-text"> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt mollit anim id est laborum.</p>
+                </div>
+                <div class="col-lg-3 cta-btn-container text-center">
+                    <a class="cta-btn align-middle" href="#">Call To Action</a>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Call To Action Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Team Kami</h2>
+            </div>
+
+            <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
+                    @foreach ($ourTeam as $team)
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <p>
+                                <img src="{{ asset('template1/img/quote-sign-left.png') }}" class="quote-sign-left" alt="">
+                                {{ $team->short_desc }}
+                                <img src="{{ asset('template1/img/quote-sign-right.png') }}" class="quote-sign-right" alt="">
+                            </p>
+                            <img src="{{ asset($team->avatar) }}" 
+                            class="testimonial-img" alt="">
+                            <h3>{{ $team->name }}</h3>
+                            <h4>{{ $team->position->name }}</h4>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+        </div>
+    </section><!-- End Testimonials Section -->
+
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq section-bg my-4 bg-primary">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-header">
+                <h2 class="text-white text-center">Tanya Kami</h2>
+            </div>
+
+            <div class="accordion accordion-flush shadow p-4 bg-white" id="list-faq">
+                @foreach ($faqs as $faq)
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-faq-{{ $faq->id }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-content-faq-{{ $faq->id }}" aria-expanded="false" 
+                            aria-controls="flush-content-faq-{{ $faq->id }}">
+                            {{ $faq->question }}
+                        </button>
+                    </h2>
+                    <div id="flush-content-faq-{{ $faq->id }}" 
+                        class="accordion-collapse collapse" 
+                        aria-labelledby="flush-faq-{{ $faq->id }}"
+                        data-bs-parent="#list-faq">
+                        <div class="accordion-body">
+                            {{ $faq->answer }}
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ======= Team Section ======= -->
+        <!--<section id="team">-->
+        <!--  <div class="container" data-aos="fade-up">-->
+        <!--    <div class="section-header">-->
+        <!--      <h2>Our Team</h2>-->
+        <!--    </div>-->
+        <!--    <div class="row">-->
+        <!--      <div class="col-lg-3 col-md-6">-->
+        <!--        <div class="member">-->
+        <!--          <div class="pic"><img src="{{ asset('template1/img/team-1.jpg') }}" alt=""></div>-->
+        <!--          <div class="details">-->
+        <!--            <h4>Walter White</h4>-->
+        <!--            <span>Chief Executive Officer</span>-->
+        <!--            <div class="social">-->
+        <!--              <a href=""><i class="bi bi-twitter"></i></a>-->
+        <!--              <a href=""><i class="bi bi-facebook"></i></a>-->
+        <!--              <a href=""><i class="bi bi-instagram"></i></a>-->
+        <!--              <a href=""><i class="bi bi-linkedin"></i></a>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--      </div>-->
+
+        <!--      <div class="col-lg-3 col-md-6">-->
+        <!--        <div class="member">-->
+        <!--          <div class="pic"><img src="{{ asset('template1/img/team-2.jpg') }}" alt=""></div>-->
+        <!--          <div class="details">-->
+        <!--            <h4>Sarah Jhinson</h4>-->
+        <!--            <span>Product Manager</span>-->
+        <!--            <div class="social">-->
+        <!--              <a href=""><i class="bi bi-twitter"></i></a>-->
+        <!--              <a href=""><i class="bi bi-facebook"></i></a>-->
+        <!--              <a href=""><i class="bi bi-instagram"></i></a>-->
+        <!--              <a href=""><i class="bi bi-linkedin"></i></a>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--      </div>-->
+
+        <!--      <div class="col-lg-3 col-md-6">-->
+        <!--        <div class="member">-->
+        <!--          <div class="pic"><img src="{{ asset('template1/img/team-3.jpg') }}" alt=""></div>-->
+        <!--          <div class="details">-->
+        <!--            <h4>William Anderson</h4>-->
+        <!--            <span>CTO</span>-->
+        <!--            <div class="social">-->
+        <!--              <a href=""><i class="bi bi-twitter"></i></a>-->
+        <!--              <a href=""><i class="bi bi-facebook"></i></a>-->
+        <!--              <a href=""><i class="bi bi-instagram"></i></a>-->
+        <!--              <a href=""><i class="bi bi-linkedin"></i></a>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--      </div>-->
+
+        <!--      <div class="col-lg-3 col-md-6">-->
+        <!--        <div class="member">-->
+        <!--          <div class="pic"><img src="{{ asset('template1/img/team-4.jpg') }}" alt=""></div>-->
+        <!--          <div class="details">-->
+        <!--            <h4>Amanda Jepson</h4>-->
+        <!--            <span>Accountant</span>-->
+        <!--            <div class="social">-->
+        <!--              <a href=""><i class="bi bi-twitter"></i></a>-->
+        <!--              <a href=""><i class="bi bi-facebook"></i></a>-->
+        <!--              <a href=""><i class="bi bi-instagram"></i></a>-->
+        <!--              <a href=""><i class="bi bi-linkedin"></i></a>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--      </div>-->
+        <!--    </div>-->
+
+        <!--  </div>-->
+    <!--</section>  -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Kontak Kami</h2>
+            </div>
+
+            <div class="row contact-info">
+
+                <div class="col-md-4">
+                    <div class="contact-address">
+                        <i class="bi bi-geo-alt"></i>
+                        <h3>Address</h3>
+                        <address>{{ $ourContact->address }}</address>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="contact-phone">
+                        <i class="bi bi-phone"></i>
+                        <h3>Phone Number</h3>
+                        <p>
+                            <a href="tel:{{ $ourContact->telephone }}">
+                                +62 {{ $ourContact->telephone }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="contact-email">
+                        <i class="bi bi-envelope"></i>
+                        <h3>Email</h3>
+                        <p>
+                            <a href="mailto:{{ $ourContact->email }}">
+                                {{ $ourContact->email }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mb-4">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22864.11283411948!2d-73.96468908098944!3d40.630720240038435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sbg!4v1540447494452"
+                width="100%" height="380" frameborder="0" 
+                style="border:0" allowfullscreen></iframe>
+        </div>
+    </section><!-- End Contact Section -->
+</main><!-- End #main -->
+@endsection

@@ -13,3 +13,12 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/public/admin/*
+public/fonts
+yarn.lock
+public/css
+public/template1
+public/template2
+public/uploaded
+public/admin
+**/**/*.map
