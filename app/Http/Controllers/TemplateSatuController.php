@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper\Helper;
 use App\Models\AboutUs;
 use App\Models\Faq;
+use App\Models\FirstHeroCarouselLanding;
 use App\Models\OurContact;
 use App\Models\OurService;
 use App\Models\OurTeam;
@@ -21,7 +22,7 @@ class TemplateSatuController extends Controller
     public function __invoke(Request $request)
     {
 
-        $heroCarousel = Helper::getJson('dummy/carousel.json');
+        $heroCarousel = FirstHeroCarouselLanding::all();
         $menus = Helper::getJson('template-1-menu.json');
 
         $aboutUs = AboutUs::first();

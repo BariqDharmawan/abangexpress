@@ -18,6 +18,7 @@ class CreateAboutUsTable extends Migration
             $table->string('our_name', 10);
             $table->string('our_vision');
             $table->text('our_mission');
+            $table->text('address_embed')->nullable();
             $table->timestamps();
         });
     }
