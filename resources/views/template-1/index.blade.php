@@ -74,21 +74,17 @@
                 </div>
 
                 <div class="col-lg-6 content">
-                    <h2>Tentang Kami</h2>
-                    <ul>
-                        Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet
-                        veniam enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute
-                        nulla ipsum velit export irure minim illum fore.
-                    </ul>
+                    <x-section-header text="{{ $landingSection[0]->section_name }}"/>
+                    <p>{{ $landingSection[0]->desc }}</p>
                     <br>
                     <div class="row">
                         <div class="col-lg">
                             <h5 class="fw-bold text-primary">Visi Kami</h5>
-                            <p>{{ $aboutUs['vision'] }}</p>
+                            <p>{{ $aboutUs->our_vision }}</p>
                         </div>
                         <div class="col-lg">
                             <h5 class="fw-bold text-primary">Misi Kami</h5>
-                            {!! $aboutUs['mission']  !!}
+                            {!! $aboutUs->our_mission  !!}
                         </div>
                     </div>
                 </div>
@@ -100,9 +96,7 @@
     <!-- ======= Services Section ======= -->
     <section id="services">
         <div class="container" data-aos="fade-up">
-            <div class="section-header">
-                <h2>Layanan Kami</h2>
-            </div>
+            <x-section-header text="{{ $landingSection[1]->section_name }}"/>
 
             <div class="row gy-4">
                 @foreach ($ourService as $service)
@@ -127,10 +121,8 @@
         <div class="container" data-aos="zoom-out">
             <div class="row">
                 <div class="col-lg-9 text-center text-lg-start">
-                    <h3 class="cta-title">Hubungi Kami</h3>
-                    <p class="cta-text"> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                        deserunt mollit anim id est laborum.</p>
+                    <h3 class="cta-title">{{ $landingSection[2]->section_name }}</h3>
+                    <p class="cta-text">{{ $landingSection[2]->desc }}</p>
                 </div>
                 <div class="col-lg-3 cta-btn-container text-center">
                     <a class="cta-btn align-middle" href="#">Call To Action</a>
@@ -142,9 +134,7 @@
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials">
         <div class="container" data-aos="fade-up">
-            <div class="section-header">
-                <h2>Team Kami</h2>
-            </div>
+            <x-section-header text="{{ $landingSection[3]->section_name }}"/>
 
             <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
                 <div class="swiper-wrapper">
@@ -174,9 +164,8 @@
     <section id="faq" class="faq section-bg my-4 bg-primary">
         <div class="container" data-aos="fade-up">
 
-            <div class="section-header">
-                <h2 class="text-white text-center">Tanya Kami</h2>
-            </div>
+            <x-section-header text="{{ $landingSection[4]->section_name }}" 
+            class="text-white text-center" />
 
             <div class="accordion accordion-flush shadow p-4 bg-white" id="list-faq">
                 @foreach ($faqs as $faq)
@@ -282,9 +271,7 @@
     <!-- ======= Contact Section ======= -->
     <section id="contact">
         <div class="container" data-aos="fade-up">
-            <div class="section-header">
-                <h2>Kontak Kami</h2>
-            </div>
+            <x-section-header text="{{ $landingSection[5]->section_name }}"/>
 
             <div class="row contact-info">
 

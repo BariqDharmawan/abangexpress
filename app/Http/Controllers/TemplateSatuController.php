@@ -6,6 +6,7 @@ use App\Helper\Helper;
 use App\Models\AboutUs;
 use App\Models\Faq;
 use App\Models\FirstHeroCarouselLanding;
+use App\Models\LandingSectionDesc;
 use App\Models\OurContact;
 use App\Models\OurService;
 use App\Models\OurTeam;
@@ -36,9 +37,11 @@ class TemplateSatuController extends Controller
 
         $ourContact = OurContact::first();
 
+        $landingSection = LandingSectionDesc::all();
+
         return view('template-1.index', compact(
             'firstWordAppName', 'heroCarousel', 'menus', 'aboutUs', 
-            'ourService', 'ourTeam', 'faqs', 'ourContact'
+            'ourService', 'ourTeam', 'faqs', 'ourContact', 'landingSection'
         ));
     }
 }

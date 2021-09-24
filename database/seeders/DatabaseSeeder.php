@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             PositionListSeeder::class,
             OurTeamSeeder::class,
             FaqSeeder::class,
-            OurContactSeeder::class
+            OurContactSeeder::class,
+            LandingSectionDescSeeder::class
         ]);
     }
 }
