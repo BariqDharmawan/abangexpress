@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,16 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/', 'template-1', 301);
+
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('dashboard', 'DashboardController@index');
 });
 
 Route::prefix('template-1')->name('template-1.')->group(function() {
-    
+    Route::get('/', 'TemplateSatuController');
 });
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('template-2')->name('template-2.')->group(function() {
+    
 });
 
 Auth::routes();

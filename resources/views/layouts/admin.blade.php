@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @include('admin.partials.meta')
-    <title>Admin - @yield('title')</title>
+    @include('partials.meta', ['prefixTitle' => 'Admin'])
     @include('admin.partials.styles')
     @stack('styles')
 </head>
