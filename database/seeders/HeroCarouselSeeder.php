@@ -1,0 +1,25 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\FirstHeroCarouselLanding;
+use Illuminate\Database\Seeder;
+
+class HeroCarouselSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $carousels = ['1.jpg', '2.jpg','3.jpg','4.jpg','5.jpg'];
+
+        foreach ($carousels as $carousel) {
+            FirstHeroCarouselLanding::create([
+                'img' => 'uploaded/dummy/hero-carousel/' . $carousel
+            ]);
+        }
+    }
+}
