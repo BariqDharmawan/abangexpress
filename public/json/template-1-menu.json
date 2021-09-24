@@ -1,0 +1,26 @@
+[
+    {
+        "url": "#hero",
+        "text": "Home"
+    },
+    {
+        "url": "#about",
+        "text": "Tentang Kami"
+    },
+    {
+        "url": "#services",
+        "text": "Layanan Kami"
+    },
+    {
+        "url": "#faq",
+        "text": "Tanya Kami"
+    },
+    {
+        "url": "#testimonials",
+        "text": "Team Kami"
+    },
+    {
+        "url": "#contact",
+        "text": "Kontak Kami"
+    }
+]
