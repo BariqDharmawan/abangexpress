@@ -1,4 +1,4 @@
-<script src="{{ asset('template1/js/app.js') }}"></script>
+<script src="{{ asset($path . '/js/app.js') }}"></script>
 @stack('scripts')
 
 {{-- template 1 vendor JS --}}

@@ -25,7 +25,7 @@ Route::prefix('template-1')->name('template-1.')->group(function() {
 });
 
 Route::prefix('template-2')->name('template-2.')->group(function() {
-    
+    Route::get('/', 'TemplateDuaController');
 });
 
 Auth::routes();

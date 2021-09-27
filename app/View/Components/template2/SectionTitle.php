@@ -1,22 +1,21 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\template2;
 
 use Illuminate\View\Component;
 
-class SectionHeader extends Component
+class SectionTitle extends Component
 {
+    public $heading, $desc;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-
-    public $text, $desc;
-
-    public function __construct($text, $desc = null)
+    public function __construct($heading, $desc = null)
     {
-        $this->text = $text;
+        $this->heading = $heading;
         $this->desc = $desc;
     }
 
@@ -27,6 +26,6 @@ class SectionHeader extends Component
      */
     public function render()
     {
-        return view('components.section-header');
+        return view('components.template2.section-title');
     }
 }

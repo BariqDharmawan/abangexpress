@@ -22,7 +22,7 @@ class FaqFactory extends Factory
     public function definition()
     {
         return [
-            'question' => $this->faker->word(5),
+            'question' => $this->faker->unique()->word(5),
             'answer' => $this->faker->sentence(3)
         ];
     }

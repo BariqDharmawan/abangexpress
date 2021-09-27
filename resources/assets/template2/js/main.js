@@ -1,3 +1,11 @@
+import Swiper, { Navigation, Pagination } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+import GLightbox from 'glightbox';
+const Isotope = require('isotope-layout');
+
 /**
 * Template Name: Arsha - v4.4.0
 * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
@@ -80,6 +88,7 @@
   let selectHeader = select('#header')
   if (selectHeader) {
     const headerScrolled = () => {
+        console.log('scrolling header')
       if (window.scrollY > 100) {
         selectHeader.classList.add('header-scrolled')
       } else {

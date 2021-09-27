@@ -15,7 +15,8 @@ class CreateLandingSectionDescsTable extends Migration
     {
         Schema::create('landing_section_descs', function (Blueprint $table) {
             $table->id();
-            $table->text('desc')->nullable();
+            $table->text('first_desc')->nullable();
+            $table->text('second_desc')->nullable();
             $table->string('section_name');
             $table->timestamps();
         });

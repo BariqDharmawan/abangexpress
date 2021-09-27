@@ -33,19 +33,22 @@ mix.js(`${template1Path}/js/app.js`, 'public/template1/js')
         processCssUrls: false 
     })
     .copy(`${template1Path}/img`, 'public/template1/img')
-    .copy('node_modules/bootstrap-icons/font/fonts', 'public/template1/css/fonts')
-    .copy('node_modules/boxicons/fonts', 'public/template1/fonts')
-    .copy('resources/assets/img/favicon', 'public/img/favicon')
     .sourceMaps();
 
+//general asset
 mix.copy('resources/assets/dummy', 'public/uploaded/dummy')
+    .copy('node_modules/bootstrap-icons/font/fonts', 'public/template1/css/fonts')
+    .copy('node_modules/bootstrap-icons/font/fonts', 'public/template2/css/fonts')
+    .copy('node_modules/boxicons/fonts', 'public/template1/fonts')
+    .copy('node_modules/boxicons/fonts', 'public/template2/fonts')
+    .copy('resources/assets/img/favicon', 'public/img/favicon')
 
 //asset for template 2
-// mix.js(`${template2Path}/js/app.js`, 'public/template2/js')
-//     .js(`${template2Path}/js/vendor.js`, 'public/template2/js')
-//     .sass(`${template2Path}/sass/app.scss`, 'public/template2/css/app.css')
-//     .options({
-//         processCssUrls: false 
-//     })
-//     .copy(`${template2Path}/img`, 'public/template2/img')
-//     .sourceMaps();
+mix.js(`${template2Path}/js/app.js`, 'public/template2/js')
+    .js(`${template2Path}/js/vendor.js`, 'public/template2/js')
+    .sass(`${template2Path}/sass/app.scss`, 'public/template2/css/app.css')
+    .options({
+        processCssUrls: false 
+    })
+    .copy(`${template2Path}/img`, 'public/template2/img')
+    .sourceMaps();
