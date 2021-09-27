@@ -120,19 +120,16 @@
 
             <x-template2.section-title heading="LAYANAN KAMI" />
 
-            <div class="row">
+            <div class="row" id="load-our-service">
                 {{-- @for ($i = 0; $i < 4; $i++) --}}
                 <div class="col-xl-3 col-md-6 d-flex align-items-stretch" 
                 data-aos="zoom-in" data-aos-delay="{{ ($i + 1) * 100 }}">
                     <div class="icon-box">
                         <div class="icon"><i class="bx bxl-dribbble"></i></div>
                         <h4>
-                            <a href="">{{ $i }} Lorem Ipsum</a>
+                            <a href=""></a>
                         </h4>
-                        <p>
-                            Voluptatum deleniti atque corrupti quos dolores et quas 
-                            molestias excepturi
-                        </p>
+                        <p></p>
                     </div>
                 </div>
                 {{-- @endfor --}}

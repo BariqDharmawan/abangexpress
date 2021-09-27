@@ -4,18 +4,30 @@ let datas = null
 let elRecord = null
 let parentData = null
 
-function getFaq(urlApi) {
-    axios.get(urlApi).then((response) => {
-        parentData = document.querySelector('#load-faq')
+async function getAjax(urlApi, parentEl) {
+    let response = null, datas = null
+    try {
+        response = await axios.get(urlApi)
+        datas = response.data
 
-        let accordionToggler = null
-        datas = response.data;
+        const parentData = document.querySelector(parentEl).cloneNode(true)
         
-        for (const record of datas) {
+        return {parentData, datas}
+
+    } catch (error) {
+        console.error(error)
+    }
+
+}
+
+function getFaq(urlApi) {
+    let accordionToggler = null
+
+    getAjax(urlApi, '#load-faq').then(result => {
+        for (const record of result.datas) {
             const idFaq = record.question.toLowerCase().replaceAll(' ', '-')
 
-            elRecord = parentData.querySelector('.accordion-faq').cloneNode(true)
-
+            elRecord = result.parentData.querySelector('.accordion-faq').cloneNode(true)
             elRecord.querySelector('.accordion__heading').textContent = record.question
             elRecord.querySelector('.accordion__text p').textContent = record.answer
             
@@ -26,31 +38,16 @@ function getFaq(urlApi) {
 
             elRecord.querySelector('.accordion__text').id = `accordion-list-${idFaq}`
             
-            parentData.appendChild(elRecord)
+            console.info(`elRecord: `, elRecord)
+            document.querySelector(`#${result.parentData.id}`).appendChild(elRecord)
         }
 
+        //remove `initial` element
         document.querySelector('.accordion-faq').remove()
-
-        parentData.querySelectorAll('.accordion-faq:not(:first-child)').forEach(faq => {
-            faq.querySelector('[id*="accordion-list-"]').classList.remove('show')
-            
-            faq.querySelector('.toggler-accordion').classList.remove('collapse')
-            faq.querySelector('.toggler-accordion').classList.add('collapsed')
-        })
-
-    })
-    .catch(error => console.error(error))
-}
-
-function getOurService(urlApi) {
-    axios.get(urlApi).then(response => {
-        datas = response.data
-        console.info(response)
     })
 }
 
 function getContact(urlApi) {
-    let contactEl = null
 
     axios.get(urlApi).then((response) => {
 
@@ -59,6 +56,7 @@ function getContact(urlApi) {
 
         const ctaEmail = document.querySelector('#cta-email')
         if (ctaEmail) {
+            ctaEmail.href = `mailto:${datas.email}`
             ctaEmail.textContent = datas.email
         }
 
@@ -99,13 +97,11 @@ function getContact(urlApi) {
 }
 
 function getOurTeam(urlApi) {
+
     let memberInfo = {}
     axios.get(urlApi).then((response) => {
         parentData = document.querySelector('#load-member')
         datas = response.data
-
-        console.info(datas)
-
         
         for (const person of datas) {
 
@@ -118,7 +114,6 @@ function getOurTeam(urlApi) {
 
             elRecord = parentData.querySelector('.member-item').cloneNode(true)
             for (const member in memberInfo) {
-                console.info(`${member}: ${memberInfo[member]}`)
                 
                 const isNotImg = !elRecord.querySelector(`.member-info__${member}`)
                                         .hasAttribute('src')
@@ -131,8 +126,6 @@ function getOurTeam(urlApi) {
                 }
 
             }
-
-            console.info(' ')
             parentData.appendChild(elRecord)
         }
 
@@ -142,4 +135,4 @@ function getOurTeam(urlApi) {
     }).catch(error => console.error(error))
 }
 
-export {getFaq, getContact, getOurService, getOurTeam}
+export {getFaq, getContact, getOurTeam}
