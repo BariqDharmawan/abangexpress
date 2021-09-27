@@ -1,20 +1,23 @@
 @extends('layouts.template-2')
+
 @section('content')
-    <!-- ======= Hero Section ======= -->
+<!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
 
     <div class="container">
         <div class="row">
             <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-                <h1>Better Solutions For Your Business</h1>
-                <h2>We are team of talented designers making websites with Bootstrap</h2>
+                <h1>{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h1>
+                <h2>{{ $aboutUs->sub_slogan }}</h2>
                 <div class="d-flex justify-content-center justify-content-lg-start">
                     <a href="#about" class="btn-get-started scrollto">Get Started</a>
-                    <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" 
+                    @if ($isProfileVideoExist)
+                    <a href="{{ $aboutUs->our_video }}" 
                     class="glightbox btn-watch-video">
                         <i class="bi bi-play-circle"></i>
                         <span>Watch Video</span>
                     </a>
+                    @endif
                 </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
@@ -118,7 +121,7 @@
             <x-template2.section-title heading="LAYANAN KAMI" />
 
             <div class="row">
-                @for ($i = 0; $i < 4; $i++)
+                {{-- @for ($i = 0; $i < 4; $i++) --}}
                 <div class="col-xl-3 col-md-6 d-flex align-items-stretch" 
                 data-aos="zoom-in" data-aos-delay="{{ ($i + 1) * 100 }}">
                     <div class="icon-box">
@@ -132,7 +135,7 @@
                         </p>
                     </div>
                 </div>
-                @endfor
+                {{-- @endfor --}}
             </div>
 
         </div>
@@ -144,14 +147,16 @@
 
             <div class="row">
                 <div class="col-lg-9 text-center text-lg-start">
-                    <h3>HUBUNGI KAMI</h3>
+                    <h2 class="text-white">HUBUNGI KAMI</h2>
                     <p> 
                         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
                         anim id est laborum.
                     </p>
                 </div>
                 <div class="col-lg-3 cta-btn-container text-center">
-                    <a class="cta-btn align-middle" href="#">Email To Action</a>
+                    <a class="cta-btn align-middle" id="cta-email">
+                        Email To Action
+                    </a>
                 </div>
             </div>
 
@@ -164,29 +169,23 @@
 
             <x-template2.section-title heading="TEAM KAMI" desc="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas." />
 
-            <div class="row">
+            <div class="row parent-load-data" id="load-member">
 
-                @for ($i = 0; $i < 4; $i++)
-                <div class="col-lg-6 mb-4">
-                    <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
+                {{-- @foreach ($ourTeam as $team) --}}
+                <div class="col-lg-6 mb-4 member-item">
+                    <div class="member d-flex align-items-start" 
+                    data-aos="zoom-in" data-aos-delay="100">
                         <div class="pic">
-                            <img src="{{ asset(
-                                'uploaded/dummy/team/team-' . $i + 1 . '.jpg'
-                            ) }}" class="img-fluid" alt=""></div>
+                            <img src="" class="img-fluid member-info__avatar" alt="" />
+                        </div>
                         <div class="member-info">
-                            <h4>Walter White</h4>
-                            <span>Chief Executive Officer</span>
-                            <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                            </div>
+                            <h4 class="member-info__name"></h4>
+                            <span class="member-info__position"></span>
+                            <p class="member-info__desc"></p>
                         </div>
                     </div>
-                </div>                    
-                @endfor
+                </div>    
+                {{-- @endforeach --}}
 
             </div>
 
@@ -200,16 +199,14 @@
             <x-template2.section-title heading="FAQ" />
 
             <div class="faq-list">
-                <ul>
-                    @for ($i = 0; $i < 5; $i++)
-                    <x-template2.accordion-list 
-                    heading="{{ $i }} Non consectetur a erat nam at lectus urna duis? " parent-list="accordion-list" 
+                <ul class="parent-load-data" id="load-faq">
+                    {{-- get faq using ajax --}}
+                    <x-template2.accordion-list class="accordion-faq"
+                    heading="" parent-list="accordion-list" 
                     icon-title="bx-help-circle icon-help" parent-list="faq-list">
-                        <p>
-                            {{ $i }} Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-                        </p>
+                        <p></p>
                     </x-template2.accordion-list>
-                    @endfor
+                    {{-- end of that --}}
                 </ul>
             </div>
 
@@ -225,29 +222,18 @@
             <div class="row">
 
                 <div class="col-lg-6 d-flex align-items-stretch">
-                    <div class="info">
-                        <div class="address">
-                            <i class="bi bi-geo-alt"></i>
-                            <h4>Location:</h4>
-                            <p>{{ $ourContact->address }}</p>
-                        </div>
+                    <ul class="info">
+                        <x-template2.list-group-simple icon="bi-geo-alt" text="Location" 
+                        subtext="" link="https://goo.gl/maps/rqzr6U6AZnDLdedQ6" 
+                        id="location" />
 
-                        <div class="email">
-                            <i class="bi bi-envelope"></i>
-                            <h4>Email:</h4>
-                            <p>
-                                <a href="mailto:{{ $ourContact->email }}">
-                                    {{ $ourContact->email }}
-                                </a>
-                            </p>
-                        </div>
+                        <x-template2.list-group-simple icon="bi-envelope" 
+                        text="Email" subtext="" link="mailto" id="email" />
 
-                        <div class="phone">
-                            <i class="bi bi-phone"></i>
-                            <h4>Call:</h4>
-                            <p>+62 {{ $ourContact->telephone }}</p>
-                        </div>
-                    </div>
+                        <x-template2.list-group-simple icon="bi-phone" 
+                        text="Call" subtext="" link="tel" id="phone" />
+
+                    </ul>
                 </div>
 
                 <div class="col-lg-6 d-flex align-items-stretch shadow">

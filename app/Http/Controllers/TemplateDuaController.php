@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\AboutUs;
+use App\Models\Faq;
 use App\Models\LandingSectionDesc;
 use App\Models\OurContact;
+use App\Models\OurTeam;
 use Illuminate\Http\Request;
 
 class TemplateDuaController extends Controller
@@ -14,10 +16,15 @@ class TemplateDuaController extends Controller
         $landingSection = LandingSectionDesc::all();
         $aboutUs = AboutUs::first();
 
-        $ourContact = OurContact::first();
+        $ourTeam = OurTeam::all();
+        
+        $faqs = Faq::all();
+
+        $isProfileVideoExist = $aboutUs->our_video ? true : false;
 
         return view('template-2.index', compact(
-            'landingSection', 'aboutUs', 'ourContact'
+            'landingSection', 'aboutUs', 'isProfileVideoExist', 
+            'ourTeam'
         ));
     }
 }

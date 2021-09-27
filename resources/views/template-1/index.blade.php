@@ -37,16 +37,15 @@
                 </li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
+        </nav>
     </div>
-</header><!-- End Header -->
+</header>
 
 <!-- ======= hero Section ======= -->
 <section id="hero">
 
     <div class="hero-content" data-aos="fade-up">
-        <h2>Making <span>your ideas</span><br>happen!</h2>
+        <h2>{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h2>
         <div>
             <a href="#about" class="btn-get-started scrollto">Get Started</a>
             <a href="#portfolio" class="btn-projects scrollto">Our Projects</a>
@@ -157,7 +156,7 @@
             </div>
 
         </div>
-    </section><!-- End Testimonials Section -->
+    </section>
 
     <!-- ======= Frequently Asked Questions Section ======= -->
     <section id="faq" class="faq section-bg my-4 bg-primary">
@@ -166,26 +165,25 @@
             <x-section-header text="{{ $landingSection[4]->section_name }}" 
             class="text-white text-center" />
 
-            <div class="accordion accordion-flush shadow p-4 bg-white" id="list-faq">
-                @foreach ($faqs as $faq)
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-faq-{{ $faq->id }}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-content-faq-{{ $faq->id }}" aria-expanded="false" 
-                            aria-controls="flush-content-faq-{{ $faq->id }}">
-                            {{ $faq->question }}
-                        </button>
+            <div class="accordion accordion-flush shadow p-4 bg-white parent-load-data" 
+            id="list-faq">
+                {{-- get faq using ajax --}}
+                <div class="accordion-item accordion-faq">
+                    <h2 class="accordion-header" id="flush-faq">
+                        <button class="accordion-button accordion__heading collapsed toggler-accordion" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#accordion-list" aria-expanded="false" 
+                        aria-controls="accordion-list"></button>
                     </h2>
-                    <div id="flush-content-faq-{{ $faq->id }}" 
-                        class="accordion-collapse collapse" 
-                        aria-labelledby="flush-faq-{{ $faq->id }}"
+                    <div id="accordion-list" 
+                        class="accordion-collapse collapse accordion__text" 
+                        aria-labelledby="flush-faq"
                         data-bs-parent="#list-faq">
                         <div class="accordion-body">
-                            {{ $faq->answer }}
+                            <p></p>
                         </div>
                     </div>
                 </div>
-                @endforeach
+                {{-- end of that --}}
             </div>
 
         </div>
@@ -275,35 +273,18 @@
             <div class="row contact-info">
 
                 <div class="col-md-4">
-                    <div class="contact-address">
-                        <i class="bi bi-geo-alt"></i>
-                        <h3>Address</h3>
-                        <address>{{ $ourContact->address }}</address>
-                    </div>
+                    <x-template1.list-group-simple icon="bi-geo-alt" id="location" 
+                    text="" subtext="" link="" class="contact-address" />
                 </div>
 
                 <div class="col-md-4">
-                    <div class="contact-phone">
-                        <i class="bi bi-phone"></i>
-                        <h3>Phone Number</h3>
-                        <p>
-                            <a href="tel:{{ $ourContact->telephone }}">
-                                +62 {{ $ourContact->telephone }}
-                            </a>
-                        </p>
-                    </div>
+                    <x-template1.list-group-simple icon="bi-phone" id="phone" 
+                    text="" subtext="" link="" class="contact-phone" />
                 </div>
 
                 <div class="col-md-4">
-                    <div class="contact-email">
-                        <i class="bi bi-envelope"></i>
-                        <h3>Email</h3>
-                        <p>
-                            <a href="mailto:{{ $ourContact->email }}">
-                                {{ $ourContact->email }}
-                            </a>
-                        </p>
-                    </div>
+                    <x-template1.list-group-simple icon="bi-envelope" id="email" 
+                    text="" subtext="" link="" class="contact-email" />
                 </div>
             </div>
         </div>

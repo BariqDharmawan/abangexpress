@@ -1,7 +1,9 @@
+import './../vendor/php-email-form/validate.js';
 import Swiper, { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import './../vendor/waypoints/noframework.waypoints'
 
 import GLightbox from 'glightbox';
 const Isotope = require('isotope-layout');
@@ -88,7 +90,6 @@ const Isotope = require('isotope-layout');
   let selectHeader = select('#header')
   if (selectHeader) {
     const headerScrolled = () => {
-        console.log('scrolling header')
       if (window.scrollY > 100) {
         selectHeader.classList.add('header-scrolled')
       } else {
@@ -177,7 +178,7 @@ const Isotope = require('isotope-layout');
    * Initiate  glightbox 
    */
   const glightbox = GLightbox({
-    selector: '.glightbox'
+    selector: '.glightbox',
   });
 
   /**

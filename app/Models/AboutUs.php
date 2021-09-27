@@ -9,5 +9,13 @@ class AboutUs extends Model
 {
     use HasFactory;
 
-    public $fillable = ['our_name', 'our_vision', 'our_mission', 'address_embed'];
+    public $fillable = [
+        'our_name',
+        'our_vision',
+        'our_mission',
+        'address_embed',
+        'our_video',
+        'sub_slogan',
+        'slogan'
+    ];
 }

@@ -17,7 +17,8 @@ class OurContactSeeder extends Seeder
         OurContact::create([
             'address' => 'A108 Adam Street, NY 535022, USA',
             'telephone' => '55895548855',
-            'email' => 'info@example.com'
+            'email' => 'info@example.com',
+            'link_address' => 'https://goo.gl/maps/sqCg6dKMqWF4M2ZD8'
         ]);
     }
 }

@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::apiResource('faq','FaqController');
+Route::apiResource('our-contact','OurContactController');
+Route::apiResource('our-service','OurServiceController');
+Route::apiResource('our-team','OurTeamController');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
