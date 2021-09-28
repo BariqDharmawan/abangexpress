@@ -12,7 +12,7 @@
                 <div class="d-flex justify-content-center justify-content-lg-start">
                     <a href="#about" class="btn-get-started scrollto">Get Started</a>
                     @if ($isProfileVideoExist)
-                    <a href="{{ $aboutUs->our_video }}" 
+                    <a href="{{ $aboutUs->our_video }}"
                     class="glightbox btn-watch-video">
                         <i class="bi bi-play-circle"></i>
                         <span>Watch Video</span>
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-                <img src="{{ asset('template2/img/hero-img.png') }}" 
+                <img src="{{ asset('template2/img/hero-img.png') }}"
                 class="img-fluid animated" alt="">
             </div>
         </div>
@@ -40,7 +40,7 @@
 
                 {{-- get client using ajax [this is shadow element] --}}
                 <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center el-to-load-ajax" data-content-type="img-only">
-                    <img src="" 
+                    <img src=""
                     class="img-fluid" alt="">
                 </div>
                 {{-- end of that --}}
@@ -85,13 +85,13 @@
                         <ul id="load-vision-mission">
 
                             <x-template2.accordion-list
-                            heading="Visi Kami" icon-title="bx-help-circle icon-help" 
+                            heading="Visi Kami" icon-title="bx-help-circle icon-help"
                             parent-list="accordion-list" :is-open="true">
                                 <p>{{ $aboutUs->our_vision }}</p>
                             </x-template2.accordion-list>
 
                             <x-template2.accordion-list
-                            heading="Misi Kami" icon-title="bx-help-circle icon-help" 
+                            heading="Misi Kami" icon-title="bx-help-circle icon-help"
                             parent-list="accordion-list">
                                 {!! $aboutUs->our_mission !!}
                             </x-template2.accordion-list>
@@ -118,11 +118,11 @@
 
             <div class="row" id="load-our-service">
                 {{-- get service using ajax [this is shadow element] --}}
-                <div class="col-xl-3 col-md-6 d-flex align-items-stretch el-to-load-ajax" 
+                <div class="col-xl-3 col-md-6 d-flex align-items-stretch el-to-load-ajax"
                 data-aos="zoom-in" data-aos-delay="">
                     <div class="icon-box w-100">
                         <div class="icon">
-                            <img src="" alt="" height="64px" width="64px" 
+                            <img src="" alt="" height="64px" width="64px"
                             class="card__icon d-block">
                         </div>
                         <h4 class="card__name text-capitalize"></h4>
@@ -164,7 +164,7 @@
 
                 {{-- @foreach ($ourTeam as $team) --}}
                 <div class="col-lg-6 mb-4 member-item">
-                    <div class="member d-flex align-items-start" 
+                    <div class="member d-flex align-items-start"
                     data-aos="zoom-in" data-aos-delay="100">
                         <div class="pic">
                             <img src="" class="img-fluid member-info__avatar" alt="" />
@@ -175,7 +175,7 @@
                             <p class="member-info__desc"></p>
                         </div>
                     </div>
-                </div>    
+                </div>
                 {{-- @endforeach --}}
 
             </div>
@@ -193,7 +193,7 @@
                 <ul id="load-faq">
                     {{-- get faq using ajax [this is shadow element] --}}
                     <x-template2.accordion-list class="accordion-faq"
-                    heading="" parent-list="accordion-list" 
+                    heading="" parent-list="accordion-list"
                     icon-title="bx-help-circle icon-help" parent-list="faq-list">
                         <p></p>
                     </x-template2.accordion-list>
@@ -214,16 +214,27 @@
 
                 <div class="col-lg-6 d-flex align-items-stretch">
                     <ul class="info">
-                        <x-template2.list-group-simple icon="bi-geo-alt" text="Location" 
-                        subtext="" link="https://goo.gl/maps/rqzr6U6AZnDLdedQ6" 
-                        id="location" />
-
-                        <x-template2.list-group-simple icon="bi-envelope" 
-                        text="Email" subtext="" link="mailto" id="email" />
-
-                        <x-template2.list-group-simple icon="bi-phone" 
-                        text="Call" subtext="" link="tel" id="phone" />
-
+                        <li id="location">
+                            <i class="bi bi-geo-alt"></i>
+                            <h4 class="list-group-simple__text">Location</h4>
+                            <p class="list-group-simple__subtext">
+                                <a href="https://goo.gl/maps/rqzr6U6AZnDLdedQ6" target="__blank"></a>
+                            </p>
+                        </li>
+                        <li id="email">
+                            <i class="bi bi-envelope"></i>
+                            <h4 class="list-group-simple__text">Email</h4>
+                            <p class="list-group-simple__subtext">
+                                <a href="mailto:" target="__blank"></a>
+                            </p>
+                        </li>
+                        <li id="phone">
+                            <i class="bi bi-phone"></i>
+                            <h4 class="list-group-simple__text">Call</h4>
+                            <p class="list-group-simple__subtext">
+                                <a href="tel:" target="__blank"></a>
+                            </p>
+                        </li>
                     </ul>
                 </div>
 
