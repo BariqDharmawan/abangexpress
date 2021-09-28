@@ -35,14 +35,16 @@
     <section id="cliens" class="cliens section-bg">
         <div class="container">
 
-            <div class="row" data-aos="zoom-in">
+            <div class="row parent-load-data" data-aos="zoom-in" id="load-clients"
+            data-api-suffix="our-client">
 
-                @for ($i = 0; $i < 6; $i++)
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                    <img src="{{ asset('uploaded/dummy/clients/client-' . $i + 1 . '.png') }}" 
+                {{-- @for ($i = 0; $i < 6; $i++) --}}
+                {{-- shadow element --}}
+                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center el-to-load-ajax" data-content-type="img-only">
+                    <img src="" 
                     class="img-fluid" alt="">
                 </div>
-                @endfor
+                {{-- @endfor --}}
 
             </div>
 
@@ -81,24 +83,33 @@
                     </div>
 
                     <div class="accordion-list">
-                        <ul>
-                            <x-template2.accordion-list heading="VISI KAMI" parent-list="accordion-list">
-                                <p>
-                                    Feugiat pretium nibh ipsum consequat. Tempus 
-                                    iaculis urna id volutpat lacus laoreet non 
-                                    curabitur gravida. Venenatis lectus magna 
-                                    fringilla urna porttitor rhoncus dolor purus non.
-                                </p>
-                            </x-template2.accordion-list>
-
-                            <x-template2.accordion-list heading="MISI KAMI"
-                            parent-list="accordion-list">
-                                <ul>
-                                    @for ($i = 0; $i < 3; $i++)
-                                        <li>Misi {{ $i + 1 }}</li>
-                                    @endfor
-                                </ul>
-                            </x-template2.accordion-list>
+                        <ul id="load-vision-mission">
+                            <li data-content-type="two-basic-column">
+                                <a data-bs-toggle="collapse" 
+                                class="collapse toggler-accordion" 
+                                data-bs-target="#accordion-list-vision">
+                                    <span class="accordion__heading">Visi Kami</span> 
+                                    <i class="bx bx-chevron-down icon-show"></i>
+                                    <i class="bx bx-chevron-up icon-close"></i>
+                                </a>
+                                <div id="accordion-list-vision" class="collapse py-4 show"
+                                data-bs-parent=".accordion-list">
+                                    {{ $aboutUs->our_vision }}
+                                </div>
+                            </li>
+                            <li data-content-type="two-basic-column">
+                                <a data-bs-toggle="collapse" 
+                                class="collapsed toggler-accordion" 
+                                data-bs-target="#accordion-list-mission">
+                                    <span class="accordion__heading">Misi Kami</span> 
+                                    <i class="bx bx-chevron-down icon-show"></i>
+                                    <i class="bx bx-chevron-up icon-close"></i>
+                                </a>
+                                <div id="accordion-list-mission" class="collapse py-4"
+                                data-bs-parent=".accordion-list">
+                                    {!! $aboutUs->our_mission !!}
+                                </div>
+                            </li>
 
                         </ul>
                     </div>
@@ -122,7 +133,7 @@
 
             <div class="row" id="load-our-service">
                 {{-- @for ($i = 0; $i < 4; $i++) --}}
-                <div class="col-xl-3 col-md-6 d-flex align-items-stretch" 
+                {{-- <div class="col-xl-3 col-md-6 d-flex align-items-stretch" 
                 data-aos="zoom-in" data-aos-delay="{{ ($i + 1) * 100 }}">
                     <div class="icon-box">
                         <div class="icon"><i class="bx bxl-dribbble"></i></div>
@@ -131,7 +142,7 @@
                         </h4>
                         <p></p>
                     </div>
-                </div>
+                </div> --}}
                 {{-- @endfor --}}
             </div>
 
@@ -166,7 +177,7 @@
 
             <x-template2.section-title heading="TEAM KAMI" desc="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas." />
 
-            <div class="row parent-load-data" id="load-member">
+            <div class="row" id="load-member">
 
                 {{-- @foreach ($ourTeam as $team) --}}
                 <div class="col-lg-6 mb-4 member-item">
@@ -196,7 +207,7 @@
             <x-template2.section-title heading="FAQ" />
 
             <div class="faq-list">
-                <ul class="parent-load-data" id="load-faq">
+                <ul id="load-faq">
                     {{-- get faq using ajax --}}
                     <x-template2.accordion-list class="accordion-faq"
                     heading="" parent-list="accordion-list" 

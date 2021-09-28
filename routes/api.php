@@ -18,6 +18,9 @@ Route::apiResource('faq','FaqController');
 Route::apiResource('our-contact','OurContactController');
 Route::apiResource('our-service','OurServiceController');
 Route::apiResource('our-team','OurTeamController');
+Route::apiResource('our-client','OurClientController');
+
+Route::get('vision-mission', 'AboutUsController@getVisionMission');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

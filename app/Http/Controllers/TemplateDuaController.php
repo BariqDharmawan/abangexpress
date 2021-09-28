@@ -24,7 +24,7 @@ class TemplateDuaController extends Controller
 
         return view('template-2.index', compact(
             'landingSection', 'aboutUs', 'isProfileVideoExist', 
-            'ourTeam'
+            'ourTeam', 'aboutUs'
         ));
     }
 }

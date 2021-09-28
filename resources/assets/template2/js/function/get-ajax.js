@@ -38,7 +38,6 @@ function getFaq(urlApi) {
 
             elRecord.querySelector('.accordion__text').id = `accordion-list-${idFaq}`
             
-            console.info(`elRecord: `, elRecord)
             document.querySelector(`#${result.parentData.id}`).appendChild(elRecord)
         }
 
@@ -135,4 +134,31 @@ function getOurTeam(urlApi) {
     }).catch(error => console.error(error))
 }
 
-export {getFaq, getContact, getOurTeam}
+function getContents(urlApi, parentEl, elType) {
+    getAjax(urlApi, parentEl).then(result => {
+        for (const record of result.datas) {
+            elRecord = document.querySelector(parentEl)
+                                .querySelector('.el-to-load-ajax')
+                                .cloneNode(true)
+            switch (elType) {
+                case 'img-only':
+                    elRecord.querySelector('img').src = record.logo
+                    // console.log(record)
+                break;
+
+                case 'two-basic-column':
+
+                    console.log(Object.values(record))
+                break;
+            }
+
+
+            document.querySelector(parentEl).appendChild(elRecord)
+        }
+
+        //remove 'shadow element'
+        document.querySelector('.el-to-load-ajax').remove()
+    })
+}
+
+export {getFaq, getContact, getOurTeam, getContents}
