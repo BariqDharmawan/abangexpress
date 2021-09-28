@@ -18,6 +18,11 @@ class OurClientController extends Controller
         return response()->json($clients);
     }
 
+    public function manage()
+    {
+        return view('admin.client.manage');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

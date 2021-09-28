@@ -17,6 +17,11 @@ class OurSocialController extends Controller
         //
     }
 
+    public function manage()
+    {
+        return view('admin.social.manage');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

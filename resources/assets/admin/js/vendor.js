@@ -1,8 +1,7 @@
 try {
-    window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
-
     require('bootstrap');
+    window.Popper = require('popper.js').default;
     require('jquery.easing')(window.jQuery);
 } catch (e) {}
 

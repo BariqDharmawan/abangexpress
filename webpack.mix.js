@@ -16,14 +16,7 @@ const template2Path = 'resources/assets/template2'
 const templateAdminPath = 'resources/assets/admin'
 
 //asset for admin
-mix.js(`${templateAdminPath}/js/app.js`, 'public/admin/js/admin.js')
-    .js(`${templateAdminPath}/js/vendor.js`, 'public/admin/js/vendor.js')
-    .sass(`${templateAdminPath}/sass/app.scss`, 'public/admin/css/admin.css')
-    .options({
-        processCssUrls: false 
-    })
-    .copy('node_modules/font-awesome/fonts', 'public/fonts')
-    .copy(`${templateAdminPath}/img`, 'public/admin/img');
+mix.copy(`${templateAdminPath}/img`, 'public/admin/img');
 
 //asset for template 1
 mix.js(`${template1Path}/js/app.js`, 'public/template1/js')
@@ -41,8 +34,11 @@ mix.copy('resources/assets/dummy', 'public/uploaded/dummy')
     .copy('node_modules/bootstrap-icons/font/fonts', 'public/template2/css/fonts')
     .copy('node_modules/boxicons/fonts', 'public/template1/fonts')
     .copy('node_modules/boxicons/fonts', 'public/template2/fonts')
+    .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/admin/webfonts')
     .copy('resources/assets/img/favicon', 'public/img/favicon')
     .copy('resources/assets/general/json', 'public/json')
+    .copy('resources/assets/general/vendor', 'public/vendor')
+    .copy('resources/assets/admin/template', 'public/admin/template')
 
 //asset for template 2
 mix.js(`${template2Path}/js/app.js`, 'public/template2/js')

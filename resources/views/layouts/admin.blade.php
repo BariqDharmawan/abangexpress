@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     @include('partials.meta', ['prefixTitle' => 'Admin'])
+    @stack('style-plugins')
     @include('admin.partials.styles')
-    @stack('styles')
 </head>
 <body>
     <div id="wrapper">

@@ -19,6 +19,11 @@ class AboutUsController extends Controller
         return response()->json($visionMission);
     }
 
+    public function identity()
+    {
+        return view('admin.identity.manage');
+    }
+
     /**
      * Display a listing of the resource.
      *
