@@ -16,7 +16,7 @@ class OurClientSeeder extends Seeder
     {
         for ($i = 0; $i < 6; $i++) { 
             OurClient::create([
-                'logo' => 'uploaded/dummy/clients/client-' . ($i + 1) . '.png',
+                'logo' => '/uploaded/dummy/clients/client-' . ($i + 1) . '.png',
                 'name' => 'client ' . $i + 1
             ]);
         }

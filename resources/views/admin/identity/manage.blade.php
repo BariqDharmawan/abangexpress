@@ -18,6 +18,7 @@
                         <tr>
                             <th>Our Name</th>
                             <th>Our Vision</th>
+                            <th>Our Mission</th>
                             <th>Slogan</th>
                             <th>Sub slogan</th>
                         </tr>
@@ -26,6 +27,7 @@
                         <tr>
                             <td>{{ $identity->our_name }}</td>
                             <td>{{ Str::words($identity->our_vision, 5, '...') }}</td>
+                            <td>{!! $identity->our_mission  !!}</td>
                             <td>{{ $identity->slogan }}</td>
                             <td>{{ Str::words($identity->sub_slogan, 4, '...') }}</td>
                         </tr>

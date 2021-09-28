@@ -20,7 +20,8 @@ class OurClientController extends Controller
 
     public function manage()
     {
-        return view('admin.client.manage');
+        $clients = OurClient::oldest()->get();
+        return view('admin.client.manage', compact('clients'));
     }
 
     /**
