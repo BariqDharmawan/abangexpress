@@ -167,7 +167,7 @@
 
             <div class="accordion accordion-flush shadow p-4 bg-white parent-load-data" 
             id="load-faq">
-                {{-- get faq using ajax --}}
+                {{-- get faq using ajax [this is 'shadow' element] --}}
                 <div class="accordion-item accordion-faq">
                     <h2 class="accordion-header" id="flush-faq">
                         <button class="accordion-button accordion__heading collapsed toggler-accordion" type="button" data-bs-toggle="collapse"
@@ -272,6 +272,7 @@
 
             <div class="row contact-info">
 
+                {{-- get contact using ajax --}}
                 <div class="col-md-4">
                     <x-template1.list-group-simple icon="bi-geo-alt" id="location" 
                     text="" subtext="" link="" class="contact-address" />
@@ -286,6 +287,8 @@
                     <x-template1.list-group-simple icon="bi-envelope" id="email" 
                     text="" subtext="" link="" class="contact-email" />
                 </div>
+                {{-- end of that --}}
+                
             </div>
         </div>
 

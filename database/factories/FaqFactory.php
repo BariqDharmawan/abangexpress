@@ -23,7 +23,8 @@ class FaqFactory extends Factory
     {
         return [
             'question' => $this->faker->unique()->word(5),
-            'answer' => $this->faker->sentence(3)
+            'answer' => $this->faker->sentence(3),
+            'admin_id' => $this->faker->numberBetween(1, 3)
         ];
     }
 }

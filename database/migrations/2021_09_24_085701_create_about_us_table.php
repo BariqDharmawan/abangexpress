@@ -22,6 +22,7 @@ class CreateAboutUsTable extends Migration
             $table->text('address_embed')->nullable();
             $table->string('slogan');
             $table->string('sub_slogan')->nullable();
+            $table->string('cover_vision_mission')->nullable();
             $table->timestamps();
         });
     }

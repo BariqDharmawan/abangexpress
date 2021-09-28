@@ -16,6 +16,7 @@ class AboutUs extends Model
         'address_embed',
         'our_video',
         'sub_slogan',
-        'slogan'
+        'slogan',
+        'cover_vision_mission'
     ];
 }

@@ -16,7 +16,7 @@ class CreateOurClientsTable extends Migration
         Schema::create('our_clients', function (Blueprint $table) {
             $table->id();
             $table->string('logo');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

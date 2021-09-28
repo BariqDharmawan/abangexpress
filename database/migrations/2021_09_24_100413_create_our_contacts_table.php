@@ -17,7 +17,7 @@ class CreateOurContactsTable extends Migration
             $table->id();
             $table->text('address');
             $table->string('telephone');
-            $table->string('email');
+            $table->string('email', 45);
             $table->string('link_address');
             $table->timestamps();
         });

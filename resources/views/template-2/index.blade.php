@@ -38,13 +38,12 @@
             <div class="row parent-load-data" data-aos="zoom-in" id="load-clients"
             data-api-suffix="our-client">
 
-                {{-- @for ($i = 0; $i < 6; $i++) --}}
-                {{-- shadow element --}}
+                {{-- get client using ajax [this is shadow element] --}}
                 <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center el-to-load-ajax" data-content-type="img-only">
                     <img src="" 
                     class="img-fluid" alt="">
                 </div>
-                {{-- @endfor --}}
+                {{-- end of that --}}
 
             </div>
 
@@ -103,7 +102,7 @@
                 </div>
 
                 <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url(
-                    "{{ asset('template2/img/why-us.png') }}"
+                    "{{ asset($aboutUs->cover_vision_mission) }}"
                 );'
                 data-aos="zoom-in" data-aos-delay="150"></div>
             </div>
@@ -118,18 +117,19 @@
             <x-template2.section-title heading="LAYANAN KAMI" />
 
             <div class="row" id="load-our-service">
-                {{-- @for ($i = 0; $i < 4; $i++) --}}
-                {{-- <div class="col-xl-3 col-md-6 d-flex align-items-stretch" 
-                data-aos="zoom-in" data-aos-delay="{{ ($i + 1) * 100 }}">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                        <h4>
-                            <a href=""></a>
-                        </h4>
-                        <p></p>
+                {{-- get service using ajax [this is shadow element] --}}
+                <div class="col-xl-3 col-md-6 d-flex align-items-stretch el-to-load-ajax" 
+                data-aos="zoom-in" data-aos-delay="">
+                    <div class="icon-box w-100">
+                        <div class="icon">
+                            <img src="" alt="" height="64px" width="64px" 
+                            class="card__icon d-block">
+                        </div>
+                        <h4 class="card__name text-capitalize"></h4>
+                        <p class="card__short-desc"></p>
                     </div>
-                </div> --}}
-                {{-- @endfor --}}
+                </div>
+                {{-- end of that --}}
             </div>
 
         </div>
@@ -141,11 +141,8 @@
 
             <div class="row">
                 <div class="col-lg-9 text-center text-lg-start">
-                    <h2 class="text-white">HUBUNGI KAMI</h2>
-                    <p> 
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-                        anim id est laborum.
-                    </p>
+                    <h2 class="text-white">{{ $landingSection[2]->section_name }}</h2>
+                    <p>{{ $landingSection[2]->first_desc }}</p>
                 </div>
                 <div class="col-lg-3 cta-btn-container text-center">
                     <a class="cta-btn align-middle" id="cta-email">
@@ -194,7 +191,7 @@
 
             <div class="faq-list">
                 <ul id="load-faq">
-                    {{-- get faq using ajax --}}
+                    {{-- get faq using ajax [this is shadow element] --}}
                     <x-template2.accordion-list class="accordion-faq"
                     heading="" parent-list="accordion-list" 
                     icon-title="bx-help-circle icon-help" parent-list="faq-list">

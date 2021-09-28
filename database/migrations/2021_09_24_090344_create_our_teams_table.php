@@ -15,7 +15,7 @@ class CreateOurTeamsTable extends Migration
     {
         Schema::create('our_teams', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('avatar');
             $table->unsignedInteger('position_id');
             $table->string('short_desc');
