@@ -18,6 +18,9 @@ Route::redirect('/', 'template-1', 301);
 
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('dashboard', 'DashboardController@index');
+    Route::get('identity', 'AboutUsController@identity')->name('about-us.identity');
+    Route::get('our-social', 'OurSocialController@manage')->name('about-us.social');
+    Route::get('clients', 'OurClientController@manage')->name('client.manage');
 });
 
 Route::prefix('template-1')->name('template-1.')->group(function() {

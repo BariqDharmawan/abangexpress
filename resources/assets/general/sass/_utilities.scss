@@ -3,3 +3,9 @@
         padding: 0 !important;
     }
 }
+
+.no-after {
+    &::after {
+        content: none !important;
+    }
+}
