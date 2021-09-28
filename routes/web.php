@@ -21,6 +21,12 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('identity', 'AboutUsController@identity')->name('about-us.identity');
     Route::get('our-social', 'OurSocialController@manage')->name('about-us.social');
     Route::get('clients', 'OurClientController@manage')->name('client.manage');
+
+    Route::prefix('content.')->name('content.')->group(function (){
+       Route::get('carousel-landing', 'ContentController@carouselLanding')->name(
+           'carousel-landing'
+       );
+    });
 });
 
 Route::prefix('template-1')->name('template-1.')->group(function() {

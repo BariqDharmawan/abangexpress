@@ -11,4 +11,9 @@ class ContentController extends Controller
         # code...
     }
 
+    public function carouselLanding()
+    {
+        # code...
+    }
+
 }

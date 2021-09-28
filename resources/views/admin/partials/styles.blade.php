@@ -6,3 +6,11 @@
 
 <!-- Custom styles for this template-->
 <link href="{{ asset('admin/template/css/sb-admin-2.min.css') }}" rel="stylesheet">
+<style>
+    .center-parent {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>

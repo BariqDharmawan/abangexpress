@@ -21,7 +21,8 @@ class AboutUsController extends Controller
 
     public function identity()
     {
-        return view('admin.identity.manage');
+        $identity = AboutUs::first();
+        return view('admin.identity.manage', compact('identity'));
     }
 
     /**

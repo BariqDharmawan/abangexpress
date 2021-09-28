@@ -22,4 +22,6 @@ public/template2
 public/uploaded
 public/admin
 public/vendor
+public/json
+public/img
 **/**/*.map
