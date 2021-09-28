@@ -42,6 +42,7 @@ mix.copy('resources/assets/dummy', 'public/uploaded/dummy')
     .copy('node_modules/boxicons/fonts', 'public/template1/fonts')
     .copy('node_modules/boxicons/fonts', 'public/template2/fonts')
     .copy('resources/assets/img/favicon', 'public/img/favicon')
+    .copy('resources/assets/general/json', 'public/json')
 
 //asset for template 2
 mix.js(`${template2Path}/js/app.js`, 'public/template2/js')
