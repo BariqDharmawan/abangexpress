@@ -13,7 +13,7 @@ class AccordionList extends Component
      *
      * @return void
      */
-    public function __construct($heading, $parentList = 'accordion-list', $iconTitle)
+    public function __construct($heading, $parentList = 'accordion-list', $iconTitle = null)
     {
         $this->heading = $heading;
         $this->parentList = $parentList;
