@@ -25,6 +25,9 @@ function getFaq(urlApi) {
 
     getAjax(urlApi, '#load-faq').then(result => {
         for (const record of result.datas) {
+
+            // console.log(record)
+
             const idFaq = record.question.toLowerCase().replaceAll(' ', '-')
 
             elRecord = result.parentData.querySelector('.accordion-faq').cloneNode(true)

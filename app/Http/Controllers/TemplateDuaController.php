@@ -22,6 +22,7 @@ class TemplateDuaController extends Controller
 
         $isProfileVideoExist = $aboutUs->our_video ? true : false;
 
+        // dd($aboutUs);
         return view('template-2.index', compact(
             'landingSection', 'aboutUs', 'isProfileVideoExist', 
             'ourTeam', 'aboutUs'

@@ -84,32 +84,18 @@
 
                     <div class="accordion-list">
                         <ul id="load-vision-mission">
-                            <li data-content-type="two-basic-column">
-                                <a data-bs-toggle="collapse" 
-                                class="collapse toggler-accordion" 
-                                data-bs-target="#accordion-list-vision">
-                                    <span class="accordion__heading">Visi Kami</span> 
-                                    <i class="bx bx-chevron-down icon-show"></i>
-                                    <i class="bx bx-chevron-up icon-close"></i>
-                                </a>
-                                <div id="accordion-list-vision" class="collapse py-4 show"
-                                data-bs-parent=".accordion-list">
-                                    {{ $aboutUs->our_vision }}
-                                </div>
-                            </li>
-                            <li data-content-type="two-basic-column">
-                                <a data-bs-toggle="collapse" 
-                                class="collapsed toggler-accordion" 
-                                data-bs-target="#accordion-list-mission">
-                                    <span class="accordion__heading">Misi Kami</span> 
-                                    <i class="bx bx-chevron-down icon-show"></i>
-                                    <i class="bx bx-chevron-up icon-close"></i>
-                                </a>
-                                <div id="accordion-list-mission" class="collapse py-4"
-                                data-bs-parent=".accordion-list">
-                                    {!! $aboutUs->our_mission !!}
-                                </div>
-                            </li>
+
+                            <x-template2.accordion-list
+                            heading="Visi Kami" icon-title="bx-help-circle icon-help" 
+                            parent-list="accordion-list" :is-open="true">
+                                <p>{{ $aboutUs->our_vision }}</p>
+                            </x-template2.accordion-list>
+
+                            <x-template2.accordion-list
+                            heading="Misi Kami" icon-title="bx-help-circle icon-help" 
+                            parent-list="accordion-list">
+                                {!! $aboutUs->our_mission !!}
+                            </x-template2.accordion-list>
 
                         </ul>
                     </div>

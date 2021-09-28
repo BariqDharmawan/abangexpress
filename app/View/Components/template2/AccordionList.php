@@ -6,18 +6,19 @@ use Illuminate\View\Component;
 
 class AccordionList extends Component
 {
-    public $heading, $parentList, $iconTitle;
+    public $heading, $parentList, $iconTitle, $isOpen;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($heading, $parentList = 'accordion-list', $iconTitle = null)
+    public function __construct($heading, $parentList = 'accordion-list', $iconTitle = null, $isOpen = false)
     {
         $this->heading = $heading;
         $this->parentList = $parentList;
         $this->iconTitle = $iconTitle;
+        $this->isOpen = $isOpen;
     }
 
     /**

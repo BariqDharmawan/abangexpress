@@ -120,7 +120,7 @@
             <div class="row">
                 <div class="col-lg-9 text-center text-lg-start">
                     <h3 class="cta-title">{{ $landingSection[2]->section_name }}</h3>
-                    <p class="cta-text">{{ $landingSection[2]->desc }}</p>
+                    <p class="cta-text">{{ $landingSection[2]->first_desc }}</p>
                 </div>
                 <div class="col-lg-3 cta-btn-container text-center">
                     <a class="cta-btn align-middle" href="#">Call To Action</a>
@@ -166,7 +166,7 @@
             class="text-white text-center" />
 
             <div class="accordion accordion-flush shadow p-4 bg-white parent-load-data" 
-            id="list-faq">
+            id="load-faq">
                 {{-- get faq using ajax --}}
                 <div class="accordion-item accordion-faq">
                     <h2 class="accordion-header" id="flush-faq">
