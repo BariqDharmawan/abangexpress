@@ -20,6 +20,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('identity', 'AboutUsController@identity')->name('about-us.identity');
     Route::get('our-social', 'OurSocialController@manage')->name('about-us.social');
+    Route::get('services', 'OurServiceController@index')->name('service.manage');
     Route::get('clients', 'OurClientController@manage')->name('client.manage');
 
     Route::prefix('content')->name('content.')->group(function (){

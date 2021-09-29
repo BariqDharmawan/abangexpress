@@ -15,7 +15,7 @@ class OurServiceController extends Controller
     public function index()
     {
         $ourService = OurService::orderBy('title', 'asc')->get();
-        return response()->json($ourService);
+        return view('admin.services.manage', compact('ourService'));
     }
 
     /**
