@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutUs;
+use App\Models\FirstHeroCarouselLanding;
 use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
     public function coverVisionMission()
     {
-        # code...
+        $cover = AboutUs::select('cover_vision_mission')->first()->cover_vision_mission;
+        return view('admin.cover-vision-mission.manage', compact('cover'));
     }
 
-    public function carouselLanding()
+    public function heroCarousel()
     {
-        # code...
+        $heroCarousel = FirstHeroCarouselLanding::all();
+        return view('admin.hero-carousel.manage', compact('heroCarousel'));
     }
 
 }

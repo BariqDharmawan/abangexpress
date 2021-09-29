@@ -6,7 +6,13 @@
 
 <!-- Custom styles for this template-->
 <link href="{{ asset('admin/template/css/sb-admin-2.min.css') }}" rel="stylesheet">
+<link href="{{ asset('admin/template/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 <style>
+    @media screen and (max-width: 993px) {
+        .md-h-auto {
+            height: auto;
+        }
+    }
     .center-parent {
         position: absolute;
         left: 50%;

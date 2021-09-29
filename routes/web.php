@@ -22,10 +22,11 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('our-social', 'OurSocialController@manage')->name('about-us.social');
     Route::get('clients', 'OurClientController@manage')->name('client.manage');
 
-    Route::prefix('content.')->name('content.')->group(function (){
-       Route::get('carousel-landing', 'ContentController@carouselLanding')->name(
-           'carousel-landing'
-       );
+    Route::prefix('content')->name('content.')->group(function (){
+        Route::get('cover-vision-mission', 'ContentController@coverVisionMission')->name(
+            'cover-vission-mission'
+        );
+        Route::get('carousel', 'ContentController@heroCarousel')->name('carousel');
     });
 });
 

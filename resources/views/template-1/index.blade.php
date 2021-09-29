@@ -16,7 +16,9 @@
                 </a>
             </h1>
             {{-- Uncomment below if you prefer to use an image logo
-            <a href="index.html"><img src="{{ asset('template1/img/logo.png') }}" alt=""></a> --}}
+                <a href="index.html"><img src="{{
+                asset('template1/img/logo.png') }}" alt=""></a> 
+            --}}
         </div>
 
         <nav id="navbar" class="navbar">
@@ -69,7 +71,7 @@
         <div class="container" data-aos="fade-up">
             <div class="row">
                 <div class="col-lg-6 about-img">
-                    <img src="{{ asset('template1/img/about-img.jpg') }}" alt="">
+                    <img src="{{ asset($aboutUs->cover_vision_mission) }}" alt="">
                 </div>
 
                 <div class="col-lg-6 content">

@@ -44,5 +44,6 @@
         @include('admin.partials.btn-back-to-top')
     </div>
     @include('admin.partials.script')
+    @yield('components')
 </body>
 </html>

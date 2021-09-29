@@ -55,8 +55,12 @@
         </a>
         <div id="collapseContent" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('admin.content.carousel-landing') }}">
-                    Carousel Landing Page
+                <a class="collapse-item" href="{{ route('admin.content.carousel') }}">
+                    Header Carousel
+                </a>
+                <a class="collapse-item" 
+                href="{{ route('admin.content.cover-vission-mission') }}">
+                    Cover Vision Mission
                 </a>
             </div>
         </div>
