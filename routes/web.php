@@ -20,7 +20,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('identity', 'AboutUsController@identity')->name('about-us.identity');
     Route::get('our-social', 'OurSocialController@manage')->name('about-us.social');
-    Route::get('services', 'OurServiceController@index')->name('service.manage');
+    Route::get('services', 'OurServiceController@manage')->name('service.manage');
     Route::get('clients', 'OurClientController@manage')->name('client.manage');
 
     Route::prefix('content')->name('content.')->group(function (){
@@ -28,7 +28,12 @@ Route::prefix('admin')->name('admin.')->group(function() {
             'cover-vission-mission'
         );
         Route::get('carousel', 'ContentController@heroCarousel')->name('carousel');
+        Route::get('section-heading', 'ContentController@sectionHeading')->name(
+            'section-heading'
+        );
     });
+
+
 });
 
 Route::prefix('template-1')->name('template-1.')->group(function() {

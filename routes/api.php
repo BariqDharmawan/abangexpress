@@ -19,7 +19,6 @@ Route::apiResource('our-contact','OurContactController');
 Route::apiResource('our-service','OurServiceController');
 Route::apiResource('our-team','OurTeamController');
 Route::apiResource('our-client','OurClientController');
-Route::apiResource('our-service','OurServiceController');
 
 Route::get('vision-mission', 'AboutUsController@getVisionMission');
 

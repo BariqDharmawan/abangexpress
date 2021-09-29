@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class OurServiceController extends Controller
 {
+
+    public function manage()
+    {
+        $ourService = OurService::orderBy('title', 'asc')->get();
+        return view('admin.services.manage', compact('ourService'));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,7 @@ class OurServiceController extends Controller
     public function index()
     {
         $ourService = OurService::orderBy('title', 'asc')->get();
-        return view('admin.services.manage', compact('ourService'));
+        return response()->json($ourService);
     }
 
     /**

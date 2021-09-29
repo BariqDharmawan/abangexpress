@@ -1,5 +1,3 @@
-@stack('plugins')
-
 {{-- <script src="{{ asset('admin/js/admin.js') }}"></script> --}}
 <script src="{{ asset('admin/template/vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset(

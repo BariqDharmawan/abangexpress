@@ -141,6 +141,8 @@ function getOurService(urlApi, parentEl) {
     let ourService = {}
     getAjax(urlApi, '#load-our-service').then(result => {
         
+        console.log(`datas: `, result.datas)
+        
         for (const [i, record] of result.datas.entries()) {
             elRecord = result.parentData.querySelector('.el-to-load-ajax').cloneNode(true)
 

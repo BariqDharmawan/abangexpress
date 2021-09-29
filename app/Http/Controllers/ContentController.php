@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AboutUs;
 use App\Models\FirstHeroCarouselLanding;
+use App\Models\LandingSectionDesc;
 use Illuminate\Http\Request;
 
 class ContentController extends Controller
@@ -18,6 +19,12 @@ class ContentController extends Controller
     {
         $heroCarousel = FirstHeroCarouselLanding::all();
         return view('admin.hero-carousel.manage', compact('heroCarousel'));
+    }
+    
+    public function sectionHeading()
+    {
+        $sectionHeading = LandingSectionDesc::all();
+        return view('admin.section-heading.manage', compact('sectionHeading'));
     }
 
 }

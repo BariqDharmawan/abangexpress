@@ -6,16 +6,18 @@ use Illuminate\View\Component;
 
 class Card extends Component
 {
-    public $title, $header;
+    public $title, $header, $hasShadow, $isHeaderTransparent;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title, $header = null)
+    public function __construct($title, $header = null, $hasShadow = true, $isHeaderTransparent = false)
     {
         $this->title = $title;
         $this->header = $header;
+        $this->hasShadow = $hasShadow || true;
+        $this->isHeaderTransparent = $isHeaderTransparent;
     }
 
     /**

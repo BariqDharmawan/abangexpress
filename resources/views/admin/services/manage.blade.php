@@ -39,14 +39,12 @@
             @include('admin.services.form', ['action' => '', 'service' => $service])
         </x-admin.modal>
 
-        <x-admin.modal id="remove-service-{{ $loop->iteration }}" 
-            heading="Remove service {{ $service->title }}">
-            <p>Are you sure wana remove service <b>{{ $service->title }}</b>?</p>
-            <form action="" method="post" class="d-block">
-                <button type="submit" class="btn btn-danger w-100">
-                    Remove it
-                </button>
-            </form>
-        </x-admin.modal>
+        @include('admin.partials.popup-delete', [
+            'id' => 'remove-service-' . $loop->iteration,
+            'heading' => 'Remove service',
+            'warningMesssage' => 
+                'Are you sure wana remove service <b>' . $service->title . '</b>?',
+            'action' => ''
+        ])
     @endforeach
 @endsection

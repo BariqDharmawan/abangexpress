@@ -62,6 +62,10 @@
                 href="{{ route('admin.content.cover-vission-mission') }}">
                     Cover Vision Mission
                 </a>
+                <a class="collapse-item" 
+                href="{{ route('admin.content.section-heading') }}">
+                    Section Heading Text
+                </a>
             </div>
         </div>
     </li>
