@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\OurTeam;
+use App\Models\PositionList;
 use Illuminate\Http\Request;
 
 class OurTeamController extends Controller
 {
+
+    public function manage()
+    {
+        $teams = OurTeam::all();
+        $positionList = PositionList::all();
+
+        return view('admin.team.manage', compact('teams', 'positionList'));
+    }
+
     /**
      * Display a listing of the resource.
      *

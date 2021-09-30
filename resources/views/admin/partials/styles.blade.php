@@ -13,6 +13,9 @@
             height: auto;
         }
     }
+    .h-full {
+        height: 100%;
+    }
     .center-parent {
         position: absolute;
         left: 50%;

@@ -86,6 +86,14 @@
         </a>
     </li>
 
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.team.manage') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Teams</span>
+        </a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

@@ -7,7 +7,7 @@
             {{ $title }}
         </h6>
         @isset($header)
-        {{ $header }}
+            {{ $header }}
         @endisset
     </div>
     @endisset

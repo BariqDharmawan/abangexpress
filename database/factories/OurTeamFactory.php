@@ -21,7 +21,7 @@ class OurTeamFactory extends Factory
      */
     public function definition()
     {
-        $avatarPath = 'uploaded/dummy/team/team-';
+        $avatarPath = '/uploaded/dummy/team/team-';
 
         return [
             'name' => $this->faker->name(),
