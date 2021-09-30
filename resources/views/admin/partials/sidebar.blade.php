@@ -94,6 +94,13 @@
         </a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.faq.manage') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>FAQ</span>
+        </a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

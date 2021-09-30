@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
+
+    public function manage()
+    {
+        $faqs = Faq::all();
+        return view('admin.faq.manage', compact('faqs'));
+    }
+
     /**
      * Display a listing of the resource.
      *

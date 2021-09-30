@@ -1,12 +1,12 @@
-<form method="POST" enctype="multipart/form-data" action="">
+<form method="POST" enctype="multipart/form-data" action="{{ $action }}">
     <div class="form-group">
         <label for="person-name">Person name</label>
-        <input type="text" class="form-control"
+        <input type="text" class="form-control" name="name"
         id="person-name" @if($data) value="{{ $data->name }}" @endif required>
     </div>
     <div class="form-group">
-        <label for="person-name">Person position</label>
-        <select class="custom-select">
+        <label for="person-position">Person position</label>
+        <select class="custom-select" id="person-position" name="position_id">
             @foreach ($positionList as $position)
                 <option value="{{ $position->id }}"
                 @if ($data and ($position->id === $data->position_id)) selected @endif>

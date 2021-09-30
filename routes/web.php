@@ -26,6 +26,9 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('team/manage', 'OurTeamController@manage')->name('team.manage');
     Route::resource('team', 'OurTeamController');
 
+    Route::get('faq/manage', 'FaqController@manage')->name('faq.manage');
+    Route::resource('faq', 'FaqController');
+
     Route::prefix('content')->name('content.')->group(function (){
         Route::get('cover-vision-mission', 'ContentController@coverVisionMission')->name(
             'cover-vission-mission'

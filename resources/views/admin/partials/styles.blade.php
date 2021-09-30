@@ -13,6 +13,15 @@
             height: auto;
         }
     }
+    .hover-no-underline:hover {
+        text-decoration: none
+    }
+    .transition-default {
+        transition: all 250ms;
+    }
+    .rotate-180deg {
+        transform: rotate(180deg);
+    }
     .h-full {
         height: 100%;
     }
