@@ -36,7 +36,7 @@
     @foreach ($ourService as $service)
         <x-admin.modal id="edit-service-{{ $loop->iteration }}" 
             heading="Edit service {{ $service->title }}">
-            @include('admin.services.form', ['action' => '', 'service' => $service])
+            @include('admin.services.form', ['action' => '', 'data' => $service])
         </x-admin.modal>
 
         @include('admin.partials.popup-delete', [

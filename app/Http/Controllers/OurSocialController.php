@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Models\OurSocial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class OurSocialController extends Controller
 {
@@ -19,7 +21,9 @@ class OurSocialController extends Controller
 
     public function manage()
     {
-        return view('admin.social.manage');
+        $socialMedia = Helper::getJson('social-media.json', true);
+        $platforms = Arr::pluck($socialMedia, 'platform');
+        return view('admin.social.manage', compact('platforms'));
     }
 
     /**
@@ -41,13 +45,13 @@ class OurSocialController extends Controller
     public function store(Request $request)
     {
         $username = $request->username;
-        $linkPlatform = OurSocial::generateUrl($username, $request->platform);
+        $linkSocial = OurSocial::generateUrl($username, $request->platform);
 
         $addSocial = OurSocial::create([
             'icon' => $request->icon,
             'platform' => $request->platform,
             'username' => $username,
-            'link' => $linkPlatform
+            'link' => $linkSocial
         ]);
 
         return response()->json($addSocial);

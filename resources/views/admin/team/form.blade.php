@@ -1,4 +1,7 @@
 <form method="POST" enctype="multipart/form-data" action="{{ $action }}">
+    @isset($data)
+        @csrf @method('PUT')
+    @endisset
     <div class="form-group">
         <label for="person-name">Person name</label>
         <input type="text" class="form-control" name="name"

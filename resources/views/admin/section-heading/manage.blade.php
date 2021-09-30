@@ -1,7 +1,4 @@
 @extends('layouts.admin')
-@push('style-plugins')
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-@endpush
 @section('content')
 <div class="col-12">
     <x-admin.card title="Heading each section">
@@ -66,12 +63,3 @@
         </x-admin.modal>
     @endforeach
 @endsection
-
-@push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.summernote').summernote();
-    });
-</script>
-@endpush

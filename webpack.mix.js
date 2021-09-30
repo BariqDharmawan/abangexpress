@@ -38,6 +38,7 @@ mix.copy('resources/assets/dummy', 'public/uploaded/dummy')
     .copy('resources/assets/img', 'public/img')
     .copy('resources/assets/general/json', 'public/json')
     .copy('resources/assets/general/vendor', 'public/vendor')
+    .copy('resources/assets/general/video', 'public/video')
     .copy('resources/assets/admin/template', 'public/admin/template')
 
 //asset for template 2

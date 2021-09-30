@@ -51,17 +51,6 @@
         </div>
     </div>
 </div>
-
-<div class="col-12">
-    <div class="card">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Embeded Map</h6>
-        </div>
-        <div class="card-body">
-            {!! $identity->address_embed !!}
-        </div>
-    </div>
-</div>
 @endsection
 
 @push('scripts')

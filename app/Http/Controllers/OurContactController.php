@@ -2,11 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutUs;
 use App\Models\OurContact;
 use Illuminate\Http\Request;
 
 class OurContactController extends Controller
 {
+
+    public function manage()
+    {
+        $contact = OurContact::first();
+        $columns = ['address', 'telephone', 'email'];
+
+        $addressEmbed = AboutUs::select('address_embed')->first()->address_embed;
+        // $ourAddress = [$ourAddress, $address];
+
+        // dd($ourAddress);
+
+        return view('admin.contact.manage', compact('contact', 'columns', 'addressEmbed'));
+    }
+
     /**
      * Display a listing of the resource.
      *

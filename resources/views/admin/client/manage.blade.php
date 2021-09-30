@@ -50,7 +50,7 @@
 
     @foreach ($clients as $client)
         <x-admin.modal id="edit-client-{{ $loop->iteration }}" heading="Add new client">
-            @include('admin.client.form', ['action' => '', 'client' => $client])
+            @include('admin.client.form', ['action' => '', 'data' => $client])
         </x-admin.modal>
 
         @include('admin.partials.popup-delete', [

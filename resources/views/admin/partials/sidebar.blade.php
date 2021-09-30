@@ -41,7 +41,8 @@
                 <a class="collapse-item" href="{{ route('admin.about-us.social') }}">
                     Social Media
                 </a>
-                <a class="collapse-item" href="buttons.html">Contacts</a>
+                <a class="collapse-item" 
+                href="{{ route('admin.contact.manage') }}">Contacts</a>
             </div>
         </div>
     </li>
