@@ -125,7 +125,7 @@
                     <p class="cta-text">{{ $landingSection[2]->first_desc }}</p>
                 </div>
                 <div class="col-lg-3 cta-btn-container text-center">
-                    <a class="cta-btn align-middle" href="#">Call To Action</a>
+                    <a class="cta-btn align-middle" href="#" id="cta-email">Call To Action</a>
                 </div>
             </div>
         </div>
