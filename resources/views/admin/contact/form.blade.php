@@ -1,4 +1,5 @@
 <form method="POST" enctype="multipart/form-data" action="{{ $action }}">
+    @csrf @method('PUT')
     <div class="form-group">
         <label for="edit-contact-addres">Our address</label>
         <textarea name="address" id="edit-contact-addres" rows="4" 

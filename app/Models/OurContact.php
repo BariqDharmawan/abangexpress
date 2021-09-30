@@ -9,5 +9,5 @@ class OurContact extends Model
 {
     use HasFactory;
 
-    public $guarded = [''];
+    public $fillable = ['address', 'telephone', 'email', 'link_address'];
 }

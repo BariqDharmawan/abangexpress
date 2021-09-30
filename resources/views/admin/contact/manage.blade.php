@@ -2,6 +2,13 @@
 
 @section('content')
     <div class="row mx-0">
+        <div class="col-12">
+            @if (session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+            @endif
+        </div>
         <div class="col-12 mb-4">
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="h4 mb-0">Manage our contact</h1>
@@ -37,7 +44,10 @@
 
 @section('components')
     <x-admin.modal id="update-contact" heading="Change contact">
-        @include('admin.contact.form', ['action' => '', 'data' => $contact])
+        @include('admin.contact.form', [
+            'action' => route('admin.our-contact.update'),
+            'data' => $contact
+        ])
     </x-admin.modal>
 
     <x-admin.modal id="change-embeded" heading="Change embeded map">
