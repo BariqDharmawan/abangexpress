@@ -16,9 +16,6 @@ class OurContactController extends Controller
         $columns = ['address', 'telephone', 'email'];
 
         $addressEmbed = AboutUs::select('address_embed')->first()->address_embed;
-        // $ourAddress = [$ourAddress, $address];
-
-        // dd($ourAddress);
 
         return view('admin.contact.manage', compact('contact', 'columns', 'addressEmbed'));
     }
@@ -38,11 +35,8 @@ class OurContactController extends Controller
     public function update(UpdateContactValidation $request)
     {
         $ourContact = OurContact::where('id', 1)->update($request->validated());
-        // if ($request->has('')) {
-        //     # code...
-        // }
-        // $ourContact->telephone = $request->telephone;
-        // $ourContact->save();
+
+        // return response()->json($ourContact);
 
         return redirect()->back()->with('success', 'Successfully update contact');
     }

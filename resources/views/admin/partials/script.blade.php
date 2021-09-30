@@ -1,14 +1,15 @@
 {{-- <script src="{{ asset('admin/js/admin.js') }}"></script> --}}
+
 <script src="{{ asset('admin/template/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('admin/template/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+<script src="{{ asset('admin/template/js/sb-admin-2.min.js') }}"></script>
 <script src="{{ asset(
     'admin/template/vendor/bootstrap/js/bootstrap.bundle.min.js'
 ) }}"></script>
-<script src="{{ asset('admin/template/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-<script src="{{ asset('admin/template/js/sb-admin-2.min.js') }}"></script>
 <script src="{{ asset('admin/template/vendor/chart.js/Chart.min.js') }}"></script>
-@push('scripts')
+
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-@endpush
+
 <script>
     $(document).ready(function() {
         $('.summernote').summernote();

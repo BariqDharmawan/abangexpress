@@ -18,7 +18,12 @@ Route::redirect('/', 'template-1', 301);
 
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
     Route::get('identity', 'AboutUsController@identity')->name('about-us.identity');
+    Route::put('identity/embed-map', 'AboutUsController@updateEmbedMap')->name(
+        'about-us.update-embed-map'
+    );
+
     Route::get('our-social', 'OurSocialController@manage')->name('about-us.social');
     Route::get('services', 'OurServiceController@manage')->name('service.manage');
     Route::get('clients', 'OurClientController@manage')->name('client.manage');
@@ -31,6 +36,8 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
     Route::get('contacts/manage', 'OurContactController@manage')->name('contact.manage');
     Route::resource('contacts', 'OurContactController');
+
+    Route::put('our-contact', 'OurContactController@update')->name('our-contact.update');
 
     Route::prefix('content')->name('content.')->group(function (){
         Route::get('cover-vision-mission', 'ContentController@coverVisionMission')->name(

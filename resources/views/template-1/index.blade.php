@@ -277,17 +277,17 @@
                 {{-- get contact using ajax --}}
                 <div class="col-md-4">
                     <x-template1.list-group-simple icon="bi-geo-alt" id="location" 
-                    text="" subtext="" link="" class="contact-address" />
+                    text="" subtext="" link="" class="contact-address" subtext-class="contact-value" />
                 </div>
 
                 <div class="col-md-4">
                     <x-template1.list-group-simple icon="bi-phone" id="phone" 
-                    text="" subtext="" link="" class="contact-phone" />
+                    text="" subtext="" link="" class="contact-phone" subtext-class="contact-value" />
                 </div>
 
                 <div class="col-md-4">
                     <x-template1.list-group-simple icon="bi-envelope" id="email" 
-                    text="" subtext="" link="" class="contact-email" />
+                    text="" subtext="" link="" class="contact-email" subtext-class="contact-value" />
                 </div>
                 {{-- end of that --}}
                 

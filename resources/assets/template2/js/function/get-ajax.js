@@ -56,12 +56,14 @@ function getContact(urlApi) {
         let accordionToggler = null
         datas = response.data;
 
+        //put email to #cta-email button
         const ctaEmail = document.querySelector('#cta-email')
         if (ctaEmail) {
             ctaEmail.href = `mailto:${datas.email}`
             ctaEmail.textContent = datas.email
         }
 
+        //put our contact to each id element on landing page section contact
         const ourContacts = {
             "#location": {
                 "link": datas.link_address,
@@ -93,6 +95,21 @@ function getContact(urlApi) {
                 plainContactValue.textContent = ourContacts[contact].value
             }
         }
+        //end of that
+
+        //put contact to navbar template 1
+        const navEmail = document.querySelector('#nav-email .contact-value')
+        const navPhone = document.querySelector('#nav-telephone .contact-value')
+
+        if (navEmail && navPhone) {
+            navEmail.textContent = datas.email
+            navEmail.href = `mailto:${datas.email}`
+
+            navPhone.textContent = datas.telephone
+            navPhone.href = `mailto:${datas.telephone}`
+        }
+        //end of that
+        
 
     })
     .catch(error => console.error(error))

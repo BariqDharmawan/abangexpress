@@ -3,19 +3,15 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 Route::apiResource('faq','FaqController');
-Route::apiResource('our-contact','OurContactController');
+
+// Route::put('our-contact', 'OurContactController@update')->name('our-contact.update');
+Route::apiResource('our-contact','OurContactController')->only(['index']);
+
+// Route::put('identity/embed-map', 'AboutUsController@updateEmbedMap')->name(
+//     'about-us.update-embed-map'
+// );
+
 Route::apiResource('our-service','OurServiceController');
 Route::apiResource('our-team','OurTeamController');
 Route::apiResource('our-client','OurClientController');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateEmbedMapValidation;
 use App\Models\AboutUs;
 use Illuminate\Http\Request;
 
@@ -76,6 +77,12 @@ class AboutUsController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function updateEmbedMap(UpdateEmbedMapValidation $request)
+    {
+        AboutUs::first()->update(['address_embed' => $request->address_embed]);
+        return redirect()->back()->with('success', 'Successfully update our embed map');
     }
 
     /**
