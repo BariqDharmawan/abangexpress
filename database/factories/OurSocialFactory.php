@@ -27,10 +27,6 @@ class OurSocialFactory extends Factory
             file_get_contents(public_path('json/social-media.json')), true
         );
 
-        
-        $platform = Arr::pluck($socialMedia, 'platform');
-        $platform = $this->faker->randomElement($platform);
-
         $link = Arr::pluck($socialMedia, 'link');
 
         $pathIcon = 'uploaded/dummy/our-social/';
@@ -42,7 +38,7 @@ class OurSocialFactory extends Factory
                 $pathIcon . 'linkedin.svg',
                 $pathIcon . 'twitter.svg',
             ]),
-            'platform' => $platform,
+            'platform' => Helper::getListSocialPlatform(),
             'username' => $this->faker->userName(),
             'link' => $this->faker->randomElement($link)
         ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Helper;
+use App\Http\Requests\UpdateSocialMediaValidation;
 use App\Models\OurSocial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -87,9 +88,19 @@ class OurSocialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSocialMediaValidation $request, $id)
     {
-        //
+        $username = $request->username;
+        $linkSocial = OurSocial::generateUrl($username, $request->platform);
+
+        $updateSocial = OurSocial::where('id', $id)->update([
+            'icon' => $request->icon,
+            'platform' => $request->platform,
+            'username' => $username,
+            'link' => $linkSocial
+        ]);
+
+        return response()->json($updateSocial);
     }
 
     /**
