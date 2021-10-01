@@ -31,6 +31,9 @@
         top: 50%;
         transform: translate(-50%, -50%);
     }
+    .embeded-full iframe {
+        width: 100%;
+    }
 </style>
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">

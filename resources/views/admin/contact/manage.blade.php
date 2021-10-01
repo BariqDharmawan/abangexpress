@@ -29,7 +29,7 @@
             </ul>
         </div>
         <div class="col-12">
-            <x-admin.card title="Embeded Map">
+            <x-admin.card title="Embeded Map" class="embeded-full">
                 <x-slot name="header">
                     <button type="button" class="btn btn-primary" 
                         data-toggle="modal" data-target="#change-embeded">
