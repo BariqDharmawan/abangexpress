@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Helper;
+use App\Http\Requests\StoreSocialMediaValidation;
 use App\Http\Requests\UpdateContactValidation;
 use App\Http\Requests\UpdateSocialMediaValidation;
 use App\Models\OurSocial;
@@ -46,20 +47,22 @@ class OurSocialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSocialMediaValidation $request)
     {
         $username = $request->username;
         $platform = $request->platform;
-        $linkSocial = OurSocial::generateUrl($username, $platform);
 
-        $addSocial = OurSocial::create([
-            'icon' => $request->icon,
+        $iconSocial = $request->file('icon');
+        $pathIconSocial = Storage::putFile('public/our-social', $iconSocial);
+
+        OurSocial::create([
+            'icon' => Str::replaceFirst('public/', '/storage/', $pathIconSocial),
             'platform' => $platform,
             'username' => $username,
-            'link' => $linkSocial
+            'link' => OurSocial::generateUrl($username, $platform)
         ]);
 
-        return response()->json($addSocial);
+        return redirect()->back()->with('success', 'Successfully add new social media');
 
     }
 

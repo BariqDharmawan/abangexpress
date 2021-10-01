@@ -64,6 +64,9 @@
                         </option>
                     @endforeach
                 </select>
+                @error('platform')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
         
             <div class="form-group">
@@ -87,6 +90,9 @@
                         Pick icon
                     </label>
                 </div>
+                @error('icon')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
         
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -106,6 +112,9 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
+            if ($("#add-service").find('.text-danger').length > 0) {
+                $("#add-service").modal('show')
+            }
             $("form").each(function () {
                 if ($(this).find('.text-danger').length > 0) {
                     let modalId = $(this).parents('.modal').attr('id')
