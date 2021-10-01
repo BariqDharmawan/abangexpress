@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class UpdateEmbedMapValidation extends FormRequest
 {
@@ -16,6 +17,19 @@ class UpdateEmbedMapValidation extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $beforeEmbed = Str::of($this->address_embed)->before('<iframe');
+        $afterEmbed = Str::of($this->address_embed)->after('</iframe>');
+
+        $embededWithoutBeforeAfter = Str::of($this->address_embed)
+                                    ->remove($beforeEmbed)->remove($afterEmbed);
+
+        $this->merge([
+            'address_embed' => $embededWithoutBeforeAfter
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,20 +38,8 @@ class UpdateEmbedMapValidation extends FormRequest
     public function rules()
     {
         return [
-            'address_embed' => [
-                'required',
-                'regex:/^<iframe/',
-                'string',
-                'min:361'
-            ]
+            'address_embed' => ['required']
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'address_embed.min' => 'address embed looks like invalid',
-            'address_embed.regex' => 'address embed should be a valid iframe'
-        ];
-    }
 }
