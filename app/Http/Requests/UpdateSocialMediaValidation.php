@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Helper\Helper;
+use App\Models\OurSocial;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
@@ -27,9 +28,23 @@ class UpdateSocialMediaValidation extends FormRequest
     public function rules()
     {   
         return [
-            'icon' => ['required', 'mimetypes:image/png,image/jpeg,image/svg'],
-            'platform' => ['required', Rule::in(Helper::getListSocialPlatform())],
+            'icon' => [
+                'sometimes',
+                'max:1000',
+                'mimes:png,jpg,jpeg,svg',
+                'dimensions:max_width=30,max_height=30'
+            ],
+            'platform' => ['required', 'in:' . implode(',', Helper::getListSocialPlatform())],
             'username' => ['required', 'string', 'min:4', 'max:40']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'icon.max' => 'Max :attribute is 1mb',
+            'icon.dimensions' => ':attribute should be have max 30x30 pixel'
+        ];
+    }
+
 }

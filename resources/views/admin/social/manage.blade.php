@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row mx-0">
-        <div class="col-12 mb-4">
+        <div class="col-12">
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="h4 mb-0">Manage our social media</h1>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-service">
@@ -10,14 +10,21 @@
                 </button>
             </div>
         </div>
+        @if (session('success'))
+        <div class="col-12 mt-4">
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        </div>
+        @endif
     </div>
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-12">
             <x-admin.card>
                 <ul class="list-group">
                     @foreach ($ourSocial as $social)
                     <li class="list-group-item d-flex align-items-center" >
-                        <img src="{{ asset($social->icon) }}" alt="" height="30px">
+                        <img src="{{ $social->icon }}" alt="" height="30px">
                         <div class="ml-4">
                             <p class="font-weight-bold text-capitalize mb-1">
                                 <a href="{{ $social->link }}" 
@@ -26,10 +33,9 @@
                             <small>{{ $social->platform }}</small>
                         </div>
                         <div class="ml-auto">
-                            <button class="btn btn-link text-primary" data-toggle="modal" 
-                            type="button" data-target="#edit-social-{{ $loop->iteration }}">
+                            <a class="btn btn-link text-primary" href="{{ route('admin.our-social.edit', $social->id) }}">
                                 Update
-                            </button>
+                            </a>
                             <button type="button" class="btn btn-link text-danger" data-toggle="modal" 
                             data-target="#remove-social-{{ $loop->iteration }}">
                                 Remove
@@ -45,19 +51,67 @@
 
 @section('components')
     <x-admin.modal id="add-service" heading="Add new service">
-        @include('admin.social.form', ['action' => ''])
+        <form method="POST" enctype="multipart/form-data" 
+        action="{{ route('admin.our-social.store') }}">
+            @csrf
+            <div class="form-group">
+                <label for="add-social-platform">Platform</label>
+                <select class="custom-select text-capitalize" name="platform" 
+                id="add-social-platform">
+                    @foreach ($platforms as $platform)
+                        <option value="{{ $platform }}">
+                            {{ $platform }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        
+            <div class="form-group">
+                <label for="add-social-username">
+                    Username
+                </label>
+                <input type="text" class="form-control" 
+                id="add-social-username" 
+                name="username" value="{{ old('username') }}">
+        
+                @error('username')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" 
+                    id="add-social-icon" name="icon" required>
+                    <label class="custom-file-label" for="add-social-icon">
+                        Pick icon
+                    </label>
+                </div>
+            </div>
+        
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
     </x-admin.modal>
     @foreach ($ourSocial as $social)
-        <x-admin.modal id="edit-social-{{ $loop->iteration }}" 
-            heading="Edit our {{ $social->platform }}">
-            @include('admin.social.form', ['action' => '', 'data' => $social])
-        </x-admin.modal>
-
         @include('admin.partials.popup-delete', [
             'id' => 'remove-social-' . $loop->iteration,
             'heading' => "Remove our $social->platform",
             'warningMesssage' => "Are you sure wana remove our $social->platform",
-            'action' => ''
+            'action' => route('admin.our-social.destroy', $social->id)
         ])
     @endforeach
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            $("form").each(function () {
+                if ($(this).find('.text-danger').length > 0) {
+                    let modalId = $(this).parents('.modal').attr('id')
+                    console.log(modalId)
+                }
+            })
+        })
+    </script>
+@endpush

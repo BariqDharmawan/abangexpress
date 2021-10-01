@@ -24,8 +24,11 @@ Route::prefix('admin')->name('admin.')->group(function() {
         'about-us.update-embed-map'
     );
 
-    Route::get('our-social', 'OurSocialController@manage')->name('about-us.social');
+    Route::get('our-social', 'OurSocialController@manage')->name('our-social.manage');
+    Route::resource('our-social', 'OurSocialController')->except('index');
+    
     Route::get('services', 'OurServiceController@manage')->name('service.manage');
+    
     Route::get('clients', 'OurClientController@manage')->name('client.manage');
 
     Route::get('team/manage', 'OurTeamController@manage')->name('team.manage');

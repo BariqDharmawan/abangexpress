@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Helper;
+use App\Http\Requests\UpdateContactValidation;
 use App\Http\Requests\UpdateSocialMediaValidation;
 use App\Models\OurSocial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class OurSocialController extends Controller
 {
@@ -46,11 +49,12 @@ class OurSocialController extends Controller
     public function store(Request $request)
     {
         $username = $request->username;
-        $linkSocial = OurSocial::generateUrl($username, $request->platform);
+        $platform = $request->platform;
+        $linkSocial = OurSocial::generateUrl($username, $platform);
 
         $addSocial = OurSocial::create([
             'icon' => $request->icon,
-            'platform' => $request->platform,
+            'platform' => $platform,
             'username' => $username,
             'link' => $linkSocial
         ]);
@@ -78,7 +82,10 @@ class OurSocialController extends Controller
      */
     public function edit($id)
     {
-        //
+        $social = OurSocial::findOrFail($id);
+        $platforms = Helper::getListSocialPlatform();
+
+        return view('admin.social.edit', compact('social', 'platforms'));
     }
 
     /**
@@ -90,17 +97,28 @@ class OurSocialController extends Controller
      */
     public function update(UpdateSocialMediaValidation $request, $id)
     {
+        $updateSocial = OurSocial::findOrFail($id);
+
         $username = $request->username;
-        $linkSocial = OurSocial::generateUrl($username, $request->platform);
+        $platform = $request->platform;
 
-        $updateSocial = OurSocial::where('id', $id)->update([
-            'icon' => $request->icon,
-            'platform' => $request->platform,
-            'username' => $username,
-            'link' => $linkSocial
-        ]);
+        if ($request->hasFile('icon')) {
+            $iconSocial = $request->file('icon');
+            $pathIconSocial = Storage::putFile('public/our-social', $iconSocial);
+            $updateSocial->icon = Str::replaceFirst('public/', '/storage/', $pathIconSocial);
+        }
+        $updateSocial->platform = $platform;
+        $updateSocial->username = $username;
+        $updateSocial->link = OurSocial::generateUrl($username, $platform);
+        $updateSocial->save();
 
-        return response()->json($updateSocial);
+        //todo: remove old icon after update
+
+        return redirect()->route('admin.our-social.manage')->with(
+            'success', "Successfully update $updateSocial->platform"
+        );
+
+        // return 'coba';
     }
 
     /**
@@ -111,6 +129,10 @@ class OurSocialController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $socialToDelete = OurSocial::findOrFail($id);
+        $platformName = $socialToDelete->platform;
+        $socialToDelete->delete();
+
+        return redirect()->back()->with('success', "Successfully remove our $platformName");
     }
 }

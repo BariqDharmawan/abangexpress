@@ -6,6 +6,7 @@ use App\Helper\Helper;
 use App\Models\OurSocial;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class OurSocialFactory extends Factory
 {
@@ -23,13 +24,8 @@ class OurSocialFactory extends Factory
      */
     public function definition()
     {
-        $socialMedia = json_decode(
-            file_get_contents(public_path('json/social-media.json')), true
-        );
 
-        $link = Arr::pluck($socialMedia, 'link');
-
-        $pathIcon = 'uploaded/dummy/our-social/';
+        $pathIcon = '/storage/our-social/';
 
         return [
             'icon' => $this->faker->randomElement([
@@ -38,9 +34,9 @@ class OurSocialFactory extends Factory
                 $pathIcon . 'linkedin.svg',
                 $pathIcon . 'twitter.svg',
             ]),
-            'platform' => Helper::getListSocialPlatform(),
+            'platform' => $this->faker->randomElement(Helper::getListSocialPlatform()),
             'username' => $this->faker->userName(),
-            'link' => $this->faker->randomElement($link)
+            'link' => $this->faker->randomElement(Helper::getListSocialLink())
         ];
     }
 }

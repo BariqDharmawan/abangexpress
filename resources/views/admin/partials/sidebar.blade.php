@@ -38,7 +38,7 @@
                 <a class="collapse-item" href="{{ route('admin.about-us.identity') }}">
                     Identity
                 </a>
-                <a class="collapse-item" href="{{ route('admin.about-us.social') }}">
+                <a class="collapse-item" href="{{ route('admin.our-social.manage') }}">
                     Social Media
                 </a>
                 <a class="collapse-item" 
