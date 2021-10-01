@@ -29,7 +29,7 @@ mix.js(`${template1Path}/js/app.js`, 'public/template1/js')
     .sourceMaps();
 
 //general asset
-mix.copy('resources/assets/dummy', 'public/uploaded/dummy')
+mix.copy('resources/assets/dummy', 'storage/app/public')
     .copy('node_modules/bootstrap-icons/font/fonts', 'public/template1/css/fonts')
     .copy('node_modules/bootstrap-icons/font/fonts', 'public/template2/css/fonts')
     .copy('node_modules/boxicons/fonts', 'public/template1/fonts')
