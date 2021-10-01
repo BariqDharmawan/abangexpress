@@ -20,6 +20,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
     Route::get('identity', 'AboutUsController@identity')->name('about-us.identity');
+    Route::put('identity', 'AboutUsController@update')->name('about-us.update');
     Route::put('identity/embed-map', 'AboutUsController@updateEmbedMap')->name(
         'about-us.update-embed-map'
     );

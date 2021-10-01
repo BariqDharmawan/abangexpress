@@ -12,11 +12,6 @@ class AboutUsController extends Controller
     public function getVisionMission()
     {
         $visionMission = AboutUs::select('our_vision', 'our_mission')->get();
-        // $visionMission->map(function ($visionMission) {
-        //     return [
-        //         'visi'
-        //     ];
-        // });
         return response()->json($visionMission);
     }
 
@@ -24,59 +19,6 @@ class AboutUsController extends Controller
     {
         $identity = AboutUs::first();
         return view('admin.identity.manage', compact('identity'));
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     public function updateEmbedMap(UpdateEmbedMapValidation $request)
@@ -92,19 +34,31 @@ class AboutUsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $ourIdentity = AboutUs::findOrFail(1);
+
+        // dd($ourIdentity, $request->all());
+
+        $isEditOurIdentityInfo = $request->hasAny([
+            'our_name', 'our_vision', 'our_mission', 'sub_slogan'
+        ]);
+
+        if($isEditOurIdentityInfo) {
+            $ourIdentity->our_name = $request->our_name;
+            $ourIdentity->our_vision = $request->our_vision;
+            $ourIdentity->our_mission = $request->our_mission;
+            $ourIdentity->sub_slogan = $request->sub_slogan;
+        }
+        else {
+            $ourIdentity->our_video = $request->our_video;
+        }
+
+        $ourIdentity->save();
+        return redirect()->back()->with(
+            'success', 
+            'Successfully update ' . $isEditOurIdentityInfo ? 'our identity' : 'video promo'
+        );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

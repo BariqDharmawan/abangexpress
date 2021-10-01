@@ -97,8 +97,8 @@
         
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-
     </x-admin.modal>
+    
     @foreach ($ourSocial as $social)
         @include('admin.partials.popup-delete', [
             'id' => 'remove-social-' . $loop->iteration,
