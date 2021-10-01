@@ -36,6 +36,7 @@ class AboutUsController extends Controller
      */
     public function update(Request $request)
     {
+        //todo: add validation
         $ourIdentity = AboutUs::findOrFail(1);
 
         // dd($ourIdentity, $request->all());

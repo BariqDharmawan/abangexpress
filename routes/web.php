@@ -48,6 +48,9 @@ Route::prefix('admin')->name('admin.')->group(function() {
             'cover-vission-mission'
         );
         Route::get('carousel', 'ContentController@heroCarousel')->name('carousel');
+        Route::delete('carousel/{id}', 'ContentController@destroyHeroCarousel')->name(
+            'carousel.destroy'
+        );
         Route::get('section-heading', 'ContentController@sectionHeading')->name(
             'section-heading'
         );

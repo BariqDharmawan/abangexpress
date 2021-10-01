@@ -20,6 +20,12 @@ class ContentController extends Controller
         $heroCarousel = FirstHeroCarouselLanding::all();
         return view('admin.hero-carousel.manage', compact('heroCarousel'));
     }
+
+    public function destroyHeroCarousel($id)
+    {
+        FirstHeroCarouselLanding::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Successfully remove slide');
+    }
     
     public function sectionHeading()
     {

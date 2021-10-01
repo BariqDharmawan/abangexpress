@@ -34,6 +34,12 @@
     .embeded-full iframe {
         width: 100%;
     }
+    .option-slide {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10;
+    }
 </style>
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
