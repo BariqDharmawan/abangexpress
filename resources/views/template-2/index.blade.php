@@ -82,10 +82,12 @@
 
                 </div>
 
-                <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url(
-                    "{{ asset($aboutUs->cover_vision_mission) }}"
-                );'
-                data-aos="zoom-in" data-aos-delay="150"></div>
+                <div class="col-lg-5 order-1 order-lg-2 align-items-stretch d-flex"
+                data-aos="zoom-in" data-aos-delay="150">
+                    <div class="img w-100 rounded" style='background-image: url(
+                        "{{ asset($aboutUs->cover_vision_mission) }}"
+                    );height: 100%'></div>
+                </div>
             </div>
 
         </div>
