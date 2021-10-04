@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="col-12">
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <x-admin.card title="Header Carousel">
         <x-slot name="header">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-hero-carousel-popup">
@@ -48,10 +53,16 @@
 
 @section('components')
     <x-admin.modal id="add-hero-carousel-popup" heading="Header Carousel">
-        <form method="POST" enctype="multipart/form-data" action="">
+        <form method="POST" enctype="multipart/form-data" 
+        action="{{ route('admin.content.carousel.store') }}">
+            @csrf
             <div class="form-group">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" required>
+                    <input type="file" class="custom-file-input" name="img" 
+                    id="customFile" required>
+                    @error('img')
+                        <div class="text-danger py-2">{{ $message }}</div>
+                    @enderror
                     <label class="custom-file-label" for="customFile">Choose cover</label>
                 </div>
             </div>
@@ -68,3 +79,11 @@
         ])  
     @endforeach
 @endsection
+
+@push('scripts')
+    <script>
+        @error('img')
+            $("#add-hero-carousel-popup").modal('show')
+        @enderror
+    </script>
+@endpush

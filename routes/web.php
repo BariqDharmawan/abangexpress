@@ -47,10 +47,15 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('cover-vision-mission', 'ContentController@coverVisionMission')->name(
             'cover-vission-mission'
         );
+
         Route::get('carousel', 'ContentController@heroCarousel')->name('carousel');
+        Route::post('carousel', 'ContentController@addNewHeroCarousel')->name(
+            'carousel.store'
+        );
         Route::delete('carousel/{id}', 'ContentController@destroyHeroCarousel')->name(
             'carousel.destroy'
         );
+        
         Route::get('section-heading', 'ContentController@sectionHeading')->name(
             'section-heading'
         );

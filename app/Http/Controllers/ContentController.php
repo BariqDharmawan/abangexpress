@@ -6,6 +6,8 @@ use App\Models\AboutUs;
 use App\Models\FirstHeroCarouselLanding;
 use App\Models\LandingSectionDesc;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ContentController extends Controller
 {
@@ -19,6 +21,22 @@ class ContentController extends Controller
     {
         $heroCarousel = FirstHeroCarouselLanding::all();
         return view('admin.hero-carousel.manage', compact('heroCarousel'));
+    }
+
+    public function addNewHeroCarousel(Request $request)
+    {
+        $request->validate([
+            'img' => ['required', 'mimes:png,jpg,jpeg']
+        ]);
+        
+        $heroCarousel = $request->file('img');
+        $pathHeroCarousel = Storage::putFile('public/hero-carousel', $heroCarousel);
+
+        FirstHeroCarouselLanding::create([
+            'img' => Str::replaceFirst('public/', '/storage/', $pathHeroCarousel)
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully add new hero');
     }
 
     public function destroyHeroCarousel($id)
