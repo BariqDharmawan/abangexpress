@@ -3,25 +3,11 @@
     @isset($data)
         @method('PUT')
     @endisset
-    <div class="form-group">
-        <label for="person-name">Person name</label>
-        <input type="text" class="form-control not-allow-number"
-        @empty($data) name="name" @else name="name_edit" @endempty
-        id="person-name" @isset($data) value="{{ old('name_edit') ?? $data->name }}" @endisset 
-        @empty($data) value="{{ old('name') }}" @endempty required>
-        
-        @isset($data)
-            @error('name_edit')
-                <p class="text-danger">{{ $message }}</p>
-            @enderror
-        @endisset
-        @empty($data)
-            @error('name')
-                <p class="text-danger">{{ $message }}</p>
-            @enderror
-        @endempty
-        
-    </div>
+
+    <x-admin.input name="name" label="Person name" 
+    value="{{ isset($data) ? $data->name : '' }}" 
+    class="not-allow-number" minlength="3" maxlength="60" required></x-admin.input>
+
     <div class="form-group">
         <label for="person-position">Person position</label>
         <select class="custom-select" id="person-position" 
@@ -38,18 +24,14 @@
             <p class="text-danger">{{ $message }}</p>
         @enderror
     </div>
-    <div class="form-group">
-        <label for="short_desc">About member</label>
-        <textarea @empty($data) name="short_desc" @else name="short_desc_edit" @endempty id="short_desc" class="form-control" rows="5" 
-        maxlength="30" required>@isset($data){{ old('short_desc_edit') ?? $data->short_desc }}@else{{ old('short_desc') }}@endisset</textarea>
-        @error(isset($data) ? 'short_desc_edit' : 'short_desc')
-            <p class="text-danger">{{ $message }}</p>
-        @enderror
-    </div>
+
+    <x-admin.input type="textarea" label="About member" name="short_desc"
+    minlength="8" maxlength="50" value="{{ $data->short_desc ?? '' }}" rows="5" required/>
+
     <div class="form-group">
         <div class="custom-file">
             <input type="file" class="custom-file-input" 
-            id="person-avatar"
+            id="person-avatar" accept="image/*"
             @empty($data) name="avatar" required @else name="avatar_edit" @endempty>
             <label class="custom-file-label" for="person-avatar">
                 {{ isset($data) ? 'Change' : 'Add' }} avatar

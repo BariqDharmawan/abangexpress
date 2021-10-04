@@ -10,7 +10,8 @@
         <input type="text" class="form-control" placeholder="Put the question here"
         @empty($data) name="question" @else name="question_edit" @endempty
         @empty($data) id="question" @else id="question_edit" @endempty
-        value="{{ isset($data) ? $data->question : old('question') }}" required>
+        value="{{ isset($data) ? $data->question : old('question') }}"
+        minlength="4" maxlength="100" required>
 
         @error(isset($data) ? 'question_edit' : 'question')
             <p class="text-danger">{{ $message }}</p>

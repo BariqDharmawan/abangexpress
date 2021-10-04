@@ -6,21 +6,10 @@
     @isset($data)
         @method('PUT')
     @endisset
-    <div class="form-group">
-        <label for="@isset($data) service-title-{{ $data->id }} @else service-title @endisset">Service name</label>
-        <input type="text" class="form-control" 
-        id="@isset($data) service-title-{{ $data->id }} @else service-title @endisset" name="title" maxlength="20" minlength="3"
-        value="@isset($data){{ $data->title }}@endisset" required>
-        @if(url()->previous() === 'services')
-            @error('title')
-                <div class="text-danger py-2">{{ $message }}</div>
-            @enderror
-        @else
-            @error('title')
-                <div class="text-danger py-2">{{ $message }}</div>
-            @enderror
-        @endempty
-    </div>
+
+    <x-admin.input label="Service name" name="title" minlength="3" maxlength="20" 
+    value="{{ $data->title ?? '' }}" required />
+
     <div class="form-group">
         <label for="@isset($data) service-desc-{{ $data->id }} @else service-desc @endisset">Service desc</label>
         <textarea name="desc" id="@isset($data)service-desc-{{ $data->id }} @else service-desc @endisset" rows="3"
