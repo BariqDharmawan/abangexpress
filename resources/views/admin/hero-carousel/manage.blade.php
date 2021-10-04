@@ -23,15 +23,15 @@
                     @endforeach
                 </ol>
             @endif
-            <div class="carousel-inner position-relative">
+            <div class="carousel-inner">
                 @foreach ($heroCarousel as $carousel)
-                <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                <div class="carousel-item {{ $loop->first ? 'active' : '' }} position-relative">
                     <img src="{{ asset($carousel->img) }}" alt="" 
-                    class="d-block w-100" height="{{ $height ?? '450px' }}">
+                    class="d-block object-cover w-100" height="450px">
+                    <button type="button" class="btn btn-danger option-slide" data-toggle="modal" data-target="#remove-hero-carousel-popup-{{ $carousel->id }}">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </div>
-                <button type="button" class="btn btn-danger option-slide" data-toggle="modal" data-target="#remove-hero-carousel-popup-{{ $loop->iteration }}">
-                    <i class="fas fa-trash"></i>
-                </button>
                 @endforeach
             </div>
             <a class="carousel-control-prev" href="#hero-carousel" role="button" data-slide="prev">
@@ -45,7 +45,7 @@
         </div>
 
         <small class="text-secondary text-center d-block mt-2">
-            Ukuran aslinya adalah 1440x430
+            Ukuran aslinya adalah 1440x450
         </small>
     </x-admin.card>
 </div>
@@ -70,12 +70,12 @@
         </form>
     </x-admin.modal>
 
-    @foreach ($heroCarousel as $slide)
+    @foreach ($heroCarousel as $carousel)
         @include('admin.partials.popup-delete', [
-            'id' => 'remove-hero-carousel-popup-' . $loop->iteration,
-            'heading' => "Remove slide $slide->id",
+            'id' => 'remove-hero-carousel-popup-' . $carousel->id,
+            'heading' => "Remove slide $carousel->id",
             'warningMesssage' => 'Are you sure wana remove this slide?',
-            'action' => route('admin.content.carousel.destroy', $slide->id)
+            'action' => route('admin.content.carousel.destroy', $carousel->id)
         ])  
     @endforeach
 @endsection

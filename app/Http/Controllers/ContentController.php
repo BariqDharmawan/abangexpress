@@ -41,7 +41,9 @@ class ContentController extends Controller
 
     public function destroyHeroCarousel($id)
     {
-        FirstHeroCarouselLanding::findOrFail($id)->delete();
+        $carouselToDelete = FirstHeroCarouselLanding::findOrFail($id);
+        dd($carouselToDelete);
+        $carouselToDelete->delete();
         return redirect()->back()->with('success', 'Successfully remove slide');
     }
     
