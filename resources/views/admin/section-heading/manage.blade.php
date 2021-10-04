@@ -12,7 +12,7 @@
                 <p class="mb-1 mt-3 font-weight-bold text-dark">First description</p>
                 <small class="d-block mb-3">
                     @if ($heading->first_desc)
-                    {{ $heading->first_desc }}
+                        {!! $heading->first_desc !!}
                     @else
                         <span class="text-danger">No desc</span>
                     @endif
@@ -35,11 +35,13 @@
     @foreach ($sectionHeading as $heading)
         <x-admin.modal id="edit-heading-{{ $loop->iteration }}" 
         heading="Heading {!! '<b>' . $heading->section_name . '</b>' !!}">
-            <form method="POST" enctype="multipart/form-data" action="">
+            <form method="POST" enctype="multipart/form-data" 
+            action="{{ route('admin.content.section-heading.update', $heading->id) }}">
+                @csrf @method('PUT')
                 <div class="form-group">
                     <label for="section-name">Heading title</label>
                     <input type="text" class="form-control"
-                    id="section-name" name="name" 
+                    id="section-name" name="section_name"
                     value="{{ $heading->section_name }}" required>
                 </div>
                 @if ($heading->first_desc)

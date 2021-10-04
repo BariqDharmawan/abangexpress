@@ -35,7 +35,7 @@
     <section id="about" class="about">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="TENTANG KAMI" />`
+            <x-template2.section-title heading="{{ $landingSection[0]->section_name }}" />`
 
             <div class="content row">
                 <div class="col-lg-6">
@@ -95,7 +95,7 @@
     <section id="services" class="services section-bg">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="LAYANAN KAMI" />
+            <x-template2.section-title heading="{{ $landingSection[1]->section_name }}" />
 
             <div class="row" id="load-our-service">
                 {{-- get service using ajax [this is shadow element] --}}
@@ -123,7 +123,7 @@
             <div class="row">
                 <div class="col-lg-9 text-center text-lg-start">
                     <h2 class="text-white">{{ $landingSection[2]->section_name }}</h2>
-                    <p>{{ $landingSection[2]->first_desc }}</p>
+                    <p>{!! $landingSection[2]->first_desc !!}</p>
                 </div>
                 <div class="col-lg-3 cta-btn-container text-center">
                     <a class="cta-btn align-middle" id="cta-email">
@@ -139,7 +139,8 @@
     <section id="team" class="team section-bg">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="TEAM KAMI" desc="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas." />
+            <x-template2.section-title heading="{{ $landingSection[3]->section_name }}"
+            desc="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas." />
 
             <div class="row" id="load-member">
 
@@ -168,7 +169,7 @@
     <section id="faq" class="faq section-bg">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="FAQ" />
+            <x-template2.section-title heading="{{ $landingSection[4]->section_name }}" />
 
             <div class="faq-list">
                 <ul id="load-faq">
@@ -189,7 +190,7 @@
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="KONTAK KAMI" />
+            <x-template2.section-title heading="{{ $landingSection[5]->section_name }}" />
 
             <div class="row">
 

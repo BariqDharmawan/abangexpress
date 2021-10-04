@@ -61,6 +61,9 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('section-heading', 'ContentController@sectionHeading')->name(
             'section-heading'
         );
+        Route::put('section-heading/{id}', 'ContentController@changeSectionHeading')->name(
+            'section-heading.update'
+        );
     });
 
 

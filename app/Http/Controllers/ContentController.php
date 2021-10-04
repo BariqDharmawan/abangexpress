@@ -58,7 +58,6 @@ class ContentController extends Controller
     public function destroyHeroCarousel($id)
     {
         $carouselToDelete = FirstHeroCarouselLanding::findOrFail($id);
-        dd($carouselToDelete);
         $carouselToDelete->delete();
         return redirect()->back()->with('success', 'Successfully remove slide');
     }
@@ -67,6 +66,21 @@ class ContentController extends Controller
     {
         $sectionHeading = LandingSectionDesc::all();
         return view('admin.section-heading.manage', compact('sectionHeading'));
+    }
+
+    public function changeSectionHeading(Request $request, $id)
+    {
+        $sectionToUpdate = LandingSectionDesc::findOrFail($id);
+        $sectionToUpdate->section_name = $request->section_name;
+        if ($request->has('first_desc')) {
+            $sectionToUpdate->first_desc = $request->first_desc;
+        }
+        if ($request->has('second_desc')) {
+            $sectionToUpdate->second_desc = $request->second_desc;
+        }
+        
+        $sectionToUpdate->save();
+        return redirect()->back()->with('success', 'Successfully change heading');
     }
 
 }
