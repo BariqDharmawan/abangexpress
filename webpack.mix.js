@@ -17,18 +17,16 @@ const templateAdminPath = 'resources/assets/admin'
 
 //asset for admin
 mix.scripts([
-    'resources/assets/admin/template/vendor/jquery-easing/jquery.easing.min.js',
-    'resources/assets/admin/template/js/sb-admin-2.min.js',
-    'resources/assets/admin/template/vendor/bootstrap/js/bootstrap.bundle.min.js',
-    'resources/assets/admin/template/vendor/chart.js/Chart.min.js',
-    'resources/assets/admin/template/vendor/datatables/jquery.dataTables.min.js',
-    'resources/assets/admin/template/vendor/datatables/dataTables.bootstrap4.min.js',
-    'resources/assets/admin/template/vendor/summernote/summernote-bs4.min.js',
+    `${templateAdminPath}/template/vendor/jquery-easing/jquery.easing.min.js`,
+    `${templateAdminPath}/template/js/sb-admin-2.min.js`,
+    `${templateAdminPath}/template/vendor/bootstrap/js/bootstrap.bundle.min.js`,
+    `${templateAdminPath}/template/vendor/chart.js/Chart.min.js`,
+    `${templateAdminPath}/template/vendor/datatables/jquery.dataTables.min.js`,
+    `${templateAdminPath}/template/vendor/datatables/dataTables.bootstrap4.min.js`,
+    `${templateAdminPath}/template/vendor/summernote/summernote-bs4.min.js`,
 ], 'public/admin/js/vendor.js')
-.js('resources/assets/admin/js/app.js', 'public/admin/js/app.js')
-.sass('resources/assets/admin/scss/app.scss', 'public/admin/css/app.css')
-// mix.js(`${templateAdminPath}/js/vendor.js`, 'public/admin/js')
-//     .js(`${templateAdminPath}/js/app.js`, 'public/admin/js')
+    .js(`${templateAdminPath}/js/app.js`, 'public/admin/js/app.js')
+    .sass(`${templateAdminPath}/scss/app.scss`, 'public/admin/css/app.css')
     .copy(`${templateAdminPath}/img`, 'public/admin/img')
 
 //asset for template 1

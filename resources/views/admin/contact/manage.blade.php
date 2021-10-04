@@ -124,15 +124,3 @@
         height="500px" autoplay muted draggable="false" loop controls></video>
     </x-admin.modal>
 @endsection
-
-@push('scripts')
-    <script>
-        $(document).ready(function () {
-            $("form").each(function () {
-                if ($(this).find('.text-danger').length) {
-                    $(this).parents('.modal').modal('show')
-                }
-            })
-        })
-    </script>
-@endpush

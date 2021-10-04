@@ -82,8 +82,5 @@
 
 @push('scripts')
     <script>
-        @error('img')
-            $("#add-hero-carousel-popup").modal('show')
-        @enderror
     </script>
 @endpush
