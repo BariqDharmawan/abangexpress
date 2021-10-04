@@ -2,8 +2,9 @@
     <img src="{{ asset($data->icon) }}" alt="" height="30px" class="d-block mb-3 mx-auto">
 @endisset
 <form method="POST" enctype="multipart/form-data" action="{{ $action }}">
+    @csrf
     @isset($data)
-        @csrf @method('PUT')
+        @method('PUT')
     @endisset
     <div class="form-group">
         <label for="@isset($data) service-title-{{ $data->id }} @else service-title @endisset">Service name</label>
@@ -13,15 +14,16 @@
     </div>
     <div class="form-group">
         <label for="@isset($data) service-desc-{{ $data->id }} @else service-desc @endisset">Service desc</label>
-        <textarea name="desc" id="@isset($data)service-desc-{{ $data->id }} @else service-desc @endisset" rows="3" 
-        style="resize: none;" 
+        <textarea name="desc" id="@isset($data)service-desc-{{ $data->id }} @else service-desc @endisset" rows="3"
+        style="resize: none;"
         class="form-control" required>@isset($data){{ $data->desc }}@endisset</textarea>
     </div>
     <div class="form-group">
         <div class="custom-file">
             <input type="file" class="custom-file-input" 
-            id="service-icon" name="icon" required>
-            <label class="custom-file-label" for="service-icon">
+            id="@isset($data)service-icon-{{ $data->id }}@else service-icon @endisset" name="icon" @empty($data) required @endempty>
+            <label class="custom-file-label" 
+            for="@isset($data)service-icon-{{ $data->id }}@else service-icon @endisset">
                 @isset($data)
                 Change icon
                 @else

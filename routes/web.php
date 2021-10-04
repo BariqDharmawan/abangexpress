@@ -29,6 +29,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('our-social', 'OurSocialController')->except('index');
     
     Route::get('services', 'OurServiceController@manage')->name('service.manage');
+    Route::resource('services', 'OurServiceController')->except('index');
     
     Route::get('clients', 'OurClientController@manage')->name('client.manage');
 

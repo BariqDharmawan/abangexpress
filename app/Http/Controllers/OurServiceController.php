@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\OurService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class OurServiceController extends Controller
 {
@@ -26,16 +28,6 @@ class OurServiceController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -43,29 +35,23 @@ class OurServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $icon = $request->file('icon');
+        $pathIcon = Storage::putFile(
+            'public/cover-vision-mission',
+            $icon
+        );
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        OurService::create([
+            'icon' => Str::replaceFirst(
+                'public/',
+                '/storage/',
+                $pathIcon
+            ),
+            'title' => $request->title,
+            'desc' => $request->desc
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return redirect()->back()->with('success', 'Successfully add new service');
     }
 
     /**
@@ -77,7 +63,28 @@ class OurServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+
+        
+        $serviceToUpdate = OurService::findOrFail($id);
+        
+        $icon = $request->file('icon');
+        if ($request->hasFile('icon')) {
+            $pathIcon = Storage::putFile(
+                'public/cover-vision-mission',
+                $icon
+            );
+            $serviceToUpdate->icon = Str::replaceFirst('public/', '/storage/', $pathIcon);
+        }
+
+        $serviceToUpdate->title = $request->title;
+        $serviceToUpdate->desc = $request->desc;
+
+        $serviceToUpdate->save();
+        return redirect()->back()->with(
+            'success', "Successfully change service $serviceToUpdate->title"
+        );
+
     }
 
     /**
@@ -88,6 +95,12 @@ class OurServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $serviceToDelete = OurService::findOrFail($id);
+        $serviceName = $serviceToDelete->title;
+
+        $serviceToDelete->delete();
+        return redirect()->back()->with(
+            'success', "Successfully remove service $serviceName"
+        );
     }
 }

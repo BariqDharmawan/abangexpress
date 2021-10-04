@@ -1,5 +1,15 @@
 @extends('layouts.admin')
 @section('content')
+
+@if (session('success'))
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    </div>
+</div>
+@endif
 <div class="col-12">
     <x-admin.card title="Our service">
         <x-slot name="header">
@@ -31,12 +41,17 @@
 @endsection
 @section('components')
     <x-admin.modal id="add-service" heading="Add new service">
-        @include('admin.services.form', ['action' => '', 'service' => ''])
+        @include('admin.services.form', [
+            'action' => route('admin.services.store')
+        ])
     </x-admin.modal>
     @foreach ($ourService as $service)
         <x-admin.modal id="edit-service-{{ $loop->iteration }}" 
             heading="Edit service {{ $service->title }}">
-            @include('admin.services.form', ['action' => '', 'data' => $service])
+            @include('admin.services.form', [
+                'action' => route('admin.services.update', $service->id),
+                'data' => $service
+            ])
         </x-admin.modal>
 
         @include('admin.partials.popup-delete', [
@@ -44,7 +59,7 @@
             'heading' => 'Remove service',
             'warningMesssage' => 
                 'Are you sure wana remove service <b>' . $service->title . '</b>?',
-            'action' => ''
+            'action' => route('admin.services.destroy', $service->id)
         ])
     @endforeach
 @endsection
