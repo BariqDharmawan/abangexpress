@@ -9,19 +9,38 @@
     <div class="form-group">
         <label for="@isset($data) service-title-{{ $data->id }} @else service-title @endisset">Service name</label>
         <input type="text" class="form-control" 
-        id="@isset($data) service-title-{{ $data->id }} @else service-title @endisset" name="title" 
+        id="@isset($data) service-title-{{ $data->id }} @else service-title @endisset" name="title" maxlength="20" minlength="3"
         value="@isset($data){{ $data->title }}@endisset" required>
+        @if(url()->previous() === 'services')
+            @error('title')
+                <div class="text-danger py-2">{{ $message }}</div>
+            @enderror
+        @else
+            @error('title')
+                <div class="text-danger py-2">{{ $message }}</div>
+            @enderror
+        @endempty
     </div>
     <div class="form-group">
         <label for="@isset($data) service-desc-{{ $data->id }} @else service-desc @endisset">Service desc</label>
         <textarea name="desc" id="@isset($data)service-desc-{{ $data->id }} @else service-desc @endisset" rows="3"
-        style="resize: none;"
+        style="resize: none;" minlength="5"
         class="form-control" required>@isset($data){{ $data->desc }}@endisset</textarea>
+        @if(url()->previous() === 'services')
+            @error('desc')
+                <div class="text-danger py-2">{{ $message }}</div>
+            @enderror
+        @else
+            @error('desc')
+                <div class="text-danger py-2">{{ $message }}</div>
+            @enderror
+        @endempty
     </div>
     <div class="form-group">
         <div class="custom-file">
             <input type="file" class="custom-file-input" 
-            id="@isset($data)service-icon-{{ $data->id }}@else service-icon @endisset" name="icon" @empty($data) required @endempty>
+            id="@isset($data)service-icon-{{ $data->id }}@else service-icon @endisset" name="icon" @empty($data) required @endempty 
+            accept="image/*">
             <label class="custom-file-label" 
             for="@isset($data)service-icon-{{ $data->id }}@else service-icon @endisset">
                 @isset($data)
@@ -31,6 +50,15 @@
                 @endisset
             </label>
         </div>
+        @if(url()->previous() === 'services')
+            @error('icon')
+                <div class="text-danger py-2">{{ $message }}</div>
+            @enderror
+        @else
+            @error('icon')
+                <div class="text-danger py-2">{{ $message }}</div>
+            @enderror
+        @endempty
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

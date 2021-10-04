@@ -41,9 +41,7 @@
 @endsection
 @section('components')
     <x-admin.modal id="add-service" heading="Add new service">
-        @include('admin.services.form', [
-            'action' => route('admin.services.store')
-        ])
+        @include('admin.services.form', ['action' => route('admin.services.store')])
     </x-admin.modal>
     @foreach ($ourService as $service)
         <x-admin.modal id="edit-service-{{ $loop->iteration }}" 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreServiceValidation;
 use App\Models\OurService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +34,7 @@ class OurServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreServiceValidation $request)
     {
         $icon = $request->file('icon');
         $pathIcon = Storage::putFile(
@@ -42,11 +43,7 @@ class OurServiceController extends Controller
         );
 
         OurService::create([
-            'icon' => Str::replaceFirst(
-                'public/',
-                '/storage/',
-                $pathIcon
-            ),
+            'icon' => Str::replaceFirst('public/','/storage/',$pathIcon),
             'title' => $request->title,
             'desc' => $request->desc
         ]);
@@ -63,9 +60,6 @@ class OurServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-
-        
         $serviceToUpdate = OurService::findOrFail($id);
         
         $icon = $request->file('icon');
