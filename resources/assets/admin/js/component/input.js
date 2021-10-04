@@ -1,4 +1,8 @@
+import bsCustomFileInput from 'bs-custom-file-input'
+
 $(document).ready(function () {
+    bsCustomFileInput.init()
+
     $(".not-allow-number").on('keydown', function (e) {
         if (e.shiftKey || e.ctrlKey || e.altKey) {
             e.preventDefault()

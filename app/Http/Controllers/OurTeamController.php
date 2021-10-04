@@ -32,12 +32,6 @@ class OurTeamController extends Controller
         return response()->json($ourTeam);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreMemberValidation $request)
     {
         $avatar = $request->file('avatar');
@@ -75,7 +69,7 @@ class OurTeamController extends Controller
     public function update(UpdateMemberValidation $request, $id)
     {
         $editMember = OurTeam::findOrFail($id);
-        $editMember->name = $request->name_edit;
+        $editMember->name = $request->name;
 
         if ($request->hasFile('avatar_edit')) {
             $avatar = $request->file('avatar_edit');
@@ -85,7 +79,7 @@ class OurTeamController extends Controller
         }
 
         $editMember->position_id = $request->position_id_edit;
-        $editMember->short_desc = $request->short_desc_edit;
+        $editMember->short_desc = $request->short_desc;
         $editMember->save();
 
         return redirect()->back()->with('success', 'Successfully add new member');

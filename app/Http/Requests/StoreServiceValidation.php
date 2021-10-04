@@ -26,11 +26,11 @@ class StoreServiceValidation extends FormRequest
         return [
             'icon' => [
                 'required',
-                'mimes:png,jpg,jpeg,svg',
-                'dimensions:max_width=30,max_height=30'
+                'mimes:png,jpg,jpeg,svg'
             ],
             'title' => ['required', 'string', 'max:20', 'min:3'],
             'desc' => ['required', 'string', 'min:5'],
         ];
     }
+
 }

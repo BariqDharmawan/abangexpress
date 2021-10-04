@@ -25,14 +25,14 @@ class StoreMemberValidation extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'min:3', 'max:150', new AlphaSpaceRule],
+            'name' => ['required', 'string', 'min:3', 'max:60', new AlphaSpaceRule],
             'avatar' => [
                 'required',
                 'mimes:png,jpg,jpeg,svg',
                 'dimensions:min_width=90,min_height=90'
             ],
             'position_id' => ['required', 'integer' ,'exists:position_list,id'],
-            'short_desc' => ['required', 'string', 'min:3', 'max:50']
+            'short_desc' => ['required', 'string', 'min:8', 'max:50']
         ];
     }
 
