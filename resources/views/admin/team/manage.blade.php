@@ -5,6 +5,11 @@
 @section('content')
 <div class="row mx-0">
     <div class="col-12 mb-4">
+        @if (session('success'))
+        <x-admin.alert-success/>
+        @endif
+    </div>
+    <div class="col-12 mb-4">
         <div class="d-flex justify-content-between align-items-center">
             <h1 class="h4 mb-0">Manage member</h1>
             <button type="button" class="btn btn-primary"

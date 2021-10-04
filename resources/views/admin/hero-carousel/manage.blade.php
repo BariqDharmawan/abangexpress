@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="col-12">
+
     @if (session('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session('success') }}
-        </div>
+    <x-admin.alert-success/>
     @endif
+    
     <x-admin.card title="Header Carousel">
         <x-slot name="header">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-hero-carousel-popup">
@@ -59,7 +59,7 @@
             <div class="form-group">
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" name="img" 
-                    id="customFile" required>
+                    id="customFile" accept="image/*" required>
                     @error('img')
                         <div class="text-danger py-2">{{ $message }}</div>
                     @enderror

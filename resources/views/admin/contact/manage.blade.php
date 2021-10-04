@@ -3,9 +3,7 @@
 @section('content')
     <div class="row">
         @if (session('success'))
-            <div class="alert alert-success" role="alert">
-                {{ session('success') }}
-            </div>
+        <x-admin.alert-success/>
         @endif
     </div>
     <div class="row mx-0">
@@ -46,15 +44,10 @@
         <form method="POST" enctype="multipart/form-data" 
         action="{{ route('admin.our-contact.update') }}" data-modal-id="update-contact">
             @csrf @method('PUT')
-            <div class="form-group">
-                <label for="edit-contact-addres">Our address</label>
-                <textarea name="address" id="edit-contact-addres" rows="4" 
-                class="form-control"
-                maxlength="200" required>{{ old('address') ?? $contact->address }}</textarea>
-                @error('address')
-                    <div class="text-danger py-2">{{ $message }}</div>
-                @enderror
-            </div>
+            
+            <x-admin.input label="Our address" type="textarea" maxlength="200" 
+            value="{{ $contact->address }}" name="address" required />
+
             <div class="form-group">
                 <label for="edit-contact-url">Maps address link</label>
                 <input type="url" class="form-control" inputmode="url" id="edit-contact-url" name="link_address" value="{{ $contact->link_address }}" 

@@ -4,11 +4,9 @@
 @if (session('success'))
 <div class="row">
     <div class="col-12">
-            <div class="alert alert-success" role="alert">
-                {{ session('success') }}
-            </div>
-        </div>
+        <x-admin.alert-success/>
     </div>
+</div>
 @endif
 
 <div class="col-12">
