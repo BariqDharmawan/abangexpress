@@ -28,6 +28,7 @@ mix.scripts([
     .js(`${templateAdminPath}/js/app.js`, 'public/admin/js/app.js')
     .sass(`${templateAdminPath}/scss/app.scss`, 'public/admin/css/app.css')
     .copy(`${templateAdminPath}/img`, 'public/admin/img')
+    .copy(`${templateAdminPath}/template/vendor/summernote/font`, 'public/admin/css/font')
 
 //asset for template 1
 mix.js(`${template1Path}/js/app.js`, 'public/template1/js')

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMemberValidation;
+use App\Http\Requests\UpdateMemberValidation;
 use App\Models\OurTeam;
 use App\Models\PositionList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class OurTeamController extends Controller
 {
@@ -29,35 +33,25 @@ class OurTeamController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMemberValidation $request)
     {
-        //
-    }
+        $avatar = $request->file('avatar');
+        $pathAvatar = Storage::putFile('public/team', $avatar);
+        
+        OurTeam::create([
+            'name' => $request->name,
+            'avatar' => Str::replaceFirst('public/', '/storage/', $pathAvatar),
+            'position_id' => $request->position_id,
+            'short_desc' => $request->short_desc,
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect()->back()->with('success', 'Successfully add new member');
+
     }
 
     /**
@@ -78,9 +72,23 @@ class OurTeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateMemberValidation $request, $id)
     {
-        //
+        $editMember = OurTeam::findOrFail($id);
+        $editMember->name = $request->name_edit;
+
+        if ($request->hasFile('avatar_edit')) {
+            $avatar = $request->file('avatar_edit');
+            $pathAvatar = Storage::putFile('public/team', $avatar);
+
+            $editMember->avatar = Str::replaceFirst('public/', '/storage/', $pathAvatar);
+        }
+
+        $editMember->position_id = $request->position_id_edit;
+        $editMember->short_desc = $request->short_desc_edit;
+        $editMember->save();
+
+        return redirect()->back()->with('success', 'Successfully add new member');
     }
 
     /**
