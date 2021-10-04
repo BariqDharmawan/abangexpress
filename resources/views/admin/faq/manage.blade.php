@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="row mx-0">
+    @if (session('success'))
+    <div class="col-12 mb-4">
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    </div>
+    @endif
     <div class="col-12 mb-4">
         <div class="d-flex justify-content-between align-items-center">
             <h1 class="h4 mb-0">Manage FAQ</h1>
@@ -55,14 +62,16 @@
 @endsection
 
 @section('components')
-    <x-admin.modal id="add-new-faq" 
-        heading="Add new FAQ">
-        @include('admin.faq.form', ['action' => '', 'data' => ''])
+    <x-admin.modal id="add-new-faq" heading="Add new FAQ">
+        @include('admin.faq.form', ['action' => route('admin.faq.store')])
     </x-admin.modal>
+
     @foreach ($faqs as $faq)
-        <x-admin.modal id="edit-faq-{{ $loop->iteration }}"
-            heading="Add new FAQ">
-            @include('admin.faq.form', ['action' => '', 'data' => $faq])
+        <x-admin.modal id="edit-faq-{{ $loop->iteration }}" heading="Add new FAQ">
+            @include('admin.faq.form', [
+                'action' => route('admin.faq.update', $faq->id),
+                'data' => $faq
+            ])
         </x-admin.modal>
 
         @include('admin.partials.popup-delete', [
@@ -70,7 +79,8 @@
             'heading' => 'Remove FAQ ' . $faq->question,
             'warningMesssage' => 
                 'Are you sure wana remove <b>' . $faq->question . '</b>?',
-            'action' => ''
+            'action' => route('admin.faq.destroy', $faq->id)
         ])
     @endforeach
+
 @endsection

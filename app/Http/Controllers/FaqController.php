@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFaqValidation;
+use App\Http\Requests\UpdateFaqValidation;
 use App\Models\Faq;
-use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
@@ -14,11 +15,6 @@ class FaqController extends Controller
         return view('admin.faq.manage', compact('faqs'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $faqs = Faq::all();
@@ -26,69 +22,36 @@ class FaqController extends Controller
         return response()->json($faqs);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(StoreFaqValidation $request)
     {
-        //
+        Faq::create([
+            'question' => $request->question,
+            'answer' => $request->answer,
+            'admin_id' => 1
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully add new FAQ');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateFaqValidation $request, $id)
     {
-        //
+        Faq::findOrFail($id)->update([
+            'question' => $request->question_edit,
+            'answer' => $request->answer_edit,
+            'admin_id' => 1
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully update FAQ');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        Faq::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Successfully remove FAQ');
     }
 }

@@ -37,7 +37,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('team', 'OurTeamController');
 
     Route::get('faq/manage', 'FaqController@manage')->name('faq.manage');
-    Route::resource('faq', 'FaqController');
+    Route::resource('faq', 'FaqController')->except('index');
 
     Route::get('contacts/manage', 'OurContactController@manage')->name('contact.manage');
     Route::resource('contacts', 'OurContactController');
