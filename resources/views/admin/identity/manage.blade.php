@@ -67,7 +67,7 @@
 @endsection
 
 @section('components')
-    <x-admin.modal id="edit-idendity" heading="Edit our idendity">
+    <x-admin.modal id="edit-idendity" heading="Edit our idendity" size="">
         <form method="POST" enctype="multipart/form-data" 
         action="{{ route('admin.about-us.update') }}">
             @csrf @method('PUT')
@@ -116,7 +116,7 @@
         </form>
     </x-admin.modal>
 
-    <x-admin.modal id="change-video-popup" heading="Change video promo">
+    <x-admin.modal id="change-video-popup" heading="Change video promo" size="">
         <form action="{{ route('admin.about-us.update') }}" method="post">
             @csrf @method('PUT')
             <div class="form-group">
