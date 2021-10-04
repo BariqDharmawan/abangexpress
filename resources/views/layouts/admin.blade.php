@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     @include('partials.meta', ['prefixTitle' => 'Admin'])
-    @include('admin.partials.styles')
+    <link rel="stylesheet" href="{{ asset('admin/css/app.css') }}">
     @stack('style-plugins')
 </head>
 <body>
@@ -43,7 +43,11 @@
 
         @include('admin.partials.btn-back-to-top')
     </div>
-    @include('admin.partials.script')
+    <script src="{{ asset('admin/template/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin/js/vendor.js') }}"></script>
+    <script src="{{ asset('admin/js/app.js') }}"></script>
+
+    @stack('scripts')
     @yield('components')
 </body>
 </html>

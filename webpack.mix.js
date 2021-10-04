@@ -16,7 +16,20 @@ const template2Path = 'resources/assets/template2'
 const templateAdminPath = 'resources/assets/admin'
 
 //asset for admin
-mix.copy(`${templateAdminPath}/img`, 'public/admin/img');
+mix.scripts([
+    'resources/assets/admin/template/vendor/jquery-easing/jquery.easing.min.js',
+    'resources/assets/admin/template/js/sb-admin-2.min.js',
+    'resources/assets/admin/template/vendor/bootstrap/js/bootstrap.bundle.min.js',
+    'resources/assets/admin/template/vendor/chart.js/Chart.min.js',
+    'resources/assets/admin/template/vendor/datatables/jquery.dataTables.min.js',
+    'resources/assets/admin/template/vendor/datatables/dataTables.bootstrap4.min.js',
+    'resources/assets/admin/template/vendor/summernote/summernote-bs4.min.js',
+], 'public/admin/js/vendor.js')
+.js('resources/assets/admin/js/app.js', 'public/admin/js/app.js')
+.sass('resources/assets/admin/scss/app.scss', 'public/admin/css/app.css')
+// mix.js(`${templateAdminPath}/js/vendor.js`, 'public/admin/js')
+//     .js(`${templateAdminPath}/js/app.js`, 'public/admin/js')
+    .copy(`${templateAdminPath}/img`, 'public/admin/img')
 
 //asset for template 1
 mix.js(`${template1Path}/js/app.js`, 'public/template1/js')
@@ -39,7 +52,10 @@ mix.copy('resources/assets/dummy', 'storage/app/public')
     .copy('resources/assets/general/json', 'public/json')
     .copy('resources/assets/general/vendor', 'public/vendor')
     .copy('resources/assets/general/video', 'public/video')
-    .copy('resources/assets/admin/template', 'public/admin/template')
+    .copy(
+        'resources/assets/admin/template/vendor/jquery', 
+        'public/admin/template/vendor/jquery'
+    )
 
 //asset for template 2
 mix.js(`${template2Path}/js/app.js`, 'public/template2/js')
