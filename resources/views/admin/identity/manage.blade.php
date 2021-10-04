@@ -67,37 +67,37 @@
 @endsection
 
 @section('components')
-    <x-admin.modal id="edit-idendity" heading="Edit our idendity" size="">
-        <form method="POST" enctype="multipart/form-data" 
+    <x-admin.modal id="edit-idendity" heading="Edit our idendity">
+        <form method="POST" enctype="multipart/form-data"
         action="{{ route('admin.about-us.update') }}">
             @csrf @method('PUT')
             <div class="form-group">
                 <label for="edit-identity-name">Our name</label>
-                <input type="text" class="form-control" 
-                id="edit-identity-name" 
+                <input type="text" class="form-control"
+                id="edit-identity-name"
                 name="our_name" value="{{ old('our_name') ?? $identity->our_name }}" required>
                 @error('our_name')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-        
+
             <div class="form-group">
                 <label for="edit-identity-vision">
                     Our Vision
                 </label>
-                <input type="text" class="form-control" 
+                <input type="text" class="form-control"
                 id="edit-identity-vision" name="our_vision" required
                 value="{{ old('our_vision') ?? $identity->our_vision }}">
-        
+
                 @error('username')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-        
+
             <div class="form-group">
                 <label for="edit-mission">Our Mission</label>
-                <textarea name="our_mission" id="edit-mission" 
-                class="form-control summernote" 
+                <textarea name="our_mission" id="edit-mission"
+                class="form-control summernote"
                 style="resize: none;" rows="3"
                 required>{{ old('our_mission') ?? $identity->our_mission }}</textarea>
             </div>
@@ -105,25 +105,25 @@
             <div class="form-group">
                 <label for="edit-sub-slogan">Our Sub Slogan</label>
                 <input type="text" required
-                class="form-control" id="edit-sub-slogan" 
+                class="form-control" id="edit-sub-slogan"
                 name="sub_slogan" value="{{ old('sub_slogan') ?? $identity->sub_slogan }}">
                 @error('sub_slogan')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-        
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </x-admin.modal>
 
-    <x-admin.modal id="change-video-popup" heading="Change video promo" size="">
+    <x-admin.modal id="change-video-popup" heading="Change video promo" >
         <form action="{{ route('admin.about-us.update') }}" method="post">
             @csrf @method('PUT')
             <div class="form-group">
                 <label for="edit-video-promo">
                     Video promo
                 </label>
-                <input type="url" class="form-control" 
+                <input type="url" class="form-control"
                 id="edit-video-promo" name="our_video" required
                 value="{{ old('our_video') ?? $identity->our_video }}">
                 @error('our_video')
@@ -142,7 +142,7 @@
     <script src="{{ asset('admin/template/vendor/glightbox/js/glightbox.min.js') }}"></script>
     <script>
         /**
-         * Initiate  glightbox 
+         * Initiate  glightbox
          */
         const glightbox = GLightbox({
             selector: '.glightbox'
