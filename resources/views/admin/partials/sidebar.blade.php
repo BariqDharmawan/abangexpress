@@ -73,14 +73,6 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.client.manage') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Clients</span>
-        </a>
-    </li>
-
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.service.manage') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Services</span>
