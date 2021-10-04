@@ -31,25 +31,6 @@
 
 <main id="main">
 
-    <!-- ======= Cliens Section ======= -->
-    <section id="cliens" class="cliens section-bg">
-        <div class="container">
-
-            <div class="row parent-load-data" data-aos="zoom-in" id="load-clients"
-            data-api-suffix="our-client">
-
-                {{-- get client using ajax [this is shadow element] --}}
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center el-to-load-ajax" data-content-type="img-only">
-                    <img src=""
-                    class="img-fluid" alt="">
-                </div>
-                {{-- end of that --}}
-
-            </div>
-
-        </div>
-    </section>
-
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
         <div class="container" data-aos="fade-up">

@@ -1,32 +1,31 @@
 @extends('layouts/admin')
 
 @section('content')
-    <div class="row mx-0">
-        <div class="col-12">
-            @if (session('success'))
+    <div class="row">
+        @if (session('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
             </div>
-            @endif
-        </div>
+        @endif
+    </div>
+    <div class="row mx-0">
         <div class="col-12 mb-4">
-            <div class="d-flex justify-content-between align-items-center">
-                <h1 class="h4 mb-0">Manage our contact</h1>
-                <button type="button" class="btn btn-primary" 
-                data-toggle="modal" data-target="#update-contact">
-                    Update our contact
-                </button>
-            </div>
-        </div>
-        <div class="col-12 mb-4">
-            <ul class="list-group">
-                @foreach ($columns as $column)
-                    <li class="list-group-item">
-                        <span class="text-capitalize">{{ $column }}</span> : 
-                        {{ $contact->{$column} }}
-                    </li>
-                @endforeach
-            </ul>
+            <x-admin.card title="Manage our contact">
+                <x-slot name="header">
+                    <button type="button" class="btn btn-primary" 
+                    data-toggle="modal" data-target="#update-contact">
+                        Update our contact
+                    </button>
+                </x-slot>
+                <ul class="list-group">
+                    @foreach ($columns as $column)
+                        <li class="list-group-item">
+                            <span class="text-capitalize">{{ $column }}</span> : 
+                            {{ $contact->{$column} }}
+                        </li>
+                    @endforeach
+                </ul>
+            </x-admin.card>
         </div>
         <div class="col-12">
             <x-admin.card title="Embeded Map" class="embeded-full">

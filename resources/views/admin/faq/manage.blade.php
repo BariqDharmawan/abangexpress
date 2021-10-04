@@ -20,11 +20,12 @@
                             <button class="btn btn-link btn-block text-left d-flex justify-content-between hover-no-underline"
                             type="button" data-toggle="collapse"
                             data-target="#faq-{{ $loop->iteration }}" 
-                            aria-expanded="@if($loop->first) true @else false @endif" 
+                            @if($loop->first)aria-expanded="true" 
+                            @else aria-expanded="false" @endif
                             aria-controls="faq-{{ $loop->iteration }}">
                                 {{ $faq->question }}
                                 <i class="fas fa-chevron-down 
-                                collapse-icon transition-default"></i>
+                                collapse-icon transition-default @if($loop->first) rotate-180deg @endif"></i>
                             </button>
                         </h2>
                     </div>
