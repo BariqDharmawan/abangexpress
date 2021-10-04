@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="h4 mb-0">Manage our social media</h1>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-service">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-social-media">
                     Add new social media
                 </button>
             </div>
@@ -50,7 +50,7 @@
 @endsection
 
 @section('components')
-    <x-admin.modal id="add-service" heading="Add new service">
+    <x-admin.modal id="add-social-media" heading="Add new social media">
         <form method="POST" enctype="multipart/form-data" 
         action="{{ route('admin.our-social.store') }}">
             @csrf
@@ -108,19 +108,3 @@
         ])
     @endforeach
 @endsection
-
-@push('scripts')
-    <script>
-        $(document).ready(function () {
-            if ($("#add-service").find('.text-danger').length > 0) {
-                $("#add-service").modal('show')
-            }
-            $("form").each(function () {
-                if ($(this).find('.text-danger').length > 0) {
-                    let modalId = $(this).parents('.modal').attr('id')
-                    console.log(modalId)
-                }
-            })
-        })
-    </script>
-@endpush
