@@ -17,6 +17,22 @@ class ContentController extends Controller
         return view('admin.cover-vision-mission.manage', compact('cover'));
     }
 
+    public function addNewCoverVisionMission(Request $request)
+    {
+        $coverVisionMission = $request->file('cover_vision_mission');
+        $pathcoverVisionMission = Storage::putFile(
+            'public/cover-vision-mission', $coverVisionMission
+        );
+        
+        AboutUs::first()->update([
+            'cover_vision_mission' => Str::replaceFirst(
+                'public/', '/storage/', $pathcoverVisionMission
+            )
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully change cover');
+    }
+
     public function heroCarousel()
     {
         $heroCarousel = FirstHeroCarouselLanding::all();
