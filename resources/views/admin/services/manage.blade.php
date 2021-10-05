@@ -18,7 +18,9 @@
         <ul class="list-group">
             @foreach ($ourService as $service)
             <li class="list-group-item d-flex align-items-center" data-id="{{ $service->id }}">
-                <i class="{{ $service->icon }} h3"></i>
+                <span class="h3">
+                    <i class="{{ $service->icon }}"></i>
+                </span>
                 <div class="ml-4">
                     <p class="font-weight-bold text-capitalize mb-1">{{ $service->title }}</p>
                     <small>{{ $service->desc }}</small>

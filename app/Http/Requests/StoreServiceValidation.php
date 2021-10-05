@@ -24,11 +24,22 @@ class StoreServiceValidation extends FormRequest
     public function rules()
     {
         return [
-            'icon' => [
-                'required'
-            ],
+            'icon' => ['required', 'string', 'min:4', 'starts_with:fa'],
             'title' => ['required', 'string', 'max:20', 'min:3'],
             'desc' => ['required', 'string', 'min:5'],
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'icon.min' => 'Please pick a valid :attribute',
+            'icon.starts_with' => 'Please pick a valid :attribute starts with "fa"',
         ];
     }
 

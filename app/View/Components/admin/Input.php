@@ -6,18 +6,29 @@ use Illuminate\View\Component;
 
 class Input extends Component
 {
-    public $name, $label, $value, $type;
+    public $name, $label, $value, $type, $isInlinePick, $id, $isChecked;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name, $label, $value = null, $type=null)
+    public function __construct(
+        $name,
+        $label = null,
+        $value = null,
+        $type=null,
+        $isInlinePick = false,
+        $id = null,
+        $isChecked = false
+    )
     {
         $this->name = $name;
         $this->label = $label;
         $this->value = $value;
         $this->type = $type;
+        $this->isInlinePick = $isInlinePick;
+        $this->id = $id;
+        $this->isChecked = $isChecked;
     }
 
     /**
@@ -29,4 +40,5 @@ class Input extends Component
     {
         return view('components.admin.input');
     }
+
 }

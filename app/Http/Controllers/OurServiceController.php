@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreServiceValidation;
 use App\Models\OurService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class OurServiceController extends Controller
 {
@@ -18,7 +16,10 @@ class OurServiceController extends Controller
             'fab fa-angellist',
             'fas fa-anchor',
             'fab fa-angular',
-            'fab fa-affiliatetheme'
+            'fas fa-battery-full', 
+            'fab fa-affiliatetheme',
+            'fab fa-algolia', 
+            'fab fa-amazon-pay'
         ];
 
         return view('admin.services.manage', compact('ourService', 'listIcon'));
@@ -43,14 +44,8 @@ class OurServiceController extends Controller
      */
     public function store(StoreServiceValidation $request)
     {
-        $icon = $request->file('icon');
-        $pathIcon = Storage::putFile(
-            'public/cover-vision-mission',
-            $icon
-        );
-
         OurService::create([
-            'icon' => Str::replaceFirst('public/','/storage/',$pathIcon),
+            'icon' => $request->icon,
             'title' => $request->title,
             'desc' => $request->desc
         ]);
@@ -68,16 +63,7 @@ class OurServiceController extends Controller
     public function update(Request $request, $id)
     {
         $serviceToUpdate = OurService::findOrFail($id);
-        
-        $icon = $request->file('icon');
-        if ($request->hasFile('icon')) {
-            $pathIcon = Storage::putFile(
-                'public/cover-vision-mission',
-                $icon
-            );
-            $serviceToUpdate->icon = Str::replaceFirst('public/', '/storage/', $pathIcon);
-        }
-
+        $serviceToUpdate->icon = $request->icon;
         $serviceToUpdate->title = $request->title;
         $serviceToUpdate->desc = $request->desc;
 

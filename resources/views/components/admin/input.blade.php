@@ -6,13 +6,15 @@
 
 <div class="form-group">
     <label for="{{ Str::slug($name) }}">{{ $label }}</label>
+    
     @if ($type == 'textarea')
     <textarea
     {{ $attributes->class(['form-control'])->merge([
         'id' => Str::slug($name),
         'name' => $name,
         'rows' => $rows ?? 4,
-    ]) }}>{{ $value ?? old($name) }}</textarea>
+    ]) }}>{{ old($name) ?? $value }}</textarea>
+
     @else
     <input {{ $attributes->class(['form-control'])->merge([
         'id' => Str::slug($name),
@@ -25,4 +27,5 @@
     @error($name)
         <div class="text-danger py-2">{{ $message }}</div>
     @enderror
+    
 </div>
