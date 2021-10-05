@@ -56,8 +56,7 @@
 
             <x-admin.input type="select" label="Platform" name="platform" required>
                 @foreach ($platforms as $platform)
-                    <option @if($social->platform == $platform) selected @endif
-                    value="{{ $platform }}">
+                    <option value="{{ $platform }}">
                         {{ $platform }}
                     </option>
                 @endforeach
