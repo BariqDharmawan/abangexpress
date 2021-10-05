@@ -100,7 +100,7 @@
 
             <div class="row gy-4">
                 @foreach ($ourService as $service)
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="box d-flex align-items-center">
                         <i class="{{ $service->icon }} h1"></i>
                         <div>

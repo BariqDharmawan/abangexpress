@@ -102,7 +102,7 @@
             <div class="row" id="load-our-service">
                 
                 @foreach ($ourService as $service)
-                <div class="col-xl-3 col-md-6 d-flex align-items-stretch"
+                <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-5"
                 data-aos="zoom-in" data-aos-delay="{{ $loop->iteration * 100 }}">
                     <div class="icon-box w-100">
                         <i class="{{ $service->icon }} h1"></i>
