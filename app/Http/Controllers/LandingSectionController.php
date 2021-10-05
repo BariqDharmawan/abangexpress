@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Models\LandingSectionDesc;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,7 @@ class LandingSectionController extends Controller
         }
         
         $sectionToUpdate->save();
-        return redirect()->back()->with('success', 'Successfully change heading');
+        return Helper::returnSuccess('change heading');
     }
 
 }

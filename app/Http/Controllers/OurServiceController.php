@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Http\Requests\StoreServiceValidation;
 use App\Models\OurService;
 use Illuminate\Http\Request;
@@ -50,7 +51,7 @@ class OurServiceController extends Controller
             'desc' => $request->desc
         ]);
 
-        return redirect()->back()->with('success', 'Successfully add new service');
+        return Helper::returnSuccess('add new service');
     }
 
     /**

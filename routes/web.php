@@ -20,14 +20,24 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
     Route::redirect('dashboard', 'identity', 301);
 
-    Route::prefix('identity')->name('about-us.')->group(function () {
-       Route::get('/', 'AboutUsController@identity')->name('identity');
-       Route::put('/', 'AboutUsController@update')->name('update');
-       Route::put('embed-map', 'AboutUsController@updateEmbedMap')->name('update-embed-map');
+    
+    Route::prefix('about-us')->group(function (){
+        
+        Route::prefix('identity')->name('about-us.')->group(function () {
+            Route::get('/', 'AboutUsController@identity')->name('identity');
+            Route::put('/', 'AboutUsController@update')->name('update');
+            Route::put('embed-map', 'AboutUsController@updateEmbedMap')->name(
+               'update-embed-map'
+            );
+        });
+
+        Route::get('our-social', 'OurSocialController@manage')->name('our-social.manage');
+        Route::resource('our-social', 'OurSocialController')->except('index');
+
+        Route::get('contacts/manage', 'OurContactController@manage')->name('contact.manage');
+        Route::resource('contacts', 'OurContactController');
     });
 
-    Route::get('our-social', 'OurSocialController@manage')->name('our-social.manage');
-    Route::resource('our-social', 'OurSocialController')->except('index');
     
     Route::get('services', 'OurServiceController@manage')->name('service.manage');
     Route::resource('services', 'OurServiceController')->except('index');
@@ -38,8 +48,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('faq/manage', 'FaqController@manage')->name('faq.manage');
     Route::resource('faq', 'FaqController')->except('index');
 
-    Route::get('contacts/manage', 'OurContactController@manage')->name('contact.manage');
-    Route::resource('contacts', 'OurContactController');
+    
 
     Route::put('our-contact', 'OurContactController@update')->name('our-contact.update');
 

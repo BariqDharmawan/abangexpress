@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Models\AboutUs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -40,7 +41,7 @@ class CoverVisionMissionController extends Controller
             )
         ]);
 
-        return redirect()->back()->with('success', 'Successfully change cover');
+        return Helper::returnSuccess('change cover');
     }
 
 }

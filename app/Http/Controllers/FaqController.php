@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Http\Requests\StoreFaqValidation;
 use App\Http\Requests\UpdateFaqValidation;
 use App\Models\Faq;
@@ -30,7 +31,7 @@ class FaqController extends Controller
             'admin_id' => 1
         ]);
 
-        return redirect()->back()->with('success', 'Successfully add new FAQ');
+        return Helper::returnSuccess('add new FAQ');
     }
 
     public function edit($id)
@@ -46,12 +47,12 @@ class FaqController extends Controller
             'admin_id' => 1
         ]);
 
-        return redirect()->back()->with('success', 'Successfully update FAQ');
+        return Helper::returnSuccess('update FAQ');
     }
 
     public function destroy($id)
     {
         Faq::findOrFail($id)->delete();
-        return redirect()->back()->with('success', 'Successfully remove FAQ');
+        return Helper::returnSuccess('remove FAQ');
     }
 }

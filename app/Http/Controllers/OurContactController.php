@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Http\Requests\UpdateContactValidation;
 use App\Models\AboutUs;
 use App\Models\OurContact;
@@ -38,6 +39,6 @@ class OurContactController extends Controller
 
         // return response()->json($ourContact);
 
-        return redirect()->back()->with('success', 'Successfully update contact');
+        return Helper::returnSuccess('update contact');
     }
 }

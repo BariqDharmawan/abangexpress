@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Models\FirstHeroCarouselLanding;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -39,7 +40,7 @@ class LandingHeroCarouselController extends Controller
             'img' => Str::replaceFirst('public/', '/storage/', $pathHeroCarousel)
         ]);
 
-        return redirect()->back()->with('success', 'Successfully add new hero');
+        return Helper::returnSuccess('add new hero');
     }
 
     /**
@@ -52,6 +53,6 @@ class LandingHeroCarouselController extends Controller
     {
         $carouselToDelete = FirstHeroCarouselLanding::findOrFail($id);
         $carouselToDelete->delete();
-        return redirect()->back()->with('success', 'Successfully remove slide');
+        return Helper::returnSuccess('remove slide');
     }
 }

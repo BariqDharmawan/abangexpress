@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Http\Requests\StoreMemberValidation;
 use App\Http\Requests\UpdateMemberValidation;
 use App\Models\OurTeam;
@@ -44,7 +45,7 @@ class OurTeamController extends Controller
             'short_desc' => $request->short_desc,
         ]);
 
-        return redirect()->back()->with('success', 'Successfully add new member');
+        return Helper::returnSuccess('add new member');
 
     }
 
@@ -82,7 +83,7 @@ class OurTeamController extends Controller
         $editMember->short_desc = $request->short_desc;
         $editMember->save();
 
-        return redirect()->back()->with('success', 'Successfully add new member');
+        return Helper::returnSuccess('add new member');
     }
 
     /**

@@ -58,7 +58,7 @@ class OurSocialController extends Controller
             'link' => OurSocial::generateUrl($username, $platform)
         ]);
 
-        return redirect()->back()->with('success', 'Successfully add new social media');
+        return Helper::returnSuccess('add new social media');
 
     }
 
