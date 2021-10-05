@@ -7,7 +7,7 @@
 </head>
 <body>
     <div id="wrapper">
-        
+
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <a class="sidebar-brand d-flex align-items-center justify-content-center" 
@@ -47,13 +47,13 @@
                 <x-admin.sidebar-dropdown id="collapseContent" parent="accordionSidebar">
                     
                     <x-admin.sidebar-dropdown-link text="Header Carousel" 
-                    :href="route('admin.content.carousel')" />
+                    :href="route('admin.content.landing-carousel.index')" />
         
                     <x-admin.sidebar-dropdown-link text="Cover Vision Mission" 
-                    :href="route('admin.content.cover-vission-mission')" />
+                    :href="route('admin.content.cover-vision-mission.index')" />
         
                     <x-admin.sidebar-dropdown-link text="Section Heading Text" 
-                    :href="route('admin.content.section-heading')" />
+                    :href="route('admin.content.section-heading.index')" />
             
                 </x-admin.sidebar-dropdown>
         

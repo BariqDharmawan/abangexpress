@@ -20,11 +20,11 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
     Route::redirect('dashboard', 'identity', 301);
 
-    Route::get('identity', 'AboutUsController@identity')->name('about-us.identity');
-    Route::put('identity', 'AboutUsController@update')->name('about-us.update');
-    Route::put('identity/embed-map', 'AboutUsController@updateEmbedMap')->name(
-        'about-us.update-embed-map'
-    );
+    Route::prefix('identity')->name('about-us.')->group(function () {
+       Route::get('/', 'AboutUsController@identity')->name('identity');
+       Route::put('/', 'AboutUsController@update')->name('update');
+       Route::put('embed-map', 'AboutUsController@updateEmbedMap')->name('update-embed-map');
+    });
 
     Route::get('our-social', 'OurSocialController@manage')->name('our-social.manage');
     Route::resource('our-social', 'OurSocialController')->except('index');
@@ -44,29 +44,21 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::put('our-contact', 'OurContactController@update')->name('our-contact.update');
 
     Route::prefix('content')->name('content.')->group(function (){
-        Route::get('cover-vision-mission', 'ContentController@coverVisionMission')->name(
-            'cover-vission-mission'
-        );
-        Route::put('cover-vision-mission', 'ContentController@addNewCoverVisionMission')
-        ->name('cover-vission-mission.store');
+        Route::prefix('cover-vision-mission')->name('cover-vision-mission.')
+        ->group(function () {
+            Route::get('/', 'CoverVisionMissionController@index')->name('index');
+            Route::put('/', 'CoverVisionMissionController@update')->name('update');
+        });
 
-        Route::get('carousel', 'ContentController@heroCarousel')->name('carousel');
-        Route::post('carousel', 'ContentController@addNewHeroCarousel')->name(
-            'carousel.store'
-        );
-        Route::delete('carousel/{id}', 'ContentController@destroyHeroCarousel')->name(
-            'carousel.destroy'
+        Route::resource('landing-carousel', 'LandingHeroCarouselController')->except(
+            'create', 'show', 'edit', 'update'
         );
 
-        Route::get('section-heading', 'ContentController@sectionHeading')->name(
-            'section-heading'
+        Route::resource('section-heading', 'LandingSectionController')->only(
+            'index', 'update'
         );
-        Route::put('section-heading/{id}', 'ContentController@changeSectionHeading')->name(
-            'section-heading.update'
-        );
+
     });
-
-
 });
 
 Route::prefix('template-1')->name('template-1.')->group(function() {

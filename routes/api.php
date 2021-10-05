@@ -9,7 +9,6 @@ Route::apiResource('our-contact','OurContactController')->only(['index']);
 
 Route::apiResource('our-service','OurServiceController');
 Route::apiResource('our-team','OurTeamController');
-Route::apiResource('our-client','OurClientController');
 
 Route::get('vision-mission', 'AboutUsController@getVisionMission');
 

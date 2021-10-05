@@ -26,7 +26,11 @@
                 </div>
                 <div class="ml-auto">
                     <x-admin.modal-trigger :is-default-style="false"
-                    class="btn-link text-primary" text="Remove"
+                    class="btn-link text-primary" text="Update"
+                    modal-target="edit-service-{{ $loop->iteration }}" />
+
+                    <x-admin.modal-trigger :is-default-style="false"
+                    class="btn-link text-danger" text="Remove"
                     modal-target="remove-service-{{ $loop->iteration }}" />
                 </div>
             </li>

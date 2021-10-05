@@ -26,7 +26,7 @@
 @section('components')
     <x-admin.modal id="change-cover-vision-mission" heading="Change cover">
         <form method="POST" enctype="multipart/form-data" 
-        action="{{ route('admin.content.cover-vission-mission.store') }}">
+        action="{{ route('admin.content.cover-vision-mission.update') }}">
             @csrf @method('PUT')
             <div class="form-group">
                 <div class="custom-file">

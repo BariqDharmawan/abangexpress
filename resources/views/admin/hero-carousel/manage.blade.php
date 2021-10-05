@@ -53,7 +53,7 @@
 @section('components')
     <x-admin.modal id="add-hero-carousel-popup" heading="Header Carousel">
         <form method="POST" enctype="multipart/form-data" 
-        action="{{ route('admin.content.carousel.store') }}">
+        action="{{ route('admin.content.landing-carousel.store') }}">
             @csrf
             <div class="form-group">
                 <div class="custom-file">
@@ -74,7 +74,7 @@
             'id' => 'remove-hero-carousel-popup-' . $carousel->id,
             'heading' => "Remove slide $carousel->id",
             'warningMesssage' => 'Are you sure wana remove this slide?',
-            'action' => route('admin.content.carousel.destroy', $carousel->id)
+            'action' => route('admin.content.landing-carousel.destroy', $carousel->id)
         ])  
     @endforeach
 @endsection
