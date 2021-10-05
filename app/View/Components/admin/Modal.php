@@ -12,7 +12,7 @@ class Modal extends Component
      *
      * @return void
      */
-    public function __construct($heading, $id, $size)
+    public function __construct($heading, $id, $size=null)
     {
         $this->heading = $heading;
         $this->id = $id;
