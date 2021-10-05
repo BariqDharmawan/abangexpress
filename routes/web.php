@@ -31,8 +31,6 @@ Route::prefix('admin')->name('admin.')->group(function() {
     
     Route::get('services', 'OurServiceController@manage')->name('service.manage');
     Route::resource('services', 'OurServiceController')->except('index');
-    
-    Route::get('clients', 'OurClientController@manage')->name('client.manage');
 
     Route::get('team/manage', 'OurTeamController@manage')->name('team.manage');
     Route::resource('team', 'OurTeamController');

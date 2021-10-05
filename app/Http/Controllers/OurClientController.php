@@ -18,12 +18,6 @@ class OurClientController extends Controller
         return response()->json($clients);
     }
 
-    public function manage()
-    {
-        $clients = OurClient::oldest()->get();
-        return view('admin.client.manage', compact('clients'));
-    }
-
     /**
      * Show the form for creating a new resource.
      *
