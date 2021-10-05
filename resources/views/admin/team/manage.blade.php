@@ -12,10 +12,9 @@
     <div class="col-12 mb-4">
         <div class="d-flex justify-content-between align-items-center">
             <h1 class="h4 mb-0">Manage member</h1>
-            <button type="button" class="btn btn-primary"
-            data-toggle="modal" data-target="#add-new-person">
-                Add new member
-            </button>
+
+            <x-admin.modal-trigger text="Add new member"
+            modal-target="add-new-person" />
         </div>
     </div>
     <div class="col-12">
@@ -40,14 +39,17 @@
                         </small>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-transparent">
-                        <button type="button" class="btn btn-link text-primary px-0"
-                        data-toggle="modal" data-target="#edit-person-{{ $loop->iteration }}">
-                            Edit info
-                        </button>
-                        <button type="button" class="btn btn-link text-danger px-0"
-                        data-toggle="modal" data-target="#remove-person-{{ $loop->iteration }}">
-                            Remove person
-                        </button>
+                        
+                        <x-admin.modal-trigger text="Edit info"
+                        modal-target="edit-person-{{ $loop->iteration }}"
+                        :is-default-style="false"
+                        class="btn-link text-primary px-0" />
+
+                        <x-admin.modal-trigger text="Remove person"
+                        modal-target="remove-person-{{ $loop->iteration }}"
+                        :is-default-style="false"
+                        class="btn-link text-danger px-0" />
+                        
                     </div>
                 </div>
             </div>

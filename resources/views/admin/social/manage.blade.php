@@ -5,9 +5,8 @@
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="h4 mb-0">Manage our social media</h1>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-social-media">
-                    Add new social media
-                </button>
+                <x-admin.modal-trigger text="Add new social media"
+                modal-target="add-social-media" />
             </div>
         </div>
         @if (session('success'))
@@ -34,10 +33,12 @@
                             <a class="btn btn-link text-primary" href="{{ route('admin.our-social.edit', $social->id) }}">
                                 Update
                             </a>
-                            <button type="button" class="btn btn-link text-danger" data-toggle="modal" 
-                            data-target="#remove-social-{{ $loop->iteration }}">
-                                Remove
-                            </button>
+
+                            <x-admin.modal-trigger text="Remove"
+                            modal-target="remove-social-{{ $loop->iteration }}"
+                            :is-default-style="false"
+                            class="btn-link text-danger" />
+
                         </div>
                     </li>
                     @endforeach
@@ -52,20 +53,15 @@
         <form method="POST" enctype="multipart/form-data" 
         action="{{ route('admin.our-social.store') }}">
             @csrf
-            <div class="form-group">
-                <label for="add-social-platform">Platform</label>
-                <select class="custom-select text-capitalize" name="platform" 
-                id="add-social-platform">
-                    @foreach ($platforms as $platform)
-                        <option value="{{ $platform }}">
-                            {{ $platform }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('platform')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
+
+            <x-admin.input type="select" label="Platform" name="platform" required>
+                @foreach ($platforms as $platform)
+                    <option @if($social->platform == $platform) selected @endif
+                    value="{{ $platform }}">
+                        {{ $platform }}
+                    </option>
+                @endforeach
+            </x-admin.input>
         
             <div class="form-group">
                 <label for="add-social-username">

@@ -16,7 +16,8 @@
     ]) }}>{{ old($name) ?? $value }}</textarea>
 
     @elseif($type == 'select')
-    <select {{ $attributes->class(['custom-select', 'text-capitalize'])->merge([
+    <select {{ $attributes->merge([
+        'class' => 'custom-select text-capitalize', 
         'name' => $name,
         'id' => $id ?? Str::slug($name)
     ]) }}>

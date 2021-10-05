@@ -11,9 +11,8 @@
 <div class="col-12">
     <x-admin.card title="Our service">
         <x-slot name="header">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-service">
-                Add new
-            </button>
+            <x-admin.modal-trigger text="Add new"
+            modal-target="add-service" />
         </x-slot>
         <ul class="list-group">
             @foreach ($ourService as $service)
@@ -26,12 +25,9 @@
                     <small>{{ $service->desc }}</small>
                 </div>
                 <div class="ml-auto">
-                    <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#edit-service-{{ $loop->iteration }}">
-                        Change
-                    </button>
-                    <button type="button" class="btn btn-link text-danger" data-toggle="modal" data-target="#remove-service-{{ $loop->iteration }}">
-                        Remove
-                    </button>
+                    <x-admin.modal-trigger :is-default-style="false"
+                    class="btn-link text-primary" text="Remove"
+                    modal-target="remove-service-{{ $loop->iteration }}" />
                 </div>
             </li>
             @endforeach

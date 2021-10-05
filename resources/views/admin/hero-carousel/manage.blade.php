@@ -9,9 +9,8 @@
     
     <x-admin.card title="Header Carousel">
         <x-slot name="header">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-hero-carousel-popup">
-                Add new image
-            </button>
+            <x-admin.modal-trigger text="Add new image"
+            modal-target="add-hero-carousel-popup" />
         </x-slot>
 
         <div id="hero-carousel" class="carousel slide" data-ride="carousel">

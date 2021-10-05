@@ -10,10 +10,8 @@
         <div class="col-12 mb-4">
             <x-admin.card title="Manage our contact">
                 <x-slot name="header">
-                    <button type="button" class="btn btn-primary" 
-                    data-toggle="modal" data-target="#update-contact">
-                        Update our contact
-                    </button>
+                    <x-admin.modal-trigger modal-target="update-contact" 
+                    text="Update our contact" />
                 </x-slot>
                 <ul class="list-group">
                     @foreach ($columns as $column)
@@ -28,10 +26,8 @@
         <div class="col-12">
             <x-admin.card title="Embeded Map" class="embeded-full">
                 <x-slot name="header">
-                    <button type="button" class="btn btn-primary" 
-                        data-toggle="modal" data-target="#change-embeded">
-                        Change maps embeded
-                    </button>
+                    <x-admin.modal-trigger modal-target="change-embeded" 
+                    text="Change maps embeded" />
                 </x-slot>
                 {!! $addressEmbed !!}
             </x-admin.card>
@@ -102,10 +98,9 @@
                 @enderror
                 <small class="mr-1 text-muted">
                     To know how to embed google map, please see
-                    <button type="button" class="btn btn-small btn-link text-primary p-0" 
-                    data-toggle="modal" data-target="#how-to-embed">
-                        <small>this video</small>
-                    </button>
+                    <x-admin.modal-trigger modal-target="how-to-embed" 
+                    text="this video" :is-default-style="false" 
+                    class="btn-small btn-link text-primary p-0 text-small" />
                 </small>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

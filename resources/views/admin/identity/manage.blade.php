@@ -17,9 +17,8 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">Our Identity</h6>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-idendity">
-                Update our identity
-            </button>
+            <x-admin.modal-trigger text="Update our identity"
+            modal-target="edit-idendity" />
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -52,9 +51,8 @@
     <div class="card">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">Video Promo</h6>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#change-video-popup">
-                Change video
-            </button>
+            <x-admin.modal-trigger text="Change video"
+            modal-target="change-video-popup" />
         </div>
         <div class="card-body">
             <a href="{{ $identity->our_video }}" class="glightbox position-relative d-inline-block" data-gallery="our_video">
