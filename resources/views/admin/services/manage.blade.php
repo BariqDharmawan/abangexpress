@@ -2,7 +2,7 @@
 @section('content')
 
 @if (session('success'))
-<div class="row">
+<div class="row mx-0">
     <div class="col-12">
         <x-admin.alert-success/>
     </div>

@@ -1,11 +1,13 @@
 @extends('layouts/admin')
 
 @section('content')
-    <div class="row">
-        @if (session('success'))
-        <x-admin.alert-success/>
-        @endif
+    @if (session('success'))
+    <div class="row mx-0">
+        <div class="col-12">
+            <x-admin.alert-success/>
+        </div>
     </div>
+    @endif
     <div class="row mx-0">
         <div class="col-12 mb-4">
             <x-admin.card title="Manage our contact">

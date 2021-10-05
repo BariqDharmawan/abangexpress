@@ -87,7 +87,7 @@
                 id="edit-identity-vision" name="our_vision" required
                 value="{{ old('our_vision') ?? $identity->our_vision }}">
 
-                @error('username')
+                @error('our_vision')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
@@ -98,6 +98,9 @@
                 class="form-control summernote"
                 style="resize: none;" rows="3"
                 required>{{ old('our_mission') ?? $identity->our_mission }}</textarea>
+                @error('our_mission')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -117,17 +120,10 @@
     <x-admin.modal id="change-video-popup" heading="Change video promo" >
         <form action="{{ route('admin.about-us.update') }}" method="post">
             @csrf @method('PUT')
-            <div class="form-group">
-                <label for="edit-video-promo">
-                    Video promo
-                </label>
-                <input type="url" class="form-control"
-                id="edit-video-promo" name="our_video" required
-                value="{{ old('our_video') ?? $identity->our_video }}">
-                @error('our_video')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
+
+            <x-admin.input label="Video promo" name="our_video" 
+            value="{{ old('our_video') ?? $identity->our_video }}" required></x-admin.input>
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </x-admin.modal>
