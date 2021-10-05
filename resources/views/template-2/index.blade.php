@@ -100,19 +100,18 @@
             <x-template2.section-title heading="{{ $landingSection[1]->section_name }}" />
 
             <div class="row" id="load-our-service">
-                {{-- get service using ajax [this is shadow element] --}}
-                <div class="col-xl-3 col-md-6 d-flex align-items-stretch el-to-load-ajax"
-                data-aos="zoom-in" data-aos-delay="">
+                
+                @foreach ($ourService as $service)
+                <div class="col-xl-3 col-md-6 d-flex align-items-stretch"
+                data-aos="zoom-in" data-aos-delay="{{ $loop->iteration * 100 }}">
                     <div class="icon-box w-100">
-                        <div class="icon">
-                            <img src="" alt="" height="64px" width="64px"
-                            class="card__icon d-block">
-                        </div>
-                        <h4 class="card__name text-capitalize"></h4>
-                        <p class="card__short-desc"></p>
+                        <i class="{{ $service->icon }} h1"></i>
+                        <h4 class="card__name text-capitalize mt-2">{{ $service->title }}</h4>
+                        <p class="card__short-desc">{{ $service->desc }}</p>
                     </div>
                 </div>
-                {{-- end of that --}}
+                @endforeach
+                
             </div>
 
         </div>

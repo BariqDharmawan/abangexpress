@@ -25,8 +25,7 @@ class StoreServiceValidation extends FormRequest
     {
         return [
             'icon' => [
-                'required',
-                'mimes:png,jpg,jpeg,svg'
+                'required'
             ],
             'title' => ['required', 'string', 'max:20', 'min:3'],
             'desc' => ['required', 'string', 'min:5'],

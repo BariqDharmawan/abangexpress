@@ -6,6 +6,7 @@ use App\Models\AboutUs;
 use App\Models\Faq;
 use App\Models\LandingSectionDesc;
 use App\Models\OurContact;
+use App\Models\OurService;
 use App\Models\OurTeam;
 use Illuminate\Http\Request;
 
@@ -20,11 +21,13 @@ class TemplateDuaController extends Controller
         
         $faqs = Faq::all();
 
+        $ourService = OurService::orderBy('title', 'asc')->get();
+
         $isProfileVideoExist = $aboutUs->our_video ? true : false;
 
         return view('template-2.index', compact(
             'landingSection', 'aboutUs', 'isProfileVideoExist', 
-            'ourTeam', 'aboutUs'
+            'ourTeam', 'aboutUs', 'ourService'
         ));
     }
 }

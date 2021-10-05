@@ -39,6 +39,7 @@ mix.js(`${template1Path}/js/app.js`, 'public/template1/js')
         processCssUrls: false 
     })
     .copy(`${template1Path}/img`, 'public/template1/img')
+    .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/template1/webfonts')
     .sourceMaps();
 
 //general asset
@@ -65,6 +66,7 @@ mix.js(`${template2Path}/js/app.js`, 'public/template2/js')
         processCssUrls: false 
     })
     .copy(`${template2Path}/img`, 'public/template2/img')
+    .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/template2/webfonts')
     .sourceMaps();
 
 mix.serve()

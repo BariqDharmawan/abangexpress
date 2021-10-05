@@ -18,7 +18,7 @@
         <ul class="list-group">
             @foreach ($ourService as $service)
             <li class="list-group-item d-flex align-items-center" data-id="{{ $service->id }}">
-                <img src="{{ asset($service->icon) }}" alt="" height="30px">
+                <i class="{{ $service->icon }} h3"></i>
                 <div class="ml-4">
                     <p class="font-weight-bold text-capitalize mb-1">{{ $service->title }}</p>
                     <small>{{ $service->desc }}</small>

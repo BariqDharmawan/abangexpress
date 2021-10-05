@@ -101,13 +101,12 @@
             <div class="row gy-4">
                 @foreach ($ourService as $service)
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="box">
-                        <div class="icon">
-                            <img src="{{ $service->icon }}" height="64px"
-                            alt="{{ $aboutUs->our_name . ' ' . 'Service' }}" >
+                    <div class="box d-flex align-items-center">
+                        <i class="{{ $service->icon }} h1"></i>
+                        <div>
+                            <h4 class="title">{{ $service->title }}</h4>
+                            <p class="description">{{ $service->desc }}</p>
                         </div>
-                        <h4 class="title">{{ $service->title }}</h4>
-                        <p class="description">{{ $service->desc }}</p>
                     </div>
                 </div>
                 @endforeach

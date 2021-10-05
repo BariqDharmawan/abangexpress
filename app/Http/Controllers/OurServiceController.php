@@ -14,7 +14,14 @@ class OurServiceController extends Controller
     public function manage()
     {
         $ourService = OurService::orderBy('title', 'asc')->get();
-        return view('admin.services.manage', compact('ourService'));
+        $listIcon = [
+            'fab fa-angellist',
+            'fas fa-anchor',
+            'fab fa-angular',
+            'fab fa-affiliatetheme'
+        ];
+
+        return view('admin.services.manage', compact('ourService', 'listIcon'));
     }
 
     /**

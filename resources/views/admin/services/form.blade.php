@@ -25,20 +25,18 @@
             @enderror
         @endempty
     </div>
-    <div class="form-group">
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" 
-            id="@isset($data)service-icon-{{ $data->id }}@else service-icon @endisset" name="icon" @empty($data) required @endempty 
-            accept="image/*">
-            <label class="custom-file-label" 
-            for="@isset($data)service-icon-{{ $data->id }}@else service-icon @endisset">
-                @isset($data)
-                Change icon
-                @else
-                Choose icon
-                @endisset
+    <div class="form-group d-flex flex-wrap">
+
+        @foreach ($listIcon as $icon)
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="pick-icon-{{ Str::slug($icon) }}" 
+            name="icon" class="custom-control-input">
+            <label class="custom-control-label h4" for="pick-icon-{{ Str::slug($icon) }}">
+                <i class="{{ $icon }}"></i>
             </label>
-        </div>
+        </div>    
+        @endforeach
+
         @if(url()->previous() === 'services')
             @error('icon')
                 <div class="text-danger py-2">{{ $message }}</div>

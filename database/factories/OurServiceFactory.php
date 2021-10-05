@@ -22,13 +22,12 @@ class OurServiceFactory extends Factory
      */
     public function definition()
     {
-        $pathIcon = 'our-service/';
         return [
             'icon' => $this->faker->unique(true)->randomElement([
-                Storage::url($pathIcon . 'service1.svg'), 
-                Storage::url($pathIcon . 'service2.svg'),
-                Storage::url($pathIcon . 'service3.svg'), 
-                Storage::url($pathIcon . 'service4.svg')
+                'fas fa-battery-full', 
+                'fab fa-affiliatetheme',
+                'fab fa-algolia', 
+                'fab fa-amazon-pay'
             ]),
             'title' => $this->faker->word(2),
             'desc' => $this->faker->sentence(4)
