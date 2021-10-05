@@ -55,6 +55,8 @@ class AboutUsController extends Controller
             $ourIdentity->our_video = $request->our_video;
         }
 
+        $ourIdentity->user_id = auth()->id();
+
         $ourIdentity->save();
 
         $message = $isEditOurIdentityInfo ? 'our identity' : 'video promo';

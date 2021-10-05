@@ -18,7 +18,8 @@ class PositionListSeeder extends Seeder
 
         foreach ($lists as $list) {
             PositionList::create([
-                'name' => $list
+                'name' => $list,
+                'user_id' => 1
             ]);
         }
     }

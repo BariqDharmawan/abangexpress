@@ -36,6 +36,7 @@ class LandingSectionController extends Controller
         if ($request->has('second_desc')) {
             $sectionToUpdate->second_desc = $request->second_desc;
         }
+        $sectionToUpdate->user_id = auth()->id();
         
         $sectionToUpdate->save();
         return Helper::returnSuccess('change heading');

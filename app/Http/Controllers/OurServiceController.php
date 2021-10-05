@@ -48,7 +48,8 @@ class OurServiceController extends Controller
         OurService::create([
             'icon' => $request->icon,
             'title' => $request->title,
-            'desc' => $request->desc
+            'desc' => $request->desc,
+            'user_id' => auth()->id()
         ]);
 
         return Helper::returnSuccess('add new service');
@@ -67,6 +68,7 @@ class OurServiceController extends Controller
         $serviceToUpdate->icon = $request->icon;
         $serviceToUpdate->title = $request->title;
         $serviceToUpdate->desc = $request->desc;
+        $serviceToUpdate->user_id = auth()->id();
 
         $serviceToUpdate->save();
         return redirect()->back()->with(

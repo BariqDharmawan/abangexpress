@@ -107,6 +107,7 @@ class OurSocialController extends Controller
         $updateSocial->platform = $platform;
         $updateSocial->username = $username;
         $updateSocial->link = OurSocial::generateUrl($username, $platform);
+        $updateSocial->user_id = auth()->id();
         $updateSocial->save();
 
         //todo: remove old icon after update

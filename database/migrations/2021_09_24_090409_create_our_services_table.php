@@ -18,6 +18,7 @@ class CreateOurServicesTable extends Migration
             $table->string('icon', 30);
             $table->string('title');
             $table->text('desc');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }

@@ -19,6 +19,7 @@ class CreateOurTeamsTable extends Migration
             $table->string('avatar');
             $table->unsignedInteger('position_id');
             $table->string('short_desc');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }

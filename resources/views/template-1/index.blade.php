@@ -31,12 +31,22 @@
                     </a>
                 </li>
                 @endforeach
+                @guest
                 <li>
-                    <a href="/landingTemplate/admin/login" style="cursor: pointer;"
+                    <a href="{{ route('login') }}" style="cursor: pointer;"
                         class="border border-dark text-center mx-2 py-2 px-4 rounded-50"> 
                         Masuk
                     </a>
                 </li>
+                @else
+                <li>
+                    <a href="{{ route('admin.about-us.identity') }}" 
+                    style="cursor: pointer;"
+                    class="border border-dark text-center mx-2 py-2 px-4 rounded-50"> 
+                        Go to dashboard
+                    </a>
+                </li>
+                @endguest
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>

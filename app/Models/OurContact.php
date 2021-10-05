@@ -9,5 +9,5 @@ class OurContact extends Model
 {
     use HasFactory;
 
-    public $fillable = ['address', 'telephone', 'email', 'link_address'];
+    public $fillable = ['address', 'telephone', 'email', 'link_address', 'user_id'];
 }

@@ -33,7 +33,8 @@ class OurTeamFactory extends Factory
                 Storage::url($avatarPath . '4.jpg')
             ]),
             'position_id' => $this->faker->numberBetween(1, 4),
-            'short_desc' => $this->faker->sentence(3)
+            'short_desc' => $this->faker->sentence(3),
+            'user_id' => 1
         ];
     }
 }

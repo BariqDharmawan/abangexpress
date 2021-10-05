@@ -37,7 +37,8 @@ class LandingHeroCarouselController extends Controller
         $pathHeroCarousel = Storage::putFile('public/hero-carousel', $heroCarousel);
 
         FirstHeroCarouselLanding::create([
-            'img' => Str::replaceFirst('public/', '/storage/', $pathHeroCarousel)
+            'img' => Str::replaceFirst('public/', '/storage/', $pathHeroCarousel),
+            'user_id' => auth()->id()
         ]);
 
         return Helper::returnSuccess('add new hero');

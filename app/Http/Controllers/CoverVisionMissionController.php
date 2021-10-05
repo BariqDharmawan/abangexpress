@@ -38,7 +38,8 @@ class CoverVisionMissionController extends Controller
         AboutUs::first()->update([
             'cover_vision_mission' => Str::replaceFirst(
                 'public/', '/storage/', $pathcoverVisionMission
-            )
+            ),
+            'user_id' => auth()->id()
         ]);
 
         return Helper::returnSuccess('change cover');

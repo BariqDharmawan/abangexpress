@@ -9,5 +9,5 @@ class FirstHeroCarouselLanding extends Model
 {
     use HasFactory;
 
-    public $fillable = ['img'];
+    public $fillable = ['img', 'user_id'];
 }

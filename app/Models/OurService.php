@@ -9,5 +9,5 @@ class OurService extends Model
 {
     use HasFactory;
 
-    public $fillable = ['icon', 'title', 'desc'];
+    public $fillable = ['icon', 'title', 'desc', 'user_id'];
 }

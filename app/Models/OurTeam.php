@@ -9,7 +9,7 @@ class OurTeam extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'avatar', 'position_id', 'short_desc'];
+    protected $fillable = ['name', 'avatar', 'position_id', 'short_desc', 'user_id'];
 
     public function position()
     {

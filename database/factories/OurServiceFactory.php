@@ -30,7 +30,8 @@ class OurServiceFactory extends Factory
                 'fab fa-amazon-pay'
             ]),
             'title' => $this->faker->word(2),
-            'desc' => $this->faker->sentence(4)
+            'desc' => $this->faker->sentence(4),
+            'user_id' => 1
         ];
     }
 }

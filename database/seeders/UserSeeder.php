@@ -15,22 +15,24 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // no need to encrypted password again, it already handled on User model
         User::insert([
             [
                 'name' => 'Admin 1',
                 'username' => 'admin1',
-                'password' => 'adminabangexpress'
+                'password' => Hash::make('adminabangexpress'),
+                'role' => 'admin'
             ],
             [
                 'name' => 'Admin 2',
                 'username' => 'admin2',
-                'password' => 'adminabangexpress'
+                'password' => Hash::make('adminabangexpress'),
+                'role' => 'admin'
             ],
             [
                 'name' => 'Admin 3',
                 'username' => 'admin3',
-                'password' => 'adminabangexpress'
+                'password' => Hash::make('adminabangexpress'),
+                'role' => 'admin'
             ],
         ]);
     }

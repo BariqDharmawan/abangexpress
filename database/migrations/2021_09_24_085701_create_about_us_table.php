@@ -23,6 +23,7 @@ class CreateAboutUsTable extends Migration
             $table->string('slogan');
             $table->string('sub_slogan')->nullable();
             $table->string('cover_vision_mission')->nullable();
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }

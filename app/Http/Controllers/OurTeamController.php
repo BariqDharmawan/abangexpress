@@ -43,6 +43,7 @@ class OurTeamController extends Controller
             'avatar' => Str::replaceFirst('public/', '/storage/', $pathAvatar),
             'position_id' => $request->position_id,
             'short_desc' => $request->short_desc,
+            'user_id' => auth()->id()
         ]);
 
         return Helper::returnSuccess('add new member');
@@ -81,6 +82,7 @@ class OurTeamController extends Controller
 
         $editMember->position_id = $request->position_id_edit;
         $editMember->short_desc = $request->short_desc;
+        $editMember->user_id = auth()->id();
         $editMember->save();
 
         return Helper::returnSuccess('add new member');

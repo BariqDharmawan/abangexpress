@@ -19,7 +19,8 @@ class HeroCarouselSeeder extends Seeder
 
         foreach ($carousels as $carousel) {
             FirstHeroCarouselLanding::create([
-                'img' => Storage::url('hero-carousel/' . $carousel)
+                'img' => Storage::url('hero-carousel/' . $carousel),
+                'user_id' => 1
             ]);
         }
     }

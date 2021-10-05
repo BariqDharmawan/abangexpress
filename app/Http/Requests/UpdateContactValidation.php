@@ -29,7 +29,8 @@ class UpdateContactValidation extends FormRequest
                 'sometimes', 'regex:/^(?!0)(?!\+).+$/', 'digits_between:8,15',
             ],
             'email' => ['sometimes', 'string', 'email:rfc,dns', 'max:45'],
-            'link_address' => ['sometimes', 'url']
+            'link_address' => ['sometimes', 'url'],
+            'user_id' => ['required']
         ];
     }
 }

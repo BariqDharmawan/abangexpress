@@ -28,7 +28,7 @@ class FaqController extends Controller
         Faq::create([
             'question' => $request->question,
             'answer' => $request->answer,
-            'admin_id' => 1
+            'user_id' => auth()->id()
         ]);
 
         return Helper::returnSuccess('add new FAQ');
@@ -44,7 +44,7 @@ class FaqController extends Controller
         Faq::findOrFail($id)->update([
             'question' => $request->question_edit,
             'answer' => $request->answer_edit,
-            'admin_id' => 1
+            'user_id' => auth()->id()
         ]);
 
         return Helper::returnSuccess('update FAQ');
@@ -52,7 +52,12 @@ class FaqController extends Controller
 
     public function destroy($id)
     {
-        Faq::findOrFail($id)->delete();
-        return Helper::returnSuccess('remove FAQ');
+        if (auth()->user()->role == 'admin') {
+            Faq::findOrFail($id)->delete();
+            return Helper::returnSuccess('remove FAQ');
+        }
+        else {
+            abort(403);
+        }
     }
 }

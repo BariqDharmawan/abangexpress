@@ -13,12 +13,16 @@ class OurContactController extends Controller
 
     public function manage()
     {
-        $contact = OurContact::first();
+        $contact = OurContact::where('user_id', auth()->id())->first();
         $columns = ['address', 'telephone', 'email'];
 
-        $addressEmbed = AboutUs::select('address_embed')->first()->address_embed;
+        $addressEmbed = AboutUs::select('address_embed')
+                        ->where('user_id', auth()->id())
+                        ->first()->address_embed;
 
-        return view('admin.contact.manage', compact('contact', 'columns', 'addressEmbed'));
+        return view('admin.contact.manage', compact(
+            'contact', 'columns', 'addressEmbed'
+        ));
     }
 
     /**
@@ -35,7 +39,13 @@ class OurContactController extends Controller
 
     public function update(UpdateContactValidation $request)
     {
-        $ourContact = OurContact::where('id', 1)->update($request->validated());
+        OurContact::firstOrFail()->update([
+            'address' => $request->address,
+            'telephone' => $request->telephone,
+            'email' => $request->email,
+            'link_address' => $request->link_address,
+            'user_id' => auth()->id()
+        ]);
 
         // return response()->json($ourContact);
 
