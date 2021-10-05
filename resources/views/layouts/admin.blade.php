@@ -16,7 +16,7 @@
                     <i class="fas fa-laugh-wink"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">
-                    {{ config('app.name') }}
+                    {{ $ourName }}
                 </div>
             </a>
         
