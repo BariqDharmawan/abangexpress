@@ -1,7 +1,8 @@
 @props(['href', 'text'])
 
-<a {{ $attributes->merge([
-    'class' => 'collapse-item', 'href' => $href
-]) }}>
+<a {{ $attributes->class([
+    'collapse-item', 
+    'active' => $href == url()->current()
+])->merge(['href' => $href])}}>
     {{ $text }}
 </a>

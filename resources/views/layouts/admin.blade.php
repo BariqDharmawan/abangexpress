@@ -24,7 +24,8 @@
         
             <x-admin.sidebar-menu text="About Us" icon="fa-fw fa-cog" 
             data-toggle="collapse" data-target="#collapseAbout"
-            aria-expanded="true" aria-controls="collapseAbout" class="collapsed">
+            aria-expanded="true" aria-controls="collapseAbout"
+            class="collapsed">
         
                 <x-admin.sidebar-dropdown id="collapseAbout" parent="accordionSidebar">
                     <x-admin.sidebar-dropdown-link text="Identity" 
