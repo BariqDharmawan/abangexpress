@@ -23,4 +23,9 @@ class Helper
         $links = Arr::pluck($socialMedia, 'link');
         return $links;
     }
+
+    public static function returnSuccess($message)
+    {
+        return redirect()->back()->with('success', "Successfully $message");
+    }
 }

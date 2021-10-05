@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Models\AboutUs;
 use App\Models\FirstHeroCarouselLanding;
 use App\Models\LandingSectionDesc;
@@ -30,7 +31,7 @@ class ContentController extends Controller
             )
         ]);
 
-        return redirect()->back()->with('success', 'Successfully change cover');
+        return Helper::returnSuccess('change cover');
     }
 
 }

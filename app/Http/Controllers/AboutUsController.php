@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
+use App\Http\Requests\IdentityValidation;
 use App\Http\Requests\UpdateEmbedMapValidation;
 use App\Models\AboutUs;
 use Illuminate\Http\Request;
@@ -24,7 +26,7 @@ class AboutUsController extends Controller
     public function updateEmbedMap(UpdateEmbedMapValidation $request)
     {
         AboutUs::first()->update(['address_embed' => $request->address_embed]);
-        return redirect()->back()->with('success', 'Successfully update our embed map');
+        return Helper::returnSuccess('update our embed map');
     }
 
     /**
@@ -34,12 +36,10 @@ class AboutUsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(IdentityValidation $request)
     {
         //todo: add validation
         $ourIdentity = AboutUs::findOrFail(1);
-
-        // dd($ourIdentity, $request->all());
 
         $isEditOurIdentityInfo = $request->hasAny([
             'our_name', 'our_vision', 'our_mission', 'sub_slogan'
@@ -56,10 +56,11 @@ class AboutUsController extends Controller
         }
 
         $ourIdentity->save();
-        return redirect()->back()->with(
-            'success', 
-            'Successfully update ' . $isEditOurIdentityInfo ? 'our identity' : 'video promo'
-        );
+
+        $message = $isEditOurIdentityInfo ? 'our identity' : 'video promo';
+
+        return Helper::returnSuccess("update $message");
+        
     }
 
 }
