@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', 'template-1', 301);
 
 Route::prefix('admin')->name('admin.')->group(function() {
-    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
+    Route::redirect('dashboard', 'identity', 301);
 
     Route::get('identity', 'AboutUsController@identity')->name('about-us.identity');
     Route::put('identity', 'AboutUsController@update')->name('about-us.update');
