@@ -21,8 +21,8 @@
             <x-admin.card title="">
                 <ul class="list-group">
                     @foreach ($ourSocial as $social)
-                    <li class="list-group-item d-flex align-items-center" >
-                        <img src="{{ $social->icon }}" alt="" height="30px">
+                    <li class="list-group-item d-flex align-items-center">
+                        <span class="h3"><i class="{{ $social->icon }}"></i></span>
                         <div class="ml-4">
                             <p class="font-weight-bold text-capitalize mb-1">
                                 <a href="{{ $social->link }}" 
@@ -72,7 +72,7 @@
                     Username
                 </label>
                 <input type="text" class="form-control" 
-                id="add-social-username" 
+                id="add-social-username" placeholder="Example: @bariqdharmawans"
                 name="username" value="{{ old('username') }}">
         
                 @error('username')
@@ -80,16 +80,21 @@
                 @enderror
             </div>
         
-            <div class="form-group">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" 
-                    id="add-social-icon" name="icon" required>
-                    <label class="custom-file-label" for="add-social-icon">
-                        Pick icon
-                    </label>
-                </div>
+            <div class="d-flex flex-wrap mb-3">
+                <p class="d-block w-100">Choose icon</p>
+                @foreach ($listIcon as $icon)
+                    <div class="form-check mr-4 h2">
+                        <input type="radio" id="pick-icon-{{ Str::slug($icon) }}" 
+                        name="icon" class="form-check-input mr-0" value="{{ $icon }}" 
+                        @if(isset($data) and $data->icon == $icon) checked @endif>
+                        <label class="form-check-label" for="pick-icon-{{ Str::slug($icon) }}">
+                            <i class="{{ $icon }}"></i>
+                        </label>
+                    </div>
+                @endforeach
+        
                 @error('icon')
-                    <div class="text-danger">{{ $message }}</div>
+                    <div class="text-danger py-2">{{ $message }}</div>
                 @enderror
             </div>
         

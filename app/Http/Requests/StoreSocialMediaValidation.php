@@ -25,18 +25,26 @@ class StoreSocialMediaValidation extends FormRequest
     public function rules()
     {
         return [
-            'icon' => [
-                'required',
-                'max:1000',
-                'mimes:png,jpg,jpeg,svg',
-                'dimensions:max_width=30,max_height=30'
-            ],
+            'icon' => ['required', 'string', 'starts_with:fa', 'min:4'],
             'platform' => [
                 'required',
                 'unique:our_socials,platform',
                 'in:' . implode(',', Helper::getListSocialPlatform())
             ],
             'username' => ['required', 'string', 'min:3', 'max:40']
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'icon.min' => 'Please pick a valid :attribute',
+            'icon.starts_with' => 'Please pick a valid :attribute starts with "fa"',
         ];
     }
 }

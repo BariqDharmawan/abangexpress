@@ -28,17 +28,16 @@ class OurSocialController extends Controller
     {
         $socialMedia = Helper::getJson('social-media.json', true);
         $platforms = Arr::pluck($socialMedia, 'platform');
-        return view('admin.social.manage', compact('platforms'));
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $listIcon = [
+            "fab fa-instagram",
+            "fab fa-facebook-square",
+            "fab fa-linkedin",
+            "fab fa-twitter",
+            "fab fa-youtube"
+        ];
+
+        return view('admin.social.manage', compact('platforms', 'listIcon'));
     }
 
     /**
@@ -52,11 +51,8 @@ class OurSocialController extends Controller
         $username = $request->username;
         $platform = $request->platform;
 
-        $iconSocial = $request->file('icon');
-        $pathIconSocial = Storage::putFile('public/our-social', $iconSocial);
-
         OurSocial::create([
-            'icon' => Str::replaceFirst('public/', '/storage/', $pathIconSocial),
+            'icon' => $request->icon,
             'platform' => $platform,
             'username' => $username,
             'link' => OurSocial::generateUrl($username, $platform)
@@ -64,17 +60,6 @@ class OurSocialController extends Controller
 
         return redirect()->back()->with('success', 'Successfully add new social media');
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -88,7 +73,20 @@ class OurSocialController extends Controller
         $social = OurSocial::findOrFail($id);
         $platforms = Helper::getListSocialPlatform();
 
-        return view('admin.social.edit', compact('social', 'platforms'));
+        $listIcon = [
+            "fab fa-instagram",
+            "fab fa-facebook-square",
+            "fab fa-linkedin",
+            "fab fa-twitter",
+            "fab fa-youtube"
+        ];
+
+        // if($social->icon == $listIcon[2]) {
+        //     dd($social);
+        // }
+
+
+        return view('admin.social.edit', compact('social', 'platforms', 'listIcon'));
     }
 
     /**
@@ -105,11 +103,7 @@ class OurSocialController extends Controller
         $username = $request->username;
         $platform = $request->platform;
 
-        if ($request->hasFile('icon')) {
-            $iconSocial = $request->file('icon');
-            $pathIconSocial = Storage::putFile('public/our-social', $iconSocial);
-            $updateSocial->icon = Str::replaceFirst('public/', '/storage/', $pathIconSocial);
-        }
+        $updateSocial->icon = $request->icon;
         $updateSocial->platform = $platform;
         $updateSocial->username = $username;
         $updateSocial->link = OurSocial::generateUrl($username, $platform);

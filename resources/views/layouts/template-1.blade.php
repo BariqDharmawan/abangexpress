@@ -21,7 +21,7 @@
             <div class="social-links d-none d-md-flex align-items-center">
                 @foreach ($ourSocial as $social)
                 <a href="{{ $social->link }}">
-                    <img src="{{ $social->icon }}" alt="" height="20px" width="20px">
+                    <i class="{{ $social->icon }}"></i>
                 </a>
                 @endforeach
             </div>
@@ -36,9 +36,8 @@
                     <h4>Our Social Networks</h4>
                     <div class="social-links mt-3">
                         @foreach ($ourSocial as $social)
-                        <a href="{{ $social->link }}" class="@if(!$loop->last) me-2 @endif">
-                            <img src="{{ $social->icon }}" height="30px" width="30px"
-                            alt="{{ config('app.name') . ' ' . $social->platform }}">
+                        <a href="{{ $social->link }}" class="h2 @if(!$loop->last) me-2 @endif">
+                            <i class="{{ $social->icon }}"></i>
                         </a>
                         @endforeach
                     </div>

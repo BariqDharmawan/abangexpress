@@ -24,15 +24,12 @@ class OurSocialFactory extends Factory
      */
     public function definition()
     {
-
-        $pathIcon = '/storage/our-social/';
-
         return [
             'icon' => $this->faker->randomElement([
-                $pathIcon . 'instagram.svg',
-                $pathIcon . 'facebook.svg',
-                $pathIcon . 'linkedin.svg',
-                $pathIcon . 'twitter.svg',
+                "fab fa-instagram",
+                "fab fa-facebook-square",
+                "fab fa-linkedin",
+                "fab fa-twitter",
             ]),
             'platform' => $this->faker->randomElement(Helper::getListSocialPlatform()),
             'username' => $this->faker->userName(),
