@@ -10,7 +10,7 @@
     <div class="col-12 mb-4">
         <div class="d-flex justify-content-between align-items-center">
             <h1 class="h4 mb-0">Manage FAQ</h1>
-            <x-admin.modal-trigger text="Add new faq"
+            <x-admin.modal.trigger text="Add new faq"
             modal-target="add-new-faq" />
         </div>
     </div>
@@ -42,12 +42,12 @@
                             {{ nl2br($faq->answer) }}
                         </div>
                         <div class="card-footer bg-transparent">
-                            <x-admin.modal-trigger text="Edit detail" 
+                            <x-admin.modal.trigger text="Edit detail" 
                             :is-default-style="false"
                             class="btn-link text-primary px-0 mr-2"
                             modal-target="edit-faq-{{ $loop->iteration }}" />
 
-                            <x-admin.modal-trigger text="Remove" 
+                            <x-admin.modal.trigger text="Remove" 
                             :is-default-style="false"
                             class="btn-link text-danger px-0"
                             modal-target="remove-faq-{{ $loop->iteration }}" />

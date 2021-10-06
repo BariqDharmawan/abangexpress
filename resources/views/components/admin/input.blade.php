@@ -5,7 +5,9 @@
 @endphp
 
 <div class="form-group">
+    @if ($type != 'file')
     <label for="{{ Str::slug($name) }}">{{ $label }}</label>
+    @endif
     
     @if ($type == 'textarea')
     <textarea
@@ -23,6 +25,18 @@
     ]) }}>
         {{ $slot }}
     </select>
+    @elseif($type == 'file')
+    <div class="custom-file">
+        <input {{ $attributes->merge([
+            'class' => 'custom-file-input',
+            'type' => 'file',
+            'id' => $id ?? Str::slug($name),
+            'name' => $name
+        ]) }} {{ $isRequired == true ? 'required' : '' }}>
+        <label class="custom-file-label" for="{{ $id ?? Str::slug($name) }}">
+            {{ $label }}
+        </label>
+    </div>
     @else
     <input {{ $attributes->class(['form-control'])->merge([
         'id' => Str::slug($name),

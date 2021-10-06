@@ -9,7 +9,7 @@
     
     <x-admin.card title="Header Carousel">
         <x-slot name="header">
-            <x-admin.modal-trigger text="Add new image"
+            <x-admin.modal.trigger text="Add new image"
             modal-target="add-hero-carousel-popup" />
         </x-slot>
 

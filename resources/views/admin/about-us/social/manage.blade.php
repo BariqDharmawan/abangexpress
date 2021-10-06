@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="h4 mb-0">Manage our social media</h1>
-                <x-admin.modal-trigger text="Add new social media"
+                <x-admin.modal.trigger text="Add new social media"
                 modal-target="add-social-media" />
             </div>
         </div>
@@ -34,7 +34,7 @@
                                 Update
                             </a>
 
-                            <x-admin.modal-trigger text="Remove"
+                            <x-admin.modal.trigger text="Remove"
                             modal-target="remove-social-{{ $loop->iteration }}"
                             :is-default-style="false"
                             class="btn-link text-danger" />

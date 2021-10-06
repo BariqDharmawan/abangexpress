@@ -5,7 +5,7 @@
             @foreach ($sectionHeading as $heading)
             <x-admin.card class="mb-3" title="Section name: {{ $heading->section_name }}" :is-header-transparent="true">
                 <x-slot name="header">
-                    <x-admin.modal-trigger text="Edit"
+                    <x-admin.modal.trigger text="Edit"
                     modal-target="edit-heading-{{ $loop->iteration }}" />
                 </x-slot>
                 <p class="mb-1 mt-3 font-weight-bold text-dark">First description</p>

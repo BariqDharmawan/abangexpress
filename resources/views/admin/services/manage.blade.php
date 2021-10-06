@@ -11,7 +11,7 @@
 <div class="col-12">
     <x-admin.card title="Our service">
         <x-slot name="header">
-            <x-admin.modal-trigger text="Add new"
+            <x-admin.modal.trigger text="Add new"
             modal-target="add-service" />
         </x-slot>
         <ul class="list-group">
@@ -25,11 +25,11 @@
                     <small>{{ $service->desc }}</small>
                 </div>
                 <div class="ml-auto">
-                    <x-admin.modal-trigger :is-default-style="false"
+                    <x-admin.modal.trigger :is-default-style="false"
                     class="btn-link text-primary" text="Update"
                     modal-target="edit-service-{{ $loop->iteration }}" />
 
-                    <x-admin.modal-trigger :is-default-style="false"
+                    <x-admin.modal.trigger :is-default-style="false"
                     class="btn-link text-danger" text="Remove"
                     modal-target="remove-service-{{ $loop->iteration }}" />
                 </div>

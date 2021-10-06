@@ -1,3 +1,5 @@
+@props(['id', 'parent'])
+
 <div {{ $attributes->merge([
     'class' => 'collapse',
     'id' => $id,

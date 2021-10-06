@@ -12,7 +12,7 @@
         <div class="col-12 mb-4">
             <x-admin.card title="Manage our contact">
                 <x-slot name="header">
-                    <x-admin.modal-trigger modal-target="update-contact" 
+                    <x-admin.modal.trigger modal-target="update-contact" 
                     text="Update our contact" />
                 </x-slot>
                 <ul class="list-group">
@@ -30,7 +30,7 @@
         <div class="col-12">
             <x-admin.card title="Embeded Map" class="embeded-full">
                 <x-slot name="header">
-                    <x-admin.modal-trigger modal-target="change-embeded" 
+                    <x-admin.modal.trigger modal-target="change-embeded" 
                     text="Change maps embeded" />
                 </x-slot>
                 {!! $addressEmbed !!}
@@ -105,7 +105,7 @@
                     @enderror
                     <small class="mr-1 text-muted">
                         To know how to embed google map, please see
-                        <x-admin.modal-trigger modal-target="how-to-embed" 
+                        <x-admin.modal.trigger modal-target="how-to-embed" 
                         text="this video" :is-default-style="false" 
                         class="btn-small btn-link text-primary p-0 text-small" />
                     </small>

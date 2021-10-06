@@ -6,7 +6,7 @@ use Illuminate\View\Component;
 
 class Input extends Component
 {
-    public $name, $label, $value, $type, $isInlinePick, $id, $isChecked;
+    public $name, $label, $value, $type, $isInlinePick, $id, $isChecked, $isRequired;
     /**
      * Create a new component instance.
      *
@@ -19,7 +19,8 @@ class Input extends Component
         $type=null,
         $isInlinePick = false,
         $id = null,
-        $isChecked = false
+        $isChecked = false,
+        $isRequired = false
     )
     {
         $this->name = $name;
@@ -29,6 +30,7 @@ class Input extends Component
         $this->isInlinePick = $isInlinePick;
         $this->id = $id;
         $this->isChecked = $isChecked;
+        $this->isRequired = $isRequired;
     }
 
     /**

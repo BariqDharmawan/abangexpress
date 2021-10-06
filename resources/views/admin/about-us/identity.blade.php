@@ -12,7 +12,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">Our Identity</h6>
-            <x-admin.modal-trigger text="Update our identity"
+            <x-admin.modal.trigger text="Update our identity"
             modal-target="edit-idendity" />
         </div>
         <div class="card-body">
@@ -46,7 +46,7 @@
     <div class="card">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">Video Promo</h6>
-            <x-admin.modal-trigger text="Change video"
+            <x-admin.modal.trigger text="Change video"
             modal-target="change-video-popup" />
         </div>
         <div class="card-body">

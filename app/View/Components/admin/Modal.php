@@ -26,6 +26,6 @@ class Modal extends Component
      */
     public function render()
     {
-        return view('components.admin.modal');
+        return view('components.admin.modal.index');
     }
 }

@@ -22,51 +22,51 @@
         
             <hr class="sidebar-divider">
         
-            <x-admin.sidebar-menu text="About Us" icon="fa-fw fa-cog" 
+            <x-admin.sidebar.menu text="About Us" icon="fa-fw fa-cog" 
             data-toggle="collapse" data-target="#collapseAbout"
             aria-expanded="true" aria-controls="collapseAbout"
             class="collapsed">
         
-                <x-admin.sidebar-dropdown id="collapseAbout" parent="accordionSidebar">
-                    <x-admin.sidebar-dropdown-link text="Identity" 
+                <x-admin.sidebar.dropdown id="collapseAbout" parent="accordionSidebar">
+                    <x-admin.sidebar.link text="Identity" 
                     :href="route('admin.about-us.identity')" />
         
-                    <x-admin.sidebar-dropdown-link text="Social Media" 
+                    <x-admin.sidebar.link text="Social Media" 
                     :href="route('admin.our-social.manage')" />
         
-                    <x-admin.sidebar-dropdown-link text="Contacts" 
+                    <x-admin.sidebar.link text="Contacts" 
                     :href="route('admin.contact.manage')" />
         
-                </x-admin.sidebar-dropdown>
+                </x-admin.sidebar.dropdown>
         
-            </x-admin.sidebar-menu>
+            </x-admin.sidebar.menu>
         
-            <x-admin.sidebar-menu text="Contents" class="collapsed" data-toggle="collapse" 
+            <x-admin.sidebar.menu text="Contents" class="collapsed" data-toggle="collapse" 
             icon="fa-fw fa-cog" data-target="#collapseContent" 
             aria-expanded="true" aria-controls="collapseContent">
         
-                <x-admin.sidebar-dropdown id="collapseContent" parent="accordionSidebar">
+                <x-admin.sidebar.dropdown id="collapseContent" parent="accordionSidebar">
                     
-                    <x-admin.sidebar-dropdown-link text="Header Carousel" 
+                    <x-admin.sidebar.link text="Header Carousel" 
                     :href="route('admin.content.landing-carousel.index')" />
         
-                    <x-admin.sidebar-dropdown-link text="Cover Vision Mission" 
+                    <x-admin.sidebar.link text="Cover Vision Mission" 
                     :href="route('admin.content.cover-vision-mission.index')" />
         
-                    <x-admin.sidebar-dropdown-link text="Section Heading Text" 
+                    <x-admin.sidebar.link text="Section Heading Text" 
                     :href="route('admin.content.section-heading.index')" />
             
-                </x-admin.sidebar-dropdown>
+                </x-admin.sidebar.dropdown>
         
-            </x-admin.sidebar-menu>
+            </x-admin.sidebar.menu>
         
-            <x-admin.sidebar-menu :href="route('admin.service.manage')" 
+            <x-admin.sidebar.menu :href="route('admin.service.manage')" 
             text="Services" icon="fa-fw fa-tachometer-alt" />
         
-            <x-admin.sidebar-menu :href="route('admin.team.manage')" 
+            <x-admin.sidebar.menu :href="route('admin.team.manage')" 
             text="Teams" icon="fa-fw fa-tachometer-alt" />
         
-            <x-admin.sidebar-menu :href="route('admin.faq.manage')" 
+            <x-admin.sidebar.menu :href="route('admin.faq.manage')" 
             text="FAQ" icon="fa-fw fa-tachometer-alt" />
         
             <!-- Divider -->

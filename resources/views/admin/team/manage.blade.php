@@ -13,7 +13,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <h1 class="h4 mb-0">Manage member</h1>
 
-            <x-admin.modal-trigger text="Add new member"
+            <x-admin.modal.trigger text="Add new member"
             modal-target="add-new-person" />
         </div>
     </div>
@@ -27,7 +27,7 @@
                         class="rounded-circle mx-auto d-block object-cover" 
                         alt="{{ $person->name }}">
                         <p class="card-text font-weight-bold h5 mb-0 mt-3 text-center">
-                            {{ Str::words($person->name, 3, '') }}
+                            {{ Str::words($person->name, 3, '...') }}
                         </p>
                     </div>
                     <div class="card-body">
@@ -40,12 +40,12 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-transparent">
                         
-                        <x-admin.modal-trigger text="Edit info"
+                        <x-admin.modal.trigger text="Edit info"
                         modal-target="edit-person-{{ $loop->iteration }}"
                         :is-default-style="false"
                         class="btn-link text-primary px-0" />
 
-                        <x-admin.modal-trigger text="Remove person"
+                        <x-admin.modal.trigger text="Remove person"
                         modal-target="remove-person-{{ $loop->iteration }}"
                         :is-default-style="false"
                         class="btn-link text-danger px-0" />

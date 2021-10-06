@@ -16,7 +16,7 @@
                 <img src="{{ $cover }}" alt="" height="300px" class="img-fluid">
             </div>
             <div class="col d-flex align-items-center justify-content-center border-left">
-                <x-admin.modal-trigger text="Change"
+                <x-admin.modal.trigger text="Change"
                 modal-target="change-cover-vision-mission" />
             </div>
         </div>
