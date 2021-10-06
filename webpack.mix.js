@@ -25,6 +25,7 @@ mix.scripts([
     `${templateAdminPath}/template/vendor/datatables/jquery.dataTables.min.js`,
     `${templateAdminPath}/template/vendor/datatables/dataTables.bootstrap4.min.js`,
     `${templateAdminPath}/template/vendor/summernote/summernote-bs4.min.js`,
+    `${templateAdminPath}/template/vendor/glightbox/js/glightbox.min.js`
 ], 'public/admin/js/vendor.js')
     .js(`${templateAdminPath}/js/app.js`, 'public/admin/js/app.js')
     .sass(`${templateAdminPath}/scss/app.scss`, 'public/admin/css/app.css')

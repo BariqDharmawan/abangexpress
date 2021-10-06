@@ -37,7 +37,7 @@ class OurSocialController extends Controller
             "fab fa-youtube"
         ];
 
-        return view('admin.social.manage', compact('platforms', 'listIcon'));
+        return view('admin.about-us.social.manage', compact('platforms', 'listIcon'));
     }
 
     /**
@@ -86,7 +86,9 @@ class OurSocialController extends Controller
         // }
 
 
-        return view('admin.social.edit', compact('social', 'platforms', 'listIcon'));
+        return view('admin.about-us.social.edit', compact(
+            'social', 'platforms', 'listIcon'
+        ));
     }
 
     /**

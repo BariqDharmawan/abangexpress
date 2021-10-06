@@ -1,10 +1,5 @@
 @extends('layouts.admin')
 
-@push('style-plugins')
-<link href="{{ asset('admin/template/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-<link href="{{ asset('admin/template/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
-@endpush
-
 @section('content')
 
 @if (session('success'))
@@ -128,18 +123,3 @@
         </form>
     </x-admin.modal>
 @endsection
-
-@push('scripts')
-    <script src="{{ asset('admin/template/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('admin/template/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('admin/template/js/demo/datatables-demo.js') }}"></script>
-    <script src="{{ asset('admin/template/vendor/glightbox/js/glightbox.min.js') }}"></script>
-    <script>
-        /**
-         * Initiate  glightbox
-         */
-        const glightbox = GLightbox({
-            selector: '.glightbox'
-        });
-    </script>
-@endpush

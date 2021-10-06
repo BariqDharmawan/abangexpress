@@ -20,7 +20,7 @@ class AboutUsController extends Controller
     public function identity()
     {
         $identity = AboutUs::first();
-        return view('admin.identity.manage', compact('identity'));
+        return view('admin.about-us.identity', compact('identity'));
     }
 
     public function updateEmbedMap(UpdateEmbedMapValidation $request)

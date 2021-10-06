@@ -18,7 +18,7 @@ class LandingHeroCarouselController extends Controller
     public function index()
     {
         $heroCarousel = FirstHeroCarouselLanding::all();
-        return view('admin.hero-carousel.manage', compact('heroCarousel'));
+        return view('admin.contents.hero-carousel', compact('heroCarousel'));
     }
 
     /**

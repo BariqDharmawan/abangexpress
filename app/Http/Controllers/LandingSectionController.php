@@ -16,7 +16,7 @@ class LandingSectionController extends Controller
     public function index()
     {
         $sectionHeading = LandingSectionDesc::all();
-        return view('admin.section-heading.manage', compact('sectionHeading'));
+        return view('admin.contents.section-heading', compact('sectionHeading'));
     }
 
     /**

@@ -20,7 +20,7 @@ class OurContactController extends Controller
                         ->where('user_id', auth()->id())
                         ->first()->address_embed;
 
-        return view('admin.contact.manage', compact(
+        return view('admin.about-us.contact.manage', compact(
             'contact', 'columns', 'addressEmbed'
         ));
     }

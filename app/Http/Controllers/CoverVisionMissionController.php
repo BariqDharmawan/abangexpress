@@ -18,7 +18,7 @@ class CoverVisionMissionController extends Controller
     public function index()
     {
         $cover = AboutUs::select('cover_vision_mission')->first()->cover_vision_mission;
-        return view('admin.cover-vision-mission.manage', compact('cover'));
+        return view('admin.contents.vision-mission', compact('cover'));
     }
 
     /**
