@@ -29,10 +29,17 @@ class UpdateMemberValidation extends FormRequest
             'avatar_edit' => [
                 'sometimes',
                 'mimes:png,jpg,jpeg,svg',
-                'dimensions:min_width=90,min_height=90'
+                'dimensions:ratio=1/1'
             ],
             'position_id_edit' => ['required', 'integer' ,'exists:position_list,id'],
             'short_desc' => ['required', 'string', 'min:3', 'max:50']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'avatar_edit.dimensions' => ':attribute should have same width and height'
         ];
     }
 }

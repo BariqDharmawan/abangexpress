@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Rules\AlphaSpaceRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreMemberValidation extends FormRequest
 {
@@ -29,7 +30,7 @@ class StoreMemberValidation extends FormRequest
             'avatar' => [
                 'required',
                 'mimes:png,jpg,jpeg,svg',
-                'dimensions:min_width=90,min_height=90'
+                'dimensions:ratio=1/1'
             ],
             'position_id' => ['required', 'integer' ,'exists:position_list,id'],
             'short_desc' => ['required', 'string', 'min:8', 'max:50']
@@ -44,7 +45,7 @@ class StoreMemberValidation extends FormRequest
     public function messages()
     {
         return [
-            'avatar.dimensions' => ':attribute should have size max 180x180',
+            'avatar.dimensions' => ':attribute should have same width and height',
         ];
     }
 }
