@@ -1,5 +1,5 @@
 import 'boxicons';
-import { getFaq, getContact } from '../../template2/js/function/get-ajax.js';
+import { getFaq, getContact } from './../../general/js/get-ajax';
 import './../vendor/php-email-form/validate.js';
 import './main';
 
