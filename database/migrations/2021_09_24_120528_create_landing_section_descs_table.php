@@ -18,6 +18,7 @@ class CreateLandingSectionDescsTable extends Migration
             $table->text('first_desc')->nullable();
             $table->text('second_desc')->nullable();
             $table->string('section_name')->unique();
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }

@@ -1,5 +1,6 @@
 const mix = require('laravel-mix');
 
+require('laravel-mix-serve')
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -16,7 +17,20 @@ const template2Path = 'resources/assets/template2'
 const templateAdminPath = 'resources/assets/admin'
 
 //asset for admin
-mix.copy(`${templateAdminPath}/img`, 'public/admin/img');
+mix.scripts([
+    `${templateAdminPath}/template/vendor/jquery-easing/jquery.easing.min.js`,
+    `${templateAdminPath}/template/js/sb-admin-2.min.js`,
+    `${templateAdminPath}/template/vendor/bootstrap/js/bootstrap.bundle.min.js`,
+    `${templateAdminPath}/template/vendor/chart.js/Chart.min.js`,
+    `${templateAdminPath}/template/vendor/datatables/jquery.dataTables.min.js`,
+    `${templateAdminPath}/template/vendor/datatables/dataTables.bootstrap4.min.js`,
+    `${templateAdminPath}/template/vendor/summernote/summernote-bs4.min.js`,
+    `${templateAdminPath}/template/vendor/glightbox/js/glightbox.min.js`
+], 'public/admin/js/vendor.js')
+    .js(`${templateAdminPath}/js/app.js`, 'public/admin/js/app.js')
+    .sass(`${templateAdminPath}/scss/app.scss`, 'public/admin/css/app.css')
+    .copy(`${templateAdminPath}/img`, 'public/admin/img')
+    .copy(`${templateAdminPath}/template/vendor/summernote/font`, 'public/admin/css/font')
 
 //asset for template 1
 mix.js(`${template1Path}/js/app.js`, 'public/template1/js')
@@ -26,10 +40,11 @@ mix.js(`${template1Path}/js/app.js`, 'public/template1/js')
         processCssUrls: false 
     })
     .copy(`${template1Path}/img`, 'public/template1/img')
+    .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/template1/webfonts')
     .sourceMaps();
 
 //general asset
-mix.copy('resources/assets/dummy', 'public/uploaded/dummy')
+mix.copy('resources/assets/dummy', 'storage/app/public')
     .copy('node_modules/bootstrap-icons/font/fonts', 'public/template1/css/fonts')
     .copy('node_modules/bootstrap-icons/font/fonts', 'public/template2/css/fonts')
     .copy('node_modules/boxicons/fonts', 'public/template1/fonts')
@@ -38,7 +53,11 @@ mix.copy('resources/assets/dummy', 'public/uploaded/dummy')
     .copy('resources/assets/img', 'public/img')
     .copy('resources/assets/general/json', 'public/json')
     .copy('resources/assets/general/vendor', 'public/vendor')
-    .copy('resources/assets/admin/template', 'public/admin/template')
+    .copy('resources/assets/general/video', 'public/video')
+    .copy(
+        'resources/assets/admin/template/vendor/jquery', 
+        'public/admin/template/vendor/jquery'
+    )
 
 //asset for template 2
 mix.js(`${template2Path}/js/app.js`, 'public/template2/js')
@@ -48,4 +67,7 @@ mix.js(`${template2Path}/js/app.js`, 'public/template2/js')
         processCssUrls: false 
     })
     .copy(`${template2Path}/img`, 'public/template2/img')
+    .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/template2/webfonts')
     .sourceMaps();
+
+mix.serve()

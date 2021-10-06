@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
+use App\Http\Requests\IdentityValidation;
+use App\Http\Requests\UpdateEmbedMapValidation;
 use App\Models\AboutUs;
 use Illuminate\Http\Request;
 
@@ -11,71 +14,19 @@ class AboutUsController extends Controller
     public function getVisionMission()
     {
         $visionMission = AboutUs::select('our_vision', 'our_mission')->get();
-        // $visionMission->map(function ($visionMission) {
-        //     return [
-        //         'visi'
-        //     ];
-        // });
         return response()->json($visionMission);
     }
 
     public function identity()
     {
         $identity = AboutUs::first();
-        return view('admin.identity.manage', compact('identity'));
+        return view('admin.about-us.identity', compact('identity'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function updateEmbedMap(UpdateEmbedMapValidation $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        AboutUs::first()->update(['address_embed' => $request->address_embed]);
+        return Helper::returnSuccess('update our embed map');
     }
 
     /**
@@ -85,19 +36,33 @@ class AboutUsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(IdentityValidation $request)
     {
-        //
+        //todo: add validation
+        $ourIdentity = AboutUs::findOrFail(1);
+
+        $isEditOurIdentityInfo = $request->hasAny([
+            'our_name', 'our_vision', 'our_mission', 'sub_slogan'
+        ]);
+
+        if($isEditOurIdentityInfo) {
+            $ourIdentity->our_name = $request->our_name;
+            $ourIdentity->our_vision = $request->our_vision;
+            $ourIdentity->our_mission = $request->our_mission;
+            $ourIdentity->sub_slogan = $request->sub_slogan;
+        }
+        else {
+            $ourIdentity->our_video = $request->our_video;
+        }
+
+        $ourIdentity->user_id = auth()->id();
+
+        $ourIdentity->save();
+
+        $message = $isEditOurIdentityInfo ? 'our identity' : 'video promo';
+
+        return Helper::returnSuccess("update $message");
+        
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

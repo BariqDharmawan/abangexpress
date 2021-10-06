@@ -1,0 +1,41 @@
+@media screen and (max-width: 993px) {
+    .md-h-auto {
+        height: auto;
+    }
+}
+.hover-no-underline:hover {
+    text-decoration: none
+}
+.transition-default {
+    transition: all 250ms;
+}
+.rotate-180deg {
+    transform: rotate(180deg);
+}
+.h-full {
+    height: 100%;
+}
+.center-parent {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.embeded-full iframe {
+    width: 100%;
+}
+.option-slide {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+.object-cover {
+    object-fit: cover;
+}
+.resize-none {
+    resize: none;
+}
+.text-small {
+    font-size: 80%;
+}

@@ -1,27 +1,37 @@
 @extends('layouts.admin')
 @section('content')
+
+@if (session('success'))
+<div class="row mx-0">
+    <div class="col-12">
+        <x-admin.alert-success/>
+    </div>
+</div>
+@endif
 <div class="col-12">
     <x-admin.card title="Our service">
         <x-slot name="header">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-service">
-                Add new
-            </button>
+            <x-admin.modal.trigger text="Add new"
+            modal-target="add-service" />
         </x-slot>
         <ul class="list-group">
             @foreach ($ourService as $service)
             <li class="list-group-item d-flex align-items-center" data-id="{{ $service->id }}">
-                <img src="{{ asset($service->icon) }}" alt="" height="30px">
+                <span class="h3">
+                    <i class="{{ $service->icon }}"></i>
+                </span>
                 <div class="ml-4">
                     <p class="font-weight-bold text-capitalize mb-1">{{ $service->title }}</p>
                     <small>{{ $service->desc }}</small>
                 </div>
                 <div class="ml-auto">
-                    <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#edit-service-{{ $loop->iteration }}">
-                        Change
-                    </button>
-                    <button type="button" class="btn btn-link text-danger" data-toggle="modal" data-target="#remove-service-{{ $loop->iteration }}">
-                        Remove
-                    </button>
+                    <x-admin.modal.trigger :is-default-style="false"
+                    class="btn-link text-primary" text="Update"
+                    modal-target="edit-service-{{ $loop->iteration }}" />
+
+                    <x-admin.modal.trigger :is-default-style="false"
+                    class="btn-link text-danger" text="Remove"
+                    modal-target="remove-service-{{ $loop->iteration }}" />
                 </div>
             </li>
             @endforeach
@@ -31,12 +41,15 @@
 @endsection
 @section('components')
     <x-admin.modal id="add-service" heading="Add new service">
-        @include('admin.services.form', ['action' => '', 'service' => ''])
+        @include('admin.services.form', ['action' => route('admin.services.store')])
     </x-admin.modal>
     @foreach ($ourService as $service)
         <x-admin.modal id="edit-service-{{ $loop->iteration }}" 
             heading="Edit service {{ $service->title }}">
-            @include('admin.services.form', ['action' => '', 'service' => $service])
+            @include('admin.services.form', [
+                'action' => route('admin.services.update', $service->id),
+                'data' => $service
+            ])
         </x-admin.modal>
 
         @include('admin.partials.popup-delete', [
@@ -44,7 +57,7 @@
             'heading' => 'Remove service',
             'warningMesssage' => 
                 'Are you sure wana remove service <b>' . $service->title . '</b>?',
-            'action' => ''
+            'action' => route('admin.services.destroy', $service->id)
         ])
     @endforeach
 @endsection

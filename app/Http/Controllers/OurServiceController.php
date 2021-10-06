@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
+use App\Http\Requests\StoreServiceValidation;
 use App\Models\OurService;
 use Illuminate\Http\Request;
 
@@ -11,7 +13,17 @@ class OurServiceController extends Controller
     public function manage()
     {
         $ourService = OurService::orderBy('title', 'asc')->get();
-        return view('admin.services.manage', compact('ourService'));
+        $listIcon = [
+            'fab fa-angellist',
+            'fas fa-anchor',
+            'fab fa-angular',
+            'fas fa-battery-full', 
+            'fab fa-affiliatetheme',
+            'fab fa-algolia', 
+            'fab fa-amazon-pay'
+        ];
+
+        return view('admin.services.manage', compact('ourService', 'listIcon'));
     }
 
     /**
@@ -26,46 +38,21 @@ class OurServiceController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreServiceValidation $request)
     {
-        //
-    }
+        OurService::create([
+            'icon' => $request->icon,
+            'title' => $request->title,
+            'desc' => $request->desc,
+            'user_id' => auth()->id()
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Helper::returnSuccess('add new service');
     }
 
     /**
@@ -77,7 +64,17 @@ class OurServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $serviceToUpdate = OurService::findOrFail($id);
+        $serviceToUpdate->icon = $request->icon;
+        $serviceToUpdate->title = $request->title;
+        $serviceToUpdate->desc = $request->desc;
+        $serviceToUpdate->user_id = auth()->id();
+
+        $serviceToUpdate->save();
+        return redirect()->back()->with(
+            'success', "Successfully change service $serviceToUpdate->title"
+        );
+
     }
 
     /**
@@ -88,6 +85,12 @@ class OurServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $serviceToDelete = OurService::findOrFail($id);
+        $serviceName = $serviceToDelete->title;
+
+        $serviceToDelete->delete();
+        return redirect()->back()->with(
+            'success', "Successfully remove service $serviceName"
+        );
     }
 }

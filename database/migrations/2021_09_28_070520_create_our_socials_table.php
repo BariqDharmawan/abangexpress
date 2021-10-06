@@ -19,6 +19,7 @@ class CreateOurSocialsTable extends Migration
             $table->string('platform');
             $table->string('username');
             $table->string('link');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }

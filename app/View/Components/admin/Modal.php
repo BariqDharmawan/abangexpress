@@ -6,16 +6,17 @@ use Illuminate\View\Component;
 
 class Modal extends Component
 {
-    public $heading, $id;
+    public $heading, $id, $size;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($heading, $id)
+    public function __construct($heading, $id, $size=null)
     {
         $this->heading = $heading;
         $this->id = $id;
+        $this->size = $size;
     }
 
     /**
@@ -25,6 +26,6 @@ class Modal extends Component
      */
     public function render()
     {
-        return view('components.admin.modal');
+        return view('components.admin.modal.index');
     }
 }

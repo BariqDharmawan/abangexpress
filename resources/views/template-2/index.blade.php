@@ -31,30 +31,11 @@
 
 <main id="main">
 
-    <!-- ======= Cliens Section ======= -->
-    <section id="cliens" class="cliens section-bg">
-        <div class="container">
-
-            <div class="row parent-load-data" data-aos="zoom-in" id="load-clients"
-            data-api-suffix="our-client">
-
-                {{-- get client using ajax [this is shadow element] --}}
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center el-to-load-ajax" data-content-type="img-only">
-                    <img src=""
-                    class="img-fluid" alt="">
-                </div>
-                {{-- end of that --}}
-
-            </div>
-
-        </div>
-    </section>
-
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="TENTANG KAMI" />`
+            <x-template2.section-title heading="{{ $landingSection[0]->section_name }}" />`
 
             <div class="content row">
                 <div class="col-lg-6">
@@ -101,10 +82,12 @@
 
                 </div>
 
-                <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url(
-                    "{{ asset($aboutUs->cover_vision_mission) }}"
-                );'
-                data-aos="zoom-in" data-aos-delay="150"></div>
+                <div class="col-lg-5 order-1 order-lg-2 align-items-stretch d-flex"
+                data-aos="zoom-in" data-aos-delay="150">
+                    <div class="img w-100 rounded" style='background-image: url(
+                        "{{ asset($aboutUs->cover_vision_mission) }}"
+                    );height: 100%'></div>
+                </div>
             </div>
 
         </div>
@@ -114,22 +97,21 @@
     <section id="services" class="services section-bg">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="LAYANAN KAMI" />
+            <x-template2.section-title heading="{{ $landingSection[1]->section_name }}" />
 
             <div class="row" id="load-our-service">
-                {{-- get service using ajax [this is shadow element] --}}
-                <div class="col-xl-3 col-md-6 d-flex align-items-stretch el-to-load-ajax"
-                data-aos="zoom-in" data-aos-delay="">
+                
+                @foreach ($ourService as $service)
+                <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-5"
+                data-aos="zoom-in" data-aos-delay="{{ $loop->iteration * 100 }}">
                     <div class="icon-box w-100">
-                        <div class="icon">
-                            <img src="" alt="" height="64px" width="64px"
-                            class="card__icon d-block">
-                        </div>
-                        <h4 class="card__name text-capitalize"></h4>
-                        <p class="card__short-desc"></p>
+                        <i class="{{ $service->icon }} h1"></i>
+                        <h4 class="card__name text-capitalize mt-2">{{ $service->title }}</h4>
+                        <p class="card__short-desc">{{ $service->desc }}</p>
                     </div>
                 </div>
-                {{-- end of that --}}
+                @endforeach
+                
             </div>
 
         </div>
@@ -142,7 +124,7 @@
             <div class="row">
                 <div class="col-lg-9 text-center text-lg-start">
                     <h2 class="text-white">{{ $landingSection[2]->section_name }}</h2>
-                    <p>{{ $landingSection[2]->first_desc }}</p>
+                    <p>{!! $landingSection[2]->first_desc !!}</p>
                 </div>
                 <div class="col-lg-3 cta-btn-container text-center">
                     <a class="cta-btn align-middle" id="cta-email">
@@ -158,7 +140,8 @@
     <section id="team" class="team section-bg">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="TEAM KAMI" desc="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas." />
+            <x-template2.section-title heading="{{ $landingSection[3]->section_name }}"
+            desc="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas." />
 
             <div class="row" id="load-member">
 
@@ -187,7 +170,7 @@
     <section id="faq" class="faq section-bg">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="FAQ" />
+            <x-template2.section-title heading="{{ $landingSection[4]->section_name }}" />
 
             <div class="faq-list">
                 <ul id="load-faq">
@@ -208,7 +191,7 @@
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="KONTAK KAMI" />
+            <x-template2.section-title heading="{{ $landingSection[5]->section_name }}" />
 
             <div class="row">
 

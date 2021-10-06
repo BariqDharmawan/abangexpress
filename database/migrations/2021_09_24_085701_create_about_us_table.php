@@ -15,7 +15,7 @@ class CreateAboutUsTable extends Migration
     {
         Schema::create('about_us', function (Blueprint $table) {
             $table->id();
-            $table->string('our_name', 10);
+            $table->string('our_name', 20);
             $table->string('our_vision');
             $table->text('our_mission');
             $table->string('our_video')->nullable();
@@ -23,6 +23,7 @@ class CreateAboutUsTable extends Migration
             $table->string('slogan');
             $table->string('sub_slogan')->nullable();
             $table->string('cover_vision_mission')->nullable();
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }

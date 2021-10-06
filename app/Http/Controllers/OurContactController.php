@@ -2,11 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
+use App\Http\Requests\UpdateContactValidation;
+use App\Models\AboutUs;
 use App\Models\OurContact;
 use Illuminate\Http\Request;
 
 class OurContactController extends Controller
 {
+
+    public function manage()
+    {
+        $contact = OurContact::where('user_id', auth()->id())->first();
+        $columns = ['address', 'telephone', 'email'];
+
+        $addressEmbed = AboutUs::select('address_embed')
+                        ->where('user_id', auth()->id())
+                        ->first()->address_embed;
+
+        return view('admin.about-us.contact.manage', compact(
+            'contact', 'columns', 'addressEmbed'
+        ));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,69 +37,18 @@ class OurContactController extends Controller
         return response()->json($ourContact);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function update(UpdateContactValidation $request)
     {
-        //
-    }
+        OurContact::firstOrFail()->update([
+            'address' => $request->address,
+            'telephone' => $request->telephone,
+            'email' => $request->email,
+            'link_address' => $request->link_address,
+            'user_id' => auth()->id()
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // return response()->json($ourContact);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return Helper::returnSuccess('update contact');
     }
 }

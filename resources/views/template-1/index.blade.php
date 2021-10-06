@@ -31,12 +31,22 @@
                     </a>
                 </li>
                 @endforeach
+                @guest
                 <li>
-                    <a href="/landingTemplate/admin/login" style="cursor: pointer;"
+                    <a href="{{ route('login') }}" style="cursor: pointer;"
                         class="border border-dark text-center mx-2 py-2 px-4 rounded-50"> 
                         Masuk
                     </a>
                 </li>
+                @else
+                <li>
+                    <a href="{{ route('admin.about-us.identity') }}" 
+                    style="cursor: pointer;"
+                    class="border border-dark text-center mx-2 py-2 px-4 rounded-50"> 
+                        Go to dashboard
+                    </a>
+                </li>
+                @endguest
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
@@ -100,14 +110,15 @@
 
             <div class="row gy-4">
                 @foreach ($ourService as $service)
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="box">
-                        <div class="icon">
-                            <img src="{{ $service->icon }}" height="64px"
-                            alt="{{ $aboutUs->our_name . ' ' . 'Service' }}" >
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="box d-flex align-items-center">
+                        <span class="h1">
+                            <i class="{{ $service->icon }}"></i>
+                        </span>
+                        <div>
+                            <h4 class="title">{{ $service->title }}</h4>
+                            <p class="description">{{ $service->desc }}</p>
                         </div>
-                        <h4 class="title">{{ $service->title }}</h4>
-                        <p class="description">{{ $service->desc }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -122,10 +133,10 @@
             <div class="row">
                 <div class="col-lg-9 text-center text-lg-start">
                     <h3 class="cta-title">{{ $landingSection[2]->section_name }}</h3>
-                    <p class="cta-text">{{ $landingSection[2]->first_desc }}</p>
+                    <p class="cta-text">{!! $landingSection[2]->first_desc !!}</p>
                 </div>
                 <div class="col-lg-3 cta-btn-container text-center">
-                    <a class="cta-btn align-middle" href="#" id="cta-email">Call To Action</a>
+                    <a class="cta-btn align-middle" href="#" id="cta-email">CTA</a>
                 </div>
             </div>
         </div>
@@ -191,82 +202,6 @@
         </div>
     </section>
 
-
-    <!-- ======= Team Section ======= -->
-        <!--<section id="team">-->
-        <!--  <div class="container" data-aos="fade-up">-->
-        <!--    <div class="section-header">-->
-        <!--      <h2>Our Team</h2>-->
-        <!--    </div>-->
-        <!--    <div class="row">-->
-        <!--      <div class="col-lg-3 col-md-6">-->
-        <!--        <div class="member">-->
-        <!--          <div class="pic"><img src="{{ asset('template1/img/team-1.jpg') }}" alt=""></div>-->
-        <!--          <div class="details">-->
-        <!--            <h4>Walter White</h4>-->
-        <!--            <span>Chief Executive Officer</span>-->
-        <!--            <div class="social">-->
-        <!--              <a href=""><i class="bi bi-twitter"></i></a>-->
-        <!--              <a href=""><i class="bi bi-facebook"></i></a>-->
-        <!--              <a href=""><i class="bi bi-instagram"></i></a>-->
-        <!--              <a href=""><i class="bi bi-linkedin"></i></a>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--      </div>-->
-
-        <!--      <div class="col-lg-3 col-md-6">-->
-        <!--        <div class="member">-->
-        <!--          <div class="pic"><img src="{{ asset('template1/img/team-2.jpg') }}" alt=""></div>-->
-        <!--          <div class="details">-->
-        <!--            <h4>Sarah Jhinson</h4>-->
-        <!--            <span>Product Manager</span>-->
-        <!--            <div class="social">-->
-        <!--              <a href=""><i class="bi bi-twitter"></i></a>-->
-        <!--              <a href=""><i class="bi bi-facebook"></i></a>-->
-        <!--              <a href=""><i class="bi bi-instagram"></i></a>-->
-        <!--              <a href=""><i class="bi bi-linkedin"></i></a>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--      </div>-->
-
-        <!--      <div class="col-lg-3 col-md-6">-->
-        <!--        <div class="member">-->
-        <!--          <div class="pic"><img src="{{ asset('template1/img/team-3.jpg') }}" alt=""></div>-->
-        <!--          <div class="details">-->
-        <!--            <h4>William Anderson</h4>-->
-        <!--            <span>CTO</span>-->
-        <!--            <div class="social">-->
-        <!--              <a href=""><i class="bi bi-twitter"></i></a>-->
-        <!--              <a href=""><i class="bi bi-facebook"></i></a>-->
-        <!--              <a href=""><i class="bi bi-instagram"></i></a>-->
-        <!--              <a href=""><i class="bi bi-linkedin"></i></a>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--      </div>-->
-
-        <!--      <div class="col-lg-3 col-md-6">-->
-        <!--        <div class="member">-->
-        <!--          <div class="pic"><img src="{{ asset('template1/img/team-4.jpg') }}" alt=""></div>-->
-        <!--          <div class="details">-->
-        <!--            <h4>Amanda Jepson</h4>-->
-        <!--            <span>Accountant</span>-->
-        <!--            <div class="social">-->
-        <!--              <a href=""><i class="bi bi-twitter"></i></a>-->
-        <!--              <a href=""><i class="bi bi-facebook"></i></a>-->
-        <!--              <a href=""><i class="bi bi-instagram"></i></a>-->
-        <!--              <a href=""><i class="bi bi-linkedin"></i></a>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--      </div>-->
-        <!--    </div>-->
-
-        <!--  </div>-->
-    <!--</section>  -->
-
     <!-- ======= Contact Section ======= -->
     <section id="contact">
         <div class="container" data-aos="fade-up">
@@ -277,17 +212,17 @@
                 {{-- get contact using ajax --}}
                 <div class="col-md-4">
                     <x-template1.list-group-simple icon="bi-geo-alt" id="location" 
-                    text="" subtext="" link="" class="contact-address" />
+                    text="" subtext="" link="" class="contact-address" subtext-class="contact-value" />
                 </div>
 
                 <div class="col-md-4">
                     <x-template1.list-group-simple icon="bi-phone" id="phone" 
-                    text="" subtext="" link="" class="contact-phone" />
+                    text="" subtext="" link="" class="contact-phone" subtext-class="contact-value" />
                 </div>
 
                 <div class="col-md-4">
                     <x-template1.list-group-simple icon="bi-envelope" id="email" 
-                    text="" subtext="" link="" class="contact-email" />
+                    text="" subtext="" link="" class="contact-email" subtext-class="contact-value" />
                 </div>
                 {{-- end of that --}}
                 

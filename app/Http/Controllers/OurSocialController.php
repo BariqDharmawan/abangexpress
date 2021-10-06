@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
+use App\Http\Requests\StoreSocialMediaValidation;
+use App\Http\Requests\UpdateContactValidation;
+use App\Http\Requests\UpdateSocialMediaValidation;
 use App\Models\OurSocial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class OurSocialController extends Controller
 {
@@ -19,17 +26,18 @@ class OurSocialController extends Controller
 
     public function manage()
     {
-        return view('admin.social.manage');
-    }
+        $socialMedia = Helper::getJson('social-media.json', true);
+        $platforms = Arr::pluck($socialMedia, 'platform');
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $listIcon = [
+            "fab fa-instagram",
+            "fab fa-facebook-square",
+            "fab fa-linkedin",
+            "fab fa-twitter",
+            "fab fa-youtube"
+        ];
+
+        return view('admin.about-us.social.manage', compact('platforms', 'listIcon'));
     }
 
     /**
@@ -38,31 +46,20 @@ class OurSocialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSocialMediaValidation $request)
     {
         $username = $request->username;
-        $linkPlatform = OurSocial::generateUrl($username, $request->platform);
+        $platform = $request->platform;
 
-        $addSocial = OurSocial::create([
+        OurSocial::create([
             'icon' => $request->icon,
-            'platform' => $request->platform,
+            'platform' => $platform,
             'username' => $username,
-            'link' => $linkPlatform
+            'link' => OurSocial::generateUrl($username, $platform)
         ]);
 
-        return response()->json($addSocial);
+        return Helper::returnSuccess('add new social media');
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -73,7 +70,25 @@ class OurSocialController extends Controller
      */
     public function edit($id)
     {
-        //
+        $social = OurSocial::findOrFail($id);
+        $platforms = Helper::getListSocialPlatform();
+
+        $listIcon = [
+            "fab fa-instagram",
+            "fab fa-facebook-square",
+            "fab fa-linkedin",
+            "fab fa-twitter",
+            "fab fa-youtube"
+        ];
+
+        // if($social->icon == $listIcon[2]) {
+        //     dd($social);
+        // }
+
+
+        return view('admin.about-us.social.edit', compact(
+            'social', 'platforms', 'listIcon'
+        ));
     }
 
     /**
@@ -83,9 +98,27 @@ class OurSocialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSocialMediaValidation $request, $id)
     {
-        //
+        $updateSocial = OurSocial::findOrFail($id);
+
+        $username = $request->username;
+        $platform = $request->platform;
+
+        $updateSocial->icon = $request->icon;
+        $updateSocial->platform = $platform;
+        $updateSocial->username = $username;
+        $updateSocial->link = OurSocial::generateUrl($username, $platform);
+        $updateSocial->user_id = auth()->id();
+        $updateSocial->save();
+
+        //todo: remove old icon after update
+
+        return redirect()->route('admin.our-social.manage')->with(
+            'success', "Successfully update $updateSocial->platform"
+        );
+
+        // return 'coba';
     }
 
     /**
@@ -96,6 +129,10 @@ class OurSocialController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $socialToDelete = OurSocial::findOrFail($id);
+        $platformName = $socialToDelete->platform;
+        $socialToDelete->delete();
+
+        return redirect()->back()->with('success', "Successfully remove our $platformName");
     }
 }

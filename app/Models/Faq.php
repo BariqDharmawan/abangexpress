@@ -11,8 +11,8 @@ class Faq extends Model
 
     protected $guarded = [''];
 
-    public function admin()
+    public function user()
     {
-        return $this->belongsTo('App\Models\User', 'admin_id');
+        return $this->belongsTo('App\Models\User');
     }
 }

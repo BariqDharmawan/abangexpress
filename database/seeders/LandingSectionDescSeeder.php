@@ -16,6 +16,7 @@ class LandingSectionDescSeeder extends Seeder
     {
         LandingSectionDesc::insert([
             [
+                'user_id' => 1,
                 'section_name' => 'Tentang Kami',
                 'first_desc' => 'Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet
                 veniam enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute
@@ -26,11 +27,13 @@ class LandingSectionDescSeeder extends Seeder
                     </p>'
             ],
             [
+                'user_id' => rand(1, 3),
                 'section_name' => 'Layanan Kami',
                 'first_desc' => '',
                 'second_desc' => ''
             ],
             [
+                'user_id' => rand(1, 3),
                 'section_name' => 'Hubungi Kami',
                 'first_desc' => 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
                 fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
@@ -38,16 +41,19 @@ class LandingSectionDescSeeder extends Seeder
                 'second_desc' => ''
             ],
             [
+                'user_id' => rand(1, 3),
                 'section_name' => 'Team Kami',
                 'first_desc' => '',
                 'second_desc' => ''
             ],
             [
+                'user_id' => rand(1, 3),
                 'section_name' => 'Tanya Kami',
                 'first_desc' => '',
                 'second_desc' => ''
             ],
             [
+                'user_id' => rand(1, 3),
                 'section_name' => 'Kontak Kami',
                 'first_desc' => '',
                 'second_desc' => ''
