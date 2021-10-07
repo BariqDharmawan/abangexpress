@@ -27,6 +27,7 @@
                 </ul>
             </x-admin.card>
         </div>
+        @isset($addressEmbed)
         <div class="col-12">
             <x-admin.card title="Embeded Map" class="embeded-full">
                 <x-slot name="header">
@@ -36,6 +37,7 @@
                 {!! $addressEmbed !!}
             </x-admin.card>
         </div>
+        @endisset
     </div>
 @endsection
 

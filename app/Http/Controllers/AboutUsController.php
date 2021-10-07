@@ -19,14 +19,15 @@ class AboutUsController extends Controller
 
     public function identity()
     {
-        $identity = AboutUs::where('user_id', auth()->id())->first();
-        // dd(auth()->id());
+        $identity = AboutUs::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
         return view('admin.about-us.identity', compact('identity'));
     }
 
     public function updateEmbedMap(UpdateEmbedMapValidation $request)
     {
-        AboutUs::where('user_id', auth()->id())->first()->update([
+        AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())->first()->update([
                     'address_embed' => $request->address_embed
                 ]);
         return Helper::returnSuccess('update our embed map');
@@ -35,7 +36,7 @@ class AboutUsController extends Controller
     public function update(IdentityValidation $request)
     {
         //todo: add validation
-        $ourIdentity = AboutUs::where('user_id', auth()->id())->first();
+        $ourIdentity = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())->first();
 
         $isEditOurIdentityInfo = $request->hasAny([
             'our_name', 'our_vision', 'our_mission', 'sub_slogan'
@@ -50,8 +51,6 @@ class AboutUsController extends Controller
         else {
             $ourIdentity->our_video = $request->our_video;
         }
-
-        $ourIdentity->user_id = auth()->id();
 
         $ourIdentity->save();
 

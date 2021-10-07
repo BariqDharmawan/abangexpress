@@ -68,6 +68,11 @@
         
             <x-admin.sidebar.menu :href="route('admin.faq.manage')" 
             text="FAQ" icon="fa-fw fa-tachometer-alt" />
+
+            @if (auth()->user()->role == 'admin')
+            <x-admin.sidebar.menu :href="route('admin.user.index')" 
+            text="User" icon="fa-fw fa-tachometer-alt" />
+            @endif
         
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -94,7 +99,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span 
                                 class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    {{ auth()->user()->username }}
+                                    {{ Auth::user()->username }}
                                 </span>
                                 <img class="img-profile rounded-circle" 
                                 src="{{ asset('admin/img/undraw_profile.svg') }}">

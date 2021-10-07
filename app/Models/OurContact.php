@@ -14,7 +14,6 @@ class OurContact extends Model
         'telephone',
         'email',
         'link_address',
-        'user_id',
         'domain_owner'
     ];
 }

@@ -13,7 +13,9 @@ class LandingHeroCarouselController extends Controller
     
     public function index()
     {
-        $heroCarousel = FirstHeroCarouselLanding::where('user_id', auth()->id())->get();
+        $heroCarousel = FirstHeroCarouselLanding::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->get();
         return view('admin.contents.hero-carousel', compact('heroCarousel'));
     }
 
@@ -28,7 +30,7 @@ class LandingHeroCarouselController extends Controller
 
         FirstHeroCarouselLanding::create([
             'img' => Str::replaceFirst('public/', '/storage/', $pathHeroCarousel),
-            'user_id' => auth()->id()
+            'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
         return Helper::returnSuccess('add new hero');
@@ -43,7 +45,7 @@ class LandingHeroCarouselController extends Controller
     public function destroy($id)
     {
         $carouselToDelete = FirstHeroCarouselLanding::where([
-            ['user_id', auth()->id()],
+            ['domain_owner', request()->getSchemeAndHttpHost()],
             ['id', $id]
         ])->firstOrFail();
 

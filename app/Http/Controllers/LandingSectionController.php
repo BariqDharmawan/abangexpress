@@ -15,7 +15,9 @@ class LandingSectionController extends Controller
      */
     public function index()
     {
-        $sectionHeading = LandingSectionDesc::where('user_id', auth()->id())->get();
+        $sectionHeading = LandingSectionDesc::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->get();
         return view('admin.contents.section-heading', compact('sectionHeading'));
     }
 
@@ -29,8 +31,8 @@ class LandingSectionController extends Controller
     public function update(Request $request, $id)
     {
         $sectionToUpdate = LandingSectionDesc::where([
-            ['user_id', auth()->id()],
             ['domain_owner', request()->getSchemeAndHttpHost()],
+            ['id', $id]
         ])->firstOrFail();
         $sectionToUpdate->section_name = $request->section_name;
         if ($request->has('first_desc')) {
@@ -39,7 +41,6 @@ class LandingSectionController extends Controller
         if ($request->has('second_desc')) {
             $sectionToUpdate->second_desc = $request->second_desc;
         }
-        $sectionToUpdate->user_id = auth()->id();
         
         $sectionToUpdate->save();
         return Helper::returnSuccess('change heading');

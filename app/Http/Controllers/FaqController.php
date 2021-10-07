@@ -14,7 +14,7 @@ class FaqController extends Controller
 
     public function manage()
     {
-        $faqs = Faq::where('user_id', auth()->id())->get();
+        $faqs = Faq::where('domain_owner', request()->getSchemeAndHttpHost())->get();
         // dd(auth()->id());
         return view('admin.faq.manage', compact('faqs'));
     }
@@ -31,7 +31,7 @@ class FaqController extends Controller
         Faq::create([
             'question' => $request->question,
             'answer' => $request->answer,
-            'user_id' => auth()->id()
+            'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
         return Helper::returnSuccess('add new FAQ');
@@ -40,12 +40,11 @@ class FaqController extends Controller
     public function update(UpdateFaqValidation $request, $id)
     {
         Faq::where([
-            ['user_id', auth()->id()],
+            ['domain_owner', request()->getSchemeAndHttpHost()],
             ['id', $id]
         ])->update([
             'question' => $request->question_edit,
-            'answer' => $request->answer_edit,
-            'user_id' => auth()->id()
+            'answer' => $request->answer_edit
         ]);
 
         return Helper::returnSuccess('update FAQ');
@@ -54,7 +53,7 @@ class FaqController extends Controller
     public function destroy($id)
     {
         $faq = Faq::where([
-            ['user_id', auth()->id()],
+            ['domain_owner', request()->getSchemeAndHttpHost()],
             ['id', $id]
         ])->firstOrFail();
         

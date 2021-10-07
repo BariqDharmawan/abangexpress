@@ -7,7 +7,6 @@ use App\Http\Requests\StoreMemberValidation;
 use App\Http\Requests\UpdateMemberValidation;
 use App\Models\OurTeam;
 use App\Models\PositionList;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -16,8 +15,10 @@ class OurTeamController extends Controller
 
     public function manage()
     {
-        $teams = OurTeam::where('user_id', auth()->id())->get();
-        $positionList = PositionList::all();
+        $teams = OurTeam::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->get();
+        $positionList = PositionList::where('domain_owner', request()->getSchemeAndHttpHost())->get();
 
         return view('admin.team.manage', compact('teams', 'positionList'));
     }
@@ -32,7 +33,7 @@ class OurTeamController extends Controller
             'avatar' => Str::replaceFirst('public/', '/storage/', $pathAvatar),
             'position_id' => $request->position_id,
             'short_desc' => $request->short_desc,
-            'user_id' => auth()->id()
+            'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
         return Helper::returnSuccess('add new member');
@@ -49,7 +50,7 @@ class OurTeamController extends Controller
     public function update(UpdateMemberValidation $request, $id)
     {
         $editMember = OurTeam::where([
-            ['user_id', auth()->id()],
+            ['domain_owner', request()->getSchemeAndHttpHost()],
             ['id', $id]
         ])->firstOrFail();
         $editMember->name = $request->name;
@@ -77,7 +78,7 @@ class OurTeamController extends Controller
     public function destroy($id)
     {
         $deletePerson = OurTeam::where([
-            ['user_id', auth()->id()],
+            ['domain_owner', request()->getSchemeAndHttpHost()],
             ['id', $id]
         ])->firstOrFail();
 

@@ -9,6 +9,7 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() 
 
     Route::redirect('dashboard', 'identity', 301);
 
+    Route::resource('user', 'UserController')->except('edit', 'show', 'create');
     
     Route::prefix('about-us')->group(function (){
         

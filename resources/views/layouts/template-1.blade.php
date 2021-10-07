@@ -47,7 +47,10 @@
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong>{{ date('Y') }}</strong>. All Rights Reserved
+                &copy; Copyright 
+                <strong class="text-capitalize">
+                    {{ $ourName . ' ' . date('Y') }}
+                </strong>. All Rights Reserved
             </div>
             <div class="credits d-none">
                 Designed by <a href="#">Pastigo</a>

@@ -22,11 +22,15 @@ class TemplateSatuController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $menus = Helper::getJson('template-1-menu.json');
 
+        $landingSection = LandingSectionDesc::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->get();
+        
         $heroCarousel = FirstHeroCarouselLanding::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->get();
-        $menus = Helper::getJson('template-1-menu.json');
 
         $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
                 ->first();
@@ -44,10 +48,6 @@ class TemplateSatuController extends Controller
         $ourContact = OurContact::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
-
-        $landingSection = LandingSectionDesc::where(
-            'domain_owner', request()->getSchemeAndHttpHost()
-        )->get();
 
         return view('template-1.index', compact(
             'firstWordAppName', 'heroCarousel', 'menus', 'aboutUs', 

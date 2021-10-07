@@ -13,12 +13,17 @@ class OurContactController extends Controller
 
     public function manage()
     {
-        $contact = OurContact::where('user_id', auth()->id())->first();
+        $contact = OurContact::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
         $columns = ['address', 'telephone', 'email'];
 
         $addressEmbed = AboutUs::select('address_embed')
-                        ->where('user_id', auth()->id())
-                        ->first()->address_embed;
+                        ->where('domain_owner', request()->getSchemeAndHttpHost())
+                        ->first();
+        if (isset($addressEmbed)) {
+            $addressEmbed = $addressEmbed->address_embed;
+        }
 
         return view('admin.about-us.contact.manage', compact(
             'contact', 'columns', 'addressEmbed'
@@ -41,14 +46,13 @@ class OurContactController extends Controller
 
     public function update(UpdateContactValidation $request)
     {
-        // dd($request->validated());
-        $updateContact = OurContact::where('user_id', auth()->id())->first();
-        dd($updateContact);
+        $updateContact = OurContact::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
         $updateContact->address = $request->address;
         $updateContact->telephone = $request->telephone;
         $updateContact->email = $request->email;
         $updateContact->link_address = $request->link_address;
-        $updateContact->user_id = auth()->id();
     
         $updateContact->save();
         return Helper::returnSuccess('update contact');

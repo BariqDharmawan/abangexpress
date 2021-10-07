@@ -34,11 +34,9 @@ class OurTeamFactory extends Factory
             ]),
             'position_id' => $this->faker->numberBetween(1, 4),
             'short_desc' => $this->faker->sentence(3),
-            'user_id' => $this->faker->numberBetween(1, 3),
             'domain_owner' => $this->faker->unique(true)->randomElement([
                 'http://127.0.0.1:8000',
-                'http://127.0.0.1:9000',
-                'http://127.0.0.1:10000',
+                'http://127.0.0.1:9000'
             ])
         ];
     }

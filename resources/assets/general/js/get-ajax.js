@@ -28,7 +28,7 @@ function getFaq(urlApi) {
 
             // console.log(record)
 
-            const idFaq = record.id
+            const idFaq = `faq-${record.id}`
 
             elRecord = result.parentData.querySelector('.accordion-faq').cloneNode(true)
             elRecord.querySelector('.accordion__heading').textContent = record.question

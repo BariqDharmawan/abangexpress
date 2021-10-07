@@ -14,11 +14,10 @@ class CreateOurServicesTable extends Migration
     public function up()
     {
         Schema::create('our_services', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('icon', 30);
             $table->string('title');
             $table->text('desc');
-            $table->unsignedInteger('user_id');
             $table->string('domain_owner');
             $table->timestamps();
         });

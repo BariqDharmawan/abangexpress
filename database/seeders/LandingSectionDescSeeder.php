@@ -16,14 +16,12 @@ class LandingSectionDescSeeder extends Seeder
     {
         $domains = [
             'http://127.0.0.1:8000',
-            'http://127.0.0.1:9000', 
-            'http://127.0.0.1:10000'
+            'http://127.0.0.1:9000'
         ];
 
         foreach ($domains as $key => $domain) {
             LandingSectionDesc::insert([
                 [
-                    'user_id' => $key + 1,
                     'domain_owner' => $domain,
                     'section_name' => "Tentang Kami $domain",
                     'first_desc' => 'Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet
@@ -35,14 +33,12 @@ class LandingSectionDescSeeder extends Seeder
                         </p>'
                 ],
                 [
-                    'user_id' => $key + 1,
                     'domain_owner' => $domain,
                     'section_name' => 'Layanan Kami',
                     'first_desc' => '',
                     'second_desc' => ''
                 ],
                 [
-                    'user_id' => $key + 1,
                     'domain_owner' => $domain,
                     'section_name' => 'Hubungi Kami',
                     'first_desc' => 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
@@ -51,21 +47,18 @@ class LandingSectionDescSeeder extends Seeder
                     'second_desc' => ''
                 ],
                 [
-                    'user_id' => $key + 1,
                     'domain_owner' => $domain,
                     'section_name' => 'Team Kami',
                     'first_desc' => '',
                     'second_desc' => ''
                 ],
                 [
-                    'user_id' => $key + 1,
                     'domain_owner' => $domain,
                     'section_name' => 'Tanya Kami',
                     'first_desc' => '',
                     'second_desc' => ''
                 ],
                 [
-                    'user_id' => $key + 1,
                     'domain_owner' => $domain,
                     'section_name' => 'Kontak Kami',
                     'first_desc' => '',

@@ -17,7 +17,7 @@ class CoverVisionMissionController extends Controller
      */
     public function index()
     {
-        $cover = AboutUs::where('user_id', auth()->id())
+        $cover = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
                 ->select('cover_vision_mission')
                 ->first()->cover_vision_mission;
         return view('admin.contents.vision-mission', compact('cover'));
@@ -41,7 +41,7 @@ class CoverVisionMissionController extends Controller
             'cover_vision_mission' => Str::replaceFirst(
                 'public/', '/storage/', $pathcoverVisionMission
             ),
-            'user_id' => auth()->id()
+            'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
         return Helper::returnSuccess('change cover');

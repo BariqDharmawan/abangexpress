@@ -14,11 +14,10 @@ class CreateLandingSectionDescsTable extends Migration
     public function up()
     {
         Schema::create('landing_section_descs', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->text('first_desc')->nullable();
             $table->text('second_desc')->nullable();
             $table->string('section_name');
-            $table->unsignedInteger('user_id');
             $table->string('domain_owner');
             $table->timestamps();
         });

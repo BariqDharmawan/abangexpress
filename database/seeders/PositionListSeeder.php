@@ -15,12 +15,18 @@ class PositionListSeeder extends Seeder
     public function run()
     {
         $lists = ['Entrepeneur', 'Designer', 'CEO & Owner', 'Freelancer'];
+        $domains = [
+            'http://127.0.0.1:8000',
+            'http://127.0.0.1:9000'
+        ];
 
-        foreach ($lists as $list) {
-            PositionList::create([
-                'name' => $list,
-                'user_id' => mt_rand(1, 3)
-            ]);
+        foreach ($domains as $key => $domain) {
+            foreach ($lists as $list) {
+                PositionList::create([
+                    'name' => $list,
+                    'domain_owner' => $domain
+                ]);
+            }
         }
     }
 }

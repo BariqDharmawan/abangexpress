@@ -13,7 +13,7 @@ class OurServiceController extends Controller
     public function manage()
     {
         $ourService = OurService::orderBy('title', 'asc')
-                    ->where('user_id', auth()->id())->get();
+                    ->where('domain_owner', request()->getSchemeAndHttpHost())->get();
         $listIcon = [
             'fab fa-angellist',
             'fas fa-anchor',
@@ -34,7 +34,9 @@ class OurServiceController extends Controller
      */
     public function index()
     {
-        $ourService = OurService::orderBy('title', 'asc')->get();
+        $ourService = OurService::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->orderBy('title', 'asc')->get();
         return response()->json($ourService);
     }
 
@@ -50,7 +52,7 @@ class OurServiceController extends Controller
             'icon' => $request->icon,
             'title' => $request->title,
             'desc' => $request->desc,
-            'user_id' => auth()->id()
+            'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
         return Helper::returnSuccess('add new service');
@@ -66,7 +68,7 @@ class OurServiceController extends Controller
     public function update(Request $request, $id)
     {
         $serviceToUpdate = OurService::where([
-            ['user_id', auth()->id()],
+            ['domain_owner', request()->getSchemeAndHttpHost()],
             ['id', $id]
         ])->firstOrFail();
         $serviceToUpdate->icon = $request->icon;
@@ -89,7 +91,7 @@ class OurServiceController extends Controller
     public function destroy($id)
     {
         $serviceToDelete = OurService::where([
-            ['user_id', auth()->id()],
+            ['domain_owner', request()->getSchemeAndHttpHost()],
             ['id', $id]
         ])->first();
 

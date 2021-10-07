@@ -14,7 +14,6 @@ class OurTeam extends Model
         'avatar',
         'position_id',
         'short_desc',
-        'user_id',
         'domain_owner'
     ];
 

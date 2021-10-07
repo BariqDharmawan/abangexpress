@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -22,11 +23,20 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $domains = [
+            'http://127.0.0.1:8000', 
+            'http://127.0.0.1:9000', 
+            'http://127.0.0.;1:10000'
+        ];
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'name' => $this->faker->sentence(2),
+            'username' => $this->faker->unique()->randomElement([
+                'admincompany1', 'admincompany2', 'admincompany3'
+            ]),
+            'password' => Hash::make('passwordadmin'),
+            'plain_password' => 'passwordadmin',
+            'role' => 'admin',
+            'domain_owner' => $this->faker->unique()->randomElement($domains),
             'remember_token' => Str::random(10),
         ];
     }

@@ -14,12 +14,11 @@ class CreateOurTeamsTable extends Migration
     public function up()
     {
         Schema::create('our_teams', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('name')->unique();
             $table->string('avatar');
             $table->unsignedInteger('position_id');
             $table->string('short_desc');
-            $table->unsignedInteger('user_id');
             $table->string('domain_owner');
             $table->timestamps();
         });
