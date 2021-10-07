@@ -29,6 +29,8 @@ class OurSocialController extends Controller
         $socialMedia = Helper::getJson('social-media.json', true);
         $platforms = Arr::pluck($socialMedia, 'platform');
 
+        $socialMedia = OurSocial::where('user_id', auth()->id())->get();
+
         $listIcon = [
             "fab fa-instagram",
             "fab fa-facebook-square",
@@ -37,7 +39,9 @@ class OurSocialController extends Controller
             "fab fa-youtube"
         ];
 
-        return view('admin.about-us.social.manage', compact('platforms', 'listIcon'));
+        return view('admin.about-us.social.manage', compact(
+            'platforms', 'listIcon', 'socialMedia'
+        ));
     }
 
     /**
@@ -55,7 +59,8 @@ class OurSocialController extends Controller
             'icon' => $request->icon,
             'platform' => $platform,
             'username' => $username,
-            'link' => OurSocial::generateUrl($username, $platform)
+            'link' => OurSocial::generateUrl($username, $platform),
+            'user_id' => auth()->id()
         ]);
 
         return Helper::returnSuccess('add new social media');

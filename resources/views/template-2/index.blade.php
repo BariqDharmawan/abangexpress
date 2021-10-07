@@ -1,5 +1,7 @@
 @extends('layouts.template-2')
 
+@section('title', $ourName)
+
 @section('content')
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
@@ -143,23 +145,26 @@
             <x-template2.section-title heading="{{ $landingSection[3]->section_name }}"
             desc="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas." />
 
-            <div class="row" id="load-member">
+            <div class="row">
 
-                {{-- @foreach ($ourTeam as $team) --}}
+                @foreach ($ourTeam as $team)
                 <div class="col-lg-6 mb-4 member-item">
                     <div class="member d-flex align-items-start"
-                    data-aos="zoom-in" data-aos-delay="100">
+                    data-aos="zoom-in" data-aos-delay="{{ 100 * $loop->iteration }}">
                         <div class="pic">
-                            <img src="" class="img-fluid member-info__avatar" alt="" />
+                            <img src="{{ $team->avatar }}" alt=""
+                            class="img-fluid member-info__avatar" />
                         </div>
                         <div class="member-info">
-                            <h4 class="member-info__name"></h4>
-                            <span class="member-info__position"></span>
-                            <p class="member-info__desc"></p>
+                            <h4 class="member-info__name">{{ $team->name }}</h4>
+                            <span class="member-info__position">
+                                {{ $team->position->name }}
+                            </span>
+                            <p class="member-info__desc">{{ $team->short_desc }}</p>
                         </div>
                     </div>
                 </div>
-                {{-- @endforeach --}}
+                @endforeach
 
             </div>
 
@@ -221,7 +226,7 @@
                     </ul>
                 </div>
 
-                <div class="col-lg-6 d-flex align-items-stretch shadow">
+                <div class="col-lg-6 d-flex align-items-stretch shadow embeded-full">
                     {!! $aboutUs->address_embed !!}
                 </div>
             </div>

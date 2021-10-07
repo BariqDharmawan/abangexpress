@@ -78,7 +78,7 @@
             'heading' => 'Remove person ' . $person->name,
             'warningMesssage' => 
                 'Are you sure wana remove <b>' . $person->name . '</b>' . ' from our team?',
-            'action' => ''
+            'action' => route('admin.team.destroy', $person->id)
         ])
 
     @endforeach

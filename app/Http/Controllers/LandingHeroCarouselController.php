@@ -10,23 +10,13 @@ use Illuminate\Support\Str;
 
 class LandingHeroCarouselController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        $heroCarousel = FirstHeroCarouselLanding::all();
+        $heroCarousel = FirstHeroCarouselLanding::where('user_id', auth()->id())->get();
         return view('admin.contents.hero-carousel', compact('heroCarousel'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -52,7 +42,11 @@ class LandingHeroCarouselController extends Controller
      */
     public function destroy($id)
     {
-        $carouselToDelete = FirstHeroCarouselLanding::findOrFail($id);
+        $carouselToDelete = FirstHeroCarouselLanding::where([
+            ['user_id', auth()->id()],
+            ['id', $id]
+        ])->firstOrFail();
+
         $carouselToDelete->delete();
         return Helper::returnSuccess('remove slide');
     }

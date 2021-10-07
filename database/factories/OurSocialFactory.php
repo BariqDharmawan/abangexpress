@@ -34,7 +34,7 @@ class OurSocialFactory extends Factory
             'platform' => $this->faker->randomElement(Helper::getListSocialPlatform()),
             'username' => $this->faker->userName(),
             'link' => $this->faker->randomElement(Helper::getListSocialLink()),
-            'user_id' => 1
+            'user_id' => $this->faker->unique(true)->numberBetween(1, 3)
         ];
     }
 }

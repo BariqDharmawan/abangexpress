@@ -16,21 +16,10 @@ class OurTeamController extends Controller
 
     public function manage()
     {
-        $teams = OurTeam::all();
+        $teams = OurTeam::where('user_id', auth()->id())->get();
         $positionList = PositionList::all();
 
         return view('admin.team.manage', compact('teams', 'positionList'));
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $ourTeam = OurTeam::with('position')->get();
-        return response()->json($ourTeam);
     }
 
     public function store(StoreMemberValidation $request)
@@ -51,17 +40,6 @@ class OurTeamController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,7 +48,10 @@ class OurTeamController extends Controller
      */
     public function update(UpdateMemberValidation $request, $id)
     {
-        $editMember = OurTeam::findOrFail($id);
+        $editMember = OurTeam::where([
+            ['user_id', auth()->id()],
+            ['id', $id]
+        ])->firstOrFail();
         $editMember->name = $request->name;
 
         if ($request->hasFile('avatar_edit')) {
@@ -82,7 +63,6 @@ class OurTeamController extends Controller
 
         $editMember->position_id = $request->position_id_edit;
         $editMember->short_desc = $request->short_desc;
-        $editMember->user_id = auth()->id();
         $editMember->save();
 
         return Helper::returnSuccess('add new member');
@@ -96,6 +76,15 @@ class OurTeamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deletePerson = OurTeam::where([
+            ['user_id', auth()->id()],
+            ['id', $id]
+        ])->firstOrFail();
+
+        $personName = $deletePerson->name;
+
+        $deletePerson->delete();
+
+        return Helper::returnSuccess("delete member name $personName");
     }
 }

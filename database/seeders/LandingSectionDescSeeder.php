@@ -14,50 +14,64 @@ class LandingSectionDescSeeder extends Seeder
      */
     public function run()
     {
-        LandingSectionDesc::insert([
-            [
-                'user_id' => 1,
-                'section_name' => 'Tentang Kami',
-                'first_desc' => 'Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet
-                veniam enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute
-                nulla ipsum velit export irure minim illum fore.',
-                'second_desc' => '<p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>'
-            ],
-            [
-                'user_id' => rand(1, 3),
-                'section_name' => 'Layanan Kami',
-                'first_desc' => '',
-                'second_desc' => ''
-            ],
-            [
-                'user_id' => rand(1, 3),
-                'section_name' => 'Hubungi Kami',
-                'first_desc' => 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.',
-                'second_desc' => ''
-            ],
-            [
-                'user_id' => rand(1, 3),
-                'section_name' => 'Team Kami',
-                'first_desc' => '',
-                'second_desc' => ''
-            ],
-            [
-                'user_id' => rand(1, 3),
-                'section_name' => 'Tanya Kami',
-                'first_desc' => '',
-                'second_desc' => ''
-            ],
-            [
-                'user_id' => rand(1, 3),
-                'section_name' => 'Kontak Kami',
-                'first_desc' => '',
-                'second_desc' => ''
-            ],
-        ]);
+        $domains = [
+            'http://127.0.0.1:8000',
+            'http://127.0.0.1:9000', 
+            'http://127.0.0.1:10000'
+        ];
+
+        foreach ($domains as $key => $domain) {
+            LandingSectionDesc::insert([
+                [
+                    'user_id' => $key + 1,
+                    'domain_owner' => $domain,
+                    'section_name' => "Tentang Kami $domain",
+                    'first_desc' => 'Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet
+                    veniam enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute
+                    nulla ipsum velit export irure minim illum fore.',
+                    'second_desc' => '<p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>'
+                ],
+                [
+                    'user_id' => $key + 1,
+                    'domain_owner' => $domain,
+                    'section_name' => 'Layanan Kami',
+                    'first_desc' => '',
+                    'second_desc' => ''
+                ],
+                [
+                    'user_id' => $key + 1,
+                    'domain_owner' => $domain,
+                    'section_name' => 'Hubungi Kami',
+                    'first_desc' => 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.',
+                    'second_desc' => ''
+                ],
+                [
+                    'user_id' => $key + 1,
+                    'domain_owner' => $domain,
+                    'section_name' => 'Team Kami',
+                    'first_desc' => '',
+                    'second_desc' => ''
+                ],
+                [
+                    'user_id' => $key + 1,
+                    'domain_owner' => $domain,
+                    'section_name' => 'Tanya Kami',
+                    'first_desc' => '',
+                    'second_desc' => ''
+                ],
+                [
+                    'user_id' => $key + 1,
+                    'domain_owner' => $domain,
+                    'section_name' => 'Kontak Kami',
+                    'first_desc' => '',
+                    'second_desc' => ''
+                ],
+            ]);
+        }
     }
 }

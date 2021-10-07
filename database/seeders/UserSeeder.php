@@ -17,22 +17,25 @@ class UserSeeder extends Seeder
     {
         User::insert([
             [
-                'name' => 'Admin 1',
-                'username' => 'admin1',
-                'password' => Hash::make('adminabangexpress'),
-                'role' => 'admin'
+                'name' => 'Company 1',
+                'username' => 'admincompany1',
+                'password' => Hash::make('admincompany1'),
+                'role' => 'admin',
+                'domain_owner' => 'http://127.0.0.1:8000'
             ],
             [
-                'name' => 'Admin 2',
-                'username' => 'admin2',
-                'password' => Hash::make('adminabangexpress'),
-                'role' => 'admin'
+                'name' => 'Company 2',
+                'username' => 'admincompany2',
+                'password' => Hash::make('admincompany2'),
+                'role' => 'admin',
+                'domain_owner' => 'http://127.0.0.1:9000'
             ],
             [
-                'name' => 'Admin 3',
-                'username' => 'admin3',
-                'password' => Hash::make('adminabangexpress'),
-                'role' => 'admin'
+                'name' => 'Company 3',
+                'username' => 'admincompany3',
+                'password' => Hash::make('admincompany3'),
+                'role' => 'admin',
+                'domain_owner' => 'http://127.0.0.1:10000'
             ],
         ]);
     }

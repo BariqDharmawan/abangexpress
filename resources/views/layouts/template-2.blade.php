@@ -22,11 +22,20 @@
                     </li>    
                     @endforeach
 
+                    @guest
                     <li>
                         <a class="getstarted scrollto" href="{{ route('login') }}">
                             Masuk
                         </a>
                     </li>
+                    @else
+                    <li>
+                        <a class="getstarted scrollto" 
+                        href="{{ route('admin.about-us.identity') }}">
+                            Go to dashboard
+                        </a>
+                    </li>
+                    @endguest
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>

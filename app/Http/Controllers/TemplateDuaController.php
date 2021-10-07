@@ -20,7 +20,8 @@ class TemplateDuaController extends Controller
         $landingSection = LandingSectionDesc::all();
         $aboutUs = AboutUs::first();
 
-        $ourTeam = OurTeam::all();
+        $ourTeam = OurTeam::where('domain_owner', request()->getSchemeAndHttpHost())
+                ->get();
         
         $faqs = Faq::all();
 

@@ -16,12 +16,21 @@ class HeroCarouselSeeder extends Seeder
     public function run()
     {
         $carousels = ['1.jpg', '2.jpg','3.jpg','4.jpg','5.jpg'];
+        $domains = [
+            'http://127.0.0.1:8000',
+            'http://127.0.0.1:9000', 
+            'http://127.0.0.1:10000'
+        ];
 
-        foreach ($carousels as $carousel) {
-            FirstHeroCarouselLanding::create([
-                'img' => Storage::url('hero-carousel/' . $carousel),
-                'user_id' => 1
-            ]);
+        foreach ($domains as $key => $domain) {
+            foreach ($carousels as $carousel) {
+                FirstHeroCarouselLanding::create([
+                    'img' => Storage::url('hero-carousel/' . $carousel),
+                    'user_id' => $key + 1,
+                    'domain_owner' => $domain
+                ]);
+            }
         }
+
     }
 }

@@ -23,21 +23,31 @@ class TemplateSatuController extends Controller
     public function __invoke(Request $request)
     {
 
-        $heroCarousel = FirstHeroCarouselLanding::all();
+        $heroCarousel = FirstHeroCarouselLanding::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->get();
         $menus = Helper::getJson('template-1-menu.json');
 
-        $aboutUs = AboutUs::first();
+        $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
+                ->first();
         $firstWordAppName = strtok($aboutUs->our_name, ' ');
 
-        $ourService = OurService::orderBy('title', 'asc')->get();
+        $ourService = OurService::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->orderBy('title', 'asc')->get();
 
-        $ourTeam = OurTeam::all();
+        $ourTeam = OurTeam::where('domain_owner', request()->getSchemeAndHttpHost())
+                ->get();
 
-        $faqs = Faq::all();
+        $faqs = Faq::where('domain_owner', request()->getSchemeAndHttpHost())->get();
 
-        $ourContact = OurContact::first();
+        $ourContact = OurContact::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
 
-        $landingSection = LandingSectionDesc::all();
+        $landingSection = LandingSectionDesc::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->get();
 
         return view('template-1.index', compact(
             'firstWordAppName', 'heroCarousel', 'menus', 'aboutUs', 

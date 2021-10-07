@@ -28,7 +28,8 @@ class AppServiceProvider extends ServiceProvider
     {
         try {
             $ourSocial = OurSocial::all();
-            $ourName = AboutUs::select('our_name')->first()->our_name;
+            $ourName = AboutUs::select('our_name')->where('domain_owner', request()
+                        ->getSchemeAndHttpHost())->first()->our_name;
 
             View::share('ourName', $ourName);
             View::share('ourSocial', $ourSocial);

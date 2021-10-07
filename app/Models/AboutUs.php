@@ -18,7 +18,8 @@ class AboutUs extends Model
         'sub_slogan',
         'slogan',
         'cover_vision_mission',
-        'user_id'
+        'user_id',
+        'domain_owner'
     ];
 
     public function user()

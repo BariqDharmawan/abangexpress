@@ -115,43 +115,4 @@ function getContact(urlApi) {
     .catch(error => console.error(error))
 }
 
-function getOurTeam(urlApi) {
-
-    let memberInfo = {}
-    axios.get(urlApi).then((response) => {
-        parentData = document.querySelector('#load-member')
-        datas = response.data
-        
-        for (const person of datas) {
-
-            memberInfo = {
-                "avatar": person.avatar,
-                "name": person.name,
-                "position": person.position.name,
-                "desc": person.short_desc
-            }
-
-            elRecord = parentData.querySelector('.member-item').cloneNode(true)
-            for (const member in memberInfo) {
-                
-                const isNotImg = !elRecord.querySelector(`.member-info__${member}`)
-                                        .hasAttribute('src')
-                if (isNotImg) {
-                    elRecord.querySelector(`.member-info__${member}`)
-                            .textContent = memberInfo[member]
-                }
-                else {
-                    elRecord.querySelector(`.member-info__${member}`).src = memberInfo[member]
-                }
-
-            }
-            parentData.appendChild(elRecord)
-        }
-
-        document.querySelector('.member-item').remove()
-
-
-    }).catch(error => console.error(error))
-}
-
-export {getFaq, getContact, getOurTeam}
+export {getFaq, getContact}

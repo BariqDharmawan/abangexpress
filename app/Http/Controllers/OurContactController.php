@@ -32,23 +32,25 @@ class OurContactController extends Controller
      */
     public function index()
     {
-        $ourContact = OurContact::first();
+        $ourContact = OurContact::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
 
         return response()->json($ourContact);
     }
 
     public function update(UpdateContactValidation $request)
     {
-        OurContact::firstOrFail()->update([
-            'address' => $request->address,
-            'telephone' => $request->telephone,
-            'email' => $request->email,
-            'link_address' => $request->link_address,
-            'user_id' => auth()->id()
-        ]);
-
-        // return response()->json($ourContact);
-
+        // dd($request->validated());
+        $updateContact = OurContact::where('user_id', auth()->id())->first();
+        dd($updateContact);
+        $updateContact->address = $request->address;
+        $updateContact->telephone = $request->telephone;
+        $updateContact->email = $request->email;
+        $updateContact->link_address = $request->link_address;
+        $updateContact->user_id = auth()->id();
+    
+        $updateContact->save();
         return Helper::returnSuccess('update contact');
     }
 }

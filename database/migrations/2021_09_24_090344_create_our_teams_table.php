@@ -20,6 +20,7 @@ class CreateOurTeamsTable extends Migration
             $table->unsignedInteger('position_id');
             $table->string('short_desc');
             $table->unsignedInteger('user_id');
+            $table->string('domain_owner');
             $table->timestamps();
         });
     }

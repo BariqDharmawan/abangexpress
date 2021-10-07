@@ -20,6 +20,7 @@ class CreateOurContactsTable extends Migration
             $table->string('email', 45);
             $table->string('link_address');
             $table->unsignedInteger('user_id');
+            $table->string('domain_owner');
             $table->timestamps();
         });
     }

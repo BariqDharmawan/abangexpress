@@ -1,4 +1,7 @@
 @extends('layouts.template-1')
+
+@section('title', $ourName)
+
 @section('content')
 <!-- ======= Header ======= -->
 <header id="header" class="d-flex align-items-center">
@@ -229,7 +232,7 @@
             </div>
         </div>
 
-        <div class="container mb-4">
+        <div class="container mb-4 embeded-full">
             {!! $aboutUs->address_embed !!}
         </div>
     </section><!-- End Contact Section -->

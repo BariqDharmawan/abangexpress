@@ -19,27 +19,23 @@ class AboutUsController extends Controller
 
     public function identity()
     {
-        $identity = AboutUs::first();
+        $identity = AboutUs::where('user_id', auth()->id())->first();
+        // dd(auth()->id());
         return view('admin.about-us.identity', compact('identity'));
     }
 
     public function updateEmbedMap(UpdateEmbedMapValidation $request)
     {
-        AboutUs::first()->update(['address_embed' => $request->address_embed]);
+        AboutUs::where('user_id', auth()->id())->first()->update([
+                    'address_embed' => $request->address_embed
+                ]);
         return Helper::returnSuccess('update our embed map');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(IdentityValidation $request)
     {
         //todo: add validation
-        $ourIdentity = AboutUs::findOrFail(1);
+        $ourIdentity = AboutUs::where('user_id', auth()->id())->first();
 
         $isEditOurIdentityInfo = $request->hasAny([
             'our_name', 'our_vision', 'our_mission', 'sub_slogan'

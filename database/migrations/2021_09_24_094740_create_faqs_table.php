@@ -18,6 +18,7 @@ class CreateFaqsTable extends Migration
             $table->string('question', 100)->unique();
             $table->text('answer');
             $table->integer('user_id');
+            $table->string('domain_owner');
             $table->timestamps();
         });
     }

@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->enum('role', ['admin', 'sub-admin'])->default('admin');
             $table->string('password');
+            $table->string('domain_owner');
             $table->rememberToken();
             $table->timestamps();
         });

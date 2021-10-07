@@ -124,7 +124,15 @@
                 </nav>
                 @yield('content')
             </div>
-            @include('admin.partials.footer')
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>
+                            Copyright &copy; {{ $ourName . ' ' . date('Y') }}
+                        </span>
+                    </div>
+                </div>
+            </footer>            
         </div>
         @include('admin.partials.btn-back-to-top')
     </div>

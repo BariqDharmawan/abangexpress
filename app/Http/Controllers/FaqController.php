@@ -5,20 +5,23 @@ namespace App\Http\Controllers;
 use App\Helper\Helper;
 use App\Http\Requests\StoreFaqValidation;
 use App\Http\Requests\UpdateFaqValidation;
+use App\Models\AboutUs;
 use App\Models\Faq;
+use App\Models\User;
 
 class FaqController extends Controller
 {
 
     public function manage()
     {
-        $faqs = Faq::all();
+        $faqs = Faq::where('user_id', auth()->id())->get();
+        // dd(auth()->id());
         return view('admin.faq.manage', compact('faqs'));
     }
 
     public function index()
     {
-        $faqs = Faq::all();
+        $faqs = Faq::where('domain_owner', request()->getSchemeAndHttpHost())->get();
 
         return response()->json($faqs);
     }
@@ -34,14 +37,12 @@ class FaqController extends Controller
         return Helper::returnSuccess('add new FAQ');
     }
 
-    public function edit($id)
-    {
-        //
-    }
-
     public function update(UpdateFaqValidation $request, $id)
     {
-        Faq::findOrFail($id)->update([
+        Faq::where([
+            ['user_id', auth()->id()],
+            ['id', $id]
+        ])->update([
             'question' => $request->question_edit,
             'answer' => $request->answer_edit,
             'user_id' => auth()->id()
@@ -52,12 +53,13 @@ class FaqController extends Controller
 
     public function destroy($id)
     {
-        if (auth()->user()->role == 'admin') {
-            Faq::findOrFail($id)->delete();
-            return Helper::returnSuccess('remove FAQ');
-        }
-        else {
-            abort(403);
-        }
+        $faq = Faq::where([
+            ['user_id', auth()->id()],
+            ['id', $id]
+        ])->firstOrFail();
+        
+        $faq->delete();
+
+        return Helper::returnSuccess('remove FAQ');
     }
 }

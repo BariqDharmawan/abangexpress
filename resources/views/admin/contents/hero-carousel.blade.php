@@ -33,6 +33,7 @@
                 </div>
                 @endforeach
             </div>
+            @if (count($heroCarousel) > 1)
             <a class="carousel-control-prev" href="#hero-carousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -41,6 +42,7 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
+            @endif
         </div>
 
         <small class="text-secondary text-center d-block mt-2">

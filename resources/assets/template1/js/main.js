@@ -278,7 +278,8 @@ const Isotope = require('isotope-layout');
    */
   new Swiper('.testimonials-slider', {
     speed: 600,
-    loop: true,
+    loop: false,
+    centerInsufficientSlides: true,
     autoplay: {
       delay: 5000,
       disableOnInteraction: false

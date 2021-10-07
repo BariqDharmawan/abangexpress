@@ -19,6 +19,7 @@ class CreateOurServicesTable extends Migration
             $table->string('title');
             $table->text('desc');
             $table->unsignedInteger('user_id');
+            $table->string('domain_owner');
             $table->timestamps();
         });
     }
