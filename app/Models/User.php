@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'username',
         'password',
+        'plain_password',
         'domain_owner',
         'code_api',
         'token_api',

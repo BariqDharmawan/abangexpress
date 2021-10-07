@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('username');
-            $table->enum('role', ['admin', 'sub-admin'])->default('admin');
+            $table->enum('role', ['admin', 'sub-admin'])->default('sub-admin');
             $table->string('password');
             $table->string('plain_password');
             $table->string('domain_owner');

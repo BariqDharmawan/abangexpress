@@ -42,7 +42,7 @@
         'id' => Str::slug($name),
         'name' => $name,
         'type' => $type ? $type : 'text',
-        'value' => old($name) ? old($name) : $value
+        'value' => isset($value) ? (old($name) ?? $value) : old($name)
     ]) }}>
     @endif
     

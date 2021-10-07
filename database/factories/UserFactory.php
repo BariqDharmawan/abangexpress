@@ -26,11 +26,11 @@ class UserFactory extends Factory
         $domains = [
             'http://127.0.0.1:8000', 
             'http://127.0.0.1:9000', 
-            'http://127.0.0.;1:10000'
+            'http://127.0.0.1:10000'
         ];
         return [
-            'name' => $this->faker->sentence(2),
-            'username' => $this->faker->unique()->randomElement([
+            'name' => $this->faker->name(),
+            'username' => $this->faker->unique(true)->randomElement([
                 'admincompany1', 'admincompany2', 'admincompany3'
             ]),
             'password' => Hash::make('passwordadmin'),
@@ -41,16 +41,14 @@ class UserFactory extends Factory
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    public function unverified()
+    public function subAdmin()
     {
-        return $this->state(function (array $attributes) {
+        return $this->state(function (array $attributes){
             return [
-                'email_verified_at' => null,
+                'username' => $this->faker->userName(),
+                'role' => 'sub-admin',
+                'password' => Hash::make('passwordsubadmin'),
+                'plain_password' => 'passwordsubadmin'
             ];
         });
     }
