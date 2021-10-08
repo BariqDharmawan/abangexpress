@@ -55,11 +55,7 @@
             <div class="menu">
                 <ul class="list">
                     <x-shipment.dropdown-item class="active" text="Dashboard"
-<<<<<<< Updated upstream
                     icon="home" href="{{ route('shipping.index') }}" />
-=======
-                    icon="home" href="{{ route('admin.shipment.index') }}" />
->>>>>>> Stashed changes
 
                     <x-shipment.dropdown-item text="Typography"
                     icon="text_fields" href="/" />
