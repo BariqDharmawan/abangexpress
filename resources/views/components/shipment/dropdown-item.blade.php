@@ -1,11 +1,15 @@
-@props(['href' => 'javascript:void(0);', 'text', 'icon', 'isDropdown' => false])
+@props([
+    'href' => 'javascript:void(0);', 'text', 'icon', 'isDropdown' => false,
+    'color' => null
+])
 
 <li {{ $attributes->merge(['class' => '']) }}>
-    <a href="{{ $href  }}" @if($isDropdown) class="menu-toggle" @endif>
+    <a href="{{ $href  }}" class="@if($isDropdown)menu-toggle @endif
+    @isset($color)text-{{ $color }} @endisset">
         @isset($icon)
         <i class="material-icons">{{ $icon }}</i>
         @endisset
-        <span>{{ $text }}</span>
+        <span class="@isset($color)text-{{ $color }} @endisset">{{ $text }}</span>
     </a>
 
     @if($isDropdown)

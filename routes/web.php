@@ -4,7 +4,7 @@ use App\Models\TemplateChoosen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('shipping')->name('shipping.')->group(function (){
+Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function (){
     Route::get('/', 'ShipmentController@index')->name('index');
     Route::get('zipcode', 'ShipmentController@zipCode')->name('zipcode');
     Route::prefix('order')->name('order.')->group(function (){

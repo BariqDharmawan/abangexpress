@@ -53,6 +53,11 @@
             </div>
 
             <div class="menu">
+                <a href="{{ route('shipping.order.book') }}" 
+                class="btn btn-primary" 
+                style="margin: 10px 1rem;">
+                    Booking Order
+                </a>
                 <ul class="list">
                     <x-shipment.dropdown-item class="active" text="Dashboard"
                     icon="home" href="{{ route('shipping.index') }}" />
@@ -63,9 +68,6 @@
 
                     <x-shipment.dropdown-item text="Order"
                     icon="swap_calls" :is-dropdown="true">
-                        <x-shipment.dropdown-item 
-                        href="{{ route('shipping.order.book') }}" 
-                        text="Booking order" />
                         <x-shipment.dropdown-item 
                         href="{{ route('shipping.order.index') }}" text="Data Order" />
                         <x-shipment.dropdown-item 
