@@ -12,6 +12,8 @@
         <ul class="ml-menu">
             {{ $slot }}
         </ul>
+    @else
+        {{ $slot }}
     @endif
 
 </li>

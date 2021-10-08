@@ -12,8 +12,8 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.html">
-                    ADMINBSB - MATERIAL DESIGN
+                <a class="navbar-brand" href="{{ route('shipping.index') }}">
+                    {{ $ourName }}
                 </a>
             </div>
         </div>
@@ -27,17 +27,26 @@
                     <img src="{{ asset('shipment/img/user.png') }}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                    <div class="email">john.doe@example.com</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ auth()->user()->name }}</div>
+                    <div class="email">{{ auth()->user()->username }}</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <x-shipment.dropdown-item text="Profile" icon="person" />
-                            <x-shipment.dropdown-item text="Followers" icon="group" />
-                            <x-shipment.dropdown-item text="Sales" 
-                            icon="shopping_cart" />
-                            <x-shipment.dropdown-item text="Likes" icon="favorite" />
-                            <x-shipment.dropdown-item text="Sign Out" icon="input" />
+                            @if (auth()->user()->role == 'admin')
+                            <x-shipment.dropdown-item 
+                            text="Company Profile" icon="person" 
+                            href="{{ route('admin.about-us.identity') }}" />
+                            @endif
+                            <li style="color: #666">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" style="padding-left: 18px"
+                                    class="btn btn-white btn-block text-left">
+                                        <i class="material-icons">input</i>
+                                        <span>Logout</span>
+                                    </button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -46,13 +55,13 @@
             <div class="menu">
                 <ul class="list">
                     <x-shipment.dropdown-item class="active" text="Home"
-                    icon="home" href="{{ route('admin.shipment.index') }}" />
+                    icon="home" href="{{ route('shipping.index') }}" />
 
                     <x-shipment.dropdown-item text="Typography"
-                    icon="text_fields" href="{{ route('admin.shipment.index') }}" />
+                    icon="text_fields" href="/" />
 
                     <x-shipment.dropdown-item text="Helper Classes"
-                    icon="layers" href="{{ route('admin.shipment.index') }}" />
+                    icon="layers" href="/" />
 
                     <x-shipment.dropdown-item text="User Interface (UI)"
                     icon="swap_calls" :is-dropdown="true">
@@ -65,8 +74,6 @@
                             <x-shipment.dropdown-item href="/alert" text="Basic" />
                             <x-shipment.dropdown-item href="/alert" text="Colored" />
                         </x-shipment.dropdown-item>
-                        <x-shipment.dropdown-item text="Typography"
-                        href="{{ route('admin.shipment.index') }}" />
                     </x-shipment.dropdown-item>
                 </ul>
             </div>

@@ -30,7 +30,7 @@ class RedirectIfAuthenticated
                     break;
                         
                     case 'sub-admin':
-                        return '/admin/shipment';
+                        return '/shipping';
                     break;
                 }
             }

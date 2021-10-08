@@ -4,10 +4,10 @@ use App\Models\TemplateChoosen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Route::get('shipping', 'ShipmentController@index')->name('shipping.index');
 
 Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() {
     
-    Route::get('shipment', 'ShipmentController@index')->name('shipment.index');
 
     Route::resource('user', 'UserController')->except('edit', 'show', 'create');
     

@@ -40,7 +40,7 @@ class AuthenticatedSessionController extends Controller
             break;
                 
             case 'sub-admin':
-                $redirectAfterLogin = '/admin/shipment';
+                $redirectAfterLogin = '/shipping';
             break;
         }
 
