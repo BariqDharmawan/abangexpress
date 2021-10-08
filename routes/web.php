@@ -4,7 +4,10 @@ use App\Models\TemplateChoosen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
 Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() {
+    
+    Route::get('shipment', 'ShipmentController@index')->name('shipment.index');
 
     Route::resource('user', 'UserController')->except('edit', 'show', 'create');
     
@@ -18,7 +21,9 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() 
             );
         });
 
-        Route::get('our-social', 'OurSocialController@manage')->name('our-social.manage');
+        Route::get('our-social', 'OurSocialController@manage')->name(
+            'our-social.manage'
+        );
         Route::resource('our-social', 'OurSocialController')->except('index');
 
         Route::get('contacts/manage', 'OurContactController@manage')->name('contact.manage');
@@ -63,14 +68,10 @@ $templateChoosen = TemplateChoosen::where(
 $templateChoosen = (int)$templateChoosen->version;
 
 if ($templateChoosen == 1) {
-    Route::name('template-1.')->group(function() {
-        Route::get('/', 'TemplateSatuController');
-    });
+    Route::get('/', 'TemplateSatuController');
 }
 else {
-    Route::name('template-2.')->group(function() {
-        Route::get('/', 'TemplateDuaController');
-    });
+    Route::get('/', 'TemplateDuaController');
 }
 
 

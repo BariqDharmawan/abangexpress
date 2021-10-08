@@ -42,7 +42,9 @@
         "font-awesome": "^4.7.0",
         "glightbox": "^3.1.0",
         "isotope-layout": "^3.0.6",
+        "jquery-countto": "^1.2.0",
         "jquery.easing": "^1.4.1",
+        "material-design-icons": "^3.0.1",
         "sweetalert2": "^11.1.7",
         "swiper": "^7.0.6"
     }

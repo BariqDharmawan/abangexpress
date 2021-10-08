@@ -106,12 +106,15 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                @if (!Str::contains(url()->current(), 'shipment'))
-                                <a class="dropdown-item" href="/shipment">
+                                @if (!Str::contains(url()->current(), 'shipment') 
+                                and auth()->user()->role == 'admin')
+                                <a class="dropdown-item" 
+                                href="{{ route('admin.shipment.index') }}">
                                     Shipment
                                 </a>
                                 @else
-                                <a class="dropdown-item" href="/shipment">
+                                <a class="dropdown-item" 
+                                href="{{ route('admin.about-us.identity') }}">
                                     Company Profile
                                 </a>
                                 @endif
