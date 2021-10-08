@@ -25,4 +25,8 @@ public/vendor
 public/json
 public/img
 public/video
+public/shipment
 **/**/*.map
+**/**/*.md
+**/**/*.yml
+**/**/LICENSE
