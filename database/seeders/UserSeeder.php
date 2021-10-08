@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         //admin
-        User::factory()->count(3)->create();
+        User::factory()->count(2)->create();
 
         //sub-admin
         User::factory()->count(5)->subAdmin()->create();

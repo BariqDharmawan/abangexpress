@@ -25,8 +25,7 @@ class UserFactory extends Factory
     {
         $domains = [
             'http://127.0.0.1:8000', 
-            'http://127.0.0.1:9000', 
-            'http://127.0.0.1:10000'
+            'http://127.0.0.1:9000'
         ];
         return [
             'name' => $this->faker->name(),
