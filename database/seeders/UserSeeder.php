@@ -15,25 +15,10 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::insert([
-            [
-                'name' => 'Admin 1',
-                'username' => 'admin1',
-                'password' => Hash::make('adminabangexpress'),
-                'role' => 'admin'
-            ],
-            [
-                'name' => 'Admin 2',
-                'username' => 'admin2',
-                'password' => Hash::make('adminabangexpress'),
-                'role' => 'admin'
-            ],
-            [
-                'name' => 'Admin 3',
-                'username' => 'admin3',
-                'password' => Hash::make('adminabangexpress'),
-                'role' => 'admin'
-            ],
-        ]);
+        //admin
+        User::factory()->count(2)->create();
+
+        //sub-admin
+        User::factory()->count(5)->subAdmin()->create();
     }
 }

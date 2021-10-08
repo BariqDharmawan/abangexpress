@@ -22,6 +22,10 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $domains = [
+            'http://127.0.0.1:8000', 
+            'http://127.0.0.1:9000'
+        ];
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
