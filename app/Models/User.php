@@ -46,4 +46,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\AboutUs', 'id');
     }
 
+    public function templateChoosen()
+    {
+        return $this->hasOne(TemplateChoosen::class);
+    }
+
 }

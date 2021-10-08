@@ -1,13 +1,10 @@
 <?php
 
+use App\Models\TemplateChoosen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', 'template-1', 301);
-
 Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() {
-
-    Route::redirect('dashboard', 'identity', 301);
 
     Route::resource('user', 'UserController')->except('edit', 'show', 'create');
     
@@ -38,8 +35,6 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() 
     Route::get('faq/manage', 'FaqController@manage')->name('faq.manage');
     Route::resource('faq', 'FaqController')->except('index');
 
-    
-
     Route::put('our-contact', 'OurContactController@update')->name('our-contact.update');
 
     Route::prefix('content')->name('content.')->group(function (){
@@ -60,13 +55,25 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() 
     });
 });
 
-Route::prefix('template-1')->name('template-1.')->group(function() {
-    Route::get('/', 'TemplateSatuController');
-});
+// $templateChoosen = 'template-1.';
+$templateChoosen = TemplateChoosen::where(
+    'domain_owner', request()->getSchemeAndHttpHost()
+)->first();
 
-Route::prefix('template-2')->name('template-2.')->group(function() {
-    Route::get('/', 'TemplateDuaController');
-});
+$templateChoosen = (int)$templateChoosen->version;
+
+if ($templateChoosen == 1) {
+    Route::name('template-1.')->group(function() {
+        Route::get('/', 'TemplateSatuController');
+    });
+}
+else {
+    Route::name('template-2.')->group(function() {
+        Route::get('/', 'TemplateDuaController');
+    });
+}
+
+
 
 Auth::routes(['register' => false]);
 

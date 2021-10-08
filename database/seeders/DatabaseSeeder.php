@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
             FaqSeeder::class,
             OurContactSeeder::class,
             LandingSectionDescSeeder::class,
-            OurSocialSeeder::class
+            OurSocialSeeder::class,
+            TemplateChoosenSeeder::class
         ]);
     }
 }
