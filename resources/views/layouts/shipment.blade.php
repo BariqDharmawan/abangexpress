@@ -57,24 +57,63 @@
                     <x-shipment.dropdown-item class="active" text="Dashboard"
                     icon="home" href="{{ route('shipping.index') }}" />
 
-                    <x-shipment.dropdown-item text="Typography"
-                    icon="text_fields" href="/" />
+                    <x-shipment.dropdown-item 
+                    text="Kode Post Taiwan" icon="text_fields" 
+                    href="{{ route('shipping.zipcode') }}" />
 
-                    <x-shipment.dropdown-item text="Helper Classes"
-                    icon="layers" href="/" />
-
-                    <x-shipment.dropdown-item text="User Interface (UI)"
+                    <x-shipment.dropdown-item text="Order"
                     icon="swap_calls" :is-dropdown="true">
-                        <x-shipment.dropdown-item href="/alert" text="Alerts" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.order.index') }}" text="Data Order" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.order.process') }}" 
+                        text="Dalam Proses" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.order.pending') }}" 
+                        text="Pending Proses" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.order.history') }}" 
+                        text="History Kiriman" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.order.receipt') }}" 
+                        text="Cetak Ulang Resi" />
                     </x-shipment.dropdown-item>
 
-                    <x-shipment.dropdown-item text="widgets" :is-dropdown="true" 
-                    icon="widgets">
-                        <x-shipment.dropdown-item text="Cards" :is-dropdown="true">
-                            <x-shipment.dropdown-item href="/alert" text="Basic" />
-                            <x-shipment.dropdown-item href="/alert" text="Colored" />
-                        </x-shipment.dropdown-item>
+                    <x-shipment.dropdown-item text="Invoices"
+                    icon="swap_calls" :is-dropdown="true">
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.invoice.bill') }}" text="Tagihan" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.invoice.verifying') }}" 
+                        text="Dalam Prose Verifikasi" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.invoice.settled') }}" text="Lunas" />
                     </x-shipment.dropdown-item>
+
+                    <x-shipment.dropdown-item text="Bantuan"
+                    icon="swap_calls" :is-dropdown="true">
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.support.guide') }}" 
+                        text="Panduan Penggunaan" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.support.regulation') }}" 
+                        text="Regulasi Pengiriman" />
+                    </x-shipment.dropdown-item>
+
+                    <x-shipment.dropdown-item text="Akun"
+                    icon="swap_calls" :is-dropdown="true">
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" style="padding-left: 18px"
+                                class="btn btn-white btn-block text-left">
+                                    <i class="material-icons">input</i>
+                                    <span>Logout</span>
+                                </button>
+                            </form>
+                        </li>
+                    </x-shipment.dropdown-item>
+
                 </ul>
             </div>
             

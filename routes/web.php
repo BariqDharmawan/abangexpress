@@ -4,7 +4,30 @@ use App\Models\TemplateChoosen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('shipping', 'ShipmentController@index')->name('shipping.index');
+Route::prefix('shipping')->name('shipping.')->group(function (){
+    Route::get('/', 'ShipmentController@index')->name('index');
+    Route::get('zipcode', 'ShipmentController@zipCode')->name('zipcode');
+    Route::prefix('order')->name('order.')->group(function (){
+        Route::get('/', 'ShipmentOrderController@index')->name('index');
+        Route::get('process', 'ShipmentOrderController@process')->name('process');
+        Route::get('pending', 'ShipmentOrderController@pending')->name('pending');
+        Route::get('history', 'ShipmentOrderController@history')->name('history');
+        Route::get('receipt', 'ShipmentOrderController@receipt')->name('receipt');
+    });
+    Route::prefix('invoices')->name('invoice.')->group(function (){
+        Route::get('bill', 'ShipmentInvoiceController@bill')->name('bill');
+        Route::get('verifying', 'ShipmentInvoiceController@verifying')->name(
+            'verifying'
+        );
+        Route::get('settled', 'ShipmentInvoiceController@settled')->name('settled');
+    });
+    Route::prefix('support')->name('support.')->group(function (){
+        Route::get('guide', 'ShipmentSupportController@guide')->name('guide');
+        Route::get('regulation', 'ShipmentSupportController@regulation')->name(
+            'regulation'
+        );
+    });
+});
 
 Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() {
     

@@ -16,6 +16,12 @@ class ShipmentController extends Controller
         return view('shipment.index');
     }
 
+    public function zipcode()
+    {
+        $title = "Zipcode berbagai negara";
+        return view('shipment.zipcode', compact('title'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
