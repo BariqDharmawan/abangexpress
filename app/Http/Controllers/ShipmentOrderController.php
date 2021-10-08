@@ -12,6 +12,12 @@ class ShipmentOrderController extends Controller
         return view('shipment.order.index', compact('title'));
     }
 
+    public function book()
+    {
+        $title = 'Booking Order';
+        return view('shipment.order.book', compact('title'));
+    }
+
     public function process()
     {
         $title = 'Dalam Proses';

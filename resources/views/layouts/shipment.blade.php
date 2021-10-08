@@ -64,6 +64,9 @@
                     <x-shipment.dropdown-item text="Order"
                     icon="swap_calls" :is-dropdown="true">
                         <x-shipment.dropdown-item 
+                        href="{{ route('shipping.order.book') }}" 
+                        text="Booking order" />
+                        <x-shipment.dropdown-item 
                         href="{{ route('shipping.order.index') }}" text="Data Order" />
                         <x-shipment.dropdown-item 
                         href="{{ route('shipping.order.process') }}" 

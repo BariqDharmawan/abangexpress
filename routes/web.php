@@ -8,6 +8,7 @@ Route::prefix('shipping')->name('shipping.')->group(function (){
     Route::get('/', 'ShipmentController@index')->name('index');
     Route::get('zipcode', 'ShipmentController@zipCode')->name('zipcode');
     Route::prefix('order')->name('order.')->group(function (){
+        Route::get('book', 'ShipmentOrderController@book')->name('book');
         Route::get('/', 'ShipmentOrderController@index')->name('index');
         Route::get('process', 'ShipmentOrderController@process')->name('process');
         Route::get('pending', 'ShipmentOrderController@pending')->name('pending');
