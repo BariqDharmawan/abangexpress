@@ -61,18 +61,20 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() 
 });
 
 // $templateChoosen = 'template-1.';
-$templateChoosen = TemplateChoosen::where(
-    'domain_owner', request()->getSchemeAndHttpHost()
-)->first();
-
-$templateChoosen = (int)$templateChoosen->version;
-
-if ($templateChoosen == 1) {
-    Route::get('/', 'TemplateSatuController');
-}
-else {
-    Route::get('/', 'TemplateDuaController');
-}
+try {
+    $templateChoosen = TemplateChoosen::where(
+        'domain_owner', request()->getSchemeAndHttpHost()
+    )->first();
+    
+    $templateChoosen = (int)$templateChoosen->version;
+    
+    if ($templateChoosen == 1) {
+        Route::get('/', 'TemplateSatuController');
+    }
+    else {
+        Route::get('/', 'TemplateDuaController');
+    }
+} catch (\Throwable $th) {}
 
 
 
