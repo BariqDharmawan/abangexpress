@@ -54,8 +54,8 @@
 
             <div class="menu">
                 <ul class="list">
-                    <x-shipment.dropdown-item class="active" text="Home"
-                    icon="home" href="{{ route('shipping.index') }}" />
+                    <x-shipment.dropdown-item class="active" text="Dashboard"
+                    icon="home" href="{{ route('admin.shipment.index') }}" />
 
                     <x-shipment.dropdown-item text="Typography"
                     icon="text_fields" href="/" />
