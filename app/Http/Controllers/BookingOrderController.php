@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BookingOrderController extends Controller
@@ -35,22 +38,45 @@ class BookingOrderController extends Controller
      */
     public function store(Request $request)
     {
+
+        echo "<pre>".
         print_r($_POST);
+        $uid=Auth::user()->username;
+        $users = User::where([
+            ['username', $uid]
+        ])->get();
+        // if(count($users)==1){} // count data found
+            foreach ($users as $user)
+            $akun=$user->code_api;
+            $tokenkey=$user->token_api;
+
+        $pengirim=$_POST['sender_name'];
+        $telepon=$_POST['sender_telephone'];
+        $penerima=$_POST['recipient_name'];
+        $teleponpenerima=$_POST['recipient_telephone'];
+        $ktp=$_POST['recipient_nik'];
+        $tujuan=$_POST['destination_country'];
+        $alamat=$_POST['recipient_address'];
+        $kodepos=$_POST['recipient_zipcode'];
+
+        $file_tmp= $_FILES['recipient_idcard']['tmp_name'];
+        $b64=base64_encode($file_tmp);
+
         $postdata='{
-            "akun": "coloader",
-            "key": "f03e563b71454776e2cb1e7b5f5ea5c4",
+            "akun": "'.$akun.'",
+            "key": "'.$tokenkey.'",
             "asal": {
-                "nama": "nama_pengirim",
-                "telepon": "-"
+                "nama": "'.$pengirim.'",
+                "telepon": "'.$telepon.'"
             },
             "tujuan": {
-                "nama": "nama_penerima",
-                "nomor_ktp": "BD1001 ",
-                "file":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAnCAYAAAH7pGGjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAINSURBVHjabIyxCQAwDMOskP9fVodSkqGajIyNxkSyqCtwFPYNu5DKh36T+cUDAAD//2L8//8/mjrG/0zoAmhmIoxgwjSTgYEJXYCBgYEBAAAA//+CWoQpgWos3JkIJ6KyEXIsqLpRQwCLxzFNQLeBERLqmCaguxMAAAD//4ySuQ0AMAgDhfffOSnSgH1IoT4Jf0X1EKj5dnN9SukyoZY4wTNba7aDMSvPkU+bJtcshhLG+RD8EfgDLwAAAP//nJTBDgAgCEJn///PdbWJgN7juUGQIlQx8uSAjbEAVw1snAb3bwCQifQxAkRgbceZwVRjSvUdH+N28zAqi3s0zd32L/5ac5t88AMAAP//rJZJCsAwDANB/390Dz20BC2W29w9OERLfgLeMExfbnJdNFJI0gGXQg96dWAL5G6BF2tnuxDi56D3L/GrAuYgEOZPG3JNmiRRIh732beDLt+8bLBLXQ7EHJSB6DbyQPSFooHYNJMCHt+INiTlNTdpK725je1n7gIAAP//1JiBEcAgCAN7PfafuQsUCSEiDiC8ngnRn20qBkzN/sEh3wHpK9SJhR0nGfcLIuYOSLw+GFcVkPl6RPTNQvLrATi2Sf3kE3BoU911IOCY9MkJyXjVrb4MNOq2PZagMfOXg/LAVk/v/KvmdrWO9LmRE2LkbB2ZSp5mKBzSzkHFZv4BAAD//wMAWwA8PIvQEYoAAAAASUVORK5CYII=",
-                "telepon": "0981784123",
-                "alamat": "NO 8 GONGYE 7TH RDPINGZHEN CITY TAOYUAN COUNTY 32459",
-                "kode_pos": "20442",
-                "negara_tujuan": "TAIWAN"
+                "nama": "'.$penerima.'",
+                "nomor_ktp": "'.$ktp.'",
+                "file":"data:image/png;base64,'.$b64.'",
+                "telepon": "'.$teleponpenerima.'",
+                "alamat": "'.$alamat.'",
+                "kode_pos": "'.$kodepos.'",
+                "negara_tujuan": "'.$tujuan.'"
             },
             "item_data": {
                 "tipe": "NON-GARMENT",
