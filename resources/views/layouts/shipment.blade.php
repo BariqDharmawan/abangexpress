@@ -141,11 +141,12 @@
         </div>
     </section>
     
+    
     <script src="{{ asset('shipment/template/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('shipment/js/vendor.js') }}"></script>
+    @stack('scripts')
     <script src="{{ asset('shipment/js/app.js') }}"></script>
 
-    @stack('scripts')
     @yield('components')
 </body>
 </html>
