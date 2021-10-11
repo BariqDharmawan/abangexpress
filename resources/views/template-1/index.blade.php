@@ -137,15 +137,13 @@
             id="load-faq">
                 {{-- get faq using ajax [this is 'shadow' element] --}}
                 <div class="accordion-item accordion-faq">
-                    <h2 class="accordion-header" id="flush-faq">
-                        <button class="accordion-button accordion__heading collapsed toggler-accordion" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#accordion-list" aria-expanded="false" 
-                        aria-controls="accordion-list"></button>
-                    </h2>
+                    <a class="accordion-button accordion__heading collapsed toggler-accordion" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#accordion-list" aria-expanded="false" 
+                    aria-controls="accordion-list"></a>
                     <div id="accordion-list" 
-                        class="accordion-collapse collapse accordion__text" 
+                        class="collapse accordion__text" 
                         aria-labelledby="flush-faq"
-                        data-bs-parent="#list-faq">
+                        data-bs-parent="#load-faq">
                         <div class="accordion-body">
                             <p></p>
                         </div>

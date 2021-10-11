@@ -14,5 +14,5 @@ First, make sure you have PHP, Apache2, Mysql installed on your local and then c
 
 
 - TASK
-[ ] Fix button login template 1, add border radius and change color to dark blue
-[ ] Change FAQ component template 1, make it same as template 2
+[X] Fix button login template 1, add border radius and change color to dark blue
+[X] Change FAQ component template 1, make it same as template 2
