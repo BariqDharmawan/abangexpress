@@ -4,17 +4,15 @@
 
 @section('content')
 
-<!-- ======= hero Section ======= -->
 <section id="hero">
-
     <div class="hero-content row mx-0" data-aos="fade-up">
         <h2 class="w-100">{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h2>
         <form method="GET" class="col-lg-8">
             @csrf
             <div class="row align-items-center justify-content-center position-relative">
                 <div class="col-12">
-                    <input type="text" class="form-control py-3 ps-lg-4 py-lg-4 shadow input--btn-inside"
-                    placeholder="Ketik nomor resi disini">
+                    <input type="text" class="form-control py-3 ps-lg-4 py-lg-4 shadow input--btn-inside" minlength="11" maxlength="11"
+                    placeholder="Ketik nomor resi disini" required>
                 </div>
                 <div class="col">
                     <button type="submit" class="btn btn-primary 
@@ -37,10 +35,34 @@
             @endforeach
         </div>
     </div>
-
 </section>
 
 <main id="main">
+    <section>
+        <div class="container" data-aos="fade-up">
+            <x-section-header text="Hasil pencarian" />
+            <div class="row panel-scroll border p-3">
+                <ul class="col-lg-3">
+                    @for ($i = 0; $i < 4; $i++)
+                    <li class="panel-scroll__item {{ $i == 0 ? 'current-day' : '' }}">
+                        <time datetime="{{ date('d M Y H:i') }}" class="fw-bold">
+                            {{ date('d M Y - H:i') }}
+                        </time>
+                    </li>
+                    @endfor
+                </ul>
+                <ul class="col-lg-9">
+                    @for ($i = 0; $i < 4; $i++)
+                        <li class="panel-scroll__text px-5">
+                            <p class="m-0">
+                                Shipment Received at Warehouse Origin Facility.
+                            </p>
+                        </li>
+                    @endfor
+                </ul>
+            </div>
+        </div>
+    </section>
     <!-- ======= About Section ======= -->
     <section id="about">
         <div class="container" data-aos="fade-up">
