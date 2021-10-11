@@ -8,9 +8,9 @@
 
 @section('content')
 <div class="row clearfix">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <form class="card" method="POST">
-            @csrf
+    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" method="POST">
+        @csrf
+        <div class="card">
             <div class="header">
                 <h2 class="h1 fw-bold">Detail pengirim</h2>
             </div>
@@ -26,11 +26,26 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="card">
             <div class="header">
                 <h2 class="h1 fw-bold">Detail penerima</h2>
             </div>
             <div class="body">
+                <div class="col-12">
+                    <x-shipment.input type="select" placeholder="Penerima Sebelumnya"
+                    name="recipient_previous" required>
+                        <optgroup label="Data penerima sebelumnya">
+                            @for ($i = 1; $i <= 5; $i++)
+                            <option value="">nama orang {{ $i }}</option>
+                            @endfor
+                        </optgroup>
+                        <optgroup label="Pilih penerima baru jika penerima tidak ada di data sebelumnya">
+                            <option value="" class="fw-bold">Penerima Baru</option>
+                        </optgroup>
+                    </x-shipment.input>
+                </div>
                 <div class="row">
                     <div class="col-lg-6">
                         <x-shipment.input placeholder="Nama penerima"
@@ -76,7 +91,9 @@
                     data-img-preview="#idcard-preview" required />
                 </div>
             </div>
+        </div>
 
+        <div class="card">
             <div class="header">
                 <h2 class="h1 fw-bold">Detail paket</h2>
             </div>
@@ -127,15 +144,24 @@
                 <div class="row no-before no-after d-flex justify-content-between mx-0 flex-md-column">
                     <small class="mb-3 mb-md-0">
                         Dengan menekan tombol "order", anda sudah menyetujui 
-                        <a href="" class="text-primary">syarat & ketentuan</a> 
-                        yang berlaku
+                        <button type="button" class="btn btn-link p-0 text-primary
+                        waves-effect m-r-20" data-toggle="modal"
+                        data-target="#modal-tnc">
+                            syarat & ketentuan
+                        </button>
                     </small>
                     <button type="submit" class="btn btn-big btn-primary">Order</button>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
+@endsection
+
+@section('components')
+<x-shipment.modal id="modal-tnc" title="Syarat dan ketentuan">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. A quos necessitatibus, labore maiores molestiae sed atque, beatae mollitia distinctio nam similique libero reprehenderit totam culpa iusto excepturi ipsam tempore hic!
+</x-shipment.modal>
 @endsection
 
 @push('scripts')
