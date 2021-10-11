@@ -53,19 +53,18 @@
             </div>
 
             <div class="menu">
-                <center>
-                    <a href="{{ route('shipping.order.book') }}"  style="margin: 10px 1rem;">
-                        <div class="info-box-3 bg-green hover-zoom-effect" style="left: 10px;margin-bottom:0px !important;">
-                            <div class="icon">
-                                <i class="material-icons">flight_takeoff</i>
-                            </div>
-                            <div class="content">
-                                <div class="text"></div>
-                                <div class="number">Create New Order</div>
-                            </div>
+                <a href="{{ route('shipping.order.book') }}"  style="margin: 10px 1rem;">
+                    <div class="info-box-3 bg-green hover-zoom-effect mb-0" 
+                    style="left: 10px;">
+                        <div class="icon">
+                            <i class="material-icons">flight_takeoff</i>
                         </div>
-                    </a>
-                </center>
+                        <div class="content">
+                            <div class="text"></div>
+                            <div class="number">Create New Order</div>
+                        </div>
+                    </div>
+                </a>
                 <ul class="list">
                     <x-shipment.dropdown-item text="Dashboard"
                     icon="home" href="{{ route('shipping.index') }}" />
