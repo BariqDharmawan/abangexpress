@@ -44,6 +44,10 @@ mix.scripts([
     `${templateShipmentPath}/template/plugins/bootstrap-select/js/bootstrap-select.js`,
     `${templateShipmentPath}/template/plugins/jquery-slimscroll/jquery.slimscroll.js`,
     `${templateShipmentPath}/template/plugins/node-waves/waves.js`,
+    `${templateShipmentPath}/template/plugins/autosize/autosize.js`,
+    `${templateShipmentPath}/template/plugins/momentjs/moment.js`,
+    `${templateShipmentPath}/template/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js`,
+    `${templateShipmentPath}/template/js/pages/forms/basic-form-elements.js`,
     `${templateShipmentPath}/template/plugins/jquery-countto/jquery.countTo.js`,
     `${templateShipmentPath}/template/plugins/raphael/raphael.min.js`,
     `${templateShipmentPath}/template/plugins/morrisjs/morris.js`,
@@ -65,7 +69,11 @@ mix.scripts([
         `${templateShipmentPath}/template/plugins/jquery`, 
         'public/shipment/template/vendor/jquery'
     )
-    .copy(`${templateShipmentPath}/template/images`, 'public/shipment/img');
+    .copy(`${templateShipmentPath}/template/images`, 'public/shipment/img')
+    .copy(
+        `${templateShipmentPath}/template/plugins/bootstrap/fonts`,
+        'public/shipment/fonts'
+    )
 
 //asset for template 1
 mix.js(`${template1Path}/js/app.js`, 'public/template1/js')
