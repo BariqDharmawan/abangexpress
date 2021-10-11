@@ -3,8 +3,8 @@
     'color' => null
 ])
 
-<li {{ $attributes->merge(['class' => '']) }}>
-    <a href="{{ $href  }}" class="@if($isDropdown)menu-toggle @endif
+<li {{ $attributes->class(['active' => $href == url()->current()]) }}>
+    <a href="{{ $href }}" class="@if($isDropdown)menu-toggle @endif
     @isset($color)text-{{ $color }} @endisset">
         @isset($icon)
         <i class="material-icons">{{ $icon }}</i>

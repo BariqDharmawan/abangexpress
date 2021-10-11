@@ -5,10 +5,12 @@ $(document).ready(function () {
         this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
     });
 
-    $(".select2").select2({
-        theme: 'classic',
-        width: 'resolve'
-    })
+    if ($(".select2").length > 0) {
+        $(".select2").select2({
+            theme: 'classic',
+            width: 'resolve'
+        })
+    }
 
     $(".not-allow-number").on('keydown', function (e) {
         if (e.altKey) {

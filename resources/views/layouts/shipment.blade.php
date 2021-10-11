@@ -59,7 +59,7 @@
                     Booking Order
                 </a>
                 <ul class="list">
-                    <x-shipment.dropdown-item class="active" text="Dashboard"
+                    <x-shipment.dropdown-item text="Dashboard"
                     icon="home" href="{{ route('shipping.index') }}" />
 
                     <x-shipment.dropdown-item 
@@ -143,8 +143,8 @@
     
     
     <script src="{{ asset('shipment/template/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('shipment/js/vendor.js') }}"></script>
     @stack('scripts')
+    <script src="{{ asset('shipment/js/vendor.js') }}"></script>
     <script src="{{ asset('shipment/js/app.js') }}"></script>
 
     @yield('components')
