@@ -7,12 +7,26 @@
 <!-- ======= hero Section ======= -->
 <section id="hero">
 
-    <div class="hero-content" data-aos="fade-up">
-        <h2>{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h2>
-        <div>
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
-            <a href="#portfolio" class="btn-projects scrollto">Our Projects</a>
-        </div>
+    <div class="hero-content row mx-0" data-aos="fade-up">
+        <h2 class="w-100">{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h2>
+        <form method="GET" class="col-lg-8">
+            @csrf
+            <div class="row align-items-center justify-content-center position-relative">
+                <div class="col-12">
+                    <input type="text" class="form-control py-3 ps-lg-4 py-lg-4 shadow input--btn-inside"
+                    placeholder="Ketik nomor resi disini">
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary 
+                    btn--inside-input py-lg-2">
+                        <i class="fas fa-search"></i>
+                        <span class="d-none d-lg-block" style="margin-left: 10px">
+                            Cari resi
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 
     <div class="hero-slider swiper-container">
