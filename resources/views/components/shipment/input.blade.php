@@ -13,10 +13,10 @@
 <div class="form-group form-float form-group-lg">
     @if ($type == 'select')
         <label for="{{ $id }}" class="form-label">{{ $placeholder }}</label>
-        <select {{ $attributes->class(['select2', 'col-12'])->merge([
+        <select {{ $attributes->class(['select2', 'w-100'])->merge([
             'name' => $name,
             'id' => $id
-        ]) }} style="width: 100%">
+        ]) }}>
             <option selected disabled>{{ $placeholder }}</option>
             {{ $slot }}
         </select>

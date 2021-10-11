@@ -8,7 +8,8 @@
 
 @section('content')
 <div class="row clearfix">
-    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" method="POST">
+    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" 
+    id="form-book-order" method="POST">
         @csrf
         <div class="card">
             <div class="header">
@@ -22,7 +23,8 @@
                     </div>
                     <div class="col-12">
                         <x-shipment.input placeholder="Telepon pengirim"
-                        name="sender_telephone" type="tel" required />
+                        name="sender_telephone" class="only-number" 
+                        type="tel" required />
                     </div>
                 </div>
             </div>
@@ -36,20 +38,20 @@
                 <div class="col-12">
                     <x-shipment.input type="select" placeholder="Penerima Sebelumnya"
                     name="recipient_previous" required>
-                        <optgroup label="Data penerima sebelumnya">
+                        {{-- <optgroup label="Data penerima sebelumnya"> --}}
                             @for ($i = 1; $i <= 5; $i++)
                             <option value="">nama orang {{ $i }}</option>
                             @endfor
-                        </optgroup>
-                        <optgroup label="Pilih penerima baru jika penerima tidak ada di data sebelumnya">
+                        {{-- </optgroup> --}}
+                        {{-- <optgroup label="Pilih penerima baru jika penerima tidak ada di data sebelumnya">
                             <option value="" class="fw-bold">Penerima Baru</option>
-                        </optgroup>
+                        </optgroup> --}}
                     </x-shipment.input>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
                         <x-shipment.input placeholder="Nama penerima"
-                        name="recipient_name" required />
+                        name="recipient_name" class="not-allow-number" required />
                     </div>
                     <div class="col-lg-6">
                         <x-shipment.input placeholder="Telepon penerima"
@@ -58,14 +60,14 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <x-shipment.input placeholder="NIK KTP Penerima"
+                        <x-shipment.input placeholder="Nomor ID Card Penerima"
                         name="recipient_nik" inputmode="numeric" 
                         class="only-number" required />
                     </div>
                     <div class="col-lg-6">
                         <x-shipment.input placeholder="Kode pos"
                         name="recipient_zipcode" inputmode="numeric" 
-                        class="only-number" required />
+                        class="only-number" minlength="3" maxlength="8" required />
                     </div>
                 </div>
                 <div class="col-12">
@@ -77,9 +79,9 @@
                     </x-shipment.input>
                 </div>
                 <div class="col-12">
-                    <x-shipment.input type="textarea" 
+                    <x-shipment.input type="textarea" id="recipient-address" 
                     placeholder="Alamat lengkap penerima"
-                    name="recipient_telephone" required />
+                    name="recipient_address" required />
                 </div>
                 <div class="col-12">
                     <img src="" alt="" id="idcard-preview" height="100px" class="mb-2">
@@ -108,7 +110,7 @@
                     <div class="col-lg-6">
                         <x-shipment.input type="number" 
                         placeholder="Masukan berat paket"
-                        small-text="Berat paket dibulatkan keatas"
+                        small-text="Berat paket dibulatkan keatas (kg)"
                         name="package_weight" required />
                     </div>
                 </div>
