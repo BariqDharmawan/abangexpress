@@ -44,7 +44,9 @@ class UserFactory extends Factory
     {
         return $this->state(function (array $attributes){
             return [
-                'username' => $this->faker->userName(),
+                'username' => $this->faker->unique()->randomElement([
+                    'subadmin1', 'subadmin2', 'subadmin3', 'subadmin4', 'subadmin5'
+                ]),
                 'role' => 'sub-admin',
                 'password' => Hash::make('passwordsubadmin'),
                 'plain_password' => 'passwordsubadmin'

@@ -1,0 +1,15 @@
+.btn {
+    cursor: pointer;
+
+    &--outline {
+        &-dark-blue {
+            color: $dark-blue !important;
+            border-color: $dark-blue;
+
+            &:hover {
+                background-color: $dark-blue;
+                color: white !important;
+            }
+        }
+    }
+}

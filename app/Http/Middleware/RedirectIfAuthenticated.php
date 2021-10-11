@@ -26,11 +26,11 @@ class RedirectIfAuthenticated
                 $role = Auth::user()->role;
                 switch ($role) {
                     case 'admin':
-                        return '/admin/identity';
+                        return redirect('/admin/identity');
                     break;
                         
                     case 'sub-admin':
-                        return '/shipping';
+                        return redirect('/shipping');
                     break;
                 }
             }

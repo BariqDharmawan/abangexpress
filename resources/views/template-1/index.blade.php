@@ -3,58 +3,6 @@
 @section('title', $ourName)
 
 @section('content')
-<!-- ======= Header ======= -->
-<header id="header" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-between">
-
-        <div id="logo">
-            <h1 class="fs-3">
-                <a href="index.html">
-                    {{ strtok($aboutUs->our_name, ' ') }}
-                    <span>
-                        {{ Str::after(
-                            $aboutUs->our_name, strtok($aboutUs->our_name, ' ')
-                        ) }}
-                    </span>
-                </a>
-            </h1>
-            {{-- Uncomment below if you prefer to use an image logo
-                <a href="index.html"><img src="{{
-                asset('template1/img/logo.png') }}" alt=""></a> 
-            --}}
-        </div>
-
-        <nav id="navbar" class="navbar">
-            <ul>
-                @foreach ($menus as $menu)
-                <li>
-                    <a href="{{ $menu->url }}" 
-                        class="nav-link scrollto @if($loop->first) active @endif">
-                        {{ $menu->text }}
-                    </a>
-                </li>
-                @endforeach
-                @guest
-                <li>
-                    <a href="{{ route('login') }}" style="cursor: pointer;"
-                        class="border border-dark text-center mx-2 py-2 px-4 rounded-50"> 
-                        Masuk
-                    </a>
-                </li>
-                @else
-                <li>
-                    <a href="{{ route('admin.about-us.identity') }}" 
-                    style="cursor: pointer;"
-                    class="border border-dark text-center mx-2 py-2 px-4 rounded-50"> 
-                        Go to dashboard
-                    </a>
-                </li>
-                @endguest
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-    </div>
-</header>
 
 <!-- ======= hero Section ======= -->
 <section id="hero">
@@ -76,7 +24,7 @@
         </div>
     </div>
 
-</section><!-- End Hero Section -->
+</section>
 
 <main id="main">
     <!-- ======= About Section ======= -->
@@ -156,9 +104,13 @@
                     <div class="swiper-slide">
                         <div class="testimonial-item">
                             <p>
-                                <img src="{{ asset('template1/img/quote-sign-left.png') }}" class="quote-sign-left" alt="">
-                                {{ $team->short_desc }}
-                                <img src="{{ asset('template1/img/quote-sign-right.png') }}" class="quote-sign-right" alt="">
+                                <img src="{{ asset(
+                                    'template1/img/quote-sign-left.png'
+                                ) }}" class="quote-sign-left" alt="">
+                                <span>{{ $team->short_desc }}</span>
+                                <img src="{{ asset(
+                                    'template1/img/quote-sign-right.png'
+                                ) }}" class="quote-sign-right" alt="">
                             </p>
                             <img src="{{ asset($team->avatar) }}" 
                             class="testimonial-img" alt="">
@@ -185,15 +137,13 @@
             id="load-faq">
                 {{-- get faq using ajax [this is 'shadow' element] --}}
                 <div class="accordion-item accordion-faq">
-                    <h2 class="accordion-header" id="flush-faq">
-                        <button class="accordion-button accordion__heading collapsed toggler-accordion" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#accordion-list" aria-expanded="false" 
-                        aria-controls="accordion-list"></button>
-                    </h2>
+                    <a class="accordion-button accordion__heading collapsed toggler-accordion" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#accordion-list" aria-expanded="false" 
+                    aria-controls="accordion-list"></a>
                     <div id="accordion-list" 
-                        class="accordion-collapse collapse accordion__text" 
+                        class="collapse accordion__text" 
                         aria-labelledby="flush-faq"
-                        data-bs-parent="#list-faq">
+                        data-bs-parent="#load-faq">
                         <div class="accordion-body">
                             <p></p>
                         </div>
