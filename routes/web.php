@@ -8,7 +8,10 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
     Route::get('/', 'ShipmentController@index')->name('index');
     Route::get('zipcode', 'ShipmentController@zipCode')->name('zipcode');
     Route::prefix('order')->name('order.')->group(function (){
-        Route::get('book', 'ShipmentOrderController@book')->name('book');
+
+
+        Route::get('book', 'BookingOrderController@index')->name('book');
+        Route::resource('book', 'BookingOrderController')->except('index');
         Route::get('/', 'ShipmentOrderController@index')->name('index');
         Route::get('process', 'ShipmentOrderController@process')->name('process');
         Route::get('pending', 'ShipmentOrderController@pending')->name('pending');
@@ -31,12 +34,12 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
 });
 
 Route::prefix('admin')->name('admin.')->middleware('roleUser:admin')->group(function() {
-    
+
 
     Route::resource('user', 'UserController')->except('edit', 'show', 'create');
-    
+
     Route::prefix('about-us')->group(function (){
-        
+
         Route::prefix('identity')->name('about-us.')->group(function () {
             Route::get('/', 'AboutUsController@identity')->name('identity');
             Route::put('/', 'AboutUsController@update')->name('update');
@@ -54,7 +57,7 @@ Route::prefix('admin')->name('admin.')->middleware('roleUser:admin')->group(func
         Route::resource('contacts', 'OurContactController');
     });
 
-    
+
     Route::get('services', 'OurServiceController@manage')->name('service.manage');
     Route::resource('services', 'OurServiceController')->except('index');
 
@@ -89,9 +92,9 @@ try {
     $templateChoosen = TemplateChoosen::where(
         'domain_owner', request()->getSchemeAndHttpHost()
     )->first();
-    
+
     $templateChoosen = (int)$templateChoosen->version;
-    
+
     if ($templateChoosen == 1) {
         Route::get('/', 'TemplateSatuController');
     }
