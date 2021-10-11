@@ -148,12 +148,17 @@
             @yield('content')
         </div>
     </section>
+<<<<<<< HEAD
 
+=======
+    
+    
+>>>>>>> 43fe0299f5affdf35fab03cd204926eaab11c4d2
     <script src="{{ asset('shipment/template/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('shipment/js/vendor.js') }}"></script>
+    @stack('scripts')
     <script src="{{ asset('shipment/js/app.js') }}"></script>
 
-    @stack('scripts')
     @yield('components')
 </body>
 </html>

@@ -9,7 +9,7 @@ $(document).ready(function () {
     }
 
     $(".not-allow-number").on('keydown', function (e) {
-        if (e.ctrlKey || e.altKey) {
+        if (e.altKey) {
             e.preventDefault()
         } else {
             const key = e.keyCode
