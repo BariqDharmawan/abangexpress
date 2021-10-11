@@ -11,3 +11,8 @@ First, make sure you have PHP, Apache2, Mysql installed on your local and then c
 - Run `npm install` and `npm run watch`
 - Open new terminal, run `php artisan migrate --seed` or 
 `php artisan migrate:fresh --seed` to generate dummy record
+
+
+- TASK
+[X] Fix button login template 1, add border radius and change color to dark blue
+[X] Change FAQ component template 1, make it same as template 2
