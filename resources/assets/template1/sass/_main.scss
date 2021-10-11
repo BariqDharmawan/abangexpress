@@ -124,7 +124,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 #header #logo h1 a {
-  color: #0c2e8a;
+  color: $dark-blue;
 }
 #header #logo h1 a span {
   color: #50d8af;
@@ -244,7 +244,7 @@ h1, h2, h3, h4, h5, h6 {
 * Mobile Navigation 
 */
 .mobile-nav-toggle {
-  color: #0c2e8a;
+  color: $dark-blue;
   font-size: 28px;
   cursor: pointer;
   display: none;
@@ -295,7 +295,7 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-mobile a, .navbar-mobile a:focus {
   padding: 10px 20px;
   font-size: 15px;
-  color: #0c2e8a;
+  color: $dark-blue;
 }
 .navbar-mobile a:hover, .navbar-mobile .active, .navbar-mobile li:hover > a {
   color: #50d8af;
@@ -355,7 +355,7 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 #hero .hero-content h2 {
-  color: #0c2e8a;
+  color: $dark-blue;
   margin-bottom: 30px;
   font-size: 64px;
   font-weight: 700;
@@ -382,12 +382,12 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 #hero .hero-content .btn-get-started {
-  background: #0c2e8a;
-  border: 2px solid #0c2e8a;
+  background: $dark-blue;
+  border: 2px solid $dark-blue;
 }
 #hero .hero-content .btn-get-started:hover {
   background: none;
-  color: #0c2e8a;
+  color: $dark-blue;
 }
 #hero .hero-content .btn-projects {
   background: #50d8af;
@@ -435,7 +435,7 @@ section {
 }
 .section-header h2 {
   font-size: 32px;
-  color: #0c2e8a;
+  color: $dark-blue;
   text-transform: uppercase;
   font-weight: 700;
   position: relative;
@@ -525,7 +525,7 @@ section {
   }
 }
 #about .content h2 {
-  color: #0c2e8a;
+  color: $dark-blue;
   font-weight: 700;
   font-size: 36px;
   font-family: "Raleway", sans-serif;
@@ -585,7 +585,7 @@ section {
   margin-top: 34px;
 }
 #services .box .icon i:before {
-  background: #0c2e8a;
+  background: $dark-blue;
   background: linear-gradient(45deg, #50d8af 0%, #a3ebd5 100%);
   background-clip: border-box;
   -webkit-background-clip: text;
@@ -1098,5 +1098,5 @@ section {
   color: #555;
 }
 #footer .credits a {
-  color: #0c2e8a;
+  color: $dark-blue;
 }

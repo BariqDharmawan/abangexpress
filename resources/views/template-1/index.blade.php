@@ -36,16 +36,17 @@
                 @endforeach
                 @guest
                 <li>
-                    <a href="{{ route('login') }}" style="cursor: pointer;"
-                        class="border border-dark text-center mx-2 py-2 px-4 rounded-50"> 
+                    <a href="{{ route('login') }}"
+                    class="btn btn--outline-dark-blue text-dark-blue text-center 
+                    mx-4 py-2 px-4 rounded-50"> 
                         Masuk
                     </a>
                 </li>
                 @else
                 <li>
-                    <a href="{{ route('admin.about-us.identity') }}" 
-                    style="cursor: pointer;"
-                    class="border border-dark text-center mx-2 py-2 px-4 rounded-50"> 
+                    <a href="{{ route('admin.about-us.identity') }}"
+                    class="btn btn--outline-dark-blue text-dark-blue text-center 
+                    mx-4 py-2 px-4 rounded-50"> 
                         Go to dashboard
                     </a>
                 </li>
