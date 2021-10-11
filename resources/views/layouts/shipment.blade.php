@@ -12,8 +12,8 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.html">
-                    ADMINBSB - MATERIAL DESIGN
+                <a class="navbar-brand" href="{{ route('shipping.index') }}">
+                    {{ $ourName }}
                 </a>
             </div>
         </div>
@@ -27,47 +27,98 @@
                     <img src="{{ asset('shipment/img/user.png') }}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                    <div class="email">john.doe@example.com</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ auth()->user()->name }}</div>
+                    <div class="email">{{ auth()->user()->username }}</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <x-shipment.dropdown-item text="Profile" icon="person" />
-                            <x-shipment.dropdown-item text="Followers" icon="group" />
-                            <x-shipment.dropdown-item text="Sales" 
-                            icon="shopping_cart" />
-                            <x-shipment.dropdown-item text="Likes" icon="favorite" />
-                            <x-shipment.dropdown-item text="Sign Out" icon="input" />
+                            @if (auth()->user()->role == 'admin')
+                            <x-shipment.dropdown-item 
+                            text="Company Profile" icon="person" 
+                            href="{{ route('admin.about-us.identity') }}" />
+                            @endif
+                            <li style="color: #666">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" style="padding-left: 18px"
+                                    class="btn btn-white btn-block text-left">
+                                        <i class="material-icons">input</i>
+                                        <span>Logout</span>
+                                    </button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div class="menu">
+                <a href="{{ route('shipping.order.book') }}" 
+                class="btn btn-primary" 
+                style="margin: 10px 1rem;">
+                    Booking Order
+                </a>
                 <ul class="list">
-                    <x-shipment.dropdown-item class="active" text="Home"
-                    icon="home" href="{{ route('admin.shipment.index') }}" />
+                    <x-shipment.dropdown-item class="active" text="Dashboard"
+                    icon="home" href="{{ route('shipping.index') }}" />
 
-                    <x-shipment.dropdown-item text="Typography"
-                    icon="text_fields" href="{{ route('admin.shipment.index') }}" />
+                    <x-shipment.dropdown-item 
+                    text="Kode Post Taiwan" icon="text_fields" 
+                    href="{{ route('shipping.zipcode') }}" />
 
-                    <x-shipment.dropdown-item text="Helper Classes"
-                    icon="layers" href="{{ route('admin.shipment.index') }}" />
-
-                    <x-shipment.dropdown-item text="User Interface (UI)"
+                    <x-shipment.dropdown-item text="Order"
                     icon="swap_calls" :is-dropdown="true">
-                        <x-shipment.dropdown-item href="/alert" text="Alerts" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.order.index') }}" text="Data Order" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.order.process') }}" 
+                        text="Dalam Proses" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.order.pending') }}" 
+                        text="Pending Proses" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.order.history') }}" 
+                        text="History Kiriman" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.order.receipt') }}" 
+                        text="Cetak Ulang Resi" />
                     </x-shipment.dropdown-item>
 
-                    <x-shipment.dropdown-item text="widgets" :is-dropdown="true" 
-                    icon="widgets">
-                        <x-shipment.dropdown-item text="Cards" :is-dropdown="true">
-                            <x-shipment.dropdown-item href="/alert" text="Basic" />
-                            <x-shipment.dropdown-item href="/alert" text="Colored" />
-                        </x-shipment.dropdown-item>
-                        <x-shipment.dropdown-item text="Typography"
-                        href="{{ route('admin.shipment.index') }}" />
+                    <x-shipment.dropdown-item text="Invoices"
+                    icon="swap_calls" :is-dropdown="true">
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.invoice.bill') }}" text="Tagihan" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.invoice.verifying') }}" 
+                        text="Dalam Prose Verifikasi" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.invoice.settled') }}" text="Lunas" />
                     </x-shipment.dropdown-item>
+
+                    <x-shipment.dropdown-item text="Bantuan"
+                    icon="swap_calls" :is-dropdown="true">
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.support.guide') }}" 
+                        text="Panduan Penggunaan" />
+                        <x-shipment.dropdown-item 
+                        href="{{ route('shipping.support.regulation') }}" 
+                        text="Regulasi Pengiriman" />
+                    </x-shipment.dropdown-item>
+
+                    <x-shipment.dropdown-item text="Akun"
+                    icon="swap_calls" :is-dropdown="true">
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" style="padding-left: 18px"
+                                class="btn btn-white btn-block text-left">
+                                    <i class="material-icons">input</i>
+                                    <span>Logout</span>
+                                </button>
+                            </form>
+                        </li>
+                    </x-shipment.dropdown-item>
+
                 </ul>
             </div>
             
