@@ -2,10 +2,6 @@
 
 @section('title', $title)
 
-@push('style-plugins')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-@endpush
-
 @section('content')
 
 <div class="row clearfix">
@@ -74,9 +70,9 @@
                 <div class="col-12">
                     <x-shipment.input type="select" placeholder="Negara penerima"
                     name="recipient_telephone" required>
-                        @for ($i = 1; $i <= 5; $i++)
-                        <option value="">Negara {{ $i }}</option>
-                        @endfor
+                    @for ($i = 1; $i <= 5; $i++)
+                    <option value="">Negara {{ $i }}</option>
+                    @endfor
                     </x-shipment.input>
                 </div>
                 <div class="col-12">
@@ -127,7 +123,7 @@
                 <div class="col-12">
                     <x-shipment.input type="textarea" 
                     placeholder="Jelaskan detail isi paket"
-                    name="package_detail" required />
+                    name="package_detail" id="package-detail" required />
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
@@ -168,6 +164,6 @@
 </x-shipment.modal>
 @endsection
 
-@push('scripts')
+{{-- @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-@endpush
+@endpush --}}

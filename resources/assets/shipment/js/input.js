@@ -1,16 +1,16 @@
 import AutoNumeric from 'autonumeric';
 
+if ($(".select2").length > 0) {
+    $(".select2").select2({
+        theme: 'classic'
+    })
+}
+
 $(document).ready(function () {
     $('.only-number').on('input', function () {
         this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
     });
 
-    if ($(".select2").length > 0) {
-        $(".select2").select2({
-            theme: 'classic',
-            width: 'resolve'
-        })
-    }
 
     $(".not-allow-number").on('keydown', function (e) {
         if (e.altKey) {

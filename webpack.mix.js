@@ -58,7 +58,7 @@ mix.scripts([
     `${templateShipmentPath}/template/plugins/flot-charts/jquery.flot.categories.js`,
     `${templateShipmentPath}/template/plugins/flot-charts/jquery.flot.time.js`,
     `${templateShipmentPath}/template/plugins/jquery-sparkline/jquery.sparkline.js`,
-    `${templateShipmentPath}/shipment/vendor/select2/js/select2.full.min.js`,
+    `${templateShipmentPath}/vendor/select2/js/select2.min.js`,
     `${templateShipmentPath}/js/admin.js`,
     `${templateShipmentPath}/js/pages/index.js`,
     `${templateShipmentPath}/js/demo.js`,

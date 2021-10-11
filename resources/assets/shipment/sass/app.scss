@@ -20,3 +20,8 @@
 @import './helper';
 @import './input';
 @import './btn';
+
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
