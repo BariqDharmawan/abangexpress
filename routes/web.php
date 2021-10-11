@@ -30,7 +30,7 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
     });
 });
 
-Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() {
+Route::prefix('admin')->name('admin.')->middleware('roleUser:admin')->group(function() {
     
 
     Route::resource('user', 'UserController')->except('edit', 'show', 'create');
