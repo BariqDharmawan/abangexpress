@@ -15,8 +15,14 @@
         }
     }
 }
+.d-none {
+    display: none;
+}
 .d-flex {
     display: flex;
+}
+.flex-column-reverse {
+    flex-direction: column-reverse;
 }
 .justify-content-between {
     justify-content: space-between;

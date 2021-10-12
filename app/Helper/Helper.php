@@ -2,9 +2,10 @@
 
 namespace App\Helper;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
-class Helper 
+class Helper
 {
     public static function getJson($json, $isToArray = false) {
         return json_decode(file_get_contents(public_path('json/' . $json)), $isToArray);

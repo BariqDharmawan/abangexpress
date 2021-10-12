@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
@@ -17,7 +18,9 @@ class BookingOrderController extends Controller
     public function index()
     {
         $title = 'Form Booking Order';
-        return view('shipment.order.book', compact('title'));
+        $prevRecipient = Helper::getJson('prev-recipient.json');
+        
+        return view('shipment.order.book', compact('title', 'prevRecipient'));
     }
 
     /**

@@ -6,27 +6,36 @@
     'id' => null,
     'smallText' => null,
     'iconAddon' => null,
-    'textAddon' => null
+    'textAddon' => null,
+    'required' => null
 ])
 
 
 <div class="form-group form-float form-group-lg">
     @if ($type == 'select')
-        <label for="{{ $id }}" class="form-label">{{ $placeholder }}</label>
+        <label for="{{ $id }}" class="form-label @isset($required)form-label--required @endisset">
+            {{ $placeholder }}
+        </label>
         <select {{ $attributes->class(['select2', 'w-100'])->merge([
             'name' => $name,
-            'id' => $id
+            'id' => $id,
+            'required' => $required
         ]) }}>
             <option selected disabled>{{ $placeholder }}</option>
             {{ $slot }}
         </select>
     @elseif($type == 'file')
-    <label for="{{ $id }}" class="form-label">{{ $placeholder }}</label>
-    <input {{ $attributes->class(['form-control'])->merge([
-        'name' => $name, 
-        'type' => 'file',
-        'id' => $id
-    ]) }} />
+    <div class="custom-file">
+        <input {{ $attributes->class(['custom-file__input'])->merge([
+            'name' => $name, 
+            'type' => 'file',
+            'id' => $id,
+            'required' => $required
+            ]) }} />
+        <label for="{{ $id }}" class="custom-file__label">
+            <span>{{ $placeholder }}</span>
+        </label>
+    </div>
     @else
         @if (isset($iconAddon) || isset($textAddon))
         <div class="input-group mb-0">
@@ -41,7 +50,9 @@
             <div class="form-line">
                 <input {{ $attributes->class(['form-control'])->merge([
                     'type' => $type,
-                    'id' => $id
+                    'id' => $id,
+                    'name' => $name,
+                    'required' => $required
                 ]) }}>
                 <label class="form-label z-20 mb-0" for="{{ $id }}">
                     {{ $placeholder }}
@@ -56,14 +67,16 @@
                     'name' => $name, 
                     'type' => $type,
                     'rows' => $rows,
-                    'id' => $id
+                    'id' => $id,
+                    'required' => $required
                 ]) }}></textarea>
                 <label class="form-label mb-0" for="{{ $id }}">{{ $placeholder }}</label>
             @else
                 <input {{ $attributes->class(['form-control'])->merge([
                     'name' => $name, 
                     'type' => $type,
-                    'id' => $id
+                    'id' => $id,
+                    'required' => $required
                 ]) }} />
                 <label class="form-label mb-0" for="{{ $id }}">{{ $placeholder }}</label>
             @endif

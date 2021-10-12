@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "barqi barqibar",
+        "telephone": "087771406656",
+        "idcard_number": "cupiditateeavolupt",
+        "zipcode": "30631",
+        "country": "negara-2",
+        "address": "Swadaya gudang baru",
+        "idcard_photo": "/storage/previous-recipient/ktp1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "bariq dharmawan",
+        "telephone": "087771406656",
+        "idcard_number": "cupiditateeavolupt",
+        "zipcode": "30631",
+        "country": "negara-2",
+        "address": "Swadaya gudang baru",
+        "idcard_photo": "/storage/previous-recipient/ktp1.jpg"
+    },
+    {
+        "id": 3,
+        "name": "blablab sf",
+        "telephone": "087771406656",
+        "idcard_number": "cupiditateeavolupt",
+        "zipcode": "30631",
+        "country": "negara-2",
+        "address": "Swadaya gudang baru",
+        "idcard_photo": "/storage/previous-recipient/ktp1.jpg"
+    }
+]
