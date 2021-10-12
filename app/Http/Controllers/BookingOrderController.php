@@ -58,6 +58,11 @@ class BookingOrderController extends Controller
         $tujuan=$_POST['destination_country'];
         $alamat=$_POST['recipient_address'];
         $kodepos=$_POST['recipient_zipcode'];
+        $berat=$_POST['package_weight'];
+        $jenis=$_POST['package_type'];
+        $desc=$_POST['package_detail'];
+        $pcs=$_POST['package_pcs'];
+        $customvalue=$_POST['package_value'];
 
         $file_tmp= $_FILES['recipient_idcard']['tmp_name'];
         $b64=base64_encode($file_tmp);
@@ -79,14 +84,14 @@ class BookingOrderController extends Controller
                 "negara_tujuan": "'.$tujuan.'"
             },
             "item_data": {
-                "tipe": "NON-GARMENT",
-                "deskripsi": "COSMETICS PERSONAL USED",
-                "berat": 2,
-                "pcs": 1,
+                "tipe": "'.$jenis.'",
+                "deskripsi": "'.$desc.'",
+                "berat": '.$berat.',
+                "pcs": '.$pcs.',
                 "panjang": 0,
                 "lebar": 0,
                 "tinggi": 0,
-                "custom_value": 20
+                "custom_value": '.$customvalue.'
             },
             "item_detail": [
                 {
