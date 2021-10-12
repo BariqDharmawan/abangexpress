@@ -106,8 +106,8 @@
                 <h2 class="h1 fw-bold">Detail paket</h2>
             </div>
             <div class="body">
-                <div class="row">
-                    <div class="col-lg-6">
+                <div class="row d-flex">
+                    <div class="col-lg-6 d-flex items-center">
                         <x-shipment.input
                         placeholder="Masukan tarif ke pelanggan anda"
                         name="package_fee" 
@@ -138,8 +138,8 @@
                     name="package_detail" id="package-detail" 
                     class="prevent-enter" required />
                 </div>
-                <div class="row">
-                    <div class="col-lg-6">
+                <div class="row d-flex">
+                    <div class="col-lg-6 d-flex items-center">
                         <x-shipment.input type="number"
                         placeholder="Masukan jumlah paket / koli"
                         name="package-koli" id="package-koli" step="1"
@@ -147,7 +147,8 @@
                     </div>
                     <div class="col-lg-6">
                         <x-shipment.input type="text" icon-addon="attach_money" 
-                        placeholder="Masukan total harga kiriman" 
+                        label="Masukan total harga kiriman" 
+                        placeholder="2000.000"
                         class="input-currency"
                         id="package-value"
                         small-text="Harga menggunakan mata uang dollar"

@@ -7,7 +7,8 @@
     'smallText' => null,
     'iconAddon' => null,
     'textAddon' => null,
-    'required' => null
+    'required' => null,
+    'label' => null
 ])
 
 
@@ -38,6 +39,9 @@
     </div>
     @else
         @if (isset($iconAddon) || isset($textAddon))
+        <label class="form-label z-20 mb-0" for="{{ $id }}">
+            {{ $label ?? $placeholder }}
+        </label>
         <div class="input-group mb-0">
             <span class="input-group-addon">
                 @isset($iconAddon)
@@ -52,11 +56,9 @@
                     'type' => $type,
                     'id' => $id,
                     'name' => $name,
-                    'required' => $required
+                    'required' => $required,
+                    'placeholder' => $placeholder
                 ]) }}>
-                <label class="form-label z-20 mb-0" for="{{ $id }}">
-                    {{ $placeholder }}
-                </label>
             </div>
         </div>
         @else
