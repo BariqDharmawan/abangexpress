@@ -71,18 +71,23 @@ $(document).ready(function () {
         }) 
     */
     
+    $('form button[type="submit"]').click(function (e) {
+        e.preventDefault()
 
-    $(".only-number-not-allow-decimal").on('input', function () {
-        if ($(this)[0].validity.stepMismatch) {
-            $(this)[0].setCustomValidity(
+        if ($(".only-number-not-allow-decimal")[0].validity.stepMismatch) {
+            $(".only-number-not-allow-decimal")[0].setCustomValidity(
                 'Jangan inputkan angka decimal'
             )
         }
         else {
-            $(this)[0].setCustomValidity(' ')
+            $(".only-number-not-allow-decimal")[0].setCustomValidity(' ')
+            $(this).parents("form").trigger('submit')
+            
         }
-        $(this)[0].reportValidity()
+        $(".only-number-not-allow-decimal")[0].reportValidity()
+
     })
+
 
     $(".input-currency").each(function () {
         new AutoNumeric(`#${$(this).attr('id')}`, {

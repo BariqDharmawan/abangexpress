@@ -10,11 +10,7 @@ use Illuminate\Http\Request;
 
 class BookingOrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $title = 'Form Booking Order';
@@ -23,22 +19,55 @@ class BookingOrderController extends Controller
         return view('shipment.order.book', compact('title', 'prevRecipient'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function order(Request $request)
+    {
+        dd($request->all());
+        $validatedData = $request->validate([
+            'sender_name' => ['required'],
+            'sender_telephone' => ['required'],
+            // 'recipient_previous' => ['required'],
+            'recipient_name' => ['required'],
+            'recipient_telephone' => ['required'],
+            'recipient_nik' => ['required'],
+            'recipient_zipcode' => ['required'],
+            'recipient_country' => ['required'],
+            'recipient_address' => ['required'],
+            'recipient_idcard' => ['required'],
+            'package_fee' => ['required'],
+            'package_weight' => ['required'],
+            'package_type' => ['required'],
+            'package_detail' => ['required'],
+            'package_koli' => ['required'],
+            'package_value' => ['required'],
+        ]);
+
+        if(empty($request->session()->get('book_order'))){
+            // $product = new Product();
+            // $product->fill($validatedData);
+            $request->session()->put('book_order', $validatedData);
+        }
+        else{
+            $product = $request->session()->get('book_order');
+            // $product->fill($validatedData);
+            $request->session()->put('book_order', $validatedData);
+        }
+
+        return redirect()->route('shipping.order.book.invoice');
+    }
+
+    public function invoice(Request $request)
+    {
+        $title = 'Form Invoice';
+        $booked = $request->session()->get('book_order');
+
+        return view('shipment.order.invoice', compact('title', 'booked'));
+    }
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
@@ -52,24 +81,25 @@ class BookingOrderController extends Controller
             $akun=$user->code_api;
             $tokenkey=$user->token_api;
 
-        $pengirim=$_POST['sender_name'];
-        $telepon=$_POST['sender_telephone'];
-        $penerima=$_POST['recipient_name'];
-        $teleponpenerima=$_POST['recipient_telephone'];
-        $ktp=$_POST['recipient_nik'];
-        $tujuan=$_POST['destination_country'];
-        $alamat=$_POST['recipient_address'];
-        $kodepos=$_POST['recipient_zipcode'];
-        $berat=$_POST['package_weight'];
-        $jenis=$_POST['package_type'];
-        $desc=$_POST['package_detail'];
-        $pcs=$_POST['package_pcs'];
+        $pengirim = $request->sender_name;
+        $telepon = $request->sender_telephone;
+        $penerima = $request->recipient_name;
+        $teleponpenerima = $request->recipient_telephone;
+        $ktp = $request->recipient_nik;
+        $tujuan = $request->destination_country;
+        $alamat = $request->recipient_address;
+        $kodepos = $request->recipient_zipcode;
+        $berat = $request->package_weight;
+        $jenis = $request->package_type;
+        $desc = $request->package_detail;
+        $pcs = $request->package_pcs;
         // $customvalue=$_POST['package_value'];
-        $customvalue=12;
+        $customvalue = 12;
 
         $file_tmp= file_get_contents($_FILES['recipient_idcard']['tmp_name']);
         echo $b64=base64_encode($file_tmp);
 
+        //todo: make this into table for better code
         $postdata='{
             "akun": "'.$akun.'",
             "key": "'.$tokenkey.'",
@@ -98,15 +128,18 @@ class BookingOrderController extends Controller
             },
             "item_detail": [
                 {
-                "deskripsi": "Night Cream",
-                "qty": "2",
-                "satuan": "PACK",
-                "value": "5"},
+                    "deskripsi": "Night Cream",
+                    "qty": "2",
+                    "satuan": "PACK",
+                    "value": "5"
+                },
                 {
-                "deskripsi": "Day Cream",
-                "qty": "2",
-                "satuan": "PACK",
-                "value": "5"}]
+                    "deskripsi": "Day Cream",
+                    "qty": "2",
+                    "satuan": "PACK",
+                    "value": "5"
+                }
+            ]
 
         }';
         $curl = curl_init();
@@ -133,12 +166,6 @@ class BookingOrderController extends Controller
          $response;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //

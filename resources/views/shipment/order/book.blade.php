@@ -5,8 +5,9 @@
 @section('content')
 
 <div class="row clearfix">
-    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" 
-    id="form-book-order" method="POST">
+    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" method="POST"
+    action="{{ route('shipping.order.book.step-order') }}"
+    id="form-book-order" enctype="multipart/form-data">
         @csrf
         <div class="card">
             <div class="header">
@@ -71,14 +72,18 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <x-shipment.input type="select" placeholder="Negara penerima"
-                    name="recipient_country" required>
+                    <label for="recipient-country" 
+                    class="form-label form-label--required">
+                        Negara penerima
+                    </label>
+                    <select name="recipient_country" class="select2" id="recipient-country" required style="width: 100%">
+                        <option selected disabled>Negara penerima</option>
                         @for ($i = 1; $i <= 5; $i++)
                             <option value="negara-{{ $i }}">
                                 Negara {{ $i }}
                             </option>
                         @endfor
-                    </x-shipment.input>
+                    </select>
                 </div>
                 <div class="col-12">
                     <x-shipment.input type="textarea" id="recipient-address" 
@@ -96,7 +101,7 @@
                     accept="image/*"
                     name="recipient_idcard" maxlength="8" minlength="3"
                     small-text="Gambar hanya boleh berekstensi .jpg, .jpeg, .png, .svg"  
-                    data-img-preview="#idcard-preview" required />
+                    data-img-preview="#idcard-preview" />
                 </div>
             </div>
         </div>
@@ -106,6 +111,7 @@
                 <h2 class="h1 fw-bold">Detail paket</h2>
             </div>
             <div class="body">
+
                 <div class="row d-flex">
                     <div class="col-lg-6 d-flex items-center">
                         <x-shipment.input
@@ -128,7 +134,7 @@
                     placeholder="Pilh jenis paket"
                     name="package_type" required>
                         @for ($i = 1; $i <= 4; $i++)
-                        <option value="">jenis {{ $i }}</option>
+                        <option value="jenis-{{ $i }}">jenis {{ $i }}</option>
                         @endfor
                     </x-shipment.input>
                 </div>
@@ -142,7 +148,7 @@
                     <div class="col-lg-6 d-flex items-center">
                         <x-shipment.input type="number"
                         placeholder="Masukan jumlah paket / koli"
-                        name="package-koli" id="package-koli" step="1"
+                        name="package_koli" id="package-koli" step="1"
                         class="only-number-not-allow-decimal" required />
                     </div>
                     <div class="col-lg-6">
@@ -156,16 +162,16 @@
                         value="{{ config('app.env') == 'local' ? 20000 : '' }}" />
                     </div>
                 </div>
+
                 <div class="row no-before no-after d-flex justify-content-between mx-0 flex-md-column">
                     <small class="mb-3 mb-md-0">
                         Dengan menekan tombol "order", anda sudah menyetujui 
-                        <button type="button" class="btn btn-link p-0 text-primary
-                        waves-effect m-r-20" data-toggle="modal"
-                        data-target="#modal-tnc">
-                            syarat & ketentuan
-                        </button>
+                        <x-shipment.modal-trigger text="syarat & ketentuan"
+                        class="btn-link p-0 text-primary m-r-20"
+                        target="modal-tnc" />
                     </small>
-                    <button type="submit" class="btn btn-big btn-primary">Order</button>
+                    <button type="submit" class="btn btn-big btn-primary" 
+                    form="form-book-order">Order</button>
                 </div>
             </div>
         </div>

@@ -14,14 +14,15 @@
 
 <div class="form-group form-float form-group-lg">
     @if ($type == 'select')
-        <label for="{{ $id }}" class="form-label @isset($required)form-label--required @endisset">
+        <label for="{{ $id }}" class="form-label 
+        @isset($required)form-label--required @endisset">
             {{ $placeholder }}
         </label>
-        <select {{ $attributes->class(['select2', 'w-100'])->merge([
+        <select {{ $attributes->class(['select2'])->merge([
             'name' => $name,
             'id' => $id,
             'required' => $required
-        ]) }}>
+        ]) }} style="width: 100%">
             <option selected disabled>{{ $placeholder }}</option>
             {{ $slot }}
         </select>
@@ -31,7 +32,8 @@
             'name' => $name, 
             'type' => 'file',
             'id' => $id,
-            'required' => $required
+            'required' => $required,
+            'value' => old($name)
             ]) }} />
         <label for="{{ $id }}" class="custom-file__label">
             <span>{{ $placeholder }}</span>
@@ -57,7 +59,8 @@
                     'id' => $id,
                     'name' => $name,
                     'required' => $required,
-                    'placeholder' => $placeholder
+                    'placeholder' => $placeholder,
+                    'value' => old($name)
                 ]) }}>
             </div>
         </div>
@@ -71,14 +74,15 @@
                     'rows' => $rows,
                     'id' => $id,
                     'required' => $required
-                ]) }}></textarea>
+                ]) }}>{{ old($name) }}</textarea>
                 <label class="form-label mb-0" for="{{ $id }}">{{ $placeholder }}</label>
             @else
                 <input {{ $attributes->class(['form-control'])->merge([
                     'name' => $name, 
                     'type' => $type,
                     'id' => $id,
-                    'required' => $required
+                    'required' => $required,
+                    'value' => old($name)
                 ]) }} />
                 <label class="form-label mb-0" for="{{ $id }}">{{ $placeholder }}</label>
             @endif
