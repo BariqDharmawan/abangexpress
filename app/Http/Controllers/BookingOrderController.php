@@ -21,38 +21,9 @@ class BookingOrderController extends Controller
 
     public function order(Request $request)
     {
-        dd($request->all());
-        $validatedData = $request->validate([
-            'sender_name' => ['required'],
-            'sender_telephone' => ['required'],
-            // 'recipient_previous' => ['required'],
-            'recipient_name' => ['required'],
-            'recipient_telephone' => ['required'],
-            'recipient_nik' => ['required'],
-            'recipient_zipcode' => ['required'],
-            'recipient_country' => ['required'],
-            'recipient_address' => ['required'],
-            'recipient_idcard' => ['required'],
-            'package_fee' => ['required'],
-            'package_weight' => ['required'],
-            'package_type' => ['required'],
-            'package_detail' => ['required'],
-            'package_koli' => ['required'],
-            'package_value' => ['required'],
-        ]);
+        // dd($request->all());
 
-        if(empty($request->session()->get('book_order'))){
-            // $product = new Product();
-            // $product->fill($validatedData);
-            $request->session()->put('book_order', $validatedData);
-        }
-        else{
-            $product = $request->session()->get('book_order');
-            // $product->fill($validatedData);
-            $request->session()->put('book_order', $validatedData);
-        }
-
-        return redirect()->route('shipping.order.book.invoice');
+        return redirect('/shipping/order/book/invoice');
     }
 
     public function invoice(Request $request)

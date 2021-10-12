@@ -72,18 +72,15 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <label for="recipient-country" 
-                    class="form-label form-label--required">
-                        Negara penerima
-                    </label>
-                    <select name="recipient_country" class="select2" id="recipient-country" required style="width: 100%">
-                        <option selected disabled>Negara penerima</option>
+                    <x-shipment.input type="select" 
+                    placeholder="Negara penerima"
+                    name="recipient_country" required>
                         @for ($i = 1; $i <= 5; $i++)
                             <option value="negara-{{ $i }}">
                                 Negara {{ $i }}
                             </option>
                         @endfor
-                    </select>
+                    </x-shipment.input>
                 </div>
                 <div class="col-12">
                     <x-shipment.input type="textarea" id="recipient-address" 
