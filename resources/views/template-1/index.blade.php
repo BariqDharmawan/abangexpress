@@ -54,9 +54,12 @@
                 <ul class="col-lg-9">
                     @for ($i = 0; $i < 4; $i++)
                         <li class="panel-scroll__text px-5">
-                            <p class="m-0">
+                            <p class="mb-1">
                                 Shipment Received at Warehouse Origin Facility.
                             </p>
+                            <address class="m-0">
+                                Jl. Condet Raya No.27 B, RT.5/RW.3, Balekambang, Kec. Kramat jati, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13530
+                            </address>
                         </li>
                     @endfor
                 </ul>

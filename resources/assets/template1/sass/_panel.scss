@@ -5,10 +5,15 @@
     flex-direction: column;
     align-items: flex-start;
 
+    $heightItem: 75px;
+    $spaceBetween: 3rem;
+
     &__item {
         position: relative;
-        height: 25px;
-        margin-bottom: 3rem;
+        height: $heightItem;
+        margin-bottom: $spaceBetween;
+        display: flex;
+        align-items: center;
 
         &.current-day {
             &::before {
@@ -43,9 +48,11 @@
     }
 
     &__text {
-        height: 25px;
-        margin-bottom: 3rem;
+        height: $heightItem;
+        overflow: hidden;
+        margin-bottom: $spaceBetween;
         display: flex;
-        align-items: center;
+        display: flex;
+        flex-direction: column;
     }
 }
