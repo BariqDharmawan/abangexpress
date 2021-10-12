@@ -42,8 +42,7 @@ class BookingOrderController extends Controller
     public function store(Request $request)
     {
 
-        echo "<pre>".
-        print_r($_POST);
+
         $uid=Auth::user()->username;
         $users = User::where([
             ['username', $uid]
@@ -61,9 +60,15 @@ class BookingOrderController extends Controller
         $tujuan=$_POST['destination_country'];
         $alamat=$_POST['recipient_address'];
         $kodepos=$_POST['recipient_zipcode'];
+        $berat=$_POST['package_weight'];
+        $jenis=$_POST['package_type'];
+        $desc=$_POST['package_detail'];
+        $pcs=$_POST['package_pcs'];
+        // $customvalue=$_POST['package_value'];
+        $customvalue=12;
 
-        $file_tmp= $_FILES['recipient_idcard']['tmp_name'];
-        $b64=base64_encode($file_tmp);
+        $file_tmp= file_get_contents($_FILES['recipient_idcard']['tmp_name']);
+        echo $b64=base64_encode($file_tmp);
 
         $postdata='{
             "akun": "'.$akun.'",
@@ -82,14 +87,14 @@ class BookingOrderController extends Controller
                 "negara_tujuan": "'.$tujuan.'"
             },
             "item_data": {
-                "tipe": "NON-GARMENT",
-                "deskripsi": "COSMETICS PERSONAL USED",
-                "berat": 2,
-                "pcs": 1,
+                "tipe": "'.$jenis.'",
+                "deskripsi": "'.$desc.'",
+                "berat": '.$berat.',
+                "pcs": '.$pcs.',
                 "panjang": 0,
                 "lebar": 0,
                 "tinggi": 0,
-                "custom_value": 20
+                "custom_value": '.$customvalue.'
             },
             "item_detail": [
                 {
@@ -121,10 +126,11 @@ class BookingOrderController extends Controller
         ),
         ));
 
-        // $response = curl_exec($curl);
+        $response = curl_exec($curl);
 
         curl_close($curl);
-        // echo $response;
+        echo "<pre>".
+         $response;
     }
 
     /**
