@@ -39,8 +39,7 @@ class BookingOrderController extends Controller
     public function store(Request $request)
     {
 
-        echo "<pre>".
-        print_r($_POST);
+
         $uid=Auth::user()->username;
         $users = User::where([
             ['username', $uid]
@@ -62,10 +61,11 @@ class BookingOrderController extends Controller
         $jenis=$_POST['package_type'];
         $desc=$_POST['package_detail'];
         $pcs=$_POST['package_pcs'];
-        $customvalue=$_POST['package_value'];
+        // $customvalue=$_POST['package_value'];
+        $customvalue=12;
 
-        $file_tmp= $_FILES['recipient_idcard']['tmp_name'];
-        $b64=base64_encode($file_tmp);
+        $file_tmp= file_get_contents($_FILES['recipient_idcard']['tmp_name']);
+        echo $b64=base64_encode($file_tmp);
 
         $postdata='{
             "akun": "'.$akun.'",
@@ -123,10 +123,11 @@ class BookingOrderController extends Controller
         ),
         ));
 
-        // $response = curl_exec($curl);
+        $response = curl_exec($curl);
 
         curl_close($curl);
-        // echo $response;
+        echo "<pre>".
+         $response;
     }
 
     /**
