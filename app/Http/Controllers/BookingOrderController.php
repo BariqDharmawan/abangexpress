@@ -202,12 +202,14 @@ class BookingOrderController extends Controller
         $jenis = $request->package_type;
         $desc = $request->package_detail;
         $pcs = $request->package_pcs;
+        $commercialInvoice = $request->commercialInvoice;
         // $customvalue=$_POST['package_value'];
-        $customvalue = 12;
+        $customvalue = $request->package_value;
 
-        $file_tmp= file_get_contents($_FILES['recipient_idcard']['tmp_name']);
-        $b64=base64_encode($file_tmp);
-        // echo "<pre>".
+        // $file_tmp= file_get_contents($_FILES['recipient_idcard']['tmp_name']);
+        // $b64=base64_encode($file_tmp);
+        $b64=$request->idcard_input_hidden;
+        echo "<pre>".
         //todo: make this into table for better code
         $postdata='{
             "akun": "'.$akun.'",
@@ -235,26 +237,13 @@ class BookingOrderController extends Controller
                 "tinggi": 0,
                 "custom_value": '.$customvalue.'
             },
-            "item_detail": [
-                {
-                    "deskripsi": "Night Cream",
-                    "qty": "2",
-                    "satuan": "PACK",
-                    "value": "5"
-                },
-                {
-                    "deskripsi": "Day Cream",
-                    "qty": "2",
-                    "satuan": "PACK",
-                    "value": "5"
-                }
-            ]
+            "item_detail": ['.$commercialInvoice.']
 
         }';
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.abangexpress.id/shipments/tw/',
+        CURLOPT_URL => 'https://res.abangexpress.id/shipments/tw/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -273,6 +262,11 @@ class BookingOrderController extends Controller
         curl_close($curl);
 
         //  $response;
+
+        return response()->json([
+            'data' => $postdata,
+            'message' => 'success'
+        ]);
     }
 
     public function show($id)

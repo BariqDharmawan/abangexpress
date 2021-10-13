@@ -18,6 +18,7 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
             'book.invoice'
         );
         Route::post('book/invoice', 'BookingOrderController@storeInvoice');
+        Route::post('book/invoice/save', 'BookingOrderController@store');
 
         Route::post('book/step-order', 'BookingOrderController@order')->name(
             'book.step-order'

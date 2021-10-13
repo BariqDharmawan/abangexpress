@@ -111,4 +111,48 @@ $(document).ready(function() {
 
     })
 
+    //submit form invoice and form booking order that saved on localstorage as well
+    $("#form-save-order").submit(function(e) {
+        e.preventDefault()
+        const thisForm = $(this)[0]
+        let xbookOrder = new FormData($(this)[0])
+
+        xbookOrder.delete('_token')
+
+        const getBookOrderOnPrevRequest = new FormData()
+        const formDataInvoice = new FormData(thisForm)
+
+        for (let key = 0; key < localStorage.length; key++) {
+            const inputNameBookingOrder = localStorage.key(key)
+
+            //form data booking order
+            getBookOrderOnPrevRequest.append(
+                inputNameBookingOrder,
+                localStorage.getItem(inputNameBookingOrder)
+            )
+        }
+
+        // Todo: submit ajax here
+        $.ajax({
+            url: "/shipping/order/book/invoice/save",
+            data: getBookOrderOnPrevRequest,
+            cache: false,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function(response) {
+
+                console.log(response)
+                alert(response.message + ', please see console')
+
+
+
+            },
+            error: function(error) {
+                alert(error)
+            }
+        })
+
+    })
+
 })

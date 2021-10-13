@@ -8,17 +8,16 @@ if ($(".select2").length > 0) {
     })
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
 
-    $(".custom-file__input").each(function () {
+    $(".custom-file__input").each(function() {
         const label = $(this).next().find('span')
         const labelText = label.text()
 
-        $(this).change(function (e) {
+        $(this).change(function(e) {
             if ($(this).val() !== '') {
                 label.text(e.target.files[0].name).addClass('no-after')
-            }
-            else {
+            } else {
                 label.text(labelText).removeClass('no-after')
             }
         })
@@ -29,13 +28,13 @@ $(document).ready(function () {
         $(".form-line :input").parents(".form-line").addClass('focused')
     }
 
-    $(".form-line :input").change(function () {
+    $(".form-line :input").change(function() {
         if ($(this).val() !== '') {
             $(this).parents(".form-line").addClass('focused')
         }
     })
 
-    $('.only-number').on('input', function () {
+    $('.only-number').on('input', function() {
         this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
     });
 
@@ -45,15 +44,15 @@ $(document).ready(function () {
         }
     });
 
-    $(".not-allow-space").on('input', function (e) {
+    $(".not-allow-space").on('input', function(e) {
         this.value = this.value.replace(/ /g, '')
     })
 
-    $(".not-allow-number").on('input', function (e) {
+    $(".not-allow-number").on('input', function(e) {
         this.value = this.value.replace(/\d+/g, '')
     })
 
-    $(".input-decimal-comma").each(function () {
+    $(".input-decimal-comma").each(function() {
         new AutoNumeric(`#${$(this).attr('id')}`, {
             decimalCharacter: ',',
             digitGroupSeparator: '.'
@@ -61,27 +60,26 @@ $(document).ready(function () {
     })
 
     if ($(".only-number-not-allow-decimal").length > 0) {
-        $('form button[type="submit"]').click(function (e) {
+        $('form button[type="submit"]').click(function(e) {
             e.preventDefault()
-        
+
             if ($(".only-number-not-allow-decimal")[0].validity.stepMismatch) {
                 $(".only-number-not-allow-decimal")[0].setCustomValidity(
                     'Jangan inputkan angka decimal'
                 )
-            }
-            else {
+            } else {
                 $(".only-number-not-allow-decimal")[0].setCustomValidity(' ')
                 $(this).parents("form").trigger('submit')
-                
+
             }
             $(".only-number-not-allow-decimal")[0].reportValidity()
-            
+
         })
     }
-    
 
 
-    $(".input-currency").each(function () {
+
+    $(".input-currency").each(function() {
         new AutoNumeric(`#${$(this).attr('id')}`, {
             decimalCharacter: ',',
             digitGroupSeparator: '.',
@@ -90,29 +88,32 @@ $(document).ready(function () {
         })
     })
 
-    $("[data-input-hidden]").change(function (e) {
-        const inputHidden = $(this).data('input-hidden')
-        console.log(`changed: ${e.target.files[0].name}`)
-        $(inputHidden).val(e.target.files[0].name)
+    $("[data-input-hidden]").change(function(e) {
+        // const inputHidden = $(this).data('input-hidden')
+        // console.log(`changed: ${e.target.files[0].name}`)
+        // $(inputHidden).val(e.target.files[0].name)
     })
 
-    $("#idcard_input_hidden").change(function () {
-        console.log($(this).val())
+    $("#idcard_input_hidden").change(function() {
+        // console.log($(this).val())
     })
 
-    $("[accept='image/*']").change(function () {
+    $("[accept='image/*']").change(function() {
         const imgPreview = $(this).data('img-preview');
-
+        const inputHidden = $(this).data('input-hidden')
         if (this.files && this.files[0]) {
             let reader = new FileReader();
 
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 previewImgUpload(imgPreview, e.target.result)
-                // $(imgPreview).attr('src', e.target.result).removeClass('d-none')
+                const str = e.target.result
+                const arku = str.split("base64,")
+                $(inputHidden).val(arku[1])
+                console.log(arku[1])
+                    // $(imgPreview).attr('src', e.target.result).removeClass('d-none')
             }
             reader.readAsDataURL(this.files[0]);
-        }
-        else {
+        } else {
             $(imgPreview).attr('src', '').addClass('d-none')
         }
     })

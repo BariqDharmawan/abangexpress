@@ -75,6 +75,17 @@
             </div>
         </div>
     </div>
+
+    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+    id="form-save-order" method="POST">
+
+        <div class="card">
+            <div class="body d-flex flex-wrap flex-column items-end">
+                <button type="submit" class="btn btn-big btn-primary">Simpan</button>
+            </div>
+        </div>
+    </form>
+
 </div>
 
 @endsection
