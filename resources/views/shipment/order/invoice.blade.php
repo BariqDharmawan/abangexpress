@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="row clearfix">
-    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" 
+    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
     id="form-invoice-order" method="POST">
         @csrf
         <div class="card">
@@ -14,7 +14,7 @@
             </div>
             <div class="body d-flex flex-wrap flex-column items-end">
                 <div class="w-100">
-                    <x-shipment.input type="textarea" 
+                    <x-shipment.input type="textarea"
                     placeholder="Deskripsi barang" name="desc" required />
                 </div>
                 <div class="w-100">
@@ -41,7 +41,7 @@
         <div class="card">
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                    <table id="commercialInvoice" class="table table-bordered table-striped table-hover js-basic-example dataTable">
                         <thead>
                             <tr>
                                 <th>No</th>

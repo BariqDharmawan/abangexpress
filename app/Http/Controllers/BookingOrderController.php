@@ -153,8 +153,20 @@ class BookingOrderController extends Controller
     {
         $data = $request->all();
         //logic to save booking order and invoice here
+        $desc=$data['desc'];
+        $qty=$data['quantity'];
+        $satuan=$data['unit'];
+        $unitValue=$data['value_unit'];
+        $commercialInvoice='
+        {
+            "deskripsi": "'.$desc.'",
+            "qty": "'.$qty.'",
+            "satuan": "'.$satuan.'",
+            "value": "'.$unitValue.'"
+        }';
 
         return response()->json([
+            'commercialInvoice' => $commercialInvoice,
             'data' => $data,
             'message' => 'success'
         ]);
