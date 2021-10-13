@@ -102,7 +102,7 @@
                     name="recipient_idcard" maxlength="8" minlength="3"
                     small-text="Gambar hanya boleh berekstensi .jpg, .jpeg, .png, .svg"  
                     data-img-preview="#idcard-preview" />
-                    <input type="text" name="idcard_input_hidden" 
+                    <input type="hidden" name="idcard_input_hidden" 
                     id="idcard_input_hidden" />
                 </div>
             </div>
