@@ -1,4 +1,13 @@
 $(document).ready(function () {
+
+    const isAlreadyFillFormBook = localStorage.getItem('sender_name') ? true : false
+    const isOnFormBookInvoicePage = (window.location.pathname 
+                                == '/shipping/order/book/invoice') ? true : false
+    
+    if (isOnFormBookInvoicePage && !isAlreadyFillFormBook) {
+        window.location.href = '/shipping/order/book'
+    }
+
     //cancel submit form book and save data to localstorage
     $("#form-book-order").submit(function (e) {
         e.preventDefault()
