@@ -6,14 +6,14 @@ $.ajaxSetup({
     }
 });
 
-$(document).ready(function () {
-    $("#get-previous-recipient").change(function () {
+$(document).ready(function() {
+    $("#get-previous-recipient").change(function() {
         const recipientId = $(this).val()
         if (recipientId != 'penerima-baru') {
             $.ajax({
                 type: "GET",
-                url: `/api/previous-recipient/${recipientId}`,
-                success: function (recipients) {
+                url: `/shipping/order/pullPenerima/${recipientId}`,
+                success: function(recipients) {
 
                     console.log(recipients)
 
@@ -22,9 +22,10 @@ $(document).ready(function () {
                     $("[name='recipient_nik']").val(recipients.idcard_number)
                     $("[name='recipient_zipcode']").val(recipients.zipcode)
 
-                    $("[name='recipient_country']").val(recipients.country)
-                    $("[name='recipient_country']").trigger('change')
 
+                    $("[name='recipient_country']").val(recipients.country)
+                        // $("[name='recipient_country']").prop('disabled', true)
+                        // $("[name='recipient_country']").trigger('change')
                     $("[name='recipient_address']").val(recipients.address)
 
                     $("[name='recipient_idcard']").next().find('span').text(
@@ -32,12 +33,11 @@ $(document).ready(function () {
                     )
 
                     previewImgUpload("#idcard-preview", recipients.idcard_photo)
-                    $("#idcard_input_hidden").val(recipients.idcard_photo)
-                    
+
                     $("#data-recipient .form-line :input").prop('readonly', true)
                     $("#data-recipient .form-line").addClass('focused')
                 },
-                error: function () {
+                error: function() {
                     alert('ada yang salah dengan API nya')
                 }
             })

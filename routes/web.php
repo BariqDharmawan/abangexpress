@@ -9,6 +9,9 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
     Route::get('zipcode', 'ShipmentController@zipCode')->name('zipcode');
     Route::prefix('order')->name('order.')->group(function (){
 
+        // PULL DATA CONSIGNEE
+        Route::get('pullPenerima/{id}', 'BookingOrderController@ambilPenerima');
+
 
         Route::get('book', 'BookingOrderController@index')->name('book');
         Route::get('book/invoice', 'BookingOrderController@invoice')->name(

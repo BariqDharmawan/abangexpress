@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-12">
                         <x-shipment.input placeholder="Telepon pengirim"
-                        name="sender_telephone" class="only-number" 
+                        name="sender_telephone" class="only-number"
                         type="tel" minlength="7" maxlength="15" required />
                     </div>
                 </div>
@@ -36,17 +36,17 @@
                 <div class="col-12">
                     <x-shipment.input type="select" placeholder="Penerima Sebelumnya"
                     name="recipient_previous" id="get-previous-recipient" required>
+                        <optgroup label="Pilih penerima baru jika penerima tidak ada di data sebelumnya">
+                            <option value="penerima-baru" class="fw-bold">
+                                Penerima Baru
+                            </option>
+                        </optgroup>
                         <optgroup label="Data penerima sebelumnya">
                             @foreach ($prevRecipient as $recipient)
                                 <option value="{{ $recipient->id }}">
                                     {{ $recipient->name }}
                                 </option>
                             @endforeach
-                        </optgroup>
-                        <optgroup label="Pilih penerima baru jika penerima tidak ada di data sebelumnya">
-                            <option value="penerima-baru" class="fw-bold">
-                                Penerima Baru
-                            </option>
                         </optgroup>
                     </x-shipment.input>
                 </div>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-lg-6">
                         <x-shipment.input placeholder="Telepon penerima"
-                        name="recipient_telephone" class="only-number" 
+                        name="recipient_telephone" class="only-number"
                         minlength="8" maxlength="15" required />
                     </div>
                 </div>
@@ -68,17 +68,19 @@
                     </div>
                     <div class="col-lg-6">
                         <x-shipment.input placeholder="Kode pos"
-                        name="recipient_zipcode" inputmode="numeric" 
+                        name="recipient_zipcode" inputmode="numeric"
                         class="only-number" minlength="3" maxlength="8" required />
                     </div>
                 </div>
                 <div class="col-12">
-                    <x-shipment.input type="select" 
+                    <x-shipment.input type="select"
                     placeholder="Negara penerima"
                     name="recipient_country" required>
+
+                    <option value="TAIWAN">Taiwan</option>
                         @for ($i = 1; $i <= 5; $i++)
-                            <option value="negara-{{ $i }}" 
-                            {{ old('recipient_country') == 'negara-' . $i ? 
+                            <option value="negara-{{ $i }}"
+                            {{ old('recipient_country') == 'negara-' . $i ?
                             'selected' : '' }}>
                                 Negara {{ $i }}
                             </option>
@@ -86,23 +88,23 @@
                     </x-shipment.input>
                 </div>
                 <div class="col-12">
-                    <x-shipment.input type="textarea" id="recipient-address" 
+                    <x-shipment.input type="textarea" id="recipient-address"
                     placeholder="Alamat lengkap penerima" class="prevent-enter"
                     name="recipient_address" required />
                 </div>
                 <div class="col-12">
-                    <img src="" alt="Photo ID Card" id="idcard-preview" 
+                    <img src="" alt="Photo ID Card" id="idcard-preview"
                     height="100px" class="mb-2 d-none">
-                    
+
                     {{-- todo: get idcard photo from database on controller if
                     recipient_previous value is not 'penerima-baru' --}}
-                    <x-shipment.input type="file" id="id-card" 
-                    placeholder="Foto KTP penerima" class="preview-upload" 
+                    <x-shipment.input type="file" id="id-card"
+                    placeholder="Foto KTP penerima" class="preview-upload"
                     accept="image/*" data-input-hidden="#idcard_input_hidden"
                     name="recipient_idcard" maxlength="8" minlength="3"
-                    small-text="Gambar hanya boleh berekstensi .jpg, .jpeg, .png, .svg"  
+                    small-text="Gambar hanya boleh berekstensi .jpg, .jpeg, .png, .svg"
                     data-img-preview="#idcard-preview" />
-                    <input type="hidden" name="idcard_input_hidden" 
+                    <input type="hidden" name="idcard_input_hidden"
                     id="idcard_input_hidden" />
                 </div>
             </div>
@@ -118,7 +120,7 @@
                     <div class="col-lg-6 d-flex items-center">
                         <x-shipment.input
                         placeholder="Masukan tarif ke pelanggan anda"
-                        name="package_fee" 
+                        name="package_fee"
                         id="package-fee" />
                     </div>
                     <div class="col-lg-6">
@@ -126,13 +128,13 @@
                         placeholder="Masukan berat paket"
                         text-addon="(kg)"
                         small-text="Berat paket dibulatkan keatas (kilogram)"
-                        name="package_weight" id="package-weight" 
+                        name="package_weight" id="package-weight"
                         class="input-decimal-comma" required
                         value="{{ config('app.env') == 'local' ? 2 : '' }}" />
                     </div>
                 </div>
                 <div class="col-12">
-                    <x-shipment.input type="select" 
+                    <x-shipment.input type="select"
                     placeholder="Pilh jenis paket"
                     name="package_type" required>
                         @for ($i = 1; $i <= 4; $i++)
@@ -141,9 +143,9 @@
                     </x-shipment.input>
                 </div>
                 <div class="col-12">
-                    <x-shipment.input type="textarea" 
+                    <x-shipment.input type="textarea"
                     placeholder="Jelaskan detail isi paket"
-                    name="package_detail" id="package-detail" 
+                    name="package_detail" id="package-detail"
                     class="prevent-enter" required />
                 </div>
                 <div class="row d-flex">
@@ -154,8 +156,8 @@
                         class="only-number-not-allow-decimal" required />
                     </div>
                     <div class="col-lg-6">
-                        <x-shipment.input type="text" icon-addon="attach_money" 
-                        label="Masukan total harga kiriman" 
+                        <x-shipment.input type="text" icon-addon="attach_money"
+                        label="Masukan total harga kiriman"
                         placeholder="2000.000"
                         class="input-currency"
                         id="package-value"
@@ -167,12 +169,12 @@
 
                 <div class="row no-before no-after d-flex justify-content-between mx-0 flex-md-column">
                     <small class="mb-3 mb-md-0">
-                        Dengan menekan tombol "order", anda sudah menyetujui 
+                        Dengan menekan tombol "order", anda sudah menyetujui
                         <x-shipment.modal-trigger text="syarat & ketentuan"
                         class="btn-link p-0 text-primary m-r-20"
                         target="modal-tnc" />
                     </small>
-                    <button type="submit" class="btn btn-big btn-primary" 
+                    <button type="submit" class="btn btn-big btn-primary"
                     form="form-book-order">Order</button>
                 </div>
             </div>
