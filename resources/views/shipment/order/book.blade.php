@@ -22,7 +22,7 @@
                     <div class="col-12">
                         <x-shipment.input placeholder="Telepon pengirim"
                         name="sender_telephone" class="only-number" 
-                        type="tel" required />
+                        type="tel" minlength="7" maxlength="15" required />
                     </div>
                 </div>
             </div>
@@ -57,7 +57,8 @@
                     </div>
                     <div class="col-lg-6">
                         <x-shipment.input placeholder="Telepon penerima"
-                        name="recipient_telephone" class="only-number" required />
+                        name="recipient_telephone" class="only-number" 
+                        minlength="8" maxlength="15" required />
                     </div>
                 </div>
                 <div class="row">
@@ -76,7 +77,9 @@
                     placeholder="Negara penerima"
                     name="recipient_country" required>
                         @for ($i = 1; $i <= 5; $i++)
-                            <option value="negara-{{ $i }}">
+                            <option value="negara-{{ $i }}" 
+                            {{ old('recipient_country') == 'negara-' . $i ? 
+                            'selected' : '' }}>
                                 Negara {{ $i }}
                             </option>
                         @endfor
@@ -95,10 +98,12 @@
                     recipient_previous value is not 'penerima-baru' --}}
                     <x-shipment.input type="file" id="id-card" 
                     placeholder="Foto KTP penerima" class="preview-upload" 
-                    accept="image/*"
+                    accept="image/*" data-input-hidden="#idcard_input_hidden"
                     name="recipient_idcard" maxlength="8" minlength="3"
                     small-text="Gambar hanya boleh berekstensi .jpg, .jpeg, .png, .svg"  
                     data-img-preview="#idcard-preview" />
+                    <input type="text" name="idcard_input_hidden" 
+                    id="idcard_input_hidden" />
                 </div>
             </div>
         </div>
@@ -145,7 +150,7 @@
                     <div class="col-lg-6 d-flex items-center">
                         <x-shipment.input type="number"
                         placeholder="Masukan jumlah paket / koli"
-                        name="package_koli" id="package-koli" step="1"
+                        name="package_koli" id="package-koli" min="1" step="1"
                         class="only-number-not-allow-decimal" required />
                     </div>
                     <div class="col-lg-6">

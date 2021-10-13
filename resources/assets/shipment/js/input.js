@@ -3,7 +3,8 @@ import { previewImgUpload } from './utilities'
 
 if ($(".select2").length > 0) {
     $(".select2").select2({
-        theme: 'classic'
+        theme: 'classic',
+        allowClear: true
     })
 }
 
@@ -15,8 +16,7 @@ $(document).ready(function () {
 
         $(this).change(function (e) {
             if ($(this).val() !== '') {
-                label.text(e.target.files[0].name)
-                    .addClass('no-after')
+                label.text(e.target.files[0].name).addClass('no-after')
             }
             else {
                 label.text(labelText).removeClass('no-after')
@@ -60,33 +60,25 @@ $(document).ready(function () {
         })
     })
 
-    /*  $("[accept='image/*']").on('change', function () {
-            if ($("[accept='image/*']")[0].files.length === 0) {
-                $("[accept='image/*']")[0].setCustomValidity('Mohon pilih gambar')
+    if ($(".only-number-not-allow-decimal").length > 0) {
+        $('form button[type="submit"]').click(function (e) {
+            e.preventDefault()
+        
+            if ($(".only-number-not-allow-decimal")[0].validity.stepMismatch) {
+                $(".only-number-not-allow-decimal")[0].setCustomValidity(
+                    'Jangan inputkan angka decimal'
+                )
             }
             else {
-                $("[accept='image/*']")[0].setCustomValidity(' ')
+                $(".only-number-not-allow-decimal")[0].setCustomValidity(' ')
+                $(this).parents("form").trigger('submit')
+                
             }
-            $("[accept='image/*']")[0].reportValidity()
-        }) 
-    */
-    
-    $('form button[type="submit"]').click(function (e) {
-        e.preventDefault()
-
-        if ($(".only-number-not-allow-decimal")[0].validity.stepMismatch) {
-            $(".only-number-not-allow-decimal")[0].setCustomValidity(
-                'Jangan inputkan angka decimal'
-            )
-        }
-        else {
-            $(".only-number-not-allow-decimal")[0].setCustomValidity(' ')
-            $(this).parents("form").trigger('submit')
+            $(".only-number-not-allow-decimal")[0].reportValidity()
             
-        }
-        $(".only-number-not-allow-decimal")[0].reportValidity()
-
-    })
+        })
+    }
+    
 
 
     $(".input-currency").each(function () {
@@ -98,9 +90,18 @@ $(document).ready(function () {
         })
     })
 
+    $("[data-input-hidden]").change(function (e) {
+        const inputHidden = $(this).data('input-hidden')
+        console.log(`changed: ${e.target.files[0].name}`)
+        $(inputHidden).val(e.target.files[0].name)
+    })
+
+    $("#idcard_input_hidden").change(function () {
+        console.log($(this).val())
+    })
+
     $("[accept='image/*']").change(function () {
         const imgPreview = $(this).data('img-preview');
-        console.log('change')
 
         if (this.files && this.files[0]) {
             let reader = new FileReader();

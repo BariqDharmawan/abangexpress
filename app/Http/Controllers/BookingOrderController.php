@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Helper;
+use App\Http\Requests\BookOrderValidation;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
@@ -19,10 +20,9 @@ class BookingOrderController extends Controller
         return view('shipment.order.book', compact('title', 'prevRecipient'));
     }
 
-    public function order(Request $request)
-    {
-        // dd($request->all());
-
+    public function order(BookOrderValidation $request)
+    {        
+        //save data to temporary table if possible
         return redirect('/shipping/order/book/invoice');
     }
 
@@ -32,6 +32,17 @@ class BookingOrderController extends Controller
         $booked = $request->session()->get('book_order');
 
         return view('shipment.order.invoice', compact('title', 'booked'));
+    }
+
+    public function storeInvoice(Request $request)
+    {
+        $data = $request->all();
+        //logic to save booking order and invoice here
+        
+        return response()->json([
+            'data' => $data,
+            'message' => 'success'
+        ]);
     }
 
     public function create()

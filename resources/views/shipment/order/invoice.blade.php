@@ -18,7 +18,7 @@
                     placeholder="Deskripsi barang" name="desc" required />
                 </div>
                 <div class="w-100">
-                    <x-shipment.input class="not-allow-number"
+                    <x-shipment.input typpe="number"
                     placeholder="Quantity" name="quantity" required />
                 </div>
                 <div class="w-100">
@@ -36,7 +36,8 @@
                 <button type="submit" class="btn btn-big btn-primary">Simpan</button>
             </div>
         </div>
-
+    </form>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="body">
                 <div class="table-responsive">
@@ -73,7 +74,7 @@
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 
 @endsection
