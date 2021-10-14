@@ -9,6 +9,8 @@ Swiper.use([Navigation, Pagination]);
 import GLightbox from 'glightbox';
 const Isotope = require('isotope-layout');
 
+import AOS from 'aos';
+
 /**
 * Template Name: Reveal - v4.4.0
 * Template URL: https://bootstrapmade.com/reveal-bootstrap-corporate-template/

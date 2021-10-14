@@ -7,12 +7,13 @@
 <section id="hero">
     <div class="hero-content row mx-0" data-aos="fade-up">
         <h2 class="w-100">{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h2>
-        <form method="GET" class="col-lg-8">
+        <form method="GET" class="col-lg-8" 
+        action="{{ route('tracking-order.index') }}">
             @csrf
             <div class="row align-items-center justify-content-center position-relative">
                 <div class="col-12">
-                    <input type="text" class="form-control py-3 ps-lg-4 py-lg-4 shadow input--btn-inside" minlength="11" maxlength="11"
-                    placeholder="Ketik nomor resi disini" required>
+                    <input type="text" class="form-control py-3 ps-lg-4 py-lg-4 shadow input--btn-inside" minlength="3"
+                    placeholder="Ketik nomor resi disini" name="track_order" required>
                 </div>
                 <div class="col">
                     <button type="submit" class="btn btn-primary 
@@ -38,10 +39,11 @@
 </section>
 
 <main id="main">
-    <section>
+    @if (session('result'))
+    <section id="search-resi-section">
         <div class="container" data-aos="fade-up">
-            <x-section-header text="Hasil pencarian" />
             <div id="panel-resi">
+                <x-section-header text="Hasil pencarian {{ session('result') }}" />
                 <div class="row panel-scroll border p-3 alert-dismissible">
                     <ul class="col-lg-3">
                         @for ($i = 0; $i < 4; $i++)
@@ -72,7 +74,7 @@
                             </li>
                         @endfor
                     </ul>
-                    <button type="button" class="btn-close btn-close--div" 
+                    <button type="button" class="btn-close btn-close--div btn-show-hidden-section-aos" data-section-closed-aos="#fade-up-about"
                     data-close-div="#panel-resi"></button>
                 </div>
                 <div class="row mt-4 justify-content-end">
@@ -86,9 +88,10 @@
             </div>
         </div>
     </section>
+    @endif
     <!-- ======= About Section ======= -->
     <section id="about">
-        <div class="container" data-aos="fade-up">
+        <div class="container" data-aos="fade-up" id="fade-up-about">
             <div class="row">
                 <div class="col-lg-6 about-img">
                     <img src="{{ asset($aboutUs->cover_vision_mission) }}" alt="">

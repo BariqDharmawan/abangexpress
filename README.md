@@ -16,5 +16,6 @@ First, make sure you have PHP, Apache2, Mysql installed on your local and then c
 - TASK
 [X] Fix button login template 1, add border radius and change color to dark blue
 [X] Change FAQ component template 1, make it same as template 2
-[ ] Integrasi kolom input `recipient_previous`, ambil data dari ajax kemudian
+[X] Integrasi kolom input `recipient_previous`, ambil data dari ajax kemudian
 kolom lain otomatis terisi dari data ajax tersebut
+[ ] Di dashboard shipping bisa search resi jg, kaya ditemplate 1
