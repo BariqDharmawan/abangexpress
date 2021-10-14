@@ -11,6 +11,8 @@ Route::apiResource('our-service','OurServiceController');
 
 Route::get('vision-mission', 'AboutUsController@getVisionMission');
 
+Route::get('previous-recipient/{id}', 'ShipmentOrderController@dummyPreviousRecipient');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

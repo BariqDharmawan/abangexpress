@@ -1,0 +1,89 @@
+.mx-0 {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+$sides: ("b": bottom, "t": top);
+
+@each $prefix, $side in $sides {
+    .m#{$prefix} {
+        &-md-0 {
+            @media screen and (max-width: 768px) {
+                margin-#{$side}: 0 !important;
+            }
+        }
+        @for $i from 0 through 5 {
+            &-#{$i} {
+                margin-#{$side}: $i * .25rem;
+            }
+        }
+    }
+}
+
+.d-none {
+    display: none;
+}
+
+.d-flex {
+    display: flex;
+}
+.items {
+    &-end {
+        align-items: flex-end;
+    }
+    &-center {
+        align-items: center;
+    }
+}
+.flex-column {
+    flex-direction: column;
+
+    &-reverse {
+        flex-direction: column-reverse;
+    }
+}
+@media screen and (max-width: 768px) {
+    .flex-md-column {
+        flex-direction: column;
+    }
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.no-before {
+    &::before {
+        content: none !important;
+    }
+}
+
+.z-20 {
+    z-index: 20;
+}
+
+.p-0 {
+    padding: 0;
+}
+
+.text-primary {
+    color: #337ab7 !important;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.fw-bold {
+    font-weight: bold !important;
+}
+
+.form-label {
+    font-size: 16px !important;
+}
+
+.h1 {
+    font-size: 20px !important;
+}

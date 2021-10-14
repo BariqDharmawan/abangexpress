@@ -1,0 +1,86 @@
+.bootstrap-select {
+    .dropdown-toggle {
+        padding: {
+            left: 0;
+            right: 0;
+        };
+    }
+}
+
+%requiredMark {
+    &::after {
+        color: $red;
+        content: ' *';
+    }
+}
+
+input {
+    &:not([type='file']):required + label {
+        @extend %requiredMark;
+    }
+    &[type="file"]:required + label span {
+        @extend %requiredMark;
+    }
+}
+
+.form-label--required {
+    @extend %requiredMark;
+}
+
+.custom-file {
+    $heightFile: calc(1.85em + .75rem + 2px);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: $heightFile;
+    margin-bottom: .5rem;
+
+    &__input {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: $heightFile;
+        margin: 0;
+        overflow: hidden;
+        opacity: 0;
+    }
+
+    &__label {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1;
+        height: $heightFile;
+        padding: .375rem .75rem;
+        overflow: hidden;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        border: 1px solid #ced4da {
+            radius: .25rem;
+        };
+
+        transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        display: inline-flex;
+        align-items: center;
+
+        &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            height: calc(1.85em + .75rem);
+            padding: .375rem .75rem;
+            color: #495057;
+            content: "Browse";
+            background-color: #e9ecef;
+            border-left: inherit;
+            border-radius: 0 .25rem .25rem 0
+        }
+    }
+}

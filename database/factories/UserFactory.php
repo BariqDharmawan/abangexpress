@@ -35,6 +35,7 @@ class UserFactory extends Factory
             'password' => Hash::make('passwordadmin'),
             'plain_password' => 'passwordadmin',
             'role' => 'admin',
+            'code_api' => 'CAX0135',
             'domain_owner' => $this->faker->unique()->randomElement($domains),
             'remember_token' => Str::random(10),
         ];
@@ -48,7 +49,9 @@ class UserFactory extends Factory
                     'subadmin1', 'subadmin2', 'subadmin3', 'subadmin4', 'subadmin5'
                 ]),
                 'role' => 'sub-admin',
+                'code_api' => 'coloader',
                 'password' => Hash::make('passwordsubadmin'),
+                'token_api' => 'f03e563b71454776e2cb1e7b5f5ea5c4',
                 'plain_password' => 'passwordsubadmin'
             ];
         });

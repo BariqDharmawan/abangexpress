@@ -9,9 +9,22 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
     Route::get('zipcode', 'ShipmentController@zipCode')->name('zipcode');
     Route::prefix('order')->name('order.')->group(function (){
 
+        // PULL DATA CONSIGNEE
+        Route::get('pullPenerima/{id}', 'BookingOrderController@ambilPenerima');
+
 
         Route::get('book', 'BookingOrderController@index')->name('book');
-        Route::resource('book', 'BookingOrderController')->except('index');
+        Route::get('book/invoice', 'BookingOrderController@invoice')->name(
+            'book.invoice'
+        );
+        Route::post('book/invoice', 'BookingOrderController@storeInvoice');
+        Route::post('book/invoice/save', 'BookingOrderController@store');
+
+        Route::post('book/step-order', 'BookingOrderController@order')->name(
+            'book.step-order'
+        );
+
+        Route::resource('book', 'BookingOrderController')->except('index', 'show');
         Route::get('/', 'ShipmentOrderController@index')->name('index');
         Route::get('process', 'ShipmentOrderController@process')->name('process');
         Route::get('pending', 'ShipmentOrderController@pending')->name('pending');

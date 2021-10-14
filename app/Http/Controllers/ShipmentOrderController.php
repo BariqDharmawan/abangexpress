@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use Illuminate\Http\Request;
 
 class ShipmentOrderController extends Controller
@@ -12,10 +13,12 @@ class ShipmentOrderController extends Controller
         return view('shipment.order.index', compact('title'));
     }
 
-    public function book()
+    public function dummyPreviousRecipient($id)
     {
-        $title = 'Booking Order';
-        return view('shipment.order.book', compact('title'));
+        $prevRecipient = Helper::getJson('prev-recipient.json')[$id - 1];
+        //todo: change this to get data from database
+
+        return response()->json($prevRecipient);
     }
 
     public function process()
