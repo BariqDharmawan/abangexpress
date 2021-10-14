@@ -77,7 +77,8 @@
                 </div>
                 <div class="row mt-4 justify-content-end">
                     <div class="col-auto">
-                        <a href="" class="btn rounded-pill btn-info text-white">
+                        <a href="javascript:void(0);" data-to-section="#topbar"
+                        class="btn rounded-pill btn-info text-white scroll-to-section">
                             Telusuri lagi
                         </a>
                     </div>
