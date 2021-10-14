@@ -30,7 +30,7 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'username' => $this->faker->unique(true)->randomElement([
-                'admincompany1', 'admincompany2', 'admincompany3'
+                'admincompany1', 'admincompany2'
             ]),
             'password' => Hash::make('passwordadmin'),
             'plain_password' => 'passwordadmin',
