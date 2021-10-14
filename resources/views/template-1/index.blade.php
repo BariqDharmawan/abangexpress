@@ -41,36 +41,47 @@
     <section>
         <div class="container" data-aos="fade-up">
             <x-section-header text="Hasil pencarian" />
-            <div class="row panel-scroll border p-3">
-                <ul class="col-lg-3">
-                    @for ($i = 0; $i < 4; $i++)
-                    <li class="panel-scroll__item 
-                    @if($i == 0) current-day @elseif($i == 1) out-for-delivery @endif">
-                        @if ($i == 0)
-                        <i class="fas fa-check text-white special-indicator"></i>
-                        @elseif ($i == 1)
-                        <i class="fas fa-box text-white special-indicator"></i>
-                        @else
-                        <i class="fas fa-circle text-secondary special-indicator"></i>
-                        @endif
-                        <time datetime="{{ date('d M Y H:i') }}" class="fw-bold fs-5">
-                            {{ date('d M Y - H:i') }}
-                        </time>
-                    </li>
-                    @endfor
-                </ul>
-                <ul class="col-lg-9">
-                    @for ($i = 0; $i < 4; $i++)
-                        <li class="panel-scroll__text px-5">
-                            <p class="mb-1 fw-bold fs-5">
-                                Shipment Received at Warehouse Origin Facility.
-                            </p>
-                            <address class="m-0 fs-6">
-                                Jl. Condet Raya No.27 B, RT.5/RW.3, Balekambang, Kec. Kramat jati, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13530
-                            </address>
+            <div id="panel-resi">
+                <div class="row panel-scroll border p-3 alert-dismissible">
+                    <ul class="col-lg-3">
+                        @for ($i = 0; $i < 4; $i++)
+                        <li class="panel-scroll__item 
+                        @if($i == 0) current-day @elseif($i == 1) out-for-delivery @endif">
+                            @if ($i == 0)
+                            <i class="fas fa-check text-white special-indicator"></i>
+                            @elseif ($i == 1)
+                            <i class="fas fa-box text-white special-indicator"></i>
+                            @else
+                            <i class="fas fa-circle text-secondary special-indicator"></i>
+                            @endif
+                            <time datetime="{{ date('d M Y H:i') }}" class="fw-bold fs-5">
+                                {{ date('d M Y - H:i') }}
+                            </time>
                         </li>
-                    @endfor
-                </ul>
+                        @endfor
+                    </ul>
+                    <ul class="col-lg-9">
+                        @for ($i = 0; $i < 4; $i++)
+                            <li class="panel-scroll__text px-5">
+                                <p class="mb-1 fw-bold fs-5">
+                                    Shipment Received at Warehouse Origin Facility.
+                                </p>
+                                <address class="m-0 fs-6">
+                                    Jl. Condet Raya No.27 B, RT.5/RW.3, Balekambang, Kec. Kramat jati, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13530
+                                </address>
+                            </li>
+                        @endfor
+                    </ul>
+                    <button type="button" class="btn-close btn-close--div" 
+                    data-close-div="#panel-resi"></button>
+                </div>
+                <div class="row mt-4 justify-content-end">
+                    <div class="col-auto">
+                        <a href="" class="btn rounded-pill btn-info text-white">
+                            Telusuri lagi
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
