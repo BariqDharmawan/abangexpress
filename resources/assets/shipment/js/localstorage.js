@@ -141,9 +141,12 @@ $(document).ready(function() {
             contentType: false,
             type: 'POST',
             success: function(response) {
+                localStorage.clear()
+                    // console.log(response.data.link_resi)
+                alert(response.message)
 
-                console.log(response)
-                alert(response.message + ', please see console')
+                window.open(response.data.link_resi, '_blank');
+                window.open('/shipping', '_self');
 
 
 
