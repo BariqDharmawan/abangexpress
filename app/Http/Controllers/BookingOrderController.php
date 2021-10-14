@@ -50,10 +50,58 @@ class BookingOrderController extends Controller
 
         curl_close($curl);
         $res=json_decode($response);
-        $res1=json_encode($res->response);
-        // $prevRecipient = Helper::getJson('prev-recipient.json');
         $prevRecipient =$res->response;
-        return view('shipment.order.book', compact('title', 'prevRecipient'));
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/countrylist/',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS =>$postdata,
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json'
+        ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $res=json_decode($response);
+        // $prevRecipient = Helper::getJson('prev-recipient.json');
+        $countryList =$res->response;
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/commoditylist/',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS =>$postdata,
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json'
+        ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $res=json_decode($response);
+        // $prevRecipient = Helper::getJson('prev-recipient.json');
+        $commodityList =$res->response;
+
+
+        return view('shipment.order.book', compact('title', 'prevRecipient','countryList','commodityList'));
     }
     public function order(BookOrderValidation $request)
     {

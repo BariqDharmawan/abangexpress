@@ -76,15 +76,11 @@
                     <x-shipment.input type="select"
                     placeholder="Negara penerima"
                     name="recipient_country" required>
-
-                    <option value="TAIWAN">Taiwan</option>
-                        @for ($i = 1; $i <= 5; $i++)
-                            <option value="negara-{{ $i }}"
-                            {{ old('recipient_country') == 'negara-' . $i ?
-                            'selected' : '' }}>
-                                Negara {{ $i }}
+                        @foreach ($countryList as $country)
+                            <option value="{{ $country->tujuan }}">
+                                {{ $country->alias }}
                             </option>
-                        @endfor
+                        @endforeach
                     </x-shipment.input>
                 </div>
                 <div class="col-12">
@@ -137,9 +133,11 @@
                     <x-shipment.input type="select"
                     placeholder="Pilh jenis paket"
                     name="package_type" required>
-                        @for ($i = 1; $i <= 4; $i++)
-                        <option value="jenis-{{ $i }}">jenis {{ $i }}</option>
-                        @endfor
+                        @foreach ($commodityList as $commodity)
+                            <option value="{{ $commodity->commodity }}">
+                                {{ $commodity->commodity }}
+                            </option>
+                        @endforeach
                     </x-shipment.input>
                 </div>
                 <div class="col-12">
