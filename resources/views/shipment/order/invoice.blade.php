@@ -68,21 +68,4 @@
 @endsection
 
 @section('components')
-    {{-- todo: integration this from ajax data --}}
-    @for ($i = 1; $i <= 5; $i++)
-        <x-shipment.modal id="delete-data{{ $i }}" title="Hapus data {{ $i }}">
-            <p>Apakah kamu yakin, ingin menghapus data {{ $i }}</p>
-            <x-slot name="action">
-                <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Tidak jadi</button>
-                    <form action="" method="POST">
-                        @csrf @method('DELETE')
-                        <button type="button" class="btn btn-danger waves-effect">
-                            Ya, hapus
-                        </button>
-                    </form>
-                </div>
-            </x-slot>
-        </x-shipment.modal>
-    @endfor
 @endsection

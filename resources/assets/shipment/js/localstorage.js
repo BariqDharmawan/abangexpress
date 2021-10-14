@@ -96,7 +96,7 @@ $(document).ready(function() {
                                      Number(invoice.value_unit),
                         action: `<button class="btn waves-effect btn-danger" 
                         data-toggle="modal" type="button"
-                        data-target="delete-data-${index + 1}">
+                        data-target="#delete-data-${index + 1}">
                             <i class="material-icons">delete</i>
                         </button>`
                     })
@@ -120,6 +120,52 @@ $(document).ready(function() {
 
                 if (btnSubmit.hasClass('enable-other-btn')) {
                     enableOtherBtn(btnSubmit)
+                }
+
+                for (let i = 0; i < commercialInvoice.length; i++) {
+                    const modalFade = $("<div>", {
+                        id: `delete-data-${i + 1}`,
+                        class: 'modal fade',
+                        tabindex: '-1',
+                        role: 'dialog'
+                    })
+
+                    const csrfToken = $("meta[name='csrf-token']").attr('content')
+                    $(`<div class="modal fade" id="delete-data-${i + 1}" 
+                        tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="{{ $id }}Label">
+                                            Hapus data ${i + 1}
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            Apakah kamu yakin, ingin menghapus data 
+                                            ${i + 1}
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">
+                                                Tidak jadi
+                                            </button>
+                                            <form action="" method="POST">
+                                                <input type="hidden" name="_token"
+                                                value="${csrfToken}">
+                                                <input type="hidden" name="_method"
+                                                value="DELETE">
+                                                <button type="button" class="btn btn-danger waves-effect">
+                                                    Ya, hapus
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).appendTo('body')
                 }
 
             },

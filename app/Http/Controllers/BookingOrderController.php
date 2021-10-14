@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class BookingOrderController extends Controller
 {
@@ -21,7 +22,6 @@ class BookingOrderController extends Controller
             ['username', $uid]
         ])->first();
 
-        // foreach ($users as $user)
         $akun = $user->code_api;
         $tokenkey = $user->token_api;
         $postdata = '{
@@ -29,54 +29,53 @@ class BookingOrderController extends Controller
             "key": "'.$tokenkey.'"
 
         }';
+
         $curl = curl_init();
-
-        // dd($user);
-
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/consigneedata/',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS =>$postdata,
-        CURLOPT_HTTPHEADER => array(
-            'Content-Type: application/json'
-        ),
+            CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/consigneedata/',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $postdata,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+            ),
         ));
 
         $response = curl_exec($curl);
 
         curl_close($curl);
-        $res=json_decode($response);
-        $prevRecipient =$res->response;
+
+        $res = json_decode($response);
+        $prevRecipient = $res->response;
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/countrylist/',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS =>$postdata,
-        CURLOPT_HTTPHEADER => array(
-            'Content-Type: application/json'
-        ),
+            CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/countrylist/',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>$postdata,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+            ),
         ));
 
         $response = curl_exec($curl);
 
         curl_close($curl);
-        $res=json_decode($response);
+        $res = json_decode($response);
         // $prevRecipient = Helper::getJson('prev-recipient.json');
-        $countryList =$res->response;
+        $countryList = $res->response;
 
         $curl = curl_init();
 
@@ -98,9 +97,9 @@ class BookingOrderController extends Controller
         $response = curl_exec($curl);
 
         curl_close($curl);
-        $res=json_decode($response);
+        $res = json_decode($response);
         // $prevRecipient = Helper::getJson('prev-recipient.json');
-        $commodityList =$res->response;
+        $commodityList = $res->response;
 
 
         return view('shipment.order.book', compact('title', 'prevRecipient','countryList','commodityList'));
