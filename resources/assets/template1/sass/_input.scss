@@ -1,0 +1,8 @@
+.input {
+    &--btn-inside {
+        padding-right: 60px;
+        @media screen and (min-width: 993px) {
+            padding-right: 140px;
+        }
+    }
+}
