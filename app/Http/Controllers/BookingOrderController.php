@@ -198,18 +198,19 @@ class BookingOrderController extends Controller
         $tujuan = $request->destination_country;
         $alamat = $request->recipient_address;
         $kodepos = $request->recipient_zipcode;
-        $berat = $request->package_weight;
+        $berat = str_replace(",",".",$request->package_weight);
         $jenis = $request->package_type;
         $desc = $request->package_detail;
-        $pcs = $request->package_pcs;
+        $pcs = $request->package_koli;
         $commercialInvoice = $request->commercialInvoice;
         // $customvalue=$_POST['package_value'];
-        $customvalue = $request->package_value;
+        $customvalue = str_replace(".","",$request->package_value);
+        $customvalue = str_replace(",",".",$customvalue);
 
         // $file_tmp= file_get_contents($_FILES['recipient_idcard']['tmp_name']);
         // $b64=base64_encode($file_tmp);
         $b64=$request->idcard_input_hidden;
-        echo "<pre>".
+        // echo "<pre>".
         //todo: make this into table for better code
         $postdata='{
             "akun": "'.$akun.'",
@@ -257,14 +258,16 @@ class BookingOrderController extends Controller
         ),
         ));
 
-        // $response = curl_exec($curl);
+        $response = curl_exec($curl);
 
         curl_close($curl);
+        $response=json_decode($response);
+        $response=$response->response;
+        // print_r($response);
 
-        //  $response;
 
         return response()->json([
-            'data' => $postdata,
+            'data' => $response,
             'message' => 'success'
         ]);
     }
