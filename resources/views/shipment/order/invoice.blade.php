@@ -39,7 +39,7 @@
             </div>
         </div>
     </form>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 d-none" 
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 d-none"
     id="parent-commercialInvoice">
         <div class="card">
             <div class="body">
@@ -58,11 +58,15 @@
                         </thead>
                     </table>
                 </div>
+
+            <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="form-save-order" method="POST">
                 <div class="mt-5">
-                    <a href="" class="btn btn-big btn-primary disabled"
-                    id="btn-generate-pdf">Generate PDF</a>
+                    <button type="submit" class="btn btn-big btn-primary disabled"
+                    id="btn-generate-pdf">Generate PDF</button>
                 </div>
+            </form>
             </div>
+
         </div>
     </div>
 
