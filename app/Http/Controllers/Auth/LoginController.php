@@ -35,7 +35,7 @@ class LoginController extends Controller
         $role = Auth::user()->role;
         switch ($role) {
             case 'admin':
-                return '/admin/identity';
+                return '/admin/about-us/identity';
             break;
                 
             case 'sub-admin':
