@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use mysqli;
 
 class BookingOrderController extends Controller
 {
@@ -114,11 +115,10 @@ class BookingOrderController extends Controller
         // $prevRecipient = session('consigneedata')[$id - 1];
         //todo: change this to get data from database
         $uid=Auth::user()->username;
-        $users = User::where([
+        $user = User::where([
             ['username', $uid]
-        ])->get();
+        ])->first();
 
-        foreach ($users as $user)
         $akun=$user->code_api;
         $tokenkey=$user->token_api;
         $postdata='{

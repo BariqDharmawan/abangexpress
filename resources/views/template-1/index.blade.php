@@ -7,7 +7,7 @@
 <section id="hero">
     <div class="hero-content row mx-0" data-aos="fade-up">
         <h2 class="w-100">{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h2>
-        <form method="GET" class="col-lg-8" 
+        <form method="GET" class="col-lg-8"
         action="{{ route('tracking-order.index') }}">
             @csrf
             <div class="row align-items-center justify-content-center position-relative">
@@ -16,7 +16,7 @@
                     placeholder="Ketik nomor resi disini" name="track_order" required>
                 </div>
                 <div class="col">
-                    <button type="submit" class="btn btn-primary 
+                    <button type="submit" class="btn btn-primary
                     btn--inside-input py-lg-2">
                         <i class="fas fa-search"></i>
                         <span class="d-none d-lg-block" style="margin-left: 10px">
@@ -31,49 +31,88 @@
     <div class="hero-slider swiper-container">
         <div class="swiper-wrapper">
             @foreach ($heroCarousel as $carousel)
-                <div class="swiper-slide" 
-                style="background-image: url('{{ asset($carousel->img) }}"></div>    
+                <div class="swiper-slide"
+                style="background-image: url('{{ asset($carousel->img) }}"></div>
             @endforeach
         </div>
     </div>
 </section>
 
 <main id="main">
-    @if (session('result'))
+    @if (session('trackingstatus')=="success")
+        <section id="search-resi-section">
+            <div class="container" data-aos="fade-up">
+                <div id="panel-resi">
+                    <x-section-header text="Hasil pencarian {{ session('result') }}" />
+                    <div class="row panel-scroll border p-3 alert-dismissible">
+
+
+                        <ul class="col-lg-3">
+                            @foreach ( session('datetime') as $dateRes)
+                            <li class="panel-scroll__item
+                            @if(strpos(strtolower($dateRes['status']),"delivered")  !==false )
+                            {{-- coloring for delivery --}}
+                                current-day
+                            @elseif(strpos(strtolower($dateRes['status']),"delivery")  !==false || strpos(strtolower($dateRes['status']),"delivering")  !==false )
+                            {{-- coloring for out for delivery --}}
+                                out-for-delivery
+                            @endif
+                            ">
+
+                                @if (strpos(strtolower($dateRes['status']),"delivered")  !==false )
+                                {{-- delivered icon --}}
+                                    <i class="fas fa-check text-white special-indicator"></i>
+                                @elseif (strpos(strtolower($dateRes['status']),"delivery")  !==false || strpos(strtolower($dateRes['status']),"delivering")  !==false )
+                                {{-- icon out for delivery --}}
+                                    <i class="fas fa-box text-white special-indicator"></i>
+                                @else
+                                {{-- other icon a.k.a intransit --}}
+                                    <i class="fas fa-circle text-secondary special-indicator"></i>
+                                @endif
+
+                                <time datetime="{{  $dateRes['date'] }}" class="fw-bold fs-5">
+                                    {{ $dateRes['date']  }}<br>{{ $dateRes['time']  }}
+                                </time>
+                            </li>
+                            @endforeach
+                        </ul>
+
+                        <ul class="col-lg-9">
+                            @foreach (session('trackresult') as $trackresult )
+                                <li class="panel-scroll__text px-5">
+                                    <p class="mb-1 fw-bold fs-5">
+                                        {{-- tracking detail --}}
+                                        {{ $trackresult['desc'] }}
+                                    </p>
+                                    <address class="m-0 fs-6">
+                                        {{-- location --}}
+                                        {{ $trackresult['location'] }}
+                                    </address>
+                                </li>
+                            @endforeach
+                        </ul>
+
+                        <button type="button" class="btn-close btn-close--div btn-show-hidden-section-aos" data-section-closed-aos="#fade-up-about"
+                        data-close-div="#panel-resi"></button>
+                    </div>
+                    <div class="row mt-4 justify-content-end">
+                        <div class="col-auto">
+                            <a href="javascript:void(0);" data-to-section="#topbar"
+                            class="btn rounded-pill btn-info text-white scroll-to-section">
+                                Telusuri lagi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @else
     <section id="search-resi-section">
         <div class="container" data-aos="fade-up">
             <div id="panel-resi">
-                <x-section-header text="Hasil pencarian {{ session('result') }}" />
+                <x-section-header text="Hasil pencarian" />
                 <div class="row panel-scroll border p-3 alert-dismissible">
-                    <ul class="col-lg-3">
-                        @for ($i = 0; $i < 4; $i++)
-                        <li class="panel-scroll__item 
-                        @if($i == 0) current-day @elseif($i == 1) out-for-delivery @endif">
-                            @if ($i == 0)
-                            <i class="fas fa-check text-white special-indicator"></i>
-                            @elseif ($i == 1)
-                            <i class="fas fa-box text-white special-indicator"></i>
-                            @else
-                            <i class="fas fa-circle text-secondary special-indicator"></i>
-                            @endif
-                            <time datetime="{{ date('d M Y H:i') }}" class="fw-bold fs-5">
-                                {{ date('d M Y - H:i') }}
-                            </time>
-                        </li>
-                        @endfor
-                    </ul>
-                    <ul class="col-lg-9">
-                        @for ($i = 0; $i < 4; $i++)
-                            <li class="panel-scroll__text px-5">
-                                <p class="mb-1 fw-bold fs-5">
-                                    Shipment Received at Warehouse Origin Facility.
-                                </p>
-                                <address class="m-0 fs-6">
-                                    Jl. Condet Raya No.27 B, RT.5/RW.3, Balekambang, Kec. Kramat jati, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13530
-                                </address>
-                            </li>
-                        @endfor
-                    </ul>
+
                     <button type="button" class="btn-close btn-close--div btn-show-hidden-section-aos" data-section-closed-aos="#fade-up-about"
                     data-close-div="#panel-resi"></button>
                 </div>
@@ -98,7 +137,7 @@
                 </div>
 
                 <div class="col-lg-6 content">
-                    <x-section-header text="{{ $landingSection[0]->section_name }}" 
+                    <x-section-header text="{{ $landingSection[0]->section_name }}"
                     desc="{{ $landingSection[0]->first_desc }}" />
                     <div class="row mt-4">
                         <div class="col-lg">
@@ -174,7 +213,7 @@
                                     'template1/img/quote-sign-right.png'
                                 ) }}" class="quote-sign-right" alt="">
                             </p>
-                            <img src="{{ asset($team->avatar) }}" 
+                            <img src="{{ asset($team->avatar) }}"
                             class="testimonial-img" alt="">
                             <h3>{{ $team->name }}</h3>
                             <h4>{{ $team->position->name }}</h4>
@@ -192,18 +231,18 @@
     <section id="faq" class="faq section-bg my-4 bg-primary">
         <div class="container" data-aos="fade-up">
 
-            <x-section-header text="{{ $landingSection[4]->section_name }}" 
+            <x-section-header text="{{ $landingSection[4]->section_name }}"
             class="text-white text-center" />
 
-            <div class="accordion accordion-flush shadow p-4 bg-white parent-load-data" 
+            <div class="accordion accordion-flush shadow p-4 bg-white parent-load-data"
             id="load-faq">
                 {{-- get faq using ajax [this is 'shadow' element] --}}
                 <div class="accordion-item accordion-faq">
                     <a class="accordion-button accordion__heading collapsed toggler-accordion" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#accordion-list" aria-expanded="false" 
+                    data-bs-target="#accordion-list" aria-expanded="false"
                     aria-controls="accordion-list"></a>
-                    <div id="accordion-list" 
-                        class="collapse accordion__text" 
+                    <div id="accordion-list"
+                        class="collapse accordion__text"
                         aria-labelledby="flush-faq"
                         data-bs-parent="#load-faq">
                         <div class="accordion-body">
@@ -226,21 +265,21 @@
 
                 {{-- get contact using ajax --}}
                 <div class="col-md-4">
-                    <x-template1.list-group-simple icon="bi-geo-alt" id="location" 
+                    <x-template1.list-group-simple icon="bi-geo-alt" id="location"
                     text="" subtext="" link="" class="contact-address" subtext-class="contact-value" />
                 </div>
 
                 <div class="col-md-4">
-                    <x-template1.list-group-simple icon="bi-phone" id="phone" 
+                    <x-template1.list-group-simple icon="bi-phone" id="phone"
                     text="" subtext="" link="" class="contact-phone" subtext-class="contact-value" />
                 </div>
 
                 <div class="col-md-4">
-                    <x-template1.list-group-simple icon="bi-envelope" id="email" 
+                    <x-template1.list-group-simple icon="bi-envelope" id="email"
                     text="" subtext="" link="" class="contact-email" subtext-class="contact-value" />
                 </div>
                 {{-- end of that --}}
-                
+
             </div>
         </div>
 
