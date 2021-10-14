@@ -90,17 +90,16 @@ $(document).ready(function() {
                     '[' + localStorage.getItem("commercialInvoice") + ']'
                 )
                 const commercialInvoice = data.map((invoice, index) => ({
-                        ...invoice, 
-                        no: index + 1,
-                        total_value: Number(invoice.quantity) * 
-                                     Number(invoice.value_unit),
-                        action: `<button class="btn waves-effect btn-danger" 
+                    ...invoice,
+                    no: index + 1,
+                    total_value: Number(invoice.quantity) *
+                        Number(invoice.value_unit),
+                    action: `<button class="btn waves-effect btn-danger"
                         data-toggle="modal" type="button"
                         data-target="#delete-data-${index + 1}">
                             <i class="material-icons">delete</i>
                         </button>`
-                    })
-                )
+                }))
 
                 console.log('data', commercialInvoice)
                 $('#commercialInvoice').DataTable().destroy()
@@ -134,7 +133,7 @@ $(document).ready(function() {
                     })
 
                     const csrfToken = $("meta[name='csrf-token']").attr('content')
-                    $(`<div class="modal fade" id="delete-data-${i + 1}" 
+                    $(`<div class="modal fade" id="delete-data-${i + 1}"
                         tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -145,7 +144,7 @@ $(document).ready(function() {
                                     </div>
                                     <div class="modal-body">
                                         <p>
-                                            Apakah kamu yakin, ingin menghapus data 
+                                            Apakah kamu yakin, ingin menghapus data
                                             ${i + 1}
                                         </p>
                                     </div>
@@ -225,5 +224,99 @@ $(document).ready(function() {
         })
 
     })
+
+
+    // generate commercial invoice table data
+    var oldCi = localStorage.getItem("commercialInvoice")
+    if (oldCi === null) {
+        // no data dont generate
+    } else {
+        // generate data
+
+        const thisForm = $(this)[0]
+        const btnSubmit = $(this).find("button[type='submit']")
+
+
+        // refresh dataTable
+        const data = JSON.parse(
+            '[' + localStorage.getItem("commercialInvoice") + ']'
+        )
+        const commercialInvoice = data.map((invoice, index) => ({
+            ...invoice,
+            no: index + 1,
+            total_value: Number(invoice.quantity) *
+                Number(invoice.value_unit),
+            action: `<button class="btn waves-effect btn-danger"
+                        data-toggle="modal" type="button"
+                        data-target="#delete-data-${index + 1}">
+                            <i class="material-icons">delete</i>
+                        </button>`
+        }))
+
+        console.log('data', commercialInvoice)
+        $('#commercialInvoice').DataTable().destroy()
+        $('#commercialInvoice').DataTable({
+            "data": commercialInvoice,
+            "columns": [
+                { "data": "no" },
+                { "data": "desc" },
+                { "data": "unit" },
+                { "data": "quantity" },
+                { "data": "value_unit" },
+                { "data": "total_value" },
+                { "data": "action" }
+            ]
+        })
+        $('#commercialInvoice').DataTable().draw()
+
+        $("#btn-generate-pdf").removeAttr("disabled");
+
+        for (let i = 0; i < commercialInvoice.length; i++) {
+            const modalFade = $("<div>", {
+                id: `delete-data-${i + 1}`,
+                class: 'modal fade',
+                tabindex: '-1',
+                role: 'dialog'
+            })
+
+            const csrfToken = $("meta[name='csrf-token']").attr('content')
+            $(`<div class="modal fade" id="delete-data-${i + 1}"
+                        tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="{{ $id }}Label">
+                                            Hapus data ${i + 1}
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            Apakah kamu yakin, ingin menghapus data
+                                            ${i + 1}
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">
+                                                Tidak jadi
+                                            </button>
+                                            <form action="" method="POST">
+                                                <input type="hidden" name="_token"
+                                                value="${csrfToken}">
+                                                <input type="hidden" name="_method"
+                                                value="DELETE">
+                                                <button type="button" class="btn btn-danger waves-effect">
+                                                    Ya, hapus
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).appendTo('body')
+        }
+
+    }
 
 })
