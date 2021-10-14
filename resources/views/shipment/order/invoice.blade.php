@@ -33,7 +33,7 @@
                     <x-shipment.input class="only-number"
                     placeholder="Value per unit" name="value_unit" required />
                 </div>
-                <button type="submit" class="btn btn-big btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-big btn-primary enable-other-btn" data-enable-other-btn="#btn-generate-pdf">Simpan</button>
             </div>
         </div>
     </form>
@@ -53,38 +53,15 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {{-- todo: integration this from ajax data --}}
-                            @for ($i = 1; $i <= 5; $i++)
-                            <tr>
-                                <td>{{ $i }}</td>
-                                <td>Cosmetic</td>
-                                <td>Set</td>
-                                <td>5</td>
-                                <td>10000</td>
-                                <td>50000</td>
-                                <td>
-                                    <x-shipment.modal-trigger class="btn-danger"
-                                    target="delete-data{{ $i }}" icon="delete" />
-                                </td>
-                            </tr>
-                            @endfor
-                        </tbody>
                     </table>
+                </div>
+                <div class="mt-5">
+                    <a href="" class="btn btn-big btn-primary disabled"
+                    id="btn-generate-pdf">Generate PDF</a>
                 </div>
             </div>
         </div>
     </div>
-
-    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-    id="form-save-order" method="POST">
-
-        <div class="card">
-            <div class="body d-flex flex-wrap flex-column items-end">
-                <button type="submit" class="btn btn-big btn-primary">Simpan</button>
-            </div>
-        </div>
-    </form>
 
 </div>
 

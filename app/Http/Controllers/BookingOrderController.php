@@ -17,19 +17,21 @@ class BookingOrderController extends Controller
         $title = 'Form Booking Order';
 
         $uid=Auth::user()->username;
-        $users = User::where([
+        $user = User::where([
             ['username', $uid]
-        ])->get();
+        ])->first();
 
-        foreach ($users as $user)
-        $akun=$user->code_api;
-        $tokenkey=$user->token_api;
-        $postdata='{
+        // foreach ($users as $user)
+        $akun = $user->code_api;
+        $tokenkey = $user->token_api;
+        $postdata = '{
             "akun": "'.$akun.'",
             "key": "'.$tokenkey.'"
 
         }';
         $curl = curl_init();
+
+        // dd($user);
 
         curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/consigneedata/',

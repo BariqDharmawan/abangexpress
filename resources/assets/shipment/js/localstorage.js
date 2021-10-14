@@ -1,3 +1,5 @@
+import { enableOtherBtn } from "./btn"
+
 $(document).ready(function() {
 
     const isAlreadyFillFormBook = localStorage.getItem('sender_name') ? true : false
@@ -27,6 +29,7 @@ $(document).ready(function() {
     $("#form-invoice-order").submit(function(e) {
         e.preventDefault()
         const thisForm = $(this)[0]
+        const btnSubmit = $(this).find("button[type='submit']")
 
         const getBookOrderOnPrevRequest = new FormData()
         const formDataInvoice = new FormData(thisForm)
@@ -76,32 +79,48 @@ $(document).ready(function() {
             contentType: false,
             type: 'POST',
             success: function(response) {
-                console.log(response.commercialInvoice)
+                console.log('response', response.commercialInvoice)
                 alert(response.message + ', please see console')
                 thisForm.reset()
 
-                $(".select2").val('')
-                    // $(".select2").val('').trigger('change')
+                $(".select2").val('').trigger('change')
 
                 // refresh dataTable
-                var data = JSON.parse('[' + localStorage.getItem("commercialInvoice") + ']')
-                console.log(data)
+                const data = JSON.parse(
+                    '[' + localStorage.getItem("commercialInvoice") + ']'
+                )
+                const commercialInvoice = data.map((invoice, index) => ({
+                        ...invoice, 
+                        no: index + 1,
+                        total_value: Number(invoice.quantity) * 
+                                     Number(invoice.value_unit),
+                        action: `<button class="btn waves-effect btn-danger" 
+                        data-toggle="modal" type="button"
+                        data-target="delete-data-${index + 1}">
+                            <i class="material-icons">delete</i>
+                        </button>`
+                    })
+                )
+
+                console.log('data', commercialInvoice)
                 $('#commercialInvoice').DataTable().destroy()
                 $('#commercialInvoice').DataTable({
-                    "data": data,
+                    "data": commercialInvoice,
                     "columns": [
+                        { "data": "no" },
                         { "data": "desc" },
-                        { "data": "desc" },
-                        { "data": "desc" },
-                        { "data": "desc" },
-                        { "data": "desc" },
-                        { "data": "desc" },
-                        { "data": "desc" }
+                        { "data": "unit" },
+                        { "data": "quantity" },
+                        { "data": "value_unit" },
+                        { "data": "total_value" },
+                        { "data": "action" }
                     ]
                 })
                 $('#commercialInvoice').DataTable().draw()
 
-
+                if (btnSubmit.hasClass('enable-other-btn')) {
+                    enableOtherBtn(btnSubmit)
+                }
 
             },
             error: function(error) {

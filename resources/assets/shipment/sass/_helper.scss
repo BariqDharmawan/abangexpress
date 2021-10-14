@@ -3,18 +3,23 @@
     margin-right: 0;
 }
 
-.mb {
-    &-md-0 {
-        @media screen and (max-width: 768px) {
-            margin-bottom: 0 !important;
+$sides: ("b": bottom, "t": top);
+
+@each $prefix, $side in $sides {
+    .m#{$prefix} {
+        &-md-0 {
+            @media screen and (max-width: 768px) {
+                margin-#{$side}: 0 !important;
+            }
         }
-    }
-    @for $i from 0 through 5 {
-        &-#{$i} {
-            margin-bottom: $i * .25rem;
+        @for $i from 0 through 5 {
+            &-#{$i} {
+                margin-#{$side}: $i * .25rem;
+            }
         }
     }
 }
+
 .d-none {
     display: none;
 }
