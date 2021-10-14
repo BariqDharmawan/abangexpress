@@ -32,7 +32,7 @@ class BookOrderValidation extends FormRequest
             'recipient_zipcode' => ['required'],
             'recipient_country' => ['required'],
             'recipient_address' => ['required'],
-            'idcard_input_hidden' => ['required'],
+            'idcard_input_hidden' => ['sometimes'],
             'package_fee' => ['required'],
             'package_weight' => ['required'],
             'package_type' => ['required'],
