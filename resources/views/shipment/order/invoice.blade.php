@@ -33,15 +33,18 @@
                     <x-shipment.input class="only-number"
                     placeholder="Value per unit" name="value_unit" required />
                 </div>
-                <button type="submit" class="btn btn-big btn-primary enable-other-btn" data-enable-other-btn="#btn-generate-pdf">Simpan</button>
+                <button type="submit" class="btn btn-big btn-primary enable-other-btn show-el-after-click" data-el-to-show="#parent-commercialInvoice" data-enable-other-btn="#btn-generate-pdf">
+                    Simpan
+                </button>
             </div>
         </div>
     </form>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 d-none" 
+    id="parent-commercialInvoice">
         <div class="card">
             <div class="body">
                 <div class="table-responsive">
-                    <table id="commercialInvoice" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                    <table id="commercialInvoice" class="table table-bordered table-striped table-hover js-basic-example dataTable w-100">
                         <thead>
                             <tr>
                                 <th>No</th>

@@ -3,4 +3,9 @@ function enableOtherBtn(btnClicked) {
     $(btnToEnable).removeClass('disabled')
 }
 
-export {enableOtherBtn}
+function showElAfterClick(btnClicked) {
+    const elToShow = btnClicked.data('el-to-show')
+    $(elToShow).show(500)
+}
+
+export {enableOtherBtn, showElAfterClick}

@@ -1,4 +1,4 @@
-import { enableOtherBtn } from "./btn"
+import { enableOtherBtn, showElAfterClick } from "./btn"
 
 $(document).ready(function() {
 
@@ -120,6 +120,9 @@ $(document).ready(function() {
 
                 if (btnSubmit.hasClass('enable-other-btn')) {
                     enableOtherBtn(btnSubmit)
+                }
+                if (btnSubmit.hasClass('show-el-after-click')) {
+                    showElAfterClick(btnSubmit)
                 }
 
                 for (let i = 0; i < commercialInvoice.length; i++) {
