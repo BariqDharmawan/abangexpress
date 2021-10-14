@@ -300,7 +300,7 @@ $(document).ready(function() {
                                             <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">
                                                 Tidak jadi
                                             </button>
-                                            <form action="" method="POST">
+                                            <form id="form-remove-invoice" action="" method="POST">
                                                 <input type="hidden" name="_token"
                                                 value="${csrfToken}">
                                                 <input type="hidden" name="_method"
