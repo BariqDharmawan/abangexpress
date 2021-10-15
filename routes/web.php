@@ -11,49 +11,49 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
     Route::get('zipcode', 'ShipmentController@zipCode')->name('zipcode');
     Route::prefix('order')->name('order.')->group(function (){
 
-    // PULL DATA CONSIGNEE
-    Route::get('pullPenerima/{id}', 'BookingOrderController@ambilPenerima');
+        // PULL DATA CONSIGNEE
+        Route::get('pullPenerima/{id}', 'BookingOrderController@ambilPenerima');
 
-
-    Route::get('book', 'BookingOrderController@index')->name('book');
-    Route::get('book/invoice', 'BookingOrderController@invoice')->name(
-        'book.invoice'
-    );
-    Route::post('book/invoice', 'BookingOrderController@storeInvoice');
-    Route::post('book/invoice/save', 'BookingOrderController@store');
-
-    Route::post('book/step-order', 'BookingOrderController@order')->name(
-        'book.step-order'
-    );
-
-    Route::post('/', 'ShipmentOrderController@filterOrder')->name(
-        'filter.order'
-    );
-    Route::post('/history', 'ShipmentOrderController@filterHistory')->name(
-        'filter.history'
-    );
-
-    Route::resource('book', 'BookingOrderController')->except('index', 'show');
-    Route::get('/', 'ShipmentOrderController@index')->name('index');
-    Route::resource('order', 'ShipmentOrderController')->except('store');
-
-    Route::get('process', 'ShipmentOrderController@process')->name('process');
-    Route::get('pending', 'ShipmentOrderController@pending')->name('pending');
-    Route::get('history', 'ShipmentOrderController@history')->name('history');
-    Route::get('receipt', 'ShipmentOrderController@receipt')->name('receipt');
-
-    Route::prefix('invoices')->name('invoice.')->group(function (){
-        Route::get('bill', 'ShipmentInvoiceController@bill')->name('bill');
-        Route::get('verifying', 'ShipmentInvoiceController@verifying')->name(
-            'verifying'
+        Route::get('book', 'BookingOrderController@index')->name('book');
+        Route::get('book/invoice', 'BookingOrderController@invoice')->name(
+            'book.invoice'
         );
-        Route::get('settled', 'ShipmentInvoiceController@settled')->name('settled');
-    });
-    Route::prefix('support')->name('support.')->group(function (){
-        Route::get('guide', 'ShipmentSupportController@guide')->name('guide');
-        Route::get('regulation', 'ShipmentSupportController@regulation')->name(
-            'regulation'
+        Route::post('book/invoice', 'BookingOrderController@storeInvoice');
+        Route::post('book/invoice/save', 'BookingOrderController@store');
+
+        Route::post('book/step-order', 'BookingOrderController@order')->name(
+            'book.step-order'
         );
+
+        Route::post('/', 'ShipmentOrderController@filterOrder')->name(
+            'filter.order'
+        );
+        Route::post('/history', 'ShipmentOrderController@filterHistory')->name(
+            'filter.history'
+        );
+
+        Route::resource('book', 'BookingOrderController')->except('index', 'show');
+        Route::get('/', 'ShipmentOrderController@index')->name('index');
+        Route::resource('order', 'ShipmentOrderController')->except('store');
+
+        Route::get('process', 'ShipmentOrderController@process')->name('process');
+        Route::get('pending', 'ShipmentOrderController@pending')->name('pending');
+        Route::get('history', 'ShipmentOrderController@history')->name('history');
+        Route::get('receipt', 'ShipmentOrderController@receipt')->name('receipt');
+
+        Route::prefix('invoices')->name('invoice.')->group(function (){
+            Route::get('bill', 'ShipmentInvoiceController@bill')->name('bill');
+            Route::get('verifying', 'ShipmentInvoiceController@verifying')->name(
+                'verifying'
+            );
+            Route::get('settled', 'ShipmentInvoiceController@settled')->name('settled');
+        });
+        Route::prefix('support')->name('support.')->group(function (){
+            Route::get('guide', 'ShipmentSupportController@guide')->name('guide');
+            Route::get('regulation', 'ShipmentSupportController@regulation')->name(
+                'regulation'
+            );
+        });
     });
 });
 
@@ -78,7 +78,9 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() 
         );
         Route::resource('our-social', 'OurSocialController')->except('index');
 
-        Route::get('contacts/manage', 'OurContactController@manage')->name('contact.manage');
+        Route::get('contacts/manage', 'OurContactController@manage')->name(
+            'contact.manage'
+        );
         Route::resource('contacts', 'OurContactController');
     });
 
