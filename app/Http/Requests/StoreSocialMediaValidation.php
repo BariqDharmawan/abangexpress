@@ -28,7 +28,6 @@ class StoreSocialMediaValidation extends FormRequest
             'icon' => ['required', 'string', 'starts_with:fa', 'min:4'],
             'platform' => [
                 'required',
-                'unique:our_socials,platform',
                 'in:' . implode(',', Helper::getListSocialPlatform())
             ],
             'username' => ['required', 'string', 'min:3', 'max:40']

@@ -27,8 +27,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         try {
-            $ourSocial = OurSocial::all();
-            $ourName = AboutUs::select('our_name')->first()->our_name;
+            $ourSocial = OurSocial::where(
+                'domain_owner', request()->getSchemeAndHttpHost()
+            )->get();
+            $ourName = AboutUs::select('our_name')->where(
+                'domain_owner', request()->getSchemeAndHttpHost()
+            )->first()->our_name ?? config('app.name');
 
             View::share('ourName', $ourName);
             View::share('ourSocial', $ourSocial);

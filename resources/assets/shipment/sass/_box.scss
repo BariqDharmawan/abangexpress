@@ -1,0 +1,12 @@
+.info-box-3 {
+    cursor: pointer;
+
+    .number {
+        transition: all 150ms;
+    }
+    &:hover {
+        .number {
+            font-weight: bold;
+        }
+    }
+}

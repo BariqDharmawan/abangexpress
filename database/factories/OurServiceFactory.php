@@ -31,7 +31,10 @@ class OurServiceFactory extends Factory
             ]),
             'title' => $this->faker->word(2),
             'desc' => $this->faker->sentence(4),
-            'user_id' => 1
+            'domain_owner' => $this->faker->unique(true)->randomElement([
+                'http://127.0.0.1:8000',
+                'http://127.0.0.1:9000'
+            ])
         ];
     }
 }

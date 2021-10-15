@@ -1,5 +1,7 @@
 @extends('layouts.template-2')
 
+@section('title', $ourName)
+
 @section('content')
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
@@ -9,18 +11,16 @@
             <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
                 <h1>{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h1>
                 <h2>{{ $aboutUs->sub_slogan }}</h2>
-                <div class="d-flex justify-content-center justify-content-lg-start">
-                    <a href="#about" class="btn-get-started scrollto">Get Started</a>
-                    @if ($isProfileVideoExist)
-                    <a href="{{ $aboutUs->our_video }}"
-                    class="glightbox btn-watch-video">
-                        <i class="bi bi-play-circle"></i>
-                        <span>Watch Video</span>
-                    </a>
-                    @endif
-                </div>
+                @include('partials.search-tracking', ['errorText' => 'pink'])
             </div>
-            <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+            <div class="col-lg-6 order-1 order-lg-2 hero-img position-relative" 
+            data-aos="zoom-in" data-aos-delay="200">
+                @if ($isProfileVideoExist)
+                    <a href="{{ $aboutUs->our_video }}"
+                    class="glightbox btn-watch-video hero-img__btn-center">
+                        <i class="bi bi-play-circle me-0"></i>
+                    </a>
+                @endif
                 <img src="{{ asset('template2/img/hero-img.png') }}"
                 class="img-fluid animated" alt="">
             </div>
@@ -31,11 +31,16 @@
 
 <main id="main">
 
+    @if (session('trackingstatus'))
+        @include('partials.result-tracking', ['templateUsing' => 2])
+    @endif
+
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="{{ $landingSection[0]->section_name }}" />`
+            <x-template2.section-title 
+            heading="{{ $landingSection[0]->section_name }}" />`
 
             <div class="content row">
                 <div class="col-lg-6">
@@ -143,23 +148,26 @@
             <x-template2.section-title heading="{{ $landingSection[3]->section_name }}"
             desc="Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas." />
 
-            <div class="row" id="load-member">
+            <div class="row">
 
-                {{-- @foreach ($ourTeam as $team) --}}
+                @foreach ($ourTeam as $team)
                 <div class="col-lg-6 mb-4 member-item">
                     <div class="member d-flex align-items-start"
-                    data-aos="zoom-in" data-aos-delay="100">
+                    data-aos="zoom-in" data-aos-delay="{{ 100 * $loop->iteration }}">
                         <div class="pic">
-                            <img src="" class="img-fluid member-info__avatar" alt="" />
+                            <img src="{{ $team->avatar }}" alt=""
+                            class="img-fluid member-info__avatar" />
                         </div>
                         <div class="member-info">
-                            <h4 class="member-info__name"></h4>
-                            <span class="member-info__position"></span>
-                            <p class="member-info__desc"></p>
+                            <h4 class="member-info__name">{{ $team->name }}</h4>
+                            <span class="member-info__position">
+                                {{ $team->position->name }}
+                            </span>
+                            <p class="member-info__desc">{{ $team->short_desc }}</p>
                         </div>
                     </div>
                 </div>
-                {{-- @endforeach --}}
+                @endforeach
 
             </div>
 
@@ -221,7 +229,7 @@
                     </ul>
                 </div>
 
-                <div class="col-lg-6 d-flex align-items-stretch shadow">
+                <div class="col-lg-6 d-flex align-items-stretch shadow embeded-full">
                     {!! $aboutUs->address_embed !!}
                 </div>
             </div>

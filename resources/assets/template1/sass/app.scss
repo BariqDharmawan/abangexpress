@@ -8,6 +8,13 @@
 @import '~bootstrap-icons/font/bootstrap-icons.css';
 @import '~boxicons/css/boxicons.min.css';
 
-// @import '~swiper/swiper-bundle.css';
+@import './../../general/sass/reset';
+@import './../../general/sass/utilities';
+@import './../../general/sass/variable';
 
+@import './icon';
+@import './../../general/sass/btn';
+@import './../../general/sass/input';
+@import './../../general/sass/panel';
+@import './../../general/sass/text';
 @import './main';

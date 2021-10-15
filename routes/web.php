@@ -1,11 +1,15 @@
 <?php
 
+use App\Models\TemplateChoosen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', 'template-1', 301);
+Route::resource('tracking-order', 'TrackingOrderController');
 
-Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() {
+Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function (){
+    Route::get('/', 'ShipmentController@index')->name('index');
+    Route::get('zipcode', 'ShipmentController@zipCode')->name('zipcode');
+    Route::prefix('order')->name('order.')->group(function (){
 
     // PULL DATA CONSIGNEE
     Route::get('pullPenerima/{id}', 'BookingOrderController@ambilPenerima');
@@ -59,9 +63,8 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() 
 
     Route::resource('user', 'UserController')->except('edit', 'show', 'create');
 
-    
     Route::prefix('about-us')->group(function (){
-        
+
         Route::prefix('identity')->name('about-us.')->group(function () {
             Route::get('/', 'AboutUsController@identity')->name('identity');
             Route::put('/', 'AboutUsController@update')->name('update');
@@ -70,14 +73,16 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() 
             );
         });
 
-        Route::get('our-social', 'OurSocialController@manage')->name('our-social.manage');
+        Route::get('our-social', 'OurSocialController@manage')->name(
+            'our-social.manage'
+        );
         Route::resource('our-social', 'OurSocialController')->except('index');
 
         Route::get('contacts/manage', 'OurContactController@manage')->name('contact.manage');
         Route::resource('contacts', 'OurContactController');
     });
 
-    
+
     Route::get('services', 'OurServiceController@manage')->name('service.manage');
     Route::resource('services', 'OurServiceController')->except('index');
 
@@ -86,8 +91,6 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() 
 
     Route::get('faq/manage', 'FaqController@manage')->name('faq.manage');
     Route::resource('faq', 'FaqController')->except('index');
-
-    
 
     Route::put('our-contact', 'OurContactController@update')->name('our-contact.update');
 
@@ -103,13 +106,23 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() 
     });
 });
 
-Route::prefix('template-1')->name('template-1.')->group(function() {
-    Route::get('/', 'TemplateSatuController');
-});
+// $templateChoosen = 'template-1.';
+try {
+    $templateChoosen = TemplateChoosen::where(
+        'domain_owner', request()->getSchemeAndHttpHost()
+    )->first();
 
-Route::prefix('template-2')->name('template-2.')->group(function() {
-    Route::get('/', 'TemplateDuaController');
-});
+    $templateChoosen = (int)$templateChoosen->version;
+
+    if ($templateChoosen == 1) {
+        Route::get('/', 'TemplateSatuController');
+    }
+    else {
+        Route::get('/', 'TemplateDuaController');
+    }
+} catch (\Throwable $th) {}
+
+
 
 Auth::routes(['register' => false]);
 

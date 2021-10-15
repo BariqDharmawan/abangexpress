@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helper\Helper;
 use App\Models\PositionList;
 use Illuminate\Database\Seeder;
 
@@ -16,11 +17,13 @@ class PositionListSeeder extends Seeder
     {
         $lists = ['Entrepeneur', 'Designer', 'CEO & Owner', 'Freelancer'];
 
-        foreach ($lists as $list) {
-            PositionList::create([
-                'name' => $list,
-                'user_id' => 1
-            ]);
+        foreach (Helper::DUMMY_DOMAINS as $key => $domain) {
+            foreach ($lists as $list) {
+                PositionList::create([
+                    'name' => $list,
+                    'domain_owner' => $domain
+                ]);
+            }
         }
     }
 }

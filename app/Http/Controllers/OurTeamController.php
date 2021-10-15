@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateMemberValidation;
 use App\Models\LandingSectionDesc;
 use App\Models\OurTeam;
 use App\Models\PositionList;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -17,25 +16,16 @@ class OurTeamController extends Controller
 
     public function manage()
     {
-        $teams = OurTeam::all();
-        $positionList = PositionList::all();
+        $teams = OurTeam::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->get();
+        $positionList = PositionList::where('domain_owner', request()->getSchemeAndHttpHost())->get();
 
         $landingSection = LandingSectionDesc::where('id', 4)->first();
 
         return view('admin.team.manage', compact(
             'teams', 'positionList', 'landingSection'
         ));
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $ourTeam = OurTeam::with('position')->get();
-        return response()->json($ourTeam);
     }
 
     public function store(StoreMemberValidation $request)
@@ -48,22 +38,11 @@ class OurTeamController extends Controller
             'avatar' => Str::replaceFirst('public/', '/storage/', $pathAvatar),
             'position_id' => $request->position_id,
             'short_desc' => $request->short_desc,
-            'user_id' => auth()->id()
+            'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
         return Helper::returnSuccess('add new member');
 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -75,7 +54,10 @@ class OurTeamController extends Controller
      */
     public function update(UpdateMemberValidation $request, $id)
     {
-        $editMember = OurTeam::findOrFail($id);
+        $editMember = OurTeam::where([
+            ['domain_owner', request()->getSchemeAndHttpHost()],
+            ['id', $id]
+        ])->firstOrFail();
         $editMember->name = $request->name;
 
         if ($request->hasFile('avatar_edit')) {
@@ -87,7 +69,6 @@ class OurTeamController extends Controller
 
         $editMember->position_id = $request->position_id_edit;
         $editMember->short_desc = $request->short_desc;
-        $editMember->user_id = auth()->id();
         $editMember->save();
 
         return Helper::returnSuccess('add new member');
@@ -101,6 +82,15 @@ class OurTeamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deletePerson = OurTeam::where([
+            ['domain_owner', request()->getSchemeAndHttpHost()],
+            ['id', $id]
+        ])->firstOrFail();
+
+        $personName = $deletePerson->name;
+
+        $deletePerson->delete();
+
+        return Helper::returnSuccess("delete member name $personName");
     }
 }

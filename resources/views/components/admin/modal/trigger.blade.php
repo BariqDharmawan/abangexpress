@@ -1,4 +1,4 @@
-@props(['modalTarget', 'type', 'isDefaultStyle' => true, 'text'])
+@props(['modalTarget', 'isDefaultStyle' => true, 'text'])
 
 <button {{ $attributes->class(['btn', 'btn-primary' => $isDefaultStyle])->merge([
     'data-target' => '#' . $modalTarget,

@@ -34,17 +34,12 @@ class AboutUsController extends Controller
 
     public function updateEmbedMap(UpdateEmbedMapValidation $request)
     {
-        AboutUs::first()->update(['address_embed' => $request->address_embed]);
+        AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())->first()->update([
+                    'address_embed' => $request->address_embed
+                ]);
         return Helper::returnSuccess('update our embed map');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(IdentityValidation $request)
     {
         //todo: add validation
@@ -65,8 +60,6 @@ class AboutUsController extends Controller
                 'public/', '/storage/', $pathcoverVisionMission
             );
         }
-
-        $ourIdentity->user_id = auth()->id();
 
         $ourIdentity->save();
 

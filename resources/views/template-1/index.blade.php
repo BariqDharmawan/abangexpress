@@ -1,91 +1,41 @@
 @extends('layouts.template-1')
+
+@section('title', $ourName)
+
 @section('content')
-<!-- ======= Header ======= -->
-<header id="header" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-between">
 
-        <div id="logo">
-            <h1 class="fs-3">
-                <a href="index.html">
-                    {{ strtok($aboutUs->our_name, ' ') }}
-                    <span>
-                        {{ Str::after(
-                            $aboutUs->our_name, strtok($aboutUs->our_name, ' ')
-                        ) }}
-                    </span>
-                </a>
-            </h1>
-            {{-- Uncomment below if you prefer to use an image logo
-                <a href="index.html"><img src="{{
-                asset('template1/img/logo.png') }}" alt=""></a> 
-            --}}
-        </div>
-
-        <nav id="navbar" class="navbar">
-            <ul>
-                @foreach ($menus as $menu)
-                <li>
-                    <a href="{{ $menu->url }}" 
-                        class="nav-link scrollto @if($loop->first) active @endif">
-                        {{ $menu->text }}
-                    </a>
-                </li>
-                @endforeach
-                @guest
-                <li>
-                    <a href="{{ route('login') }}" style="cursor: pointer;"
-                        class="border border-dark text-center mx-2 py-2 px-4 rounded-50"> 
-                        Masuk
-                    </a>
-                </li>
-                @else
-                <li>
-                    <a href="{{ route('admin.about-us.identity') }}" 
-                    style="cursor: pointer;"
-                    class="border border-dark text-center mx-2 py-2 px-4 rounded-50"> 
-                        Go to dashboard
-                    </a>
-                </li>
-                @endguest
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-    </div>
-</header>
-
-<!-- ======= hero Section ======= -->
 <section id="hero">
-
-    <div class="hero-content" data-aos="fade-up">
-        <h2>{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h2>
-        <div>
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
-            <a href="#portfolio" class="btn-projects scrollto">Our Projects</a>
-        </div>
+    <div class="hero-content row mx-0" data-aos="fade-up">
+        <h2 class="w-100">{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h2>
+        @include('partials.search-tracking', ['errorText' => 'danger'])
     </div>
 
     <div class="hero-slider swiper-container">
         <div class="swiper-wrapper">
             @foreach ($heroCarousel as $carousel)
-                <div class="swiper-slide" 
-                style="background-image: url('{{ asset($carousel->img) }}"></div>    
+                <div class="swiper-slide"
+                style="background-image: url('{{ asset($carousel->img) }}"></div>
             @endforeach
         </div>
     </div>
-
-</section><!-- End Hero Section -->
+</section>
 
 <main id="main">
+    
+    @if (session('trackingstatus'))
+        @include('partials.result-tracking', ['templateUsing' => 1])
+    @endif
+
     <!-- ======= About Section ======= -->
     <section id="about">
-        <div class="container" data-aos="fade-up">
+        <div class="container" data-aos="fade-up" id="fade-up-about">
             <div class="row">
                 <div class="col-lg-6 about-img">
                     <img src="{{ asset($aboutUs->cover_vision_mission) }}" alt="">
                 </div>
 
                 <div class="col-lg-6 content">
-                    <x-section-header text="{{ $landingSection[0]->section_name }}" 
+                    <x-section-header text="{{ $landingSection[0]->section_name }}"
                     desc="{{ $landingSection[0]->first_desc }}" />
                     <div class="row mt-4">
                         <div class="col-lg">
@@ -138,11 +88,15 @@
                     <div class="swiper-slide">
                         <div class="testimonial-item">
                             <p>
-                                <img src="{{ asset('template1/img/quote-sign-left.png') }}" class="quote-sign-left" alt="">
-                                {{ $team->short_desc }}
-                                <img src="{{ asset('template1/img/quote-sign-right.png') }}" class="quote-sign-right" alt="">
+                                <img src="{{ asset(
+                                    'template1/img/quote-sign-left.png'
+                                ) }}" class="quote-sign-left" alt="">
+                                <span>{{ $team->short_desc }}</span>
+                                <img src="{{ asset(
+                                    'template1/img/quote-sign-right.png'
+                                ) }}" class="quote-sign-right" alt="">
                             </p>
-                            <img src="{{ asset($team->avatar) }}" 
+                            <img src="{{ asset($team->avatar) }}"
                             class="testimonial-img" alt="">
                             <h3>{{ $team->name }}</h3>
                             <h4>{{ $team->position->name }}</h4>
@@ -160,22 +114,20 @@
     <section id="faq" class="faq section-bg my-4 bg-primary">
         <div class="container" data-aos="fade-up">
 
-            <x-section-header text="{{ $landingSection[4]->section_name }}" 
-            class="text-white text-center" />
+            <x-section-header text="{{ $landingSection[4]->section_name }}"
+            class="text-white text-center no-before" />
 
-            <div class="accordion accordion-flush shadow p-4 bg-white parent-load-data" 
+            <div class="accordion accordion-flush shadow p-4 bg-white parent-load-data"
             id="load-faq">
                 {{-- get faq using ajax [this is 'shadow' element] --}}
                 <div class="accordion-item accordion-faq">
-                    <h2 class="accordion-header" id="flush-faq">
-                        <button class="accordion-button accordion__heading collapsed toggler-accordion" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#accordion-list" aria-expanded="false" 
-                        aria-controls="accordion-list"></button>
-                    </h2>
-                    <div id="accordion-list" 
-                        class="accordion-collapse collapse accordion__text" 
+                    <a class="accordion-button accordion__heading collapsed toggler-accordion" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#accordion-list" aria-expanded="false"
+                    aria-controls="accordion-list"></a>
+                    <div id="accordion-list"
+                        class="collapse accordion__text"
                         aria-labelledby="flush-faq"
-                        data-bs-parent="#list-faq">
+                        data-bs-parent="#load-faq">
                         <div class="accordion-body">
                             <p></p>
                         </div>
@@ -196,25 +148,25 @@
 
                 {{-- get contact using ajax --}}
                 <div class="col-md-4">
-                    <x-template1.list-group-simple icon="bi-geo-alt" id="location" 
+                    <x-template1.list-group-simple icon="bi-geo-alt" id="location"
                     text="" subtext="" link="" class="contact-address" subtext-class="contact-value" />
                 </div>
 
                 <div class="col-md-4">
-                    <x-template1.list-group-simple icon="bi-phone" id="phone" 
+                    <x-template1.list-group-simple icon="bi-phone" id="phone"
                     text="" subtext="" link="" class="contact-phone" subtext-class="contact-value" />
                 </div>
 
                 <div class="col-md-4">
-                    <x-template1.list-group-simple icon="bi-envelope" id="email" 
+                    <x-template1.list-group-simple icon="bi-envelope" id="email"
                     text="" subtext="" link="" class="contact-email" subtext-class="contact-value" />
                 </div>
                 {{-- end of that --}}
-                
+
             </div>
         </div>
 
-        <div class="container mb-4">
+        <div class="container mb-4 embeded-full">
             {!! $aboutUs->address_embed !!}
         </div>
     </section><!-- End Contact Section -->

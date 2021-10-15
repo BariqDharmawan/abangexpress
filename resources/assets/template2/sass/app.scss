@@ -10,4 +10,12 @@
 
 @import './../../general/sass/reset';
 @import './../../general/sass/utilities';
-@import './main';
+
+@import './../../general/sass/variable';
+@import './../../general/sass/btn';
+@import './../../general/sass/input';
+@import './../../general/sass/panel';
+@import './../../general/sass/text';
+
+@import './hero';
+@import 'main';

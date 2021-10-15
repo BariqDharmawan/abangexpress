@@ -21,8 +21,11 @@ class OurContactController extends Controller
         $columns = ['address', 'telephone', 'email'];
 
         $addressEmbed = AboutUs::select('address_embed')
-                        ->where('user_id', auth()->id())
-                        ->first()->address_embed;
+                        ->where('domain_owner', request()->getSchemeAndHttpHost())
+                        ->first();
+        if (isset($addressEmbed)) {
+            $addressEmbed = $addressEmbed->address_embed;
+        }
 
         $landingSection = LandingSectionDesc::where('id', 5)->first();
 
@@ -38,23 +41,24 @@ class OurContactController extends Controller
      */
     public function index()
     {
-        $ourContact = OurContact::first();
+        $ourContact = OurContact::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
 
         return response()->json($ourContact);
     }
 
     public function update(UpdateContactValidation $request)
     {
-        OurContact::firstOrFail()->update([
-            'address' => $request->address,
-            'telephone' => $request->telephone,
-            'email' => $request->email,
-            'link_address' => $request->link_address,
-            'user_id' => auth()->id()
-        ]);
-
-        // return response()->json($ourContact);
-
+        $updateContact = OurContact::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
+        $updateContact->address = $request->address;
+        $updateContact->telephone = $request->telephone;
+        $updateContact->email = $request->email;
+        $updateContact->link_address = $request->link_address;
+    
+        $updateContact->save();
         return Helper::returnSuccess('update contact');
     }
 }

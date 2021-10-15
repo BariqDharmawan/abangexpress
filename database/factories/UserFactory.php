@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Helper\Helper;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -22,29 +24,34 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $domains = [
-            'http://127.0.0.1:8000', 
-            'http://127.0.0.1:9000'
-        ];
         return [
             'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'username' => $this->faker->unique(true)->randomElement([
+                'admincompany1', 'admincompany2'
+            ]),
+            'password' => Hash::make('passwordadmin'),
+            'plain_password' => 'passwordadmin',
+            'role' => 'admin',
+            'code_api' => 'CAX0135',
+            'domain_owner' => $this->faker->unique()->randomElement(
+                Helper::DUMMY_DOMAINS
+            ),
             'remember_token' => Str::random(10),
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    public function unverified()
+    public function subAdmin()
     {
-        return $this->state(function (array $attributes) {
+        return $this->state(function (array $attributes){
             return [
-                'email_verified_at' => null,
+                'username' => $this->faker->unique()->randomElement([
+                    'subadmin1', 'subadmin2', 'subadmin3', 'subadmin4', 'subadmin5'
+                ]),
+                'role' => 'sub-admin',
+                'code_api' => 'coloader',
+                'password' => Hash::make('passwordsubadmin'),
+                'token_api' => 'f03e563b71454776e2cb1e7b5f5ea5c4',
+                'plain_password' => 'passwordsubadmin'
             ];
         });
     }

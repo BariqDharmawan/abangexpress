@@ -3,9 +3,34 @@
         padding: 0 !important;
     }
 }
-
+.no-before {
+    &::before {
+        content: none !important;
+    }
+}
 .no-after {
     &::after {
         content: none !important;
     }
+}
+
+.embeded-full iframe {
+    width: 100%;
+}
+
+.text {
+    &-left {
+        text-align: left;
+    }
+    &-white {
+        color: white !important;
+    }
+}
+
+.mt-auto {
+    margin-top: auto;
+}
+
+.bg-template {
+    background-color: #F44336;
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helper\Helper;
 use App\Models\FirstHeroCarouselLanding;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
@@ -17,11 +18,14 @@ class HeroCarouselSeeder extends Seeder
     {
         $carousels = ['1.jpg', '2.jpg','3.jpg','4.jpg','5.jpg'];
 
-        foreach ($carousels as $carousel) {
-            FirstHeroCarouselLanding::create([
-                'img' => Storage::url('hero-carousel/' . $carousel),
-                'user_id' => 1
-            ]);
+        foreach (Helper::DUMMY_DOMAINS as $key => $domain) {
+            foreach ($carousels as $carousel) {
+                FirstHeroCarouselLanding::create([
+                    'img' => Storage::url('hero-carousel/' . $carousel),
+                    'domain_owner' => $domain
+                ]);
+            }
         }
+
     }
 }

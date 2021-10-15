@@ -30,6 +30,10 @@ class OurSocialController extends Controller
         $socialMedia = Helper::getJson('social-media.json', true);
         $platforms = Arr::pluck($socialMedia, 'platform');
 
+        $socialMedia = OurSocial::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->get();
+
         $listIcon = [
             "fab fa-instagram",
             "fab fa-facebook-square",
@@ -38,7 +42,9 @@ class OurSocialController extends Controller
             "fab fa-youtube"
         ];
 
-        return view('admin.about-us.social.manage', compact('platforms', 'listIcon'));
+        return view('admin.about-us.social.manage', compact(
+            'platforms', 'listIcon', 'socialMedia'
+        ));
     }
 
     /**
@@ -56,7 +62,8 @@ class OurSocialController extends Controller
             'icon' => $request->icon,
             'platform' => $platform,
             'username' => $username,
-            'link' => OurSocial::generateUrl($username, $platform)
+            'link' => OurSocial::generateUrl($username, $platform),
+            'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
         return Helper::returnSuccess('add new social media');
@@ -82,11 +89,6 @@ class OurSocialController extends Controller
             "fab fa-youtube"
         ];
 
-        // if($social->icon == $listIcon[2]) {
-        //     dd($social);
-        // }
-
-
         return view('admin.about-us.social.edit', compact(
             'social', 'platforms', 'listIcon'
         ));
@@ -110,7 +112,6 @@ class OurSocialController extends Controller
         $updateSocial->platform = $platform;
         $updateSocial->username = $username;
         $updateSocial->link = OurSocial::generateUrl($username, $platform);
-        $updateSocial->user_id = auth()->id();
         $updateSocial->save();
 
         //todo: remove old icon after update
@@ -118,8 +119,6 @@ class OurSocialController extends Controller
         return redirect()->route('admin.our-social.manage')->with(
             'success', "Successfully update $updateSocial->platform"
         );
-
-        // return 'coba';
     }
 
     /**
@@ -130,10 +129,13 @@ class OurSocialController extends Controller
      */
     public function destroy($id)
     {
-        $socialToDelete = OurSocial::findOrFail($id);
+        $socialToDelete = OurSocial::where([
+            ['domain_owner', request()->getSchemeAndHttpHost()],
+            ['id', $id]
+        ])->firstOrFail();
         $platformName = $socialToDelete->platform;
         $socialToDelete->delete();
 
-        return redirect()->back()->with('success', "Successfully remove our $platformName");
+        return Helper::returnSuccess("remove our $platformName");
     }
 }

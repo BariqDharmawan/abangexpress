@@ -14,6 +14,6 @@ class OurSocialSeeder extends Seeder
      */
     public function run()
     {
-        OurSocial::factory()->count(4)->create();
+        OurSocial::factory()->count(10)->create();
     }
 }

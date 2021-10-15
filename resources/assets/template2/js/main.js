@@ -8,6 +8,7 @@ import './../vendor/waypoints/noframework.waypoints'
 import GLightbox from 'glightbox';
 const Isotope = require('isotope-layout');
 
+import AOS from 'aos';
 /**
 * Template Name: Arsha - v4.4.0
 * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/

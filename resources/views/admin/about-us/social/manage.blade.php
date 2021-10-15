@@ -19,7 +19,7 @@
         <div class="col-12">
             <x-admin.card title="">
                 <ul class="list-group">
-                    @foreach ($ourSocial as $social)
+                    @foreach ($socialMedia as $social)
                     <li class="list-group-item d-flex align-items-center">
                         <span class="h3"><i class="{{ $social->icon }}"></i></span>
                         <div class="ml-4">

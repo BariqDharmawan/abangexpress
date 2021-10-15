@@ -11,7 +11,13 @@ class OurSocial extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['icon', 'platform', 'username', 'link', 'user_id'];
+    protected $fillable = [
+        'icon',
+        'platform',
+        'username',
+        'link',
+        'domain_owner'
+    ];
 
     public static function generateUrl(string $username, $platform)
     {

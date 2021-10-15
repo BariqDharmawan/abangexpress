@@ -13,7 +13,8 @@ class OurServiceController extends Controller
 
     public function manage()
     {
-        $ourService = OurService::orderBy('title', 'asc')->get();
+        $ourService = OurService::orderBy('title', 'asc')
+                    ->where('domain_owner', request()->getSchemeAndHttpHost())->get();
         $listIcon = [
             'fab fa-angellist',
             'fas fa-anchor',
@@ -42,7 +43,6 @@ class OurServiceController extends Controller
         $ourService = OurService::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->orderBy('title', 'asc')->get();
-
         return response()->json($ourService);
     }
 
@@ -58,7 +58,7 @@ class OurServiceController extends Controller
             'icon' => $request->icon,
             'title' => $request->title,
             'desc' => $request->desc,
-            'user_id' => auth()->id()
+            'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
         return Helper::returnSuccess('add new service');
@@ -66,11 +66,13 @@ class OurServiceController extends Controller
 
     public function update(Request $request, $id)
     {
-        $serviceToUpdate = OurService::findOrFail($id);
+        $serviceToUpdate = OurService::where([
+            ['domain_owner', request()->getSchemeAndHttpHost()],
+            ['id', $id]
+        ])->firstOrFail();
         $serviceToUpdate->icon = $request->icon;
         $serviceToUpdate->title = $request->title;
         $serviceToUpdate->desc = $request->desc;
-        $serviceToUpdate->user_id = auth()->id();
 
         $serviceToUpdate->save();
         return redirect()->back()->with(
@@ -87,7 +89,11 @@ class OurServiceController extends Controller
      */
     public function destroy($id)
     {
-        $serviceToDelete = OurService::findOrFail($id);
+        $serviceToDelete = OurService::where([
+            ['domain_owner', request()->getSchemeAndHttpHost()],
+            ['id', $id]
+        ])->first();
+
         $serviceName = $serviceToDelete->title;
 
         $serviceToDelete->delete();

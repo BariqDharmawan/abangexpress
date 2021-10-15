@@ -29,7 +29,10 @@ class UpdateSocialMediaValidation extends FormRequest
     {   
         return [
             'icon' => ['sometimes', 'string', 'starts_with:fa', 'min:4'],
-            'platform' => ['required', 'in:' . implode(',', Helper::getListSocialPlatform())],
+            'platform' => [
+                'required',
+                'in:' . implode(',', Helper::getListSocialPlatform())
+            ],
             'username' => ['required', 'string', 'min:3', 'max:40']
         ];
     }

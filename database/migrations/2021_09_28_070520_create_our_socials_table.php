@@ -14,12 +14,12 @@ class CreateOurSocialsTable extends Migration
     public function up()
     {
         Schema::create('our_socials', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('icon');
             $table->string('platform');
             $table->string('username');
             $table->string('link');
-            $table->unsignedInteger('user_id');
+            $table->string('domain_owner');
             $table->timestamps();
         });
     }

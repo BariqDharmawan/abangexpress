@@ -14,9 +14,9 @@ class CreateFirstHeroCarouselLandingsTable extends Migration
     public function up()
     {
         Schema::create('first_hero_carousel_landings', function (Blueprint $table) {
-            $table->id();
-            $table->string('img')->unique();
-            $table->unsignedInteger('user_id');
+            $table->increments('id');
+            $table->string('img');
+            $table->string('domain_owner');
             $table->timestamps();
         });
     }

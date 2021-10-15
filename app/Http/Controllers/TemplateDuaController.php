@@ -15,22 +15,38 @@ class TemplateDuaController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $menus = Helper::getJson('template-1-menu.json');
+        $menus = Helper::getJson('template-2-menu.json');
 
-        $landingSection = LandingSectionDesc::all();
-        $aboutUs = AboutUs::first();
+        $landingSection = LandingSectionDesc::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->get();
 
-        $ourTeam = OurTeam::all();
+        $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
+                ->first();
+
+        $ourTeam = OurTeam::where('domain_owner', request()->getSchemeAndHttpHost())
+                ->get();
         
-        $faqs = Faq::all();
+        $faqs = Faq::where('domain_owner', request()->getSchemeAndHttpHost())->get();
 
-        $ourService = OurService::orderBy('title', 'asc')->get();
+        $ourService = OurService::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->orderBy('title', 'asc')->get();
 
-        $isProfileVideoExist = $aboutUs->our_video ? true : false;
+        if ($aboutUs) {
+            $isProfileVideoExist = $aboutUs->our_video ? true : false;
 
-        return view('template-2.index', compact(
-            'landingSection', 'aboutUs', 'isProfileVideoExist', 
-            'ourTeam', 'aboutUs', 'ourService', 'menus'
-        ));
+            return view('template-2.index', compact(
+                'landingSection', 'aboutUs', 'isProfileVideoExist', 
+                'ourTeam', 'aboutUs', 'ourService', 'menus'
+            ));
+        }
+        else {
+            return view('template-2.index', compact(
+                'landingSection', 'aboutUs',
+                'ourTeam', 'aboutUs', 'ourService', 'menus'
+            ));
+        }
+
     }
 }

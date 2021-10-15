@@ -24,7 +24,10 @@ class FaqFactory extends Factory
         return [
             'question' => $this->faker->unique()->sentence(4),
             'answer' => $this->faker->sentence(10),
-            'user_id' => 1
+            'domain_owner' => $this->faker->randomElement([
+                'http://127.0.0.1:8000',
+                'http://127.0.0.1:9000'
+            ])
         ];
     }
 }

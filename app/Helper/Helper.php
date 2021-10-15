@@ -2,9 +2,10 @@
 
 namespace App\Helper;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
-class Helper 
+class Helper
 {
     public static function getJson($json, $isToArray = false) {
         return json_decode(file_get_contents(public_path('json/' . $json)), $isToArray);
@@ -28,4 +29,9 @@ class Helper
     {
         return redirect()->back()->with('success', "Successfully $message");
     }
+
+    public const DUMMY_DOMAINS = [
+        'http://127.0.0.1:8000',
+        'http://127.0.0.1:9000'
+    ];
 }

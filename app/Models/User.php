@@ -19,9 +19,15 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
+        'id',
         'name',
         'username',
         'password',
+        'plain_password',
+        'domain_owner',
+        'code_api',
+        'token_api',
+        'lt'
     ];
 
     /**
@@ -32,17 +38,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'plain_password'
     ];
 
-    /**
-     * The "booted" method of the model.
-     *
-     * @return void
-     */
-    protected static function booted()
+    public function aboutUs()
     {
-        static::creating(function ($user) {
-            $user->password = Hash::make($user->password);
-        });
+        return $this->hasMany('App\Models\AboutUs', 'id');
     }
+
+    public function templateChoosen()
+    {
+        return $this->hasOne(TemplateChoosen::class);
+    }
+
 }

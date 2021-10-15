@@ -8,9 +8,10 @@ Route::apiResource('faq','FaqController');
 Route::apiResource('our-contact','OurContactController')->only(['index']);
 
 Route::apiResource('our-service','OurServiceController');
-Route::apiResource('our-team','OurTeamController');
 
 Route::get('vision-mission', 'AboutUsController@getVisionMission');
+
+Route::get('previous-recipient/{id}', 'ShipmentOrderController@dummyPreviousRecipient');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

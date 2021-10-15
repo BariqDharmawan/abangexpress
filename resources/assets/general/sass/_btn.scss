@@ -1,0 +1,25 @@
+.btn {
+    cursor: pointer;
+
+    &--outline {
+        &-dark-blue {
+            color: $dark-blue !important;
+            border-color: $dark-blue;
+
+            &:hover {
+                background-color: $dark-blue;
+                color: white !important;
+            }
+        }
+    }
+
+    &--inside-input {
+        position: absolute;
+        right: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        // width: 150px;
+        align-items: center;
+    }
+}

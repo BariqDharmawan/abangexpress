@@ -73,7 +73,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span 
                                 class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    {{ auth()->user()->username }}
+                                    {{ Auth::user()->username }}
                                 </span>
                                 <img class="img-profile rounded-circle" 
                                 src="{{ asset('admin/img/undraw_profile.svg') }}">
@@ -81,11 +81,13 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 @if (!Str::contains(url()->current(), 'shipment'))
-                                <a class="dropdown-item" href="/shipment">
+                                <a class="dropdown-item" 
+                                href="{{ route('shipping.index') }}">
                                     Shipment
                                 </a>
                                 @else
-                                <a class="dropdown-item" href="/shipment">
+                                <a class="dropdown-item" 
+                                href="{{ route('admin.about-us.identity') }}">
                                     Company Profile
                                 </a>
                                 @endif
@@ -103,7 +105,15 @@
                 </nav>
                 @yield('content')
             </div>
-            @include('admin.partials.footer')
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>
+                            Copyright &copy; {{ $ourName . ' ' . date('Y') }}
+                        </span>
+                    </div>
+                </div>
+            </footer>            
         </div>
         @include('admin.partials.btn-back-to-top')
     </div>

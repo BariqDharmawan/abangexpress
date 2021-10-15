@@ -9,6 +9,8 @@ Swiper.use([Navigation, Pagination]);
 import GLightbox from 'glightbox';
 const Isotope = require('isotope-layout');
 
+import AOS from 'aos';
+
 /**
 * Template Name: Reveal - v4.4.0
 * Template URL: https://bootstrapmade.com/reveal-bootstrap-corporate-template/
@@ -278,7 +280,8 @@ const Isotope = require('isotope-layout');
    */
   new Swiper('.testimonials-slider', {
     speed: 600,
-    loop: true,
+    loop: false,
+    centerInsufficientSlides: true,
     autoplay: {
       delay: 5000,
       disableOnInteraction: false
