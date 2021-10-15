@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Helper\Helper;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -23,10 +24,6 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $domains = [
-            'http://127.0.0.1:8000', 
-            'http://127.0.0.1:9000'
-        ];
         return [
             'name' => $this->faker->name(),
             'username' => $this->faker->unique(true)->randomElement([
@@ -36,7 +33,9 @@ class UserFactory extends Factory
             'plain_password' => 'passwordadmin',
             'role' => 'admin',
             'code_api' => 'CAX0135',
-            'domain_owner' => $this->faker->unique()->randomElement($domains),
+            'domain_owner' => $this->faker->unique()->randomElement(
+                Helper::DUMMY_DOMAINS
+            ),
             'remember_token' => Str::random(10),
         ];
     }

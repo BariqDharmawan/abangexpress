@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helper\Helper;
 use App\Models\LandingSectionDesc;
 use Illuminate\Database\Seeder;
 
@@ -14,12 +15,7 @@ class LandingSectionDescSeeder extends Seeder
      */
     public function run()
     {
-        $domains = [
-            'http://127.0.0.1:8000',
-            'http://127.0.0.1:9000'
-        ];
-
-        foreach ($domains as $key => $domain) {
+        foreach (Helper::DUMMY_DOMAINS as $key => $domain) {
             LandingSectionDesc::insert([
                 [
                     'domain_owner' => $domain,
