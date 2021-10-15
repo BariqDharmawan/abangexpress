@@ -10,10 +10,17 @@
         <form method="GET" class="col-lg-8"
         action="{{ route('tracking-order.index') }}">
             @csrf
-            <div class="row align-items-center justify-content-center position-relative">
-                <div class="col-12">
+            <div class="row align-items-center justify-content-center 
+            position-relative">
+                <div class="col-12 mx-0 px-0">
                     <input type="text" class="form-control py-3 ps-lg-4 py-lg-4 shadow input--btn-inside not-allow-space" minlength="3"
                     placeholder="Ketik nomor resi disini" name="track_order" required>
+                    @error('track_order')
+                        <span class="text-danger text-shadow
+                        input__error-message input__error-message--absolute-bottom">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
                 <div class="col">
                     <button type="submit" class="btn btn-primary
@@ -43,17 +50,20 @@
         <section id="search-resi-section">
             <div class="container" data-aos="fade-up">
                 <div id="panel-resi">
-                    <x-section-header text="Hasil pencarian {{ session('result') }}" />
+                    <x-section-header text="Hasil pencarian 
+                    {{ session('trackingstatus') == 'success' ? 
+                    session('trackUpdate')->awb : old('track_order') }}" />
                     @if (session('trackingstatus')=="success")
                         <div class="panel-scroll__header bg-success p-3 
                         text-white text-center fw-bold text-uppercase rounded-top">
-                            {{ session('lastUpdate')->lastupdate }}
+                            {{ session('trackUpdate')->lastupdate }} To 
+                            {{ session('trackUpdate')->name }}
                         </div>
                     @endif
                     <div class="row panel-scroll border p-3 alert-dismissible mx-0
-                    @if(session('trackingstatus') == 'failed') 
-                    align-items-center text-center panel-scroll--empty
-                    @endif">
+                        @if(session('trackingstatus') == 'failed') 
+                            align-items-center text-center panel-scroll--empty
+                        @endif">
                         @if (session('trackingstatus')=="success")
                             <ul class="col-lg-3">
                                 @foreach ( session('datetime') as $dateRes)
@@ -104,7 +114,7 @@
                                 Nomor resi tidak ditemukan, <br> 
                                 silahkan telusuri ulang
                             </p>
-                        @endif
+                        @endif                            
 
                         <button type="button" class="btn-close btn-close--div btn-show-hidden-section-aos" data-section-closed-aos="#fade-up-about"
                         data-close-div="#panel-resi"></button>

@@ -34,16 +34,16 @@ class TrackingOrderController extends Controller
 
         $response = curl_exec($curl);
         curl_close($curl);
-        $res=json_decode($response);
-        $trackStatus=$res->status;
         
-        $lastUpdate = $res->result;
+        $res = json_decode($response);
+        $trackStatus = $res->status;
+        $trackUpdate = $res->result;
 
-        if ($trackStatus=="success"){
+        if ($trackStatus == "success"){
 
-            $response=collect($res->trackresult,true);
+            $response = collect($res->trackresult,true);
 
-            $tanggal=$response->map(function($item,$key){
+            $tanggal = $response->map(function($item,$key){
                 return[
                     'date' => $item->date,
                     'time' => $item->time,
@@ -51,21 +51,18 @@ class TrackingOrderController extends Controller
                 ];
             });
 
-            $result=$response->map(function($item,$key){
+            $result = $response->map(function($item,$key){
                 return[
                     'desc' => $item->desc,
                     'location' => $item->location
                 ];
             });
 
-            // dd($response);
-
-
             return redirect('/#search-resi-section')->with([
                 'trackingstatus' => $trackStatus,
                 'datetime'=>$tanggal,
                 'trackresult'=>$result, 
-                'lastUpdate' => $lastUpdate
+                'trackUpdate' => $trackUpdate
             ]);
         }else{
             return redirect('/#search-resi-section')->with(
@@ -74,23 +71,11 @@ class TrackingOrderController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //

@@ -5,4 +5,15 @@
             padding-right: 140px;
         }
     }
+
+    &__error-message {
+        &--absolute-bottom {
+            bottom: -10px;
+            left: 0;
+            position: absolute;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            transform: translateY(100%);
+        }
+    }
 }
