@@ -1,12 +1,16 @@
 .panel-scroll {
-    height: 300px;
+    height: 450px;
     overflow-y: auto;
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
-
+    border-top: 0 !important;
+    
     $heightItem: 85px;
     $spaceBetween: 3rem;
+
+    &--empty {
+        height: 350px;
+    }
 
     &__item {
         position: relative;

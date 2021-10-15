@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TrackOrderValidation;
 use Illuminate\Http\Request;
 
 class TrackingOrderController extends Controller
 {
 
-    public function index(Request $request)
+    public function index(TrackOrderValidation $request)
     {
-        $request->validate([
-            'track_order' => ['required', 'min:3', 'string']
-        ]);
-
         $noresi = $request->track_order;
         $curl = curl_init();
 
@@ -39,11 +36,9 @@ class TrackingOrderController extends Controller
         curl_close($curl);
         $res=json_decode($response);
         $trackStatus=$res->status;
-        // dd($tanggal);
-        // echo $response;
+        
+        $lastUpdate = $res->result;
 
-        //todo: integrate search result here
-        // dd($result);
         if ($trackStatus=="success"){
 
             $response=collect($res->trackresult,true);
@@ -63,10 +58,19 @@ class TrackingOrderController extends Controller
                 ];
             });
 
+            // dd($response);
 
-            return redirect('/#search-resi-section')->with(['trackingstatus'=>$trackStatus,'datetime'=>$tanggal,'trackresult'=>$result]);
+
+            return redirect('/#search-resi-section')->with([
+                'trackingstatus' => $trackStatus,
+                'datetime'=>$tanggal,
+                'trackresult'=>$result, 
+                'lastUpdate' => $lastUpdate
+            ]);
         }else{
-            return redirect('/#search-resi-section');
+            return redirect('/#search-resi-section')->with(
+                'trackingstatus', $trackStatus
+            );
         }
     }
 
