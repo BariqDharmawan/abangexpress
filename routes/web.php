@@ -7,7 +7,57 @@ Route::redirect('/', 'template-1', 301);
 
 Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() {
 
-    Route::redirect('dashboard', 'identity', 301);
+    // PULL DATA CONSIGNEE
+    Route::get('pullPenerima/{id}', 'BookingOrderController@ambilPenerima');
+
+
+    Route::get('book', 'BookingOrderController@index')->name('book');
+    Route::get('book/invoice', 'BookingOrderController@invoice')->name(
+        'book.invoice'
+    );
+    Route::post('book/invoice', 'BookingOrderController@storeInvoice');
+    Route::post('book/invoice/save', 'BookingOrderController@store');
+
+    Route::post('book/step-order', 'BookingOrderController@order')->name(
+        'book.step-order'
+    );
+
+    Route::post('/', 'ShipmentOrderController@filterOrder')->name(
+        'filter.order'
+    );
+    Route::post('/history', 'ShipmentOrderController@filterHistory')->name(
+        'filter.history'
+    );
+
+    Route::resource('book', 'BookingOrderController')->except('index', 'show');
+    Route::get('/', 'ShipmentOrderController@index')->name('index');
+    Route::resource('order', 'ShipmentOrderController')->except('store');
+
+    Route::get('process', 'ShipmentOrderController@process')->name('process');
+    Route::get('pending', 'ShipmentOrderController@pending')->name('pending');
+    Route::get('history', 'ShipmentOrderController@history')->name('history');
+    Route::get('receipt', 'ShipmentOrderController@receipt')->name('receipt');
+
+    Route::prefix('invoices')->name('invoice.')->group(function (){
+        Route::get('bill', 'ShipmentInvoiceController@bill')->name('bill');
+        Route::get('verifying', 'ShipmentInvoiceController@verifying')->name(
+            'verifying'
+        );
+        Route::get('settled', 'ShipmentInvoiceController@settled')->name('settled');
+    });
+    Route::prefix('support')->name('support.')->group(function (){
+        Route::get('guide', 'ShipmentSupportController@guide')->name('guide');
+        Route::get('regulation', 'ShipmentSupportController@regulation')->name(
+            'regulation'
+        );
+    });
+});
+
+Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() {
+    Route::resource('home', 'HomeController')->except('update');
+    Route::put('home/update', 'HomeController@update')->name('home.update');
+
+    Route::resource('user', 'UserController')->except('edit', 'show', 'create');
 
     
     Route::prefix('about-us')->group(function (){
@@ -42,14 +92,8 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() 
     Route::put('our-contact', 'OurContactController@update')->name('our-contact.update');
 
     Route::prefix('content')->name('content.')->group(function (){
-        Route::prefix('cover-vision-mission')->name('cover-vision-mission.')
-        ->group(function () {
-            Route::get('/', 'CoverVisionMissionController@index')->name('index');
-            Route::put('/', 'CoverVisionMissionController@update')->name('update');
-        });
-
-        Route::resource('landing-carousel', 'LandingHeroCarouselController')->except(
-            'create', 'show', 'edit', 'update'
+        Route::resource('landing-carousel', 'LandingHeroCarouselController')->only(
+            'store', 'destroy'
         );
 
         Route::resource('section-heading', 'LandingSectionController')->only(

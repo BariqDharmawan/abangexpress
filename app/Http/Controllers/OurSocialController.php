@@ -6,6 +6,7 @@ use App\Helper\Helper;
 use App\Http\Requests\StoreSocialMediaValidation;
 use App\Http\Requests\UpdateContactValidation;
 use App\Http\Requests\UpdateSocialMediaValidation;
+use App\Models\LandingSectionDesc;
 use App\Models\OurSocial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;

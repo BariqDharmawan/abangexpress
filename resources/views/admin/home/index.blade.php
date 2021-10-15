@@ -6,22 +6,22 @@
     @if (session('success'))
     <x-admin.alert-success/>
     @endif
-    
-    <x-admin.card title="Header Carousel">
+
+    <x-admin.card title="Nama kita" class="mt-5">
         <x-slot name="header">
-            <x-admin.modal.trigger text="Add new image"
+            <x-admin.modal.trigger text="Ganti nama kita"
+            modal-target="our-name" />
+        </x-slot>
+        <h1 class="h3">{{ $identity->our_name }}</h1>
+    </x-admin.card>
+    
+    <x-admin.card title="Header Carousel" class="mt-5">
+        <x-slot name="header">
+            <x-admin.modal.trigger text="Tambah slider"
             modal-target="add-hero-carousel-popup" />
         </x-slot>
 
         <div id="hero-carousel" class="carousel slide" data-ride="carousel">
-            @if (isset($isIndicatorHidden) and $isIndicatorHidden)
-                <ol class="carousel-indicators">
-                    @foreach ($heroCarousel as $carousel)
-                    <li data-target="#hero-carousel" data-slide-to="{{ $loop->index }}" 
-                    class="@if($loop->first) active @endif"></li>
-                    @endforeach
-                </ol>
-            @endif
             <div class="carousel-inner">
                 @foreach ($heroCarousel as $carousel)
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }} position-relative">
@@ -33,6 +33,7 @@
                 </div>
                 @endforeach
             </div>
+            @if (count($heroCarousel) > 1)
             <a class="carousel-control-prev" href="#hero-carousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -41,16 +42,45 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
+            @endif
         </div>
 
         <small class="text-secondary text-center d-block mt-2">
             Ukuran aslinya adalah 1440x450
         </small>
     </x-admin.card>
+
+    <x-admin.card title="Heading" class="mt-5">
+        <x-slot name="header">
+            <x-admin.modal.trigger text="Ganti heading"
+            modal-target="change-heading" />
+        </x-slot>
+        <h1 class="h3">{{ $identity->slogan }}</h1>
+    </x-admin.card>
 </div>
 @endsection
 
 @section('components')
+
+    <x-admin.modal id="our-name" heading="Ganti nama kita">
+        <form method="POST" enctype="multipart/form-data" 
+        action="{{ route('admin.home.update') }}">
+            @csrf @method('PUT')
+            <div class="form-group">
+                <label for="edit-sub-slogan">Heading</label>
+                <input type="text" required
+                class="form-control" id="edit-sub-slogan"
+                name="our_name" 
+                value="{{ old('our_name') ?? $identity->our_name }}">
+                @error('our_name')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </x-admin.modal>
+
     <x-admin.modal id="add-hero-carousel-popup" heading="Header Carousel">
         <form method="POST" enctype="multipart/form-data" 
         action="{{ route('admin.content.landing-carousel.store') }}">
@@ -77,6 +107,25 @@
             'action' => route('admin.content.landing-carousel.destroy', $carousel->id)
         ])  
     @endforeach
+
+    <x-admin.modal id="change-heading" heading="Change Heading">
+        <form method="POST" enctype="multipart/form-data" 
+        action="{{ route('admin.home.update') }}">
+            @csrf @method('PUT')
+            <div class="form-group">
+                <label for="edit-sub-slogan">Heading</label>
+                <input type="text" required
+                class="form-control" id="edit-sub-slogan"
+                name="slogan" 
+                value="{{ old('slogan') ?? $identity->slogan }}">
+                @error('slogan')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </x-admin.modal>
 @endsection
 
 @push('scripts')

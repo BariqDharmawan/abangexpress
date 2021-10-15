@@ -21,53 +21,32 @@
             </a>
         
             <hr class="sidebar-divider">
-        
-            <x-admin.sidebar.menu text="About Us" icon="fa-fw fa-cog" 
-            data-toggle="collapse" data-target="#collapseAbout"
-            aria-expanded="true" aria-controls="collapseAbout"
-            class="collapsed">
-        
-                <x-admin.sidebar.dropdown id="collapseAbout" parent="accordionSidebar">
-                    <x-admin.sidebar.link text="Identity" 
-                    :href="route('admin.about-us.identity')" />
-        
-                    <x-admin.sidebar.link text="Social Media" 
-                    :href="route('admin.our-social.manage')" />
-        
-                    <x-admin.sidebar.link text="Contacts" 
-                    :href="route('admin.contact.manage')" />
-        
-                </x-admin.sidebar.dropdown>
-        
-            </x-admin.sidebar.menu>
-        
-            <x-admin.sidebar.menu text="Contents" class="collapsed" data-toggle="collapse" 
-            icon="fa-fw fa-cog" data-target="#collapseContent" 
-            aria-expanded="true" aria-controls="collapseContent">
-        
-                <x-admin.sidebar.dropdown id="collapseContent" parent="accordionSidebar">
-                    
-                    <x-admin.sidebar.link text="Header Carousel" 
-                    :href="route('admin.content.landing-carousel.index')" />
-        
-                    <x-admin.sidebar.link text="Cover Vision Mission" 
-                    :href="route('admin.content.cover-vision-mission.index')" />
-        
-                    <x-admin.sidebar.link text="Section Heading Text" 
-                    :href="route('admin.content.section-heading.index')" />
-            
-                </x-admin.sidebar.dropdown>
-        
-            </x-admin.sidebar.menu>
-        
+
+            <x-admin.sidebar.menu :href="route('admin.home.index')" 
+            text="Home" icon="fa-fw fa-tachometer-alt" />
+
+            <x-admin.sidebar.menu :href="route('admin.about-us.identity')" 
+            text="Tentang Kami" icon="fa-fw fa-tachometer-alt" />
+
             <x-admin.sidebar.menu :href="route('admin.service.manage')" 
-            text="Services" icon="fa-fw fa-tachometer-alt" />
-        
+            text="Layanan Kami" icon="fa-fw fa-tachometer-alt" />
+
             <x-admin.sidebar.menu :href="route('admin.team.manage')" 
-            text="Teams" icon="fa-fw fa-tachometer-alt" />
-        
+            text="Team Kami" icon="fa-fw fa-tachometer-alt" />
+
             <x-admin.sidebar.menu :href="route('admin.faq.manage')" 
-            text="FAQ" icon="fa-fw fa-tachometer-alt" />
+            text="Tanya Kami" icon="fa-fw fa-tachometer-alt" />
+
+            <x-admin.sidebar.menu text="Kontak Kami" 
+            :href="route('admin.contact.manage')" icon="fa-fw fa-tachometer-alt" />
+
+            <x-admin.sidebar.menu text="Social Media" 
+            :href="route('admin.our-social.manage')" icon="fa-fw fa-tachometer-alt" />
+
+            @if (auth()->user()->role == 'admin')
+            <x-admin.sidebar.menu :href="route('admin.user.index')" 
+            text="Subadmin" icon="fa-fw fa-tachometer-alt" />
+            @endif
         
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

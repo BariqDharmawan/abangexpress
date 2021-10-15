@@ -4,8 +4,8 @@
     <div class="row mx-0">
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center">
-                <h1 class="h4 mb-0">Manage our social media</h1>
-                <x-admin.modal.trigger text="Add new social media"
+                <h1 class="h4 mb-0">Social media</h1>
+                <x-admin.modal.trigger text="Tambah social media"
                 modal-target="add-social-media" />
             </div>
         </div>
@@ -31,10 +31,10 @@
                         </div>
                         <div class="ml-auto">
                             <a class="btn btn-link text-primary" href="{{ route('admin.our-social.edit', $social->id) }}">
-                                Update
+                                Ubah detail
                             </a>
 
-                            <x-admin.modal.trigger text="Remove"
+                            <x-admin.modal.trigger text="Hapus"
                             modal-target="remove-social-{{ $loop->iteration }}"
                             :is-default-style="false"
                             class="btn-link text-danger" />

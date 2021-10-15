@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper\Helper;
 use App\Http\Requests\StoreMemberValidation;
 use App\Http\Requests\UpdateMemberValidation;
+use App\Models\LandingSectionDesc;
 use App\Models\OurTeam;
 use App\Models\PositionList;
 use Illuminate\Http\Request;
@@ -19,7 +20,11 @@ class OurTeamController extends Controller
         $teams = OurTeam::all();
         $positionList = PositionList::all();
 
-        return view('admin.team.manage', compact('teams', 'positionList'));
+        $landingSection = LandingSectionDesc::where('id', 4)->first();
+
+        return view('admin.team.manage', compact(
+            'teams', 'positionList', 'landingSection'
+        ));
     }
 
     /**

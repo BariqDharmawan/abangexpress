@@ -4,11 +4,11 @@
         @method('PUT')
     @endisset
 
-    <x-admin.input name="name" label="Person name" 
+    <x-admin.input name="name" label="Nama member" 
     value="{{ isset($data) ? $data->name : '' }}" 
     class="not-allow-number" minlength="3" maxlength="60" required></x-admin.input>
     
-    <x-admin.input type="select" label="Platform" 
+    <x-admin.input type="select" label="Jabatan" 
     name="{{ empty($data) ? 'position_id' : 'position_id_edit' }}" required>
         @foreach ($positionList as $position)
             <option value="{{ $position->id }}"
@@ -19,11 +19,11 @@
         @endforeach
     </x-admin.input>
 
-    <x-admin.input type="textarea" label="About member" name="short_desc"
+    <x-admin.input type="textarea" label="Deskripsi member" name="short_desc"
     minlength="8" maxlength="50" value="{{ $data->short_desc ?? '' }}" 
     rows="5" required/>
 
-    <x-admin.input label="{{ isset($data) ? 'Change' : 'Add' }} avatar" 
+    <x-admin.input label="{{ isset($data) ? 'Ubah' : 'Pilih' }} profile foto" 
     type="file" name="{{ isset($data) ? 'avatar_edit' : 'avatar' }}" 
     :is-required="isset($data) ? false : true" accept="image/*"/>
 

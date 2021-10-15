@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper\Helper;
 use App\Http\Requests\StoreServiceValidation;
+use App\Models\LandingSectionDesc;
 use App\Models\OurService;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,12 @@ class OurServiceController extends Controller
             'fab fa-amazon-pay'
         ];
 
-        return view('admin.services.manage', compact('ourService', 'listIcon'));
+
+        $landingSection = LandingSectionDesc::where('id', 2)->first();
+
+        return view('admin.services.manage', compact(
+            'ourService', 'listIcon', 'landingSection'
+        ));
     }
 
     /**
@@ -33,7 +39,10 @@ class OurServiceController extends Controller
      */
     public function index()
     {
-        $ourService = OurService::orderBy('title', 'asc')->get();
+        $ourService = OurService::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->orderBy('title', 'asc')->get();
+
         return response()->json($ourService);
     }
 
@@ -55,13 +64,6 @@ class OurServiceController extends Controller
         return Helper::returnSuccess('add new service');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $serviceToUpdate = OurService::findOrFail($id);

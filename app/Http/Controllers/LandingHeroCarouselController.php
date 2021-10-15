@@ -10,16 +10,6 @@ use Illuminate\Support\Str;
 
 class LandingHeroCarouselController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $heroCarousel = FirstHeroCarouselLanding::all();
-        return view('admin.contents.hero-carousel', compact('heroCarousel'));
-    }
 
     /**
      * Store a newly created resource in storage.
