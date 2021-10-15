@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
@@ -13,7 +14,10 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        return view('shipment.index');
+        $quickReport = Helper::getJson('shipping-quick-report.json');
+        $quickReport = collect($quickReport->response);
+
+        return view('shipment.index', compact('quickReport'));
     }
 
     public function zipcode()

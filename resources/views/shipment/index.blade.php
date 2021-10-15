@@ -17,19 +17,66 @@
         </div>
     </form>
 
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="card">
-            <div class="header">
-                <h2>Kiriman belum ditagih</h2>
-            </div>
-            <div class="body">
-                <div class="info-box bg-orange hover-expand-effect">
-                    <div class="icon">
-                        <img src="{{ asset('img/icon/savings_black_24dp.svg') }}" alt="">
+    <div class="row clearfix">
+        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Kiriman belum ditagih</h2>
+                </div>
+                <div class="body p-0">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <div class="icon d-inline-flex items-center justify-center
+                        pt-5 pb-5">
+                            <img src="{{ asset('img/icon/savings_white_24dp.svg') }}" 
+                            alt="" width="80px" class="pl-4 pr-4">
+                        </div>
+                        <div class="content w-100 d-flex items-center pt-5 pb-5">
+                            <div class="number count-to" data-from="0" 
+                            data-to="{{ $quickReport['pcs'] }}" data-speed="1000" data-fresh-interval="20"></div>
+                            <span class="ml-3">Resi</span>
+                        </div>
                     </div>
-                    <div class="content">
-                        <div class="text">NEW VISITORS</div>
-                        <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Tagihan belum dibayar</h2>
+                </div>
+                <div class="body p-0">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <div class="icon d-inline-flex items-center justify-center
+                        pt-5 pb-5">
+                            <img src="{{ asset('img/icon/money-bill-solid.svg') }}" 
+                            alt="" width="80px" class="pl-4 pr-4">
+                        </div>
+                        <div class="content w-100 d-flex items-center pt-5 pb-5">
+                            <span class="mr-3">Rp. </span>
+                            <div class="number count-to" data-from="0" 
+                            data-to="{{ $quickReport['hutang'] }}" data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Kiriman bulan {{ $quickReport['waktu'] }}</h2>
+                </div>
+                <div class="body p-0">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <div class="icon d-inline-flex items-center justify-center 
+                        pt-5 pb-5">
+                            <img alt="" width="80px" class="pl-4 pr-4"
+                            src="{{ asset('img/icon/shipping-fast-solid.svg') }}">
+                        </div>
+                        <div class="content w-100 d-flex items-center pt-5 pb-5">
+                            <div class="number count-to" data-from="0" 
+                            data-to="{{ $quickReport['berat'] }}" data-speed="1000" data-fresh-interval="20"></div>
+                            <span class="ml-3">Kg</span>
+                        </div>
                     </div>
                 </div>
             </div>
