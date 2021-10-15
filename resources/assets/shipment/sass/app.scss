@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
 @import '~material-design-icons/iconfont/material-icons.css';
-
 @import './../template/plugins/bootstrap/css/bootstrap.css';
 @import './../template/plugins/node-waves/waves.css';
 @import './../template/plugins/animate-css/animate.css';
@@ -10,30 +8,28 @@
 @import './../template/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css';
 @import './../template/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css';
 @import './../vendor/select2/css/select2.css';
-
 @import './variable';
-
 @import './../template/plugins/waitme/waitMe.css';
 @import './../template/plugins/bootstrap-select/css/bootstrap-select.css';
 @import './../template/css/style.css';
 @import './../template/css/themes/all-themes.css';
-
 @import './../../general/sass/utilities';
 @import './input';
-
 @import './../../general/sass/underline';
 @import './../../general/sass/variable';
 @import './../../general/sass/btn';
 @import './../../general/sass/input';
 @import './../../general/sass/panel';
 @import './../../general/sass/text';
-
 @import './box';
 @import './btn';
 @import './helper';
 @import './pdf';
-
 body {
     width: 100%;
     overflow-x: hidden;
+}
+
+.navbar--red {
+    background-color: #d63b2f;
 }

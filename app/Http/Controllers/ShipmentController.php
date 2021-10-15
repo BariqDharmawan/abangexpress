@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Helper\Helper;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 class ShipmentController extends Controller
 {
     /**
@@ -14,8 +17,44 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $quickReport = Helper::getJson('shipping-quick-report.json');
-        $quickReport = collect($quickReport->response);
+
+        $uid=Auth::user()->username;
+        $user = User::where([
+            ['username', $uid]
+        ])->first();
+
+        $akun = $user->code_api;
+        $tokenkey = $user->token_api;
+        $postdata = '{
+            "akun": "'.$akun.'",
+            "key": "'.$tokenkey.'"
+
+        }';
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/dashboarddata/',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $postdata,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        $res = json_decode($response);
+
+
+        $quickReport = collect($res->response);
 
         return view('shipment.index', compact('quickReport'));
     }
