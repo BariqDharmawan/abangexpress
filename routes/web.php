@@ -24,12 +24,19 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
             'book.step-order'
         );
 
+        Route::post('filter/book', 'ShipmentOrderController@filterOrder')->name(
+            'filter.order'
+        );
+
         Route::resource('book', 'BookingOrderController')->except('index', 'show');
         Route::get('/', 'ShipmentOrderController@index')->name('index');
+        Route::resource('order', 'ShipmentOrderController');
+
         Route::get('process', 'ShipmentOrderController@process')->name('process');
         Route::get('pending', 'ShipmentOrderController@pending')->name('pending');
         Route::get('history', 'ShipmentOrderController@history')->name('history');
         Route::get('receipt', 'ShipmentOrderController@receipt')->name('receipt');
+
     });
     Route::prefix('invoices')->name('invoice.')->group(function (){
         Route::get('bill', 'ShipmentInvoiceController@bill')->name('bill');

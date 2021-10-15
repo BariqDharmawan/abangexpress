@@ -38,7 +38,7 @@
                                         <td>{{ $xdata->tujuan }}</td>
                                         <td>Berat : {{ $xdata->berat }} <br> Qty : {{ $xdata->qty }}</td>
                                         <td>
-                                            <a type="submit" href="https://abangexpress.id/shipment/cn/{{ $xdata->token}}" target="_blank" class="btn btn-big btn-primary">Cetak Ulang</a>
+                                            <a type="submit" href="https://abangexpress.id/shipment/cn/{{ $xdata->token}}" target="_blank" class="btn btn-big btn-primary"><i class="material-icons">print</i>Cetak Ulang</a>
                                         </td>
                                     </tr>
                                 @endforeach

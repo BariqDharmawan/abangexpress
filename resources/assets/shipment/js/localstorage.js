@@ -357,4 +357,14 @@ $(document).ready(function() {
         }
     });
 
+    // pop the filter
+    function myxFunction() {
+        var x = document.getElementById("myxDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
 })
