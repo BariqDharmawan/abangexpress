@@ -53,9 +53,10 @@
             </div>
 
             <div class="menu">
-                <a href="{{ route('shipping.order.book') }}"  style="margin: 10px 1rem;">
-                    <div class="info-box-3 bg-green hover-zoom-effect mb-0" 
-                    style="left: 10px;">
+                <a href="{{ route('shipping.order.book') }}"
+                class="remove-underline">
+                    <div class="info-box-3 bg-green hover-zoom-effect 
+                    mb-0 mt-4 ml-4 mr-1 left-0">
                         <div class="icon">
                             <i class="material-icons">flight_takeoff</i>
                         </div>

@@ -20,6 +20,12 @@ $sides: ("b": bottom, "t": top, 'l': left);
     }
 }
 
+.left {
+    &-0 {
+        left: 0;
+    }
+}
+
 .p {
     @for $i from 1 through 5 {
         &-#{$i} {

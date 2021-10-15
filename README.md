@@ -18,7 +18,7 @@ First, make sure you have PHP, Apache2, Mysql installed on your local and then c
 [X] Change FAQ component template 1, make it same as template 2
 [X] Integrasi kolom input `recipient_previous`, ambil data dari ajax kemudian
 kolom lain otomatis terisi dari data ajax tersebut
-[ ] Di dashboard shipping bisa search resi jg, kaya ditemplate 1
+[X] Di dashboard shipping bisa search resi jg, kaya ditemplate 1
 [X] Siapin controller buat search resi
 [X] Fix hide section result resi
 [X] Integrasi controller search resi (TrackingOrderController)
