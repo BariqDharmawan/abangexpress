@@ -13,6 +13,52 @@
                     {{$title}}
                 </h2>
             </div>
+            <div class="header">
+                <button type="button" class="btn m-b-10 bg-green waves-effect" data-toggle="collapse" data-target="#myxDIV" aria-expanded="true" aria-controls="myxDIV">
+                    <i class="material-icons">filter_list</i>
+                    <span>Filter</span>
+                </button>
+               <div class="collapse" id="myxDIV" aria-expanded="true">
+                    <div  class="well">
+                        <div class="row">
+
+                            <form role="form" method="POST" action="{{ route('shipping.order.filter.history') }}"
+                            autocomplete="off">
+                                @csrf
+                                <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label for="disabledSelect">Tanggal Awal</label>
+                                                <input class="form-control" name="awal" type="date">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="disabledSelect">Pengirim</label>
+                                                <input class="form-control" name="pengirim" type="text">
+                                            </div>
+                                </div>
+                                <div class="col-lg-4">
+
+                                        <div class="form-group">
+                                            <label for="disabledSelect">Tanggal Akhir</label>
+                                            <input class="form-control" name="akhir" type="date">
+                                        </div>
+
+                                        <div class="form-group">
+
+                                        <div class="form-group">
+                                            <x-shipment.input type="select"
+                                            placeholder="Sub Cabang"
+                                            name="kodeanak" required>
+                                                <option value="x">X</option>
+                                            </x-shipment.input>
+                                        </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Cari data</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="body">
                 <div class="table-responsive">
                     <table id="{{ $tableClass}}" class="table table-bordered table-striped table-hover js-basic-example dataTable w-100">
@@ -24,7 +70,7 @@
                                 <th>Penerima</th>
                                 <th>Tujuan</th>
                                 <th>Detail</th>
-                                <th>Action</th>
+                                {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -37,7 +83,7 @@
                                         <td>{{ $xdata->penerima }} <br> {{ $xdata->teleponp }} <br> {{ $xdata->alamat }}</td>
                                         <td>{{ $xdata->tujuan }}</td>
                                         <td>Berat : {{ $xdata->berat }} <br> Qty : {{ $xdata->qty }}</td>
-                                        <td></td>
+                                        {{-- <td></td> --}}
                                     </tr>
                                 @endforeach
                             @endif

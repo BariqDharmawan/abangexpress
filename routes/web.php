@@ -27,6 +27,9 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
         Route::post('filter/book', 'ShipmentOrderController@filterOrder')->name(
             'filter.order'
         );
+        Route::post('filter/history', 'ShipmentOrderController@filterHistory')->name(
+            'filter.history'
+        );
 
         Route::resource('book', 'BookingOrderController')->except('index', 'show');
         Route::get('/', 'ShipmentOrderController@index')->name('index');

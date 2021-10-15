@@ -24,7 +24,7 @@
                                 <th>Penerima</th>
                                 <th>Tujuan</th>
                                 <th>Detail</th>
-                                <th>Action</th>
+                                {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -37,7 +37,7 @@
                                         <td>{{ $xdata->penerima }} <br> {{ $xdata->teleponp }} <br> {{ $xdata->alamat }}</td>
                                         <td>{{ $xdata->tujuan }}</td>
                                         <td>Berat : {{ $xdata->berat }} <br> Qty : {{ $xdata->qty }}</td>
-                                        <td></td>
+                                        {{-- <td></td> --}}
                                     </tr>
                                 @endforeach
                             @endif
