@@ -46,6 +46,7 @@
         "jquery-countto": "^1.2.0",
         "jquery.easing": "^1.4.1",
         "material-design-icons": "^3.0.1",
+        "pdfobject": "^2.2.7",
         "sweetalert2": "^11.1.7",
         "swiper": "^7.0.6"
     }
