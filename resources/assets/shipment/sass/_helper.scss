@@ -3,7 +3,17 @@
     margin-right: 0;
 }
 
-$sides: ("b": bottom, "t": top, 'l': left);
+$sides: ("b": bottom, "t": top, 'l': left, 'r': right);
+
+@each $prefix, $side in $sides {
+    .p#{$prefix} {
+        @for $i from 0 through 5 {
+            &-#{$i} {
+                padding-#{$side}: $i * .25rem !important;
+            }
+        }
+    }
+}
 
 @each $prefix, $side in $sides {
     .m#{$prefix} {
@@ -20,6 +30,10 @@ $sides: ("b": bottom, "t": top, 'l': left);
     }
 }
 
+.ml-auto {
+    margin-left: auto;
+}
+
 .left {
     &-0 {
         left: 0;
@@ -27,6 +41,7 @@ $sides: ("b": bottom, "t": top, 'l': left);
 }
 
 .p {
+
     @for $i from 1 through 5 {
         &-#{$i} {
             padding: calc(#{$i} * .25rem) !important;
@@ -34,12 +49,19 @@ $sides: ("b": bottom, "t": top, 'l': left);
     }
 }
 
+.w-100 {
+    width: 100%;
+}
+
 .d-none {
     display: none;
 }
 
 .d-flex {
-    display: flex;
+    display: flex !important;
+}
+.d-inline-flex {
+    display: inline-flex !important;
 }
 .items {
     &-end {
@@ -48,6 +70,9 @@ $sides: ("b": bottom, "t": top, 'l': left);
     &-center {
         align-items: center;
     }
+}
+.justify-center {
+    justify-content: center;
 }
 .flex-column {
     flex-direction: column;
@@ -83,11 +108,15 @@ $sides: ("b": bottom, "t": top, 'l': left);
 }
 
 .p-0 {
-    padding: 0;
+    padding: 0 !important;
 }
 .px-5 {
     padding-left: 3rem;
     padding-right: 3rem;
+}
+
+.h-100 {
+    height: 100%;
 }
 
 .text-primary {
