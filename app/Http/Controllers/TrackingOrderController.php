@@ -10,7 +10,7 @@ class TrackingOrderController extends Controller
 
     public function index(TrackOrderValidation $request)
     {
-        $noresi = $request->track_order;
+        $noresi = $request->receipt_number;
         $curl = curl_init();
 
         curl_setopt_array($curl, array(

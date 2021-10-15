@@ -4,11 +4,11 @@
             @if ($templateUsing == 1)
                 <x-section-header text="Hasil pencarian 
                 {{ session('trackingstatus') == 'success' ? 
-                session('trackUpdate')->awb : old('track_order') }}" />
+                session('trackUpdate')->awb : old('receipt_number') }}" />
             @elseif($templateUsing == 2)
                 <x-template2.section-title heading="Hasil pencarian 
                 {{ session('trackingstatus') == 'success' ? 
-                session('trackUpdate')->awb : old('track_order') }}" />
+                session('trackUpdate')->awb : old('receipt_number') }}" />
             @endif
             
             @if (session('trackingstatus')=="success")

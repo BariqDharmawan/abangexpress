@@ -8,7 +8,8 @@
     <form method="GET" class="card mt-3" action="{{ route('tracking-order.index') }}">
         @csrf
         <div class="body">
-            <x-shipment.input class="input--btn-inside not-allow-space" name="track_order" minlength="3" placeholder="Ketik nomor resi disini" 
+            <x-shipment.input class="input--btn-inside not-allow-space" 
+            name="receipt_number" maxlength="30" placeholder="Ketik nomor resi disini" 
             autocomplete="off" required/>
             <button type="submit" class="btn btn-big btn-primary">
                 Cari resi
@@ -42,7 +43,7 @@
                 <h3>
                     Hasil pencarian 
                     {{ session('trackingstatus') == 'success' ? 
-                    session('trackUpdate')->awb : old('track_order') }}
+                    session('trackUpdate')->awb : old('receipt_number') }}
                 </h3>
             </div>
             
