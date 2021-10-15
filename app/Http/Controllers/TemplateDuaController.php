@@ -33,11 +33,20 @@ class TemplateDuaController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->orderBy('title', 'asc')->get();
 
-        $isProfileVideoExist = $aboutUs->our_video ? true : false;
+        if ($aboutUs) {
+            $isProfileVideoExist = $aboutUs->our_video ? true : false;
 
-        return view('template-2.index', compact(
-            'landingSection', 'aboutUs', 'isProfileVideoExist', 
-            'ourTeam', 'aboutUs', 'ourService', 'menus'
-        ));
+            return view('template-2.index', compact(
+                'landingSection', 'aboutUs', 'isProfileVideoExist', 
+                'ourTeam', 'aboutUs', 'ourService', 'menus'
+            ));
+        }
+        else {
+            return view('template-2.index', compact(
+                'landingSection', 'aboutUs',
+                'ourTeam', 'aboutUs', 'ourService', 'menus'
+            ));
+        }
+
     }
 }
