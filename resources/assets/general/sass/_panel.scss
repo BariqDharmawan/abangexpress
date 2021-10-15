@@ -4,11 +4,14 @@
     display: flex;
     align-items: flex-start;
     border-top: 0 !important;
+    background-color: white;
     
     $heightItem: 85px;
     $spaceBetween: 3rem;
 
     &--empty {
+        align-items: center;
+        justify-content: center;
         height: 350px;
     }
 

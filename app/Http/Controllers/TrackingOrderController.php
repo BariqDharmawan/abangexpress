@@ -58,14 +58,14 @@ class TrackingOrderController extends Controller
                 ];
             });
 
-            return redirect('/#search-resi-section')->with([
+            return redirect(url()->previous() . '#search-resi-section')->with([
                 'trackingstatus' => $trackStatus,
                 'datetime'=>$tanggal,
                 'trackresult'=>$result, 
                 'trackUpdate' => $trackUpdate
             ]);
         }else{
-            return redirect('/#search-resi-section')->with(
+            return redirect(url()->previous() . '#search-resi-section')->with(
                 'trackingstatus', $trackStatus
             );
         }

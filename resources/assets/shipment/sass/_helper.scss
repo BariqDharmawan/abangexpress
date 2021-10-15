@@ -3,7 +3,7 @@
     margin-right: 0;
 }
 
-$sides: ("b": bottom, "t": top);
+$sides: ("b": bottom, "t": top, 'l': left);
 
 @each $prefix, $side in $sides {
     .m#{$prefix} {
@@ -14,8 +14,16 @@ $sides: ("b": bottom, "t": top);
         }
         @for $i from 0 through 5 {
             &-#{$i} {
-                margin-#{$side}: $i * .25rem;
+                margin-#{$side}: $i * .25rem !important;
             }
+        }
+    }
+}
+
+.p {
+    @for $i from 1 through 5 {
+        &-#{$i} {
+            padding: calc(#{$i} * .25rem) !important;
         }
     }
 }

@@ -21,4 +21,7 @@ kolom lain otomatis terisi dari data ajax tersebut
 [ ] Di dashboard shipping bisa search resi jg, kaya ditemplate 1
 [X] Siapin controller buat search resi
 [X] Fix hide section result resi
-[ ] Integrasi controller search resi (TrackingOrderController)
+[X] Integrasi controller search resi (TrackingOrderController)
+
+[X] Trackingnya di kasih kotak keterangan status dan penerima
+[X] Trackingnya di taro tempalate 2

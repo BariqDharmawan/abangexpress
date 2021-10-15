@@ -1,7 +1,6 @@
 <section id="search-resi-section">
     <div class="container" data-aos="fade-up">
         <div id="panel-resi">
-
             @if ($templateUsing == 1)
                 <x-section-header text="Hasil pencarian 
                 {{ session('trackingstatus') == 'success' ? 
@@ -22,7 +21,7 @@
 
             <div class="row panel-scroll border p-3 alert-dismissible mx-0
                 @if(session('trackingstatus') == 'failed') 
-                    align-items-center text-center panel-scroll--empty
+                    panel-scroll--empty
                 @endif">
                 @if (session('trackingstatus')=="success")
                     <ul class="col-lg-3">
