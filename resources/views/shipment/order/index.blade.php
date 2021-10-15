@@ -46,7 +46,12 @@
                                             <x-shipment.input type="select"
                                             placeholder="Sub Cabang"
                                             name="kodeanak" required>
-                                                <option value="x">X</option>
+                                            @if (count($underling)>1)
+                                                @foreach ($underling as $underling)
+                                                    <option value="{{$underling->kodeAgen}}">{{$underling->nama}}</option>
+                                                @endforeach
+                                            @endif
+
                                             </x-shipment.input>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Cari data</button>

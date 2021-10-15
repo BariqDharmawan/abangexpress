@@ -24,16 +24,16 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
             'book.step-order'
         );
 
-        Route::post('filter/book', 'ShipmentOrderController@filterOrder')->name(
+        Route::post('/', 'ShipmentOrderController@filterOrder')->name(
             'filter.order'
         );
-        Route::post('filter/history', 'ShipmentOrderController@filterHistory')->name(
+        Route::post('/history', 'ShipmentOrderController@filterHistory')->name(
             'filter.history'
         );
 
         Route::resource('book', 'BookingOrderController')->except('index', 'show');
         Route::get('/', 'ShipmentOrderController@index')->name('index');
-        Route::resource('order', 'ShipmentOrderController');
+        Route::resource('order', 'ShipmentOrderController')->except('store');
 
         Route::get('process', 'ShipmentOrderController@process')->name('process');
         Route::get('pending', 'ShipmentOrderController@pending')->name('pending');

@@ -53,8 +53,9 @@ class ShipmentOrderController extends Controller
         $res = json_decode($response);
         $orderData = $res->response;
         $statusRes = $res->status;
-        // dd($orderData);
-        return view('shipment.order.index', compact('title','tableClass','orderData','statusRes'));
+        $underling = $res->underling;
+        // dd($res);
+        return view('shipment.order.index', compact('title','tableClass','orderData','statusRes','underling'));
 
     }
 
@@ -200,8 +201,9 @@ class ShipmentOrderController extends Controller
         $res = json_decode($response);
         $orderData = $res->response;
         $statusRes = $res->status;
+        $underling = $res->underling;
         // dd($orderData);
-        return view('shipment.order.history', compact('title','tableClass','orderData','statusRes'));
+        return view('shipment.order.history', compact('title','tableClass','orderData','statusRes','underling'));
     }
 
     public function receipt()
@@ -257,21 +259,21 @@ class ShipmentOrderController extends Controller
         $title = 'Data order';
         $tableClass='dataOrder';
         $qw="";
-        if (!empty($_POST['awal']) || !empty($_POST['akhir']) || !empty($_POST['pengirim']) ){
-            $t1=$_POST['awal'];
-            if (!empty($_POST['akhir'])){
-                $t2=$_POST['akhir'];}
+        if (!empty($request->awal) || !empty($request->akhir) || !empty($request->pengirim) || !empty($request->kodeanak)){
+            $t1=$request->awal;
+            if (!empty($request->akhir)){
+                $t2=$request->akhir;}
             else{
-                $t2=$_POST['awal']    ;
+                $t2=$request->awal    ;
             }
-            if (!empty($_POST['awal']) || !empty($_POST['akhir'])){
+            if (!empty($request->awal) || !empty($request->akhir)){
                 $qw=$qw."and (tglorder between '$t1' and '$t2') ";
             }
-            if (!empty($_POST['pengirim'])){
-                $qw=$qw."and pengirim like '%".$_POST['pengirim']."%'";
+            if (!empty($request->pengirim)){
+                $qw=$qw."and pengirim like '%".$request->pengirim."%'";
             }
-            if (!empty($_POST['kodeanak'])){
-                $qw=$qw."and kodeagen='".$_POST['kodeanak']."'";
+            if (!empty($request->kodeanak)){
+                $qw=$qw."and kodeagen='".$request->kodeanak."'";
             }
             // dd($qw);
         }
@@ -313,8 +315,10 @@ class ShipmentOrderController extends Controller
         $res = json_decode($response);
         $orderData = $res->response;
         $statusRes = $res->status;
+        $underling = $res->underling;
         // dd($postdata);
-        return view('shipment.order.index', compact('title','tableClass','orderData','statusRes'));
+        return view('shipment.order.index', compact('title','tableClass','orderData','statusRes','underling'));
+        // return redirect()->back()->with(['title'=>$title,'tableClass'=>$tableClass,'statusRes'=>$statusRes,'orderData'=>$orderData,'title'=>$unde]);
 
     }
 
@@ -324,21 +328,21 @@ class ShipmentOrderController extends Controller
         $title = 'Data order';
         $tableClass='dataOrder';
         $qw="";
-        if (!empty($_POST['awal']) || !empty($_POST['akhir']) || !empty($_POST['pengirim']) ){
-            $t1=$_POST['awal'];
-            if (!empty($_POST['akhir'])){
-                $t2=$_POST['akhir'];}
+        if (!empty($request->awal) || !empty($request->akhir) || !empty($request->pengirim) ){
+            $t1=$request->awal;
+            if (!empty($request->akhir)){
+                $t2=$request->akhir;}
             else{
-                $t2=$_POST['awal']    ;
+                $t2=$request->awal;
             }
-            if (!empty($_POST['awal']) || !empty($_POST['akhir'])){
+            if (!empty($request->awal) || !empty($request->akhir)){
                 $qw=$qw."and (tglorder between '$t1' and '$t2') ";
             }
-            if (!empty($_POST['pengirim'])){
-                $qw=$qw."and pengirim like '%".$_POST['pengirim']."%'";
+            if (!empty($request->pengirim)){
+                $qw=$qw."and pengirim like '%".$request->pengirim."%'";
             }
-            if (!empty($_POST['kodeanak'])){
-                $qw=$qw."and kodeagen='".$_POST['kodeanak']."'";
+            if (!empty($request->kodeanak)){
+                $qw=$qw."and kodeagen='".$request->kodeanak."'";
             }
             // dd($qw);
         }
@@ -380,8 +384,9 @@ class ShipmentOrderController extends Controller
         $res = json_decode($response);
         $orderData = $res->response;
         $statusRes = $res->status;
+        $underling = $res->underling;
         // dd($postdata);
-        return view('shipment.order.index', compact('title','tableClass','orderData','statusRes'));
+        return view('shipment.order.history', compact('title','tableClass','orderData','statusRes','underling'));
 
     }
 
