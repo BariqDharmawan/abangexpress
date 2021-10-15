@@ -60,7 +60,7 @@ $(document).ready(function() {
             ciresult[entry[0]] = entry[1]
         }
         ciresult = JSON.stringify(ciresult)
-        console.log(ciresult);
+
         // check if there commercialInvoice on localStorage
         var oldCi = localStorage.getItem("commercialInvoice")
         if (oldCi === null) {
@@ -79,8 +79,8 @@ $(document).ready(function() {
             contentType: false,
             type: 'POST',
             success: function(response) {
-                console.log('response', response.commercialInvoice)
-                alert(response.message + ', please see console')
+
+                alert(response.message)
                 thisForm.reset()
 
                 $(".select2").val('').trigger('change')
@@ -101,7 +101,6 @@ $(document).ready(function() {
                         </button>`
                 }))
 
-                console.log('data', commercialInvoice)
                 $('#commercialInvoice').DataTable().destroy()
                 $('#commercialInvoice').DataTable({
                     "data": commercialInvoice,
@@ -209,7 +208,6 @@ $(document).ready(function() {
             type: 'POST',
             success: function(response) {
                 localStorage.clear()
-                    // console.log(response.data.link_resi)
                 alert(response.message)
 
                 window.open(response.data.link_resi, '_blank');
@@ -255,7 +253,6 @@ $(document).ready(function() {
                             </button>`
             }))
 
-            console.log('data', commercialInvoice)
             $('#commercialInvoice').DataTable().destroy()
             $('#commercialInvoice').DataTable({
                 "data": commercialInvoice,
@@ -351,7 +348,7 @@ $(document).ready(function() {
                     }
                 }
                 localStorage.setItem('commercialInvoice', str1)
-                console.log(str1)
+
                 FillCommercialInvoice()
             } else {
                 // remove key if only 1 found
