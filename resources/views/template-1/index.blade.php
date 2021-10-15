@@ -130,7 +130,7 @@
         <div class="container" data-aos="fade-up">
 
             <x-section-header text="{{ $landingSection[4]->section_name }}"
-            class="text-white text-center" />
+            class="text-white text-center no-before" />
 
             <div class="accordion accordion-flush shadow p-4 bg-white parent-load-data"
             id="load-faq">

@@ -29,7 +29,7 @@
     </div> --}}
 
     @if (session('trackingstatus'))
-    <section id="search-resi-section">
+    <section id="search-resi-section" class="mb-5">
         <div id="panel-resi">
             <div class="block-header">
                 <h3>
@@ -56,23 +56,22 @@
                         @foreach ( session('datetime') as $dateRes)
                         <li class="panel-scroll__item
                         @if(strpos(strtolower($dateRes['status']),"delivered") !== false)
-                        {{-- coloring for delivery --}}
                             current-day
                         @elseif(strpos(strtolower($dateRes['status']),"delivery") !== false || strpos(strtolower($dateRes['status']),"delivering")  !== false)
-                        {{-- coloring for out for delivery --}}
                             out-for-delivery
-                        @endif
-                        ">
+                        @endif">
 
                             @if (strpos(strtolower($dateRes['status']),"delivered")  !==false )
-                            {{-- delivered icon --}}
-                                <i class="fas fa-check text-white special-indicator"></i>
+                            <img src="{{ asset('img/icon/check-solid.svg') }}" 
+                            height="40px" width="40px" class="special-indicator" alt="">
                             @elseif (strpos(strtolower($dateRes['status']),"delivery")  !==false || strpos(strtolower($dateRes['status']),"delivering")  !==false )
-                            {{-- icon out for delivery --}}
-                                <i class="fas fa-box text-white special-indicator"></i>
+                                <img src="{{ asset('img/icon/box-solid.svg') }}" 
+                                height="40px" width="40px" 
+                                class="special-indicator" alt="">
                             @else
-                            {{-- other icon a.k.a intransit --}}
-                                <i class="fas fa-circle text-secondary special-indicator"></i>
+                                <img src="{{ asset('img/icon/circle-solid.svg') }}" 
+                                height="40px" width="40px" 
+                                class="special-indicator" alt="">
                             @endif
 
                             <time datetime="{{  $dateRes['date'] }}" class="fw-bold fs-5">
@@ -82,7 +81,7 @@
                         @endforeach
                     </ul>
 
-                    <ul class="col-lg-9">
+                    <ul class="col-lg-9 pl-4">
                         @foreach (session('trackresult') as $trackresult )
                             <li class="panel-scroll__text px-5">
                                 <p class="mb-1 fw-bold fs-5">

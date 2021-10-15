@@ -17,7 +17,8 @@
 
     &__item {
         position: relative;
-        height: $heightItem;
+        min-height: 45px;
+        max-height: $heightItem;
         margin-bottom: $spaceBetween;
         display: flex;
         align-items: center;
@@ -79,7 +80,8 @@
     }
 
     &__text {
-        height: $heightItem;
+        min-height: 45px;
+        max-height: $heightItem;
         overflow: hidden;
         margin-bottom: $spaceBetween;
         display: flex;
