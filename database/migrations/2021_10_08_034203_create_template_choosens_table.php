@@ -15,7 +15,7 @@ class CreateTemplateChoosensTable extends Migration
     {
         Schema::create('template_choosens', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('domain_owner', 25);
+            $table->string('domain_owner', 100);
             $table->enum('version', [1, 2]);
             $table->timestamps();
         });

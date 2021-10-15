@@ -3,7 +3,11 @@
         padding: 0 !important;
     }
 }
-
+.no-before {
+    &::before {
+        content: none !important;
+    }
+}
 .no-after {
     &::after {
         content: none !important;

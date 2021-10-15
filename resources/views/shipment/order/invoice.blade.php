@@ -22,11 +22,12 @@
                     placeholder="Quantity" name="quantity" required />
                 </div>
                 <div class="w-100">
-                    <x-shipment.input type="select"
-                    placeholder="Satuan unit" name="unit" required>
-                        @for ($i = 1; $i <= 3; $i++)
-                            <option value="unit-{{ $i }}">Unit {{ $i }}</option>
-                        @endfor
+                    <x-shipment.input type="select" placeholder="Satuan unit" name="unit" required>
+                        <option value="PCS" selected>Default : PCS</option>
+                        <option value="BOX">BOX</option>
+                        <option value="PACK">PACK</option>
+                        <option value="PCS">PCS</option>
+                        <option value="UNIT">UNIT</option>
                     </x-shipment.input>
                 </div>
                 <div class="w-100">
@@ -39,7 +40,7 @@
             </div>
         </div>
     </form>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 d-none" 
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
     id="parent-commercialInvoice">
         <div class="card">
             <div class="body">
@@ -58,11 +59,15 @@
                         </thead>
                     </table>
                 </div>
+
+            <form id="form-save-order"   method="POST">
                 <div class="mt-5">
-                    <a href="" class="btn btn-big btn-primary disabled"
-                    id="btn-generate-pdf">Generate PDF</a>
+                    <button type="submit" class="btn btn-big btn-primary"
+                    id="btn-generate-pdf" disabled>Generate PDF</button>
                 </div>
+            </form>
             </div>
+
         </div>
     </div>
 
