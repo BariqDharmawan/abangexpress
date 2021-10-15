@@ -7,32 +7,7 @@
 <section id="hero">
     <div class="hero-content row mx-0" data-aos="fade-up">
         <h2 class="w-100">{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h2>
-        <form method="GET" class="col-lg-8"
-        action="{{ route('tracking-order.index') }}">
-            @csrf
-            <div class="row align-items-center justify-content-center 
-            position-relative">
-                <div class="col-12 mx-0 px-0">
-                    <input type="text" class="form-control py-3 ps-lg-4 py-lg-4 shadow input--btn-inside not-allow-space" minlength="3"
-                    placeholder="Ketik nomor resi disini" name="track_order" required>
-                    @error('track_order')
-                        <span class="text-danger text-shadow
-                        input__error-message input__error-message--absolute-bottom">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-primary
-                    btn--inside-input py-lg-2">
-                        <i class="fas fa-search"></i>
-                        <span class="d-none d-lg-block" style="margin-left: 10px">
-                            Cari resi
-                        </span>
-                    </button>
-                </div>
-            </div>
-        </form>
+        @include('partials.search-tracking', ['errorText' => 'danger'])
     </div>
 
     <div class="hero-slider swiper-container">
@@ -46,91 +21,11 @@
 </section>
 
 <main id="main">
+    
     @if (session('trackingstatus'))
-        <section id="search-resi-section">
-            <div class="container" data-aos="fade-up">
-                <div id="panel-resi">
-                    <x-section-header text="Hasil pencarian 
-                    {{ session('trackingstatus') == 'success' ? 
-                    session('trackUpdate')->awb : old('track_order') }}" />
-                    @if (session('trackingstatus')=="success")
-                        <div class="panel-scroll__header bg-success p-3 
-                        text-white text-center fw-bold text-uppercase rounded-top">
-                            {{ session('trackUpdate')->lastupdate }} To 
-                            {{ session('trackUpdate')->name }}
-                        </div>
-                    @endif
-                    <div class="row panel-scroll border p-3 alert-dismissible mx-0
-                        @if(session('trackingstatus') == 'failed') 
-                            align-items-center text-center panel-scroll--empty
-                        @endif">
-                        @if (session('trackingstatus')=="success")
-                            <ul class="col-lg-3">
-                                @foreach ( session('datetime') as $dateRes)
-                                <li class="panel-scroll__item
-                                @if(strpos(strtolower($dateRes['status']),"delivered")  !==false )
-                                {{-- coloring for delivery --}}
-                                    current-day
-                                @elseif(strpos(strtolower($dateRes['status']),"delivery")  !==false || strpos(strtolower($dateRes['status']),"delivering")  !==false )
-                                {{-- coloring for out for delivery --}}
-                                    out-for-delivery
-                                @endif
-                                ">
-
-                                    @if (strpos(strtolower($dateRes['status']),"delivered")  !==false )
-                                    {{-- delivered icon --}}
-                                        <i class="fas fa-check text-white special-indicator"></i>
-                                    @elseif (strpos(strtolower($dateRes['status']),"delivery")  !==false || strpos(strtolower($dateRes['status']),"delivering")  !==false )
-                                    {{-- icon out for delivery --}}
-                                        <i class="fas fa-box text-white special-indicator"></i>
-                                    @else
-                                    {{-- other icon a.k.a intransit --}}
-                                        <i class="fas fa-circle text-secondary special-indicator"></i>
-                                    @endif
-
-                                    <time datetime="{{  $dateRes['date'] }}" class="fw-bold fs-5">
-                                        {{ $dateRes['date']  }}<br>{{ $dateRes['time']  }}
-                                    </time>
-                                </li>
-                                @endforeach
-                            </ul>
-
-                            <ul class="col-lg-9">
-                                @foreach (session('trackresult') as $trackresult )
-                                    <li class="panel-scroll__text px-5">
-                                        <p class="mb-1 fw-bold fs-5">
-                                            {{-- tracking detail --}}
-                                            {{ $trackresult['desc'] }}
-                                        </p>
-                                        <address class="m-0 fs-6">
-                                            {{-- location --}}
-                                            {{ $trackresult['location'] }}
-                                        </address>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @elseif(session('trackingstatus') == 'failed')
-                            <p class="fs-1 fw-bold">
-                                Nomor resi tidak ditemukan, <br> 
-                                silahkan telusuri ulang
-                            </p>
-                        @endif                            
-
-                        <button type="button" class="btn-close btn-close--div btn-show-hidden-section-aos" data-section-closed-aos="#fade-up-about"
-                        data-close-div="#panel-resi"></button>
-                    </div>
-                    <div class="row mt-4 justify-content-end">
-                        <div class="col-auto">
-                            <a href="javascript:void(0);" data-to-section="#topbar"
-                            class="btn rounded-pill btn-info text-white scroll-to-section">
-                                Telusuri lagi
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        @include('partials.result-tracking', ['templateUsing' => 1])
     @endif
+
     <!-- ======= About Section ======= -->
     <section id="about">
         <div class="container" data-aos="fade-up" id="fade-up-about">

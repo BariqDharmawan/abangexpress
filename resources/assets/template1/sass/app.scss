@@ -10,11 +10,11 @@
 
 @import './../../general/sass/reset';
 @import './../../general/sass/utilities';
-@import './variable';
+@import './../../general/sass/variable';
 
 @import './icon';
-@import './btn';
-@import './input';
-@import './panel';
-@import './text';
+@import './../../general/sass/btn';
+@import './../../general/sass/input';
+@import './../../general/sass/panel';
+@import './../../general/sass/text';
 @import './main';

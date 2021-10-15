@@ -1,4 +1,5 @@
 import 'boxicons';
+import './input'
 import './main.js';
 import { getFaq, getContact } from './../../general/js/get-ajax';
 
