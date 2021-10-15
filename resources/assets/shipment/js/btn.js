@@ -8,4 +8,4 @@ function showElAfterClick(btnClicked) {
     $(elToShow).show(500)
 }
 
-export {enableOtherBtn, showElAfterClick}
+export { enableOtherBtn, showElAfterClick }
