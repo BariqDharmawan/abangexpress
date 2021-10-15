@@ -38,18 +38,28 @@
             border-radius: 50%;
             font-size: 28px;
             padding: 8px;
+
+            &--55px {
+                transform: translateX(50%) translateY(3px);
+            }
         }
 
         &.out-for-delivery {
             .special-indicator {
                 @include coloredIndicator($orange);
 
+                &--40px {
+                    transform: translateX(50%) translateY(-5px);
+                }
             }
         }
 
         &.current-day {
             .special-indicator {
                 @include coloredIndicator($dark-blue);
+                &--40px {
+                    transform: translateX(50%) translateY(-5px);
+                }
             }
         }
 

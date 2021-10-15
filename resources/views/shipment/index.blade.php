@@ -63,15 +63,15 @@
 
                             @if (strpos(strtolower($dateRes['status']),"delivered")  !==false )
                             <img src="{{ asset('img/icon/check-solid.svg') }}" 
-                            height="40px" width="40px" class="special-indicator" alt="">
+                            height="40px" width="40px" class="special-indicator special-indicator--40px" alt="">
                             @elseif (strpos(strtolower($dateRes['status']),"delivery")  !==false || strpos(strtolower($dateRes['status']),"delivering")  !==false )
                                 <img src="{{ asset('img/icon/box-solid.svg') }}" 
                                 height="40px" width="40px" 
-                                class="special-indicator" alt="">
+                                class="special-indicator special-indicator--40px" alt="">
                             @else
                                 <img src="{{ asset('img/icon/circle-solid.svg') }}" 
-                                height="40px" width="40px" 
-                                class="special-indicator" alt="">
+                                height="55px" width="55px" 
+                                class="special-indicator special-indicator--55px" alt="">
                             @endif
 
                             <time datetime="{{  $dateRes['date'] }}" class="fw-bold fs-5">
