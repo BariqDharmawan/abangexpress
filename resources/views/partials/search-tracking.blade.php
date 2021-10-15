@@ -4,8 +4,8 @@
                     position-relative">
         <div class="col-12 mx-0 px-0">
             <input type="text" class="form-control py-3 ps-lg-4 py-lg-4 shadow input--btn-inside not-allow-space"
-                minlength="3" placeholder="Ketik nomor resi disini" name="track_order" required>
-            @error('track_order')
+                minlength="3" placeholder="Ketik nomor resi disini" name="receipt_number" required>
+            @error('receipt_number')
             <span class="text-{{ $errorText }} text-shadow
             input__error-message input__error-message--absolute-bottom">
                 {{ $message }}

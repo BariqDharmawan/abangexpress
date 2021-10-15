@@ -8,25 +8,14 @@
     <form method="GET" class="card mt-3" action="{{ route('tracking-order.index') }}">
         @csrf
         <div class="body">
-            <x-shipment.input class="input--btn-inside not-allow-space" name="track_order" minlength="3" placeholder="Ketik nomor resi disini" 
+            <x-shipment.input class="input--btn-inside not-allow-space" 
+            name="receipt_number" maxlength="30" placeholder="Ketik nomor resi disini" 
             autocomplete="off" required/>
             <button type="submit" class="btn btn-big btn-primary">
                 Cari resi
             </button>
         </div>
     </form>
-
-    {{-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box bg-orange hover-expand-effect">
-            <div class="icon">
-                <i class="material-icons">person_add</i>
-            </div>
-            <div class="content">
-                <div class="text">NEW VISITORS</div>
-                <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
-            </div>
-        </div>
-    </div> --}}
 
     @if (session('trackingstatus'))
     <section id="search-resi-section" class="mb-5">
@@ -35,7 +24,7 @@
                 <h3>
                     Hasil pencarian 
                     {{ session('trackingstatus') == 'success' ? 
-                    session('trackUpdate')->awb : old('track_order') }}
+                    session('trackUpdate')->awb : old('receipt_number') }}
                 </h3>
             </div>
             

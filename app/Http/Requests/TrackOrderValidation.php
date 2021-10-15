@@ -14,7 +14,7 @@ class TrackOrderValidation extends FormRequest
     public function rules()
     {
         return [
-            'track_order' => ['required', 'min:3', 'string']
+            'receipt_number' => ['required', 'string', 'min:3', 'max:30', 'alpha_num']
         ];
     }
 }
