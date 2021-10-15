@@ -8,11 +8,12 @@
     </div>
 </div>
 @endif
-<div class="col-12">
-    
-    @include('admin.partials.card-change-section')
 
-    <x-admin.card title="Layanan Kami">
+@include('admin.partials.card-change-section')
+
+<div class="col-12">
+
+    <x-admin.card title="Layanan Kami" class="mt-3">
         <x-slot name="header">
             <x-admin.modal.trigger text="Tambah layanan baru"
             modal-target="add-service" />
