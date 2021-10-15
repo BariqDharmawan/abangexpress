@@ -30,6 +30,10 @@ $sides: ("b": bottom, "t": top, 'l': left, 'r': right);
     }
 }
 
+.ml-auto {
+    margin-left: auto;
+}
+
 .left {
     &-0 {
         left: 0;
