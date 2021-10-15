@@ -83,11 +83,15 @@ $sides: ("b": bottom, "t": top, 'l': left);
 }
 
 .p-0 {
-    padding: 0;
+    padding: 0 !important;
 }
 .px-5 {
     padding-left: 3rem;
     padding-right: 3rem;
+}
+
+.h-100 {
+    height: 100%;
 }
 
 .text-primary {

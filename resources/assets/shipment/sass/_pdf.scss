@@ -1,0 +1,9 @@
+.preview-pdf {
+    width: 100%;
+    display: block;
+    height: 300px;
+
+    &--full {
+        height: calc(100vh - 70px - 140px);
+    }
+}
