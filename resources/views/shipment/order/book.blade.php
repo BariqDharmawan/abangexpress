@@ -11,7 +11,9 @@
         @csrf
         <div class="card">
             <div class="header">
-                <h2 class="h1 fw-bold">Detail pengirim</h2>
+                <h2 class="h1 fw-bold">
+                    <i class="material-icons">account_box</i> Detail Pengirim
+                </h2>
             </div>
             <div class="body">
                 <div class="row clearfix mx-0">
@@ -30,7 +32,9 @@
 
         <div class="card">
             <div class="header">
-                <h2 class="h1 fw-bold">Detail penerima</h2>
+                <h2 class="h1 fw-bold">
+                    <i class="material-icons">person_add</i> Detail Penerima
+                </h2>
             </div>
             <div class="body" id="data-recipient">
                 <div class="col-12">
@@ -108,7 +112,7 @@
 
         <div class="card">
             <div class="header">
-                <h2 class="h1 fw-bold">Detail paket</h2>
+                <h2 class="h1 fw-bold"><i class="material-icons">card_giftcard</i> Detail paket</h2>
             </div>
             <div class="body">
 
