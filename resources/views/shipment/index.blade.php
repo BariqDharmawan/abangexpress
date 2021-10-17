@@ -14,7 +14,7 @@
                     autocomplete="off" required/>
                 </div>
                 <div class="col-xs-12 col-md-12 col-lg-2 mb-0">
-                    <button type="submit" class="btn btn-big btn-primary w-100">
+                    <button type="submit" class="btn btn-big btn-danger w-100">
                         Cari resi
                     </button>
                 </div>
@@ -32,8 +32,9 @@
                     <div class="info-box info-box--120px bg-green hover-expand-effect">
                         <div class="icon d-inline-flex items-center justify-center
                         pt-5 pb-5">
-                            <img src="{{ asset('img/icon/savings_white_24dp.svg') }}"
-                            alt="" width="80px" class="pl-4 pr-4">
+                            {{-- <img src="{{ asset('img/icon/savings_white_24dp.svg') }}"
+                            alt="" width="80px" class="pl-4 pr-4"> --}}
+                            <i  class="material-icons">credit_card</i>
                         </div>
                         <div class="content w-100 d-flex items-center pt-5 pb-5">
                             <div class="number count-to" data-from="0"
@@ -53,8 +54,10 @@
                     <div class="info-box info-box--120px bg-red hover-expand-effect">
                         <div class="icon d-inline-flex items-center justify-center
                         pt-5 pb-5">
-                            <img src="{{ asset('img/icon/money-bill-solid.svg') }}"
-                            alt="" width="80px" class="pl-4 pr-4">
+                            {{-- <img src="{{ asset('img/icon/money-bill-solid.svg') }}"
+                            alt="" width="80px" class="pl-4 pr-4"> --}}
+
+                            <i  class="material-icons">date_range</i>
                         </div>
                         <div class="content w-100 d-flex items-center pt-5 pb-5">
                             <span class="mr-3">Rp. </span>
@@ -74,8 +77,9 @@
                     <div class="info-box info-box--120px bg-green hover-expand-effect">
                         <div class="icon d-inline-flex items-center justify-center
                         pt-5 pb-5">
-                            <img alt="" width="80px" class="pl-4 pr-4"
-                            src="{{ asset('img/icon/shipping-fast-solid.svg') }}">
+                            {{-- <img alt="" width="80px" class="pl-4 pr-4"
+                            src="{{ asset('img/icon/shipping-fast-solid.svg') }}"> --}}
+                            <i  class="material-icons">insert_chart</i>
                         </div>
                         <div class="content w-100 d-flex items-center pt-5 pb-5">
                             <div class="number count-to" data-from="0"

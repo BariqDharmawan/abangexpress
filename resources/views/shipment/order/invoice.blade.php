@@ -10,7 +10,7 @@
         @csrf
         <div class="card">
             <div class="header">
-                <h2 class="h1 fw-bold">Commercial Invoice</h2>
+                <h2 class="h1 fw-bold"> <i  class="material-icons">playlist_add</i> Commercial Invoice</h2>
             </div>
             <div class="body d-flex flex-wrap flex-column items-end">
                 <div class="w-100">
@@ -34,7 +34,7 @@
                     <x-shipment.input class="only-number"
                     placeholder="Value per unit" name="value_unit" required />
                 </div>
-                <button type="submit" class="btn btn-big btn-primary enable-other-btn show-el-after-click" data-el-to-show="#parent-commercialInvoice" data-enable-other-btn="#btn-generate-pdf">
+                <button type="submit" class="btn btn-big btn-danger enable-other-btn show-el-after-click" data-el-to-show="#parent-commercialInvoice" data-enable-other-btn="#btn-generate-pdf">
                     Simpan
                 </button>
             </div>
@@ -62,7 +62,7 @@
 
             <form id="form-save-order"   method="POST">
                 <div class="mt-5">
-                    <button type="submit" class="btn btn-big btn-primary"
+                    <button type="submit" class="btn btn-big btn-danger"
                     id="btn-generate-pdf" disabled>Generate PDF</button>
                 </div>
             </form>
