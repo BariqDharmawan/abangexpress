@@ -62,7 +62,14 @@
                         <div class="content w-100 d-flex items-center pt-5 pb-5">
                             <span class="mr-3">Rp. </span>
                             <div class="number count-to" data-from="0"
-                            data-to="{{ $quickReport['hutang'] }}" data-speed="1000" data-fresh-interval="20"></div>
+                            data-to="
+                            @if (auth()->user()->lt==3)
+                            {{ $quickReport['hutang'] }}
+                            @else
+                            {{ 0 }}
+                            @endif
+
+                            " data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
                 </div>
