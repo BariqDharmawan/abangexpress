@@ -38,7 +38,13 @@
                                         <td>{{ $xdata->tujuan }}</td>
                                         <td>Berat : {{ $xdata->berat }} <br> Qty : {{ $xdata->qty }}</td>
                                         <td>
-                                            <a type="submit" href="https://duniaexportimport.com/resi/{{ $xdata->token}}" target="_blank" class="btn btn-big btn-primary"><i class="material-icons">print</i>Cetak Ulang</a>
+
+                                            <form method="POST"  action="{{ route('shipping.order.print') }}" target="_blank">
+                                                @csrf
+                                                <input type="hidden" name="link" value="resi/{{ $xdata->token}}">
+                                                <button type="submit" class="btn btn-big btn-primary"><i class="material-icons">print</i>Cetak Ulang</button>
+                                            </form>
+                                            {{-- <a type="submit" href="resi/{{ $xdata->token}}" target="_blank" class="btn btn-big btn-primary"><i class="material-icons">print</i>Cetak Ulang</a> --}}
                                         </td>
                                     </tr>
                                 @endforeach
