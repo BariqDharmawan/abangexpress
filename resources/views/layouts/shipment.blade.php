@@ -108,10 +108,10 @@
                     <x-shipment.dropdown-item text="Bantuan"
                     icon="help_outline" :is-dropdown="true">
                         <x-shipment.dropdown-item
-                        href="{{ route('shipping.order.support.guide') }}"
+                        href="{{ route('shipping.support.guide') }}"
                         text="Panduan Penggunaan" />
                         <x-shipment.dropdown-item
-                        href="{{ route('shipping.order.support.regulation') }}"
+                        href="{{ route('shipping.support.regulation') }}"
                         text="Regulasi Pengiriman" />
                     </x-shipment.dropdown-item>
 
