@@ -42,10 +42,13 @@
 
             <x-admin.sidebar.menu text="Social Media" 
             :href="route('admin.our-social.manage')" icon="fa-fw fa-tachometer-alt" />
+            
+            <x-admin.sidebar.menu text="Shipment" 
+            :href="route('shipping.index')" icon="fa-fw fa-tachometer-alt" />
 
             @if (auth()->user()->role == 'admin')
-            <x-admin.sidebar.menu :href="route('admin.user.index')" 
-            text="Subadmin" icon="fa-fw fa-tachometer-alt" />
+                <x-admin.sidebar.menu :href="route('admin.user.index')" 
+                text="Subadmin" icon="fa-fw fa-tachometer-alt" />
             @endif
         
             <!-- Divider -->
@@ -80,17 +83,6 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                @if (!Str::contains(url()->current(), 'shipment'))
-                                <a class="dropdown-item" 
-                                href="{{ route('shipping.index') }}">
-                                    Shipment
-                                </a>
-                                @else
-                                <a class="dropdown-item" 
-                                href="{{ route('admin.about-us.identity') }}">
-                                    Company Profile
-                                </a>
-                                @endif
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
