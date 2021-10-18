@@ -25,11 +25,7 @@ class ShipmentController extends Controller
 
         $akun = $user->code_api;
         $tokenkey = $user->token_api;
-        $postdata = '{
-            "akun": "'.$akun.'",
-            "key": "'.$tokenkey.'"
-
-        }';
+        $postdata = '{"akun": "'.$akun.'","key": "'.$tokenkey.'"}';
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -52,8 +48,7 @@ class ShipmentController extends Controller
         curl_close($curl);
 
         $res = json_decode($response);
-
-
+        // dd($postdata);
         $quickReport = collect($res->response);
 
         return view('shipment.index', compact('quickReport'));

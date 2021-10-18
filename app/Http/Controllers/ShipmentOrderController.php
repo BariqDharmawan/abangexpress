@@ -221,7 +221,7 @@ class ShipmentOrderController extends Controller
         $postdata = '{
             "akun": "'.$akun.'",
             "key": "'.$tokenkey.'",
-            "param":"and statustransaksi=`3`"
+            "param":"and not(statustransaksi=`C`)"
 
         }';
 

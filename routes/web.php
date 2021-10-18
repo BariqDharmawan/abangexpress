@@ -14,6 +14,10 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
         // PULL DATA CONSIGNEE
         Route::get('pullPenerima/{id}', 'BookingOrderController@ambilPenerima');
 
+        Route::match(array('GET', 'POST'),'print', 'BookingOrderController@prints')->name(
+            'print'
+        );
+
         Route::get('book', 'BookingOrderController@index')->name('book');
         Route::get('book/invoice', 'BookingOrderController@invoice')->name(
             'book.invoice'
@@ -41,19 +45,19 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
         Route::get('history', 'ShipmentOrderController@history')->name('history');
         Route::get('receipt', 'ShipmentOrderController@receipt')->name('receipt');
 
-        Route::prefix('invoices')->name('invoice.')->group(function (){
-            Route::get('bill', 'ShipmentInvoiceController@bill')->name('bill');
-            Route::get('verifying', 'ShipmentInvoiceController@verifying')->name(
-                'verifying'
-            );
-            Route::get('settled', 'ShipmentInvoiceController@settled')->name('settled');
-        });
-        Route::prefix('support')->name('support.')->group(function (){
-            Route::get('guide', 'ShipmentSupportController@guide')->name('guide');
-            Route::get('regulation', 'ShipmentSupportController@regulation')->name(
-                'regulation'
-            );
-        });
+    });
+    Route::prefix('invoices')->name('invoice.')->group(function (){
+        Route::get('bill', 'ShipmentInvoiceController@bill')->name('bill');
+        Route::get('verifying', 'ShipmentInvoiceController@verifying')->name(
+            'verifying'
+        );
+        Route::get('settled', 'ShipmentInvoiceController@settled')->name('settled');
+    });
+    Route::prefix('support')->name('support.')->group(function (){
+        Route::get('guide', 'ShipmentSupportController@guide')->name('guide');
+        Route::get('regulation', 'ShipmentSupportController@regulation')->name(
+            'regulation'
+        );
     });
 });
 

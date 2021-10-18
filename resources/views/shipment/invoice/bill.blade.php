@@ -33,7 +33,12 @@
                                         <td>{{ $xdata->sisa }}</td>
                                         <td>Berat : {{ $xdata->status }}</td>
                                         <td>
-                                            <a type="submit" href="https://duniaexportimport.com/view-tagihan/{{ $xdata->nomor}}" target="_blank" class="btn btn-big btn-primary"><i class="material-icons">print</i>Detail Tagihan</a>
+                                            <form method="POST"  action="{{ route('shipping.order.print') }}" target="_blank">
+                                                @csrf
+                                                <input type="hidden" name="link" value="view-tagihan/{{ $xdata->nomor}}">
+                                                <button type="submit" class="btn btn-big btn-primary"><i class="material-icons">print</i>Cetak Ulang</button>
+                                            </form>
+                                            {{-- <a type="submit" href="https://duniaexportimport.com/view-tagihan/{{ $xdata->nomor}}" target="_blank" class="btn btn-big btn-primary"><i class="material-icons">print</i>Detail Tagihan</a> --}}
                                         </td>
                                     </tr>
                                 @endforeach
