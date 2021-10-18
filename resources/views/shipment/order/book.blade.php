@@ -27,7 +27,7 @@
             <div class="col-12">
                 <x-shipment.input type="select" placeholder="Penerima Sebelumnya"
                 name="recipient_previous" id="get-previous-recipient" required>
-                    <optgroup label="Pilih penerima baru jika penerima tidak ada 
+                    <optgroup label="Pilih penerima baru jika penerima tidak ada
                     di data sebelumnya">
                         <option value="penerima-baru" class="fw-bold">
                             Penerima Baru
@@ -36,7 +36,7 @@
                     <optgroup label="Data penerima sebelumnya">
                         @foreach ($prevRecipient as $recipient)
                             <option value="{{ $recipient->id }}">
-                                {{ $recipient->name }}
+                                {{ $recipient->name }} - {{ $recipient->country }} - {{ $recipient->telephone }}
                             </option>
                         @endforeach
                     </optgroup>
@@ -99,20 +99,18 @@
 
         <x-shipment.card heading="Detail paket" icon="card_giftcard">
             <div class="row d-flex">
-                <div class="col-lg-6 d-flex items-center">
+                {{-- <div class="col-lg-6 d-flex items-center">
                     <x-shipment.input
                     placeholder="Masukan tarif ke pelanggan anda"
                     name="package_fee"
                     id="package-fee" />
-                </div>
+                </div> --}}
                 <div class="col-lg-6">
                     <x-shipment.input
                     placeholder="Masukan berat paket"
                     text-addon="(kg)"
-                    small-text="Berat paket dibulatkan keatas (kilogram)"
                     name="package_weight" id="package-weight"
-                    class="input-decimal-dot" required
-                    value="{{ config('app.env') == 'local' ? 2 : '' }}" />
+                    class="input-decimal-dot" required />
                 </div>
             </div>
             <div class="col-12">
@@ -142,12 +140,11 @@
                 <div class="col-lg-6">
                     <x-shipment.input type="text" icon-addon="attach_money"
                     label="Masukan total harga kiriman"
-                    placeholder="2000.000"
+                    placeholder=""
                     class="input-currency"
                     id="package-value"
                     small-text="Harga menggunakan mata uang dollar"
-                    name="package_value" required
-                    value="{{ config('app.env') == 'local' ? 20000 : '' }}" />
+                    name="package_value" required />
                 </div>
             </div>
 
