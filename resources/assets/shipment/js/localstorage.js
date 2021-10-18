@@ -80,7 +80,6 @@ $(document).ready(function() {
             type: 'POST',
             success: function(response) {
 
-                alert(response.message)
                 thisForm.reset()
 
                 $(".select2").val('').trigger('change')
@@ -208,7 +207,6 @@ $(document).ready(function() {
             type: 'POST',
             success: function(response) {
                 localStorage.clear()
-                alert(response.message)
 
                 window.open(response.data.link_resi, '_blank');
                 window.open('/shipping', '_self');
