@@ -31,8 +31,8 @@ class BookOrderValidation extends FormRequest
             'recipient_telephone' => ['required'],
             'recipient_nik' => [
                 Rule::requiredIf(
-                    $this->recipient_country == 'TAIWAN' or 
-                    $this->recipient_country == 'KOREA SOUTH' or 
+                    $this->recipient_country == 'TAIWAN' or
+                    $this->recipient_country == 'KOREA SOUTH' or
                     $this->recipient_country == 'INDIA'
                 )
             ],
@@ -40,7 +40,6 @@ class BookOrderValidation extends FormRequest
             'recipient_country' => ['required'],
             'recipient_address' => ['required'],
             'idcard_input_hidden' => ['sometimes'],
-            'package_fee' => ['required'],
             'package_weight' => ['required'],
             'package_type' => ['required'],
             'package_detail' => ['required'],

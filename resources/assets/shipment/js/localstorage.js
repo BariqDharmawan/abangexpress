@@ -115,12 +115,11 @@ $(document).ready(function() {
                 })
                 $('#commercialInvoice').DataTable().draw()
 
-                if (btnSubmit.hasClass('enable-other-btn')) {
-                    enableOtherBtn(btnSubmit)
-                }
                 if (btnSubmit.hasClass('show-el-after-click')) {
                     showElAfterClick(btnSubmit)
                 }
+
+                $("#btn-generate-pdf").removeAttr("disabled");
 
                 for (let i = 0; i < commercialInvoice.length; i++) {
                     const modalFade = $("<div>", {
@@ -178,7 +177,7 @@ $(document).ready(function() {
     })
 
     //submit form invoice and form booking order that saved on localstorage as well
-    $("#form-save-order").submit(function(e) {
+    $("#print-invoice").submit(function(e) {
         e.preventDefault()
         const thisForm = $(this)[0]
         let xbookOrder = new FormData($(this)[0])
