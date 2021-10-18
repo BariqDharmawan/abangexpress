@@ -25,3 +25,5 @@ kolom lain otomatis terisi dari data ajax tersebut
 
 [X] Trackingnya di kasih kotak keterangan status dan penerima
 [X] Trackingnya di taro tempalate 2
+[ ] Pake bahasa indonesia
+[ ] Hapus section "hubungi kami"

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreFaqValidation;
 use App\Http\Requests\UpdateFaqValidation;
 use App\Models\AboutUs;
 use App\Models\Faq;
+use App\Models\LandingSectionDesc;
 use App\Models\User;
 
 class FaqController extends Controller
@@ -15,8 +16,9 @@ class FaqController extends Controller
     public function manage()
     {
         $faqs = Faq::where('domain_owner', request()->getSchemeAndHttpHost())->get();
-        // dd(auth()->id());
-        return view('admin.faq.manage', compact('faqs'));
+        $landingSection = LandingSectionDesc::where('id', 5)->first();
+        
+        return view('admin.faq.manage', compact('faqs', 'landingSection'));
     }
 
     public function index()

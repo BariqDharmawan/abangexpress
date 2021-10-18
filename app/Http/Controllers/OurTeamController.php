@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper\Helper;
 use App\Http\Requests\StoreMemberValidation;
 use App\Http\Requests\UpdateMemberValidation;
+use App\Models\LandingSectionDesc;
 use App\Models\OurTeam;
 use App\Models\PositionList;
 use Illuminate\Support\Facades\Storage;
@@ -20,7 +21,11 @@ class OurTeamController extends Controller
         )->get();
         $positionList = PositionList::where('domain_owner', request()->getSchemeAndHttpHost())->get();
 
-        return view('admin.team.manage', compact('teams', 'positionList'));
+        $landingSection = LandingSectionDesc::where('id', 4)->first();
+
+        return view('admin.team.manage', compact(
+            'teams', 'positionList', 'landingSection'
+        ));
     }
 
     public function store(StoreMemberValidation $request)

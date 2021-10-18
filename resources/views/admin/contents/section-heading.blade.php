@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 <div class="col-12">
-    <x-admin.card title="Heading each section">
+    <x-admin.card title="Heading tiap section">
             @foreach ($sectionHeading as $heading)
             <x-admin.card class="mb-3" title="Section name: {{ $heading->section_name }}" :is-header-transparent="true">
                 <x-slot name="header">
@@ -28,39 +28,4 @@
             @endforeach
     </x-admin.card>
 </div>
-@endsection
-
-@section('components')
-    @foreach ($sectionHeading as $heading)
-        <x-admin.modal id="edit-heading-{{ $loop->iteration }}" 
-        heading="Heading {!! '<b>' . $heading->section_name . '</b>' !!}">
-            <form method="POST" enctype="multipart/form-data" 
-            action="{{ route('admin.content.section-heading.update', $heading->id) }}">
-                @csrf @method('PUT')
-                <div class="form-group">
-                    <label for="section-name">Heading title</label>
-                    <input type="text" class="form-control"
-                    id="section-name" name="section_name"
-                    value="{{ $heading->section_name }}" required>
-                </div>
-                @if ($heading->first_desc)
-                <div class="form-group">
-                    <label for="section-first-desc">Heading first description</label>
-                    <textarea name="first_desc" id="section-first-desc" 
-                    rows="3" class="form-control summernote" 
-                    style="resize: none;" required>{{ $heading->first_desc }}</textarea>
-                </div>
-                @endif
-                @if ($heading->second_desc)
-                <div class="form-group">
-                    <label for="section-first-desc">Heading second description</label>
-                    <textarea name="first_desc" id="section-first-desc" 
-                    rows="3" class="form-control summernote" 
-                    style="resize: none;" required>{{ $heading->second_desc }}</textarea>
-                </div>
-                @endif
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </x-admin.modal>
-    @endforeach
 @endsection

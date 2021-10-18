@@ -15,7 +15,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "GET",
-                url: `/shipping/order/pullPenerima/${recipientId}`,
+                url: `/shipping/order/get-recipient/${recipientId}`,
                 success: function(recipients) {
                     
                     console.log(recipients)
@@ -47,9 +47,10 @@ $(document).ready(function() {
 
                     
                 },
-                error: function() {
+                error: function(error) {
                     $("#data-recipient .form-line").removeClass('focused')
                     alert('ada yang salah dengan API nya')
+                    console.error(error)
                 }
             })
         }

@@ -15,7 +15,7 @@ class StoreInvoiceValidation extends FormRequest
     public function rules()
     {
         return [
-            'desc' => ['required', 'string', 'min:2'],
+            'desc' => ['required', 'string', 'min:5'],
             'quantity' => ['required', 'numeric', 'integer', 'min:1'],
             'unit' => ['required'],
             'value_unit' => ['required'],

@@ -9,17 +9,22 @@
     </div>
     @endif
     <div class="row mx-0">
+
+        @include('admin.partials.card-change-section', ['side' => 'b'])
+
         <div class="col-12 mb-4">
-            <x-admin.card title="Manage our contact">
+            <x-admin.card title="Kontak kami">
                 <x-slot name="header">
                     <x-admin.modal.trigger modal-target="update-contact" 
-                    text="Update our contact" />
+                    text="Ubah kontak kami" />
                 </x-slot>
                 <ul class="list-group">
                     @isset($contact)
-                        @foreach ($columns as $column)
+                        @foreach ($columns as $key => $column)
                             <li class="list-group-item">
-                                <span class="text-capitalize">{{ $column }}</span> : 
+                                <span class="text-capitalize">
+                                    {{ $titles[$key] }}
+                                </span> : 
                                 {{ $contact->{$column} }}
                             </li>
                         @endforeach
@@ -29,10 +34,10 @@
         </div>
         @isset($addressEmbed)
         <div class="col-12">
-            <x-admin.card title="Embeded Map" class="embeded-full">
+            <x-admin.card title="Maps embed" class="embeded-full">
                 <x-slot name="header">
                     <x-admin.modal.trigger modal-target="change-embeded" 
-                    text="Change maps embeded" />
+                    text="Ubah maps embed" />
                 </x-slot>
                 {!! $addressEmbed !!}
             </x-admin.card>
@@ -42,17 +47,20 @@
 @endsection
 
 @section('components')
+
+    @include('admin.partials.change-heading-desc')
+
     @isset($contact)
         <x-admin.modal id="update-contact" heading="Change contact">
             <form method="POST" enctype="multipart/form-data" 
             action="{{ route('admin.our-contact.update') }}" data-modal-id="update-contact">
                 @csrf @method('PUT')
                 
-                <x-admin.input label="Our address" type="textarea" maxlength="200" 
+                <x-admin.input label="Alamat" type="textarea" maxlength="200" 
                 value="{{ $contact->address }}" name="address" required />
 
                 <div class="form-group">
-                    <label for="edit-contact-url">Maps address link</label>
+                    <label for="edit-contact-url">Link google maps</label>
                     <input type="url" class="form-control" inputmode="url" id="edit-contact-url" name="link_address" value="{{ $contact->link_address }}" 
                     title="Link should be start with 'https://'"
                     pattern="^(http(s)?:\/\/)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$" required>
@@ -62,7 +70,7 @@
                 </div>
             
                 <div class="form-group">
-                    <label for="our-telephone">Our telephone</label>
+                    <label for="our-telephone">Telepon</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text">+62</div>
@@ -78,7 +86,7 @@
                 </div>
             
                 <div class="form-group">
-                    <label for="edit-contact-email">Our email</label>
+                    <label for="edit-contact-email">Email</label>
                     <input type="email" class="form-control" inputmode="email" id="edit-contact-email" name="email" 
                     value="{{ old('email') ?? $contact->email }}"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
@@ -94,11 +102,13 @@
     @endisset
 
     @isset($addressEmbed)
-        <x-admin.modal id="change-embeded" heading="Change embeded map">
+        <x-admin.modal id="change-embeded" heading="Ubah embeded map">
             <form action="{{ route('admin.about-us.update-embed-map') }}" method="POST" data-modal-id="change-embeded">
                 @csrf @method('PUT')
                 <div class="form-group">
-                    <label for="edit-contact-addres">Put the embeded script here</label>
+                    <label for="edit-contact-addres">
+                        Masukan embed map disini
+                    </label>
                     <textarea name="address_embed" id="address-embed" 
                     rows="10" class="form-control"
                     title="Please input valid embed script" required>{{ $addressEmbed }}</textarea>
@@ -106,9 +116,9 @@
                         <div class="text-danger py-2">{{ $message }}</div>
                     @enderror
                     <small class="mr-1 text-muted">
-                        To know how to embed google map, please see
+                        Untuk mengetahui cara embed, lihatlah
                         <x-admin.modal.trigger modal-target="how-to-embed" 
-                        text="this video" :is-default-style="false" 
+                        text="video ini" :is-default-style="false" 
                         class="btn-small btn-link text-primary p-0 text-small" />
                     </small>
                 </div>
@@ -116,7 +126,7 @@
             </form>
         </x-admin.modal>
 
-        <x-admin.modal id="how-to-embed" heading="How to embeded map" size="lg">
+        <x-admin.modal id="how-to-embed" heading="Cara embed map" size="lg">
             <video src="{{ asset('video/cara-embed-map.mp4') }}" width="100%" 
             height="500px" autoplay muted draggable="false" loop controls></video>
         </x-admin.modal>

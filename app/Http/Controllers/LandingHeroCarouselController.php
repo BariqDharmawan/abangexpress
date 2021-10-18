@@ -10,14 +10,6 @@ use Illuminate\Support\Str;
 
 class LandingHeroCarouselController extends Controller
 {
-    
-    public function index()
-    {
-        $heroCarousel = FirstHeroCarouselLanding::where(
-            'domain_owner', request()->getSchemeAndHttpHost()
-        )->get();
-        return view('admin.contents.hero-carousel', compact('heroCarousel'));
-    }
 
     public function store(Request $request)
     {

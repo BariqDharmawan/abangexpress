@@ -53,7 +53,7 @@
             </div>
 
             <div class="menu">
-                <a href="{{ route('shipping.order.book') }}"
+                <a href="{{ route('shipping.order.book.index') }}"
                 class="remove-underline">
                     <div class="info-box-3 bg-green hover-zoom-effect
                     mb-0 mt-4 ml-4 mr-1 left-0">
@@ -93,7 +93,6 @@
                     </x-shipment.dropdown-item>
 
                     @if (auth()->user()->lt==3)
-
                         <x-shipment.dropdown-item text="Invoices "
                         icon="payment" :is-dropdown="true">
                             <x-shipment.dropdown-item
@@ -104,17 +103,15 @@
                             <x-shipment.dropdown-item
                             href="{{ route('shipping.invoice.settled') }}" text="Lunas" />
                         </x-shipment.dropdown-item>
-                    @else
-
                     @endif
 
                     <x-shipment.dropdown-item text="Bantuan"
                     icon="help_outline" :is-dropdown="true">
                         <x-shipment.dropdown-item
-                        href="{{ route('shipping.support.guide') }}"
+                        href="{{ route('shipping.order.support.guide') }}"
                         text="Panduan Penggunaan" />
                         <x-shipment.dropdown-item
-                        href="{{ route('shipping.support.regulation') }}"
+                        href="{{ route('shipping.order.support.regulation') }}"
                         text="Regulasi Pengiriman" />
                     </x-shipment.dropdown-item>
 

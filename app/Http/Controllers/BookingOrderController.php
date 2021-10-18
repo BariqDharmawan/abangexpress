@@ -189,9 +189,11 @@ class BookingOrderController extends Controller
 
     public function storeInvoice(StoreInvoiceValidation $request)
     {
+        $commercialInvoice = json_encode($request->validated());
+
         return response()->json([
-            'commercialInvoice' => json_encode($request->validated()),
-            'data' => $request->all(),
+            'commercialInvoice' => $commercialInvoice,
+            'data' => $commercialInvoice,
             'message' => 'success'
         ]);
     }

@@ -4,6 +4,15 @@
 
 @section('content')
 
+@if (session('error'))
+<div class="alert alert-danger alert-dismissible fade show mb-0 text-center" 
+role="alert">
+    {{ session('error') }}
+    <button type="button" class="btn-close" 
+    data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <section id="hero">
     <div class="hero-content row mx-0" data-aos="fade-up">
         <h2 class="w-100">{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h2>
@@ -76,21 +85,6 @@
 
         </div>
     </section>
-
-    <!-- ======= Call To Action Section ======= -->
-    <section id="call-to-action">
-        <div class="container" data-aos="zoom-out">
-            <div class="row">
-                <div class="col-lg-9 text-center text-lg-start">
-                    <h3 class="cta-title">{{ $landingSection[2]->section_name }}</h3>
-                    <p class="cta-text">{!! $landingSection[2]->first_desc !!}</p>
-                </div>
-                <div class="col-lg-3 cta-btn-container text-center">
-                    <a class="cta-btn align-middle" href="#" id="cta-email">CTA</a>
-                </div>
-            </div>
-        </div>
-    </section><!-- End Call To Action Section -->
 
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials">

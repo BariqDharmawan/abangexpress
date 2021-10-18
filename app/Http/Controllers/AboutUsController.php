@@ -6,7 +6,10 @@ use App\Helper\Helper;
 use App\Http\Requests\IdentityValidation;
 use App\Http\Requests\UpdateEmbedMapValidation;
 use App\Models\AboutUs;
+use App\Models\LandingSectionDesc;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AboutUsController extends Controller
 {
@@ -22,7 +25,11 @@ class AboutUsController extends Controller
         $identity = AboutUs::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
-        return view('admin.about-us.identity', compact('identity'));
+
+        $aboutUs = LandingSectionDesc::first();
+        // dd($aboutUs);
+
+        return view('admin.about-us.identity', compact('identity', 'aboutUs'));
     }
 
     public function updateEmbedMap(UpdateEmbedMapValidation $request)
@@ -36,28 +43,35 @@ class AboutUsController extends Controller
     public function update(IdentityValidation $request)
     {
         //todo: add validation
-        $ourIdentity = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())->first();
+        $ourIdentity = AboutUs::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
 
-        $isEditOurIdentityInfo = $request->hasAny([
-            'our_name', 'our_vision', 'our_mission', 'sub_slogan'
-        ]);
-
-        if($isEditOurIdentityInfo) {
-            $ourIdentity->our_name = $request->our_name;
-            $ourIdentity->our_vision = $request->our_vision;
-            $ourIdentity->our_mission = $request->our_mission;
-            $ourIdentity->sub_slogan = $request->sub_slogan;
-        }
-        else {
-            $ourIdentity->our_video = $request->our_video;
+        $ourIdentity->our_vision = $request->our_vision;
+        $ourIdentity->our_mission = $request->our_mission;
+        $ourIdentity->our_video = $request->our_video;
+        
+        if ($request->hasFile('cover_vision_mission')) {
+            $coverVisionMission = $request->file('cover_vision_mission');
+            $pathcoverVisionMission = Storage::putFile(
+                'public/cover-vision-mission', $coverVisionMission
+            );
+            $ourIdentity->cover_vision_mission = Str::replaceFirst(
+                'public/', '/storage/', $pathcoverVisionMission
+            );
         }
 
         $ourIdentity->save();
 
-        $message = $isEditOurIdentityInfo ? 'our identity' : 'video promo';
+        LandingSectionDesc::first()->update([
+            'section_name' => $request->section_name,
+            'first_desc' => $request->first_desc,
+            'second_desc' => $request->second_desc
+        ]);
 
-        return Helper::returnSuccess("update $message");
+        return Helper::returnSuccess("change about us");
         
     }
 
 }
+

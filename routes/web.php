@@ -12,13 +12,11 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
     Route::prefix('order')->name('order.')->group(function (){
 
         // PULL DATA CONSIGNEE
-        Route::get('pullPenerima/{id}', 'BookingOrderController@ambilPenerima');
+        Route::get('get-recipient/{id}', 'BookingOrderController@ambilPenerima');
 
-        Route::match(array('GET', 'POST'),'print', 'BookingOrderController@prints')->name(
-            'print'
-        );
-
-        Route::get('book', 'BookingOrderController@index')->name('book');
+        Route::match(['GET', 'POST'], 'print', 'BookingOrderController@prints')
+        ->name('print');
+        
         Route::get('book/invoice', 'BookingOrderController@invoice')->name(
             'book.invoice'
         );
@@ -32,11 +30,13 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
         Route::post('/', 'ShipmentOrderController@filterOrder')->name(
             'filter.order'
         );
+
+        Route::resource('book', 'BookingOrderController')->except('show');
+
         Route::post('/history', 'ShipmentOrderController@filterHistory')->name(
             'filter.history'
         );
 
-        Route::resource('book', 'BookingOrderController')->except('index', 'show');
         Route::get('/', 'ShipmentOrderController@index')->name('index');
         Route::resource('order', 'ShipmentOrderController')->except('store');
 
@@ -45,24 +45,26 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
         Route::get('history', 'ShipmentOrderController@history')->name('history');
         Route::get('receipt', 'ShipmentOrderController@receipt')->name('receipt');
 
-    });
-    Route::prefix('invoices')->name('invoice.')->group(function (){
-        Route::get('bill', 'ShipmentInvoiceController@bill')->name('bill');
-        Route::get('verifying', 'ShipmentInvoiceController@verifying')->name(
-            'verifying'
-        );
-        Route::get('settled', 'ShipmentInvoiceController@settled')->name('settled');
-    });
-    Route::prefix('support')->name('support.')->group(function (){
-        Route::get('guide', 'ShipmentSupportController@guide')->name('guide');
-        Route::get('regulation', 'ShipmentSupportController@regulation')->name(
-            'regulation'
-        );
+        Route::prefix('invoices')->name('invoice.')->group(function (){
+            Route::get('bill', 'ShipmentInvoiceController@bill')->name('bill');
+            Route::get('verifying', 'ShipmentInvoiceController@verifying')->name(
+                'verifying'
+            );
+            Route::get('settled', 'ShipmentInvoiceController@settled')->name('settled');
+        });
+        Route::prefix('support')->name('support.')->group(function (){
+            Route::get('guide', 'ShipmentSupportController@guide')->name('guide');
+            Route::get('regulation', 'ShipmentSupportController@regulation')->name(
+                'regulation'
+            );
+        });
     });
 });
 
-Route::prefix('admin')->name('admin.')->middleware('roleUser:admin')->group(function() {
-
+Route::prefix('admin')->name('admin.')->middleware(['isAdmin', 'checkDomain'])
+->group(function() {
+    Route::resource('home', 'HomeController')->except('update');
+    Route::put('home/update', 'HomeController@update')->name('home.update');
 
     Route::resource('user', 'UserController')->except('edit', 'show', 'create');
 
@@ -81,7 +83,9 @@ Route::prefix('admin')->name('admin.')->middleware('roleUser:admin')->group(func
         );
         Route::resource('our-social', 'OurSocialController')->except('index');
 
-        Route::get('contacts/manage', 'OurContactController@manage')->name('contact.manage');
+        Route::get('contacts/manage', 'OurContactController@manage')->name(
+            'contact.manage'
+        );
         Route::resource('contacts', 'OurContactController');
     });
 
@@ -98,14 +102,8 @@ Route::prefix('admin')->name('admin.')->middleware('roleUser:admin')->group(func
     Route::put('our-contact', 'OurContactController@update')->name('our-contact.update');
 
     Route::prefix('content')->name('content.')->group(function (){
-        Route::prefix('cover-vision-mission')->name('cover-vision-mission.')
-        ->group(function () {
-            Route::get('/', 'CoverVisionMissionController@index')->name('index');
-            Route::put('/', 'CoverVisionMissionController@update')->name('update');
-        });
-
-        Route::resource('landing-carousel', 'LandingHeroCarouselController')->except(
-            'create', 'show', 'edit', 'update'
+        Route::resource('landing-carousel', 'LandingHeroCarouselController')->only(
+            'store', 'destroy'
         );
 
         Route::resource('section-heading', 'LandingSectionController')->only(
