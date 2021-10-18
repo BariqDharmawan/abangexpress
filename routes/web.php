@@ -14,6 +14,9 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
         // PULL DATA CONSIGNEE
         Route::get('pullPenerima/{id}', 'BookingOrderController@ambilPenerima');
 
+        Route::match(array('GET', 'POST'),'print', 'BookingOrderController@prints')->name(
+            'print'
+        );
 
         Route::get('book', 'BookingOrderController@index')->name('book');
         Route::get('book/invoice', 'BookingOrderController@invoice')->name(
