@@ -56,7 +56,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <x-shipment.input placeholder="Nomor ID Card Penerima"
-                    name="recipient_nik" class="not-allow-space" required />
+                    name="recipient_nik" class="not-allow-space" />
                 </div>
                 <div class="col-lg-6">
                     <x-shipment.input placeholder="Kode pos"
@@ -111,7 +111,7 @@
                     text-addon="(kg)"
                     small-text="Berat paket dibulatkan keatas (kilogram)"
                     name="package_weight" id="package-weight"
-                    class="input-decimal-comma" required
+                    class="input-decimal-dot" required
                     value="{{ config('app.env') == 'local' ? 2 : '' }}" />
                 </div>
             </div>
