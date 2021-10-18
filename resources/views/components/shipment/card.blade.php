@@ -1,4 +1,4 @@
-@props(['icon' => null, 'id' => null])
+@props(['icon' => null, 'id' => null, 'heading' => null])
 
 <div class="card">
     <div class="header">
