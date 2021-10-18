@@ -95,7 +95,9 @@
                         </li>
                     </ul>
                 </nav>
-                @yield('content')
+                <main class="px-2">
+                    @yield('content')
+                </main>
             </div>
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
