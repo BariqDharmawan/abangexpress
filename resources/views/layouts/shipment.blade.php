@@ -110,10 +110,10 @@
                     <x-shipment.dropdown-item text="Bantuan"
                     icon="swap_calls" :is-dropdown="true">
                         <x-shipment.dropdown-item
-                        href="{{ route('shipping.support.guide') }}"
+                        href="{{ route('shipping.order.support.guide') }}"
                         text="Panduan Penggunaan" />
                         <x-shipment.dropdown-item
-                        href="{{ route('shipping.support.regulation') }}"
+                        href="{{ route('shipping.order.support.regulation') }}"
                         text="Regulasi Pengiriman" />
                     </x-shipment.dropdown-item>
 

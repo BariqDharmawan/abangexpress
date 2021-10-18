@@ -4,6 +4,15 @@
 
 @section('content')
 
+@if (session('error'))
+<div class="alert alert-danger alert-dismissible fade show mb-0 text-center" 
+role="alert">
+    {{ session('error') }}
+    <button type="button" class="btn-close" 
+    data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <section id="hero">
     <div class="hero-content row mx-0" data-aos="fade-up">
         <h2 class="w-100">{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h2>
