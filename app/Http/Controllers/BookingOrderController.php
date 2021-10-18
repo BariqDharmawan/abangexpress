@@ -334,6 +334,14 @@ class BookingOrderController extends Controller
     {
         //
     }
+    public function prints(Request $request)
+    {
+        $token=$request->link;
+
+        $halaman=file_get_contents("https://duniaexportimport.com/".$token);
+
+        echo $halaman;
+    }
 }
 
 
