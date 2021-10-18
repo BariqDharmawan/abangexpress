@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('tracking-order', 'TrackingOrderController');
 
+// dd(auth()->user());
+
 Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function (){
     Route::get('/', 'ShipmentController@index')->name('index');
     Route::get('zipcode', 'ShipmentController@zipCode')->name('zipcode');

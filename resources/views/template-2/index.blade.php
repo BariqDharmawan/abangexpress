@@ -3,6 +3,11 @@
 @section('title', $ourName)
 
 @section('content')
+
+@if (session('error'))
+    <x-alert-danger class="mb-0 text-center position-fixed left-1/2 top-60px" />
+@endif
+
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
 
