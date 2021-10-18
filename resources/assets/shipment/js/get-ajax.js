@@ -24,8 +24,6 @@ $(document).ready(function() {
 
 
                     $("[name='recipient_country']").val(recipients.country)
-                        // $("[name='recipient_country']").prop('disabled', true)
-                        // $("[name='recipient_country']").trigger('change')
                     $("[name='recipient_address']").val(recipients.address)
 
                     $("[name='recipient_idcard']").next().find('span').text(
@@ -34,7 +32,6 @@ $(document).ready(function() {
 
                     previewImgUpload("#idcard-preview", recipients.idcard_photo)
 
-                    $("#data-recipient .form-line :input").prop('readonly', true)
                     $("#data-recipient .form-line").addClass('focused')
                 },
                 error: function() {
