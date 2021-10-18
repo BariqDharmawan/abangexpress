@@ -9,6 +9,9 @@
         <x-admin.alert-success/>
         @endif
     </div>
+
+    @include('admin.partials.card-change-section', ['side' => 'b'])
+
     <div class="col-12 mb-4">
         <div class="d-flex justify-content-between align-items-center">
             <h1 class="h4 mb-0">Team kami</h1>
@@ -18,8 +21,8 @@
         </div>
     </div>
 
-    <div class="col-12">
-        <div class="row">
+    <div class="col-12 px-0">
+        <div class="row mx-0">
             @foreach ($teams as $person)
             <div class="col-lg-3 mb-4">
                 <div class="card h-full">
@@ -57,8 +60,6 @@
             @endforeach
         </div>
     </div>
-
-    @include('admin.partials.card-change-section')
 
 </div>
 @endsection

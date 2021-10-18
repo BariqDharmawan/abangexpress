@@ -9,11 +9,11 @@
 </div>
 @endif
 
-@include('admin.partials.card-change-section')
+@include('admin.partials.card-change-section', ['side' => 'b'])
 
 <div class="col-12">
 
-    <x-admin.card title="Layanan Kami" class="mt-3">
+    <x-admin.card title="Layanan Kami">
         <x-slot name="header">
             <x-admin.modal.trigger text="Tambah layanan baru"
             modal-target="add-service" />
