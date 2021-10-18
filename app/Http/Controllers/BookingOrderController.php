@@ -66,7 +66,7 @@ class BookingOrderController extends Controller
 
         curl_close($curl);
         $res = json_decode($response);
-        
+
         $countryList = $res->response;
 
         $curl = curl_init();
@@ -90,7 +90,7 @@ class BookingOrderController extends Controller
 
         curl_close($curl);
         $res = json_decode($response);
-        
+
         $commodityList = $res->response;
 
         return view('shipment.order.book', compact(
@@ -337,8 +337,13 @@ class BookingOrderController extends Controller
     public function prints(Request $request)
     {
         $token=$request->link;
-
-        $halaman=file_get_contents("https://duniaexportimport.com/".$token);
+        if (!empty($token)){
+            $halaman=file_get_contents("https://duniaexportimport.com/".$token);
+        }else{
+            $token=$_GET['key'];
+            $halaman=file_get_contents("https://duniaexportimport.com/resi/".$token);
+            // dd($token);
+        }
 
         echo $halaman;
     }
