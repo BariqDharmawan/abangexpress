@@ -10,12 +10,22 @@ $(document).ready(function() {
     $("#get-previous-recipient").change(function() {
         const recipientId = $(this).val()
         if (recipientId != 'penerima-baru') {
+
+            $("#data-recipient .form-line").addClass('focused')
+
             $.ajax({
                 type: "GET",
-                url: `/shipping/order/pullPenerima/${recipientId}`,
+                url: `/shipping/order/get-recipient/${recipientId}`,
                 success: function(recipients) {
-
+                    
                     console.log(recipients)
+
+                    if (recipients.country.includes('TAIWAN', 'KOREA SOUTH', 'INDIA')) {
+                        $("[name='recipient_nik']").prop('required', true)
+                    }
+                    else {
+                        $("[name='recipient_nik']").prop('required', false)
+                    }
 
                     $("[name='recipient_name']").val(recipients.name)
                     $("[name='recipient_telephone']").val(recipients.telephone)
@@ -24,21 +34,23 @@ $(document).ready(function() {
 
 
                     $("[name='recipient_country']").val(recipients.country)
-                        // $("[name='recipient_country']").prop('disabled', true)
-                        // $("[name='recipient_country']").trigger('change')
                     $("[name='recipient_address']").val(recipients.address)
 
                     $("[name='recipient_idcard']").next().find('span').text(
                         removePath(recipients.idcard_photo)
                     )
 
+                    $("[name='recipient_country']").val(recipients.country)
+                    $("[name='recipient_country']").trigger('change')
+
                     previewImgUpload("#idcard-preview", recipients.idcard_photo)
 
-                    $("#data-recipient .form-line :input").prop('readonly', true)
-                    $("#data-recipient .form-line").addClass('focused')
+                    
                 },
-                error: function() {
+                error: function(error) {
+                    $("#data-recipient .form-line").removeClass('focused')
                     alert('ada yang salah dengan API nya')
+                    console.error(error)
                 }
             })
         }

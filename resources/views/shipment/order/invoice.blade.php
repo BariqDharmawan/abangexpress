@@ -14,11 +14,11 @@
             </div>
             <div class="body d-flex flex-wrap flex-column items-end">
                 <div class="w-100">
-                    <x-shipment.input type="textarea"
+                    <x-shipment.input type="textarea" minlength="5"
                     placeholder="Deskripsi barang" name="desc" required />
                 </div>
                 <div class="w-100">
-                    <x-shipment.input typpe="number"
+                    <x-shipment.input type="number" min="1"
                     placeholder="Quantity" name="quantity" required />
                 </div>
                 <div class="w-100">
@@ -60,7 +60,7 @@
                     </table>
                 </div>
 
-            <form id="form-save-order"   method="POST">
+            <form id="print-invoice" method="POST">
                 <div class="mt-5">
                     <button type="submit" class="btn btn-big btn-danger"
                     id="btn-generate-pdf" disabled>Generate PDF</button>

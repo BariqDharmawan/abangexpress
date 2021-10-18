@@ -80,7 +80,6 @@ $(document).ready(function() {
             type: 'POST',
             success: function(response) {
 
-                alert(response.message)
                 thisForm.reset()
 
                 $(".select2").val('').trigger('change')
@@ -171,7 +170,8 @@ $(document).ready(function() {
 
             },
             error: function(error) {
-                alert(error)
+                // alert(error)
+                console.log(error)
             }
         })
 
@@ -208,9 +208,8 @@ $(document).ready(function() {
             type: 'POST',
             success: function(response) {
                 localStorage.clear()
-                alert(response.message)
 
-                window.open(response.data.link_resi, '_blank');
+                window.open('/shipping/order/print?key=' + response.data.token_resi, '_blank');
                 window.open('/shipping', '_self');
 
 
@@ -329,7 +328,7 @@ $(document).ready(function() {
             let data = localStorage.getItem("commercialInvoice");
             // split and count
             const xArray = data.split("},");
-            if (xArray.length > 0) {
+            if (xArray.length > 1) {
 
                 var removeId = ids - 1;
                 var str1 = "";
@@ -357,14 +356,5 @@ $(document).ready(function() {
         }
     });
 
-    // pop the filter
-    function myxFunction() {
-        var x = document.getElementById("myxDIV");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
-    }
 
 })

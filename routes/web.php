@@ -12,7 +12,7 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
     Route::prefix('order')->name('order.')->group(function (){
 
         // PULL DATA CONSIGNEE
-        Route::get('pullPenerima/{id}', 'BookingOrderController@ambilPenerima');
+        Route::get('get-recipient/{id}', 'BookingOrderController@ambilPenerima');
 
         Route::match(array('GET', 'POST'),'print', 'BookingOrderController@prints')->name(
             'print'
@@ -32,11 +32,13 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
         Route::post('/', 'ShipmentOrderController@filterOrder')->name(
             'filter.order'
         );
+
+        Route::resource('book', 'BookingOrderController')->except('show');
+
         Route::post('/history', 'ShipmentOrderController@filterHistory')->name(
             'filter.history'
         );
 
-        Route::resource('book', 'BookingOrderController')->except('index', 'show');
         Route::get('/', 'ShipmentOrderController@index')->name('index');
         Route::resource('order', 'ShipmentOrderController')->except('store');
 

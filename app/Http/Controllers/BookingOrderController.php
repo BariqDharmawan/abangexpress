@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper\Helper;
 use App\Http\Requests\BookOrderValidation;
+use App\Http\Requests\StoreInvoiceValidation;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use mysqli;
 
 class BookingOrderController extends Controller
 {
@@ -18,18 +16,11 @@ class BookingOrderController extends Controller
     {
         $title = 'Form Booking Order';
 
-        $uid=Auth::user()->username;
-        $user = User::where([
-            ['username', $uid]
-        ])->first();
-
-        $akun = $user->code_api;
-        $tokenkey = $user->token_api;
-        $postdata = '{
-            "akun": "'.$akun.'",
-            "key": "'.$tokenkey.'"
-
-        }';
+        $postdata = [
+            'akun' => Auth::user()->code_api,
+            'key' => Auth::user()->token_api
+        ];
+        $postdata = json_encode($postdata);
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -65,7 +56,7 @@ class BookingOrderController extends Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS =>$postdata,
+            CURLOPT_POSTFIELDS => $postdata,
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json'
             ),
@@ -75,7 +66,7 @@ class BookingOrderController extends Controller
 
         curl_close($curl);
         $res = json_decode($response);
-        // $prevRecipient = Helper::getJson('prev-recipient.json');
+
         $countryList = $res->response;
 
         $curl = curl_init();
@@ -89,7 +80,7 @@ class BookingOrderController extends Controller
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS =>$postdata,
+        CURLOPT_POSTFIELDS => $postdata,
         CURLOPT_HTTPHEADER => array(
             'Content-Type: application/json'
         ),
@@ -99,21 +90,19 @@ class BookingOrderController extends Controller
 
         curl_close($curl);
         $res = json_decode($response);
-        // $prevRecipient = Helper::getJson('prev-recipient.json');
+
         $commodityList = $res->response;
 
-
-        return view('shipment.order.book', compact('title', 'prevRecipient','countryList','commodityList'));
+        return view('shipment.order.book', compact(
+            'title', 'prevRecipient','countryList','commodityList'
+        ));
     }
     public function order(BookOrderValidation $request)
     {
-        //save data to temporary table if possible
         return redirect('/shipping/order/book/invoice');
     }
-    public function ambilPenerima($id){
-
-        // $prevRecipient = session('consigneedata')[$id - 1];
-        //todo: change this to get data from database
+    public function ambilPenerima($id)
+    {
         $uid=Auth::user()->username;
         $user = User::where([
             ['username', $uid]
@@ -198,25 +187,13 @@ class BookingOrderController extends Controller
         return view('shipment.order.invoice', compact('title', 'booked'));
     }
 
-    public function storeInvoice(Request $request)
+    public function storeInvoice(StoreInvoiceValidation $request)
     {
-        $data = $request->all();
-        //logic to save booking order and invoice here
-        $desc=$data['desc'];
-        $qty=$data['quantity'];
-        $satuan=$data['unit'];
-        $unitValue=$data['value_unit'];
-        $commercialInvoice='
-        {
-            "deskripsi": "'.$desc.'",
-            "qty": "'.$qty.'",
-            "satuan": "'.$satuan.'",
-            "value": "'.$unitValue.'"
-        }';
+        $commercialInvoice = json_encode($request->validated());
 
         return response()->json([
             'commercialInvoice' => $commercialInvoice,
-            'data' => $data,
+            'data' => $commercialInvoice,
             'message' => 'success'
         ]);
     }
@@ -362,7 +339,14 @@ class BookingOrderController extends Controller
     public function prints(Request $request)
     {
         $token=$request->link;
-        $halaman=file_get_contents("https://duniaexportimport.com/".$token);
+        if (!empty($token)){
+            $halaman=file_get_contents("https://duniaexportimport.com/".$token);
+        }else{
+            $token=$_GET['key'];
+            $halaman=file_get_contents("https://duniaexportimport.com/resi/".$token);
+            // dd($token);
+        }
+
         echo $halaman;
     }
 }

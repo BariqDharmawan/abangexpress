@@ -53,7 +53,7 @@
             </div>
 
             <div class="menu">
-                <a href="{{ route('shipping.order.book') }}"
+                <a href="{{ route('shipping.order.book.index') }}"
                 class="remove-underline">
                     <div class="info-box-3 bg-green hover-zoom-effect
                     mb-0 mt-4 ml-4 mr-1 left-0">
@@ -70,12 +70,12 @@
                     <x-shipment.dropdown-item text="Dashboard"
                     icon="home" href="{{ route('shipping.index') }}" />
 
-                    <x-shipment.dropdown-item
+                    {{-- <x-shipment.dropdown-item
                     text="Kode Post Taiwan" icon="text_fields"
-                    href="{{ route('shipping.zipcode') }}" />
+                    href="{{ route('shipping.zipcode') }}" /> --}}
 
                     <x-shipment.dropdown-item text="Order"
-                    icon="swap_calls" :is-dropdown="true">
+                    icon="flight_takeoff" :is-dropdown="true">
                         <x-shipment.dropdown-item
                         href="{{ route('shipping.order.index') }}" text="Data Order" />
                         <x-shipment.dropdown-item
@@ -91,10 +91,10 @@
                         href="{{ route('shipping.order.receipt') }}"
                         text="Cetak Ulang Resi" />
                     </x-shipment.dropdown-item>
-                    @if (auth()->user()->lt==3)
 
+                    @if (auth()->user()->lt==3)
                         <x-shipment.dropdown-item text="Invoices "
-                        icon="swap_calls" :is-dropdown="true">
+                        icon="payment" :is-dropdown="true">
                             <x-shipment.dropdown-item
                             href="{{ route('shipping.invoice.bill') }}" text="Tagihan" />
                             <x-shipment.dropdown-item
@@ -103,12 +103,10 @@
                             <x-shipment.dropdown-item
                             href="{{ route('shipping.invoice.settled') }}" text="Lunas" />
                         </x-shipment.dropdown-item>
-                    @else
-
                     @endif
 
                     <x-shipment.dropdown-item text="Bantuan"
-                    icon="swap_calls" :is-dropdown="true">
+                    icon="help_outline" :is-dropdown="true">
                         <x-shipment.dropdown-item
                         href="{{ route('shipping.order.support.guide') }}"
                         text="Panduan Penggunaan" />
@@ -118,7 +116,7 @@
                     </x-shipment.dropdown-item>
 
                     <x-shipment.dropdown-item text="Akun"
-                    icon="swap_calls" :is-dropdown="true">
+                    icon="person_outline" :is-dropdown="true">
                         <li>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf

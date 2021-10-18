@@ -95,6 +95,8 @@
     @else
         @isset($smallText)
         <small class="text-black-50">{{ $smallText }}</small>
+        @else
+        <small class="text-danger error-ajax-{{ $name }} d-block" style="margin-top: 5px"></small>
         @endisset
     @enderror
 </div>

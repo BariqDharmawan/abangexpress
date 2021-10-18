@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class BookOrderValidation extends FormRequest
 {
@@ -28,7 +29,13 @@ class BookOrderValidation extends FormRequest
             'sender_telephone' => ['required'],
             'recipient_name' => ['required'],
             'recipient_telephone' => ['required'],
-            'recipient_nik' => ['required'],
+            'recipient_nik' => [
+                Rule::requiredIf(
+                    $this->recipient_country == 'TAIWAN' or 
+                    $this->recipient_country == 'KOREA SOUTH' or 
+                    $this->recipient_country == 'INDIA'
+                )
+            ],
             'recipient_zipcode' => ['required'],
             'recipient_country' => ['required'],
             'recipient_address' => ['required'],
