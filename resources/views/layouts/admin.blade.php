@@ -23,32 +23,32 @@
             <hr class="sidebar-divider">
 
             <x-admin.sidebar.menu :href="route('admin.home.index')" 
-            text="Home" icon="fa-fw fa-tachometer-alt" />
+            text="Home" icon="fas fa-home" />
 
             <x-admin.sidebar.menu :href="route('admin.about-us.identity')" 
-            text="Tentang Kami" icon="fa-fw fa-tachometer-alt" />
+            text="Tentang Kami" icon="fas fa-info-circle" />
 
             <x-admin.sidebar.menu :href="route('admin.service.manage')" 
             text="Layanan Kami" icon="fa-fw fa-tachometer-alt" />
 
             <x-admin.sidebar.menu :href="route('admin.team.manage')" 
-            text="Team Kami" icon="fa-fw fa-tachometer-alt" />
+            text="Team Kami" icon="fas fa-people-carry" />
 
             <x-admin.sidebar.menu :href="route('admin.faq.manage')" 
-            text="Tanya Kami" icon="fa-fw fa-tachometer-alt" />
+            text="Tanya Kami" icon="fas fa-question-circle" />
 
             <x-admin.sidebar.menu text="Kontak Kami" 
-            :href="route('admin.contact.manage')" icon="fa-fw fa-tachometer-alt" />
+            :href="route('admin.contact.manage')" icon="fas fa-phone-alt" />
 
             <x-admin.sidebar.menu text="Social Media" 
-            :href="route('admin.our-social.manage')" icon="fa-fw fa-tachometer-alt" />
+            :href="route('admin.our-social.manage')" icon="fas fa-share-alt" />
             
             <x-admin.sidebar.menu text="Shipment" 
-            :href="route('shipping.index')" icon="fa-fw fa-tachometer-alt" />
+            :href="route('shipping.index')" icon="fas fa-shipping-fast" />
 
             @if (auth()->user()->role == 'admin')
                 <x-admin.sidebar.menu :href="route('admin.user.index')" 
-                text="Subadmin" icon="fa-fw fa-tachometer-alt" />
+                text="Subadmin" icon="fas fa-users" />
             @endif
         
             <!-- Divider -->
