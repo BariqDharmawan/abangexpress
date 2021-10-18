@@ -8,6 +8,13 @@
         content: none !important;
     }
 }
+.top-60px {
+    top: 60px;
+}
+.left-1\/2 {
+    left: 50%;
+    transform: translateX(-50%);
+}
 .no-after {
     &::after {
         content: none !important;
