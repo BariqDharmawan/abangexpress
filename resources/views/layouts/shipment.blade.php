@@ -95,21 +95,21 @@
                     <x-shipment.dropdown-item text="Invoices"
                     icon="swap_calls" :is-dropdown="true">
                         <x-shipment.dropdown-item
-                        href="{{ route('shipping.invoice.bill') }}" text="Tagihan" />
+                        href="{{ route('shipping.order.invoice.bill') }}" text="Tagihan" />
                         <x-shipment.dropdown-item
-                        href="{{ route('shipping.invoice.verifying') }}"
+                        href="{{ route('shipping.order.invoice.verifying') }}"
                         text="Dalam Prose Verifikasi" />
                         <x-shipment.dropdown-item
-                        href="{{ route('shipping.invoice.settled') }}" text="Lunas" />
+                        href="{{ route('shipping.order.invoice.settled') }}" text="Lunas" />
                     </x-shipment.dropdown-item>
 
                     <x-shipment.dropdown-item text="Bantuan"
                     icon="swap_calls" :is-dropdown="true">
                         <x-shipment.dropdown-item
-                        href="{{ route('shipping.support.guide') }}"
+                        href="{{ route('shipping.order.support.guide') }}"
                         text="Panduan Penggunaan" />
                         <x-shipment.dropdown-item
-                        href="{{ route('shipping.support.regulation') }}"
+                        href="{{ route('shipping.order.support.regulation') }}"
                         text="Regulasi Pengiriman" />
                     </x-shipment.dropdown-item>
 

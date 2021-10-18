@@ -57,7 +57,8 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
     });
 });
 
-Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function() {
+Route::prefix('admin')->name('admin.')->middleware(['isAdmin', 'checkDomain'])
+->group(function() {
     Route::resource('home', 'HomeController')->except('update');
     Route::put('home/update', 'HomeController@update')->name('home.update');
 
