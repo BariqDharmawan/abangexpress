@@ -8,7 +8,7 @@
 <body>
     <div id="wrapper">
 
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-red sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <a class="sidebar-brand d-flex align-items-center justify-content-center" 
             href="{{ route('admin.about-us.identity') }}">
@@ -25,30 +25,24 @@
             <x-admin.sidebar.menu :href="route('admin.home.index')" 
             text="Home" icon="fas fa-home" />
 
-            <x-admin.sidebar.menu :href="route('admin.about-us.identity')" 
-            text="Tentang Kami" icon="fas fa-info-circle" />
-
-            <x-admin.sidebar.menu :href="route('admin.service.manage')" 
-            text="Layanan Kami" icon="fa-fw fa-tachometer-alt" />
-
-            <x-admin.sidebar.menu :href="route('admin.team.manage')" 
-            text="Team Kami" icon="fas fa-people-carry" />
-
-            <x-admin.sidebar.menu :href="route('admin.faq.manage')" 
-            text="Tanya Kami" icon="fas fa-question-circle" />
-
-            <x-admin.sidebar.menu text="Kontak Kami" 
-            :href="route('admin.contact.manage')" icon="fas fa-phone-alt" />
-
-            <x-admin.sidebar.menu text="Social Media" 
-            :href="route('admin.our-social.manage')" icon="fas fa-share-alt" />
+            <x-admin.sidebar.menu text="Edit company profile" class="collapsed" 
+            data-toggle="collapse" icon="fas fa-building" data-target="#dropdown-edit-company" aria-expanded="true" aria-controls="dropdown-edit-company">
+                <x-admin.sidebar.dropdown id="dropdown-edit-company" parent="accordionSidebar">
+                    <x-admin.sidebar.link text="Tentang Kami" icon="fas fa-info-circle" :href="route('admin.about-us.identity')" />
+                    <x-admin.sidebar.link text="Layanan Kami" icon="fa-fw fa-tachometer-alt" :href="route('admin.service.manage')" />
+                    <x-admin.sidebar.link text="Team Kami" icon="fas fa-people-carry" :href="route('admin.team.manage')" />
+                    <x-admin.sidebar.link text="Tanya Kami" icon="fas fa-question-circle" :href="route('admin.faq.manage')" />
+                    <x-admin.sidebar.link text="Kontak Kami" icon="fas fa-phone-alt" :href="route('admin.contact.manage')" />
+                    <x-admin.sidebar.link text="Social Media" icon="fas fa-share-alt" :href="route('admin.our-social.manage')" />
+                </x-admin.sidebar.dropdown>
+            </x-admin.sidebar.menu>
             
             <x-admin.sidebar.menu text="Shipment" 
-            :href="route('shipping.index')" icon="fas fa-shipping-fast" />
+            :href="route('shipping.index')" target="_blank" icon="fas fa-shipping-fast" />
 
             @if (auth()->user()->role == 'admin')
                 <x-admin.sidebar.menu :href="route('admin.user.index')" 
-                text="Subadmin" icon="fas fa-users" />
+                text="Anak cabang" icon="fas fa-users" />
             @endif
         
             <!-- Divider -->

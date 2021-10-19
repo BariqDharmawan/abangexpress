@@ -10,10 +10,10 @@
         </div>
         @endif
         <div class="col-12">
-            <x-admin.card title="Manage data pengguna">
+            <x-admin.card title="Manage anak cabang">
                 <x-slot name="header">
                     <x-admin.modal.trigger modal-target="add-new-subadmin"
-                    text="Tambah Pengguna Baru" />
+                    text="Tambah anak cabang" />
                 </x-slot>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable"
