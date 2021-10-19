@@ -9,49 +9,42 @@
 @endif
 
 <div class="col-12">
-    <div class="card shadow mb-4">
-        <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Tentang kita</h6>
+
+    <x-admin.card title="Tentang kita" class="mb-4">
+        <x-slot name="header">
             <x-admin.modal.trigger text="Ubah tentang kita"
             modal-target="edit-idendity" />
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Our Vision</th>
-                            <th>Our Mission</th>
-                            <th>Heading</th>
-                            <th>Deskripsi 1</th>
-                            <th>Deskripsi 2</th>
-                            <th>Video / gambar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ Str::words($identity->our_vision, 5, '...') }}</td>
-                            <td>{!! $identity->our_mission  !!}</td>
-                            <td>{{ $aboutUs->section_name }}</td>
-                            <td>{!! $aboutUs->first_desc !!}</td>
-                            <td>{!! $aboutUs->second_desc !!}</td>
-                            <td>
-                                @if ($identity->our_video)
-                                    <a href="{{ $identity->our_video }}" 
-                                    target="_blank">
-                                        Lihat video
-                                    </a>
-                                @else
-                                    <img alt="" height="100px"
-                                    src="{{ asset($identity->cover_vision_mission) }}">
-                                @endif
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+        </x-slot>
+
+        <x-admin.table id="dataTable" :thead="[
+            'Our Vision',
+            'Our Mission',
+            'Heading',
+            'Deskripsi 1',
+            'Deskripsi 2',
+            'Video / gambar'
+        ]">
+            <tr>
+                <td>{{ Str::words($identity->our_vision, 5, '...') }}</td>
+                <td>{!! $identity->our_mission  !!}</td>
+                <td>{{ $aboutUs->section_name }}</td>
+                <td>{!! $aboutUs->first_desc !!}</td>
+                <td>{!! $aboutUs->second_desc !!}</td>
+                <td>
+                    @if ($identity->our_video)
+                        <a href="{{ $identity->our_video }}" 
+                        target="_blank">
+                            Lihat video
+                        </a>
+                    @else
+                        <img alt="" height="100px"
+                        src="{{ asset($identity->cover_vision_mission) }}">
+                    @endif
+                </td>
+            </tr>
+        </x-admin.table>
+
+    </x-admin.card>
 </div>
 
 @endsection

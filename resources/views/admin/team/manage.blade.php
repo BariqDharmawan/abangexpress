@@ -25,25 +25,23 @@
         <div class="row mx-0">
             @foreach ($teams as $person)
             <div class="col-lg-3 mb-4">
-                <div class="card h-full">
-                    <div class="card-header">
+                <x-admin.card title="{{ Str::words($person->name, 3, '...') }}" 
+                :reverse-header="true" 
+                footer-class="d-flex justify-content-between bg-transparent">
+                    <x-slot name="header">
                         <img src="{{ $person->avatar }}" height="90px" width="90px"
-                        class="rounded-circle mx-auto d-block object-cover" 
+                        class="rounded-circle mx-auto d-block object-cover mb-3" 
                         alt="{{ $person->name }}">
-                        <p class="card-text font-weight-bold h5 mb-0 mt-3 text-center">
-                            {{ Str::words($person->name, 3, '...') }}
-                        </p>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text font-weight-bold text-info">
-                            {{ $person->position->name }}
-                        </p>
-                        <small>
-                            Deskripsi singkat <br> {{ $person->short_desc }}
-                        </small>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between bg-transparent">
-                        
+                    </x-slot>
+                    
+                    <p class="card-text font-weight-bold text-info">
+                        {{ $person->position->name }}
+                    </p>
+                    <small>
+                        Deskripsi singkat <br> {{ $person->short_desc }}
+                    </small>
+
+                    <x-slot name="footer">
                         <x-admin.modal.trigger text="Ubah info"
                         modal-target="edit-person-{{ $loop->iteration }}"
                         :is-default-style="false"
@@ -53,9 +51,9 @@
                         modal-target="remove-person-{{ $loop->iteration }}"
                         :is-default-style="false"
                         class="btn-link text-danger px-0" />
-                        
-                    </div>
-                </div>
+                    </x-slot>
+                    
+                </x-admin.card>
             </div>
             @endforeach
         </div>
