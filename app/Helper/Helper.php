@@ -27,7 +27,7 @@ class Helper
 
     public static function returnSuccess($message)
     {
-        return redirect()->back()->with('success', "Successfully $message");
+        return redirect()->back()->with('success', "Berhasil $message");
     }
 
     public const DUMMY_DOMAINS = [

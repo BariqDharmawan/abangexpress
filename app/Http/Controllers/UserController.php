@@ -44,7 +44,7 @@ class UserController extends Controller
             'password' => Hash::make( $request->sandi)
         ]);
 
-        return Helper::returnSuccess('add new sub admin');
+        return Helper::returnSuccess('menambah sub admin');
     }
 
     public function edit($id)

@@ -66,7 +66,7 @@ class OurSocialController extends Controller
             'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
-        return Helper::returnSuccess('add new social media');
+        return Helper::returnSuccess('menambah social media');
 
     }
 

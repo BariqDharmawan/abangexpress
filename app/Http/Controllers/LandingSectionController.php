@@ -43,7 +43,7 @@ class LandingSectionController extends Controller
         }
         
         $sectionToUpdate->save();
-        return Helper::returnSuccess('change heading');
+        return Helper::returnSuccess('mengganti heading');
     }
 
 }

@@ -61,7 +61,7 @@ class OurServiceController extends Controller
             'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
-        return Helper::returnSuccess('add new service');
+        return Helper::returnSuccess('menambah service baru');
     }
 
     public function update(Request $request, $id)

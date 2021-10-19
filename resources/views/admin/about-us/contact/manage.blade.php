@@ -59,15 +59,10 @@
                 <x-admin.input label="Alamat" type="textarea" maxlength="200" 
                 value="{{ $contact->address }}" name="address" required />
 
-                <div class="form-group">
-                    <label for="edit-contact-url">Link google maps</label>
-                    <input type="url" class="form-control" inputmode="url" id="edit-contact-url" name="link_address" value="{{ $contact->link_address }}" 
-                    title="Link should be start with 'https://'"
-                    pattern="^(http(s)?:\/\/)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$" required>
-                    @error('link_address')
-                        <div class="text-danger py-2">{{ $message }}</div>
-                    @enderror
-                </div>
+                <x-admin.input label="Link google maps" type="url" 
+                value="{{ $contact->link_address }}" name="link_address"
+                title="Link should be start with 'https://'"
+                pattern="^(http(s)?:\/\/)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$" inputmode="url" required />
             
                 <div class="form-group">
                     <label for="our-telephone">Telepon</label>
@@ -84,17 +79,13 @@
                         <div class="text-danger py-2">{{ $message }}</div>
                     @enderror
                 </div>
-            
-                <div class="form-group">
-                    <label for="edit-contact-email">Email</label>
-                    <input type="email" class="form-control" inputmode="email" id="edit-contact-email" name="email" 
-                    value="{{ old('email') ?? $contact->email }}"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
-                    title="Email should be a valid email with domain (.com, .co.id, etc)" required>
-                    @error('email')
-                        <div class="text-danger py-2">{{ $message }}</div>
-                    @enderror
-                </div>
+
+                <x-admin.input label="Email" type="email" name="email" 
+                value="{{ $contact->email }}" 
+                title="Email harus menggunakan valid email dengan domain 
+                (.com, .co.id, dll)"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                inputmode="email" required />
             
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -105,6 +96,7 @@
         <x-admin.modal id="change-embeded" heading="Ubah embeded map">
             <form action="{{ route('admin.about-us.update-embed-map') }}" method="POST" data-modal-id="change-embeded">
                 @csrf @method('PUT')
+                
                 <div class="form-group">
                     <label for="edit-contact-addres">
                         Masukan embed map disini

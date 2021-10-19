@@ -41,7 +41,7 @@ class OurTeamController extends Controller
             'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
-        return Helper::returnSuccess('add new member');
+        return Helper::returnSuccess('menambah anggota member baru');
 
     }
 
@@ -71,7 +71,7 @@ class OurTeamController extends Controller
         $editMember->short_desc = $request->short_desc;
         $editMember->save();
 
-        return Helper::returnSuccess('add new member');
+        return Helper::returnSuccess('update info member');
     }
 
     /**
@@ -91,6 +91,6 @@ class OurTeamController extends Controller
 
         $deletePerson->delete();
 
-        return Helper::returnSuccess("delete member name $personName");
+        return Helper::returnSuccess("menghapus member dengan nama $personName");
     }
 }

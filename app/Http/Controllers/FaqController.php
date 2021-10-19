@@ -36,7 +36,7 @@ class FaqController extends Controller
             'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
-        return Helper::returnSuccess('add new FAQ');
+        return Helper::returnSuccess('menambah FAQ baru');
     }
 
     public function update(UpdateFaqValidation $request, $id)
@@ -61,6 +61,6 @@ class FaqController extends Controller
         
         $faq->delete();
 
-        return Helper::returnSuccess('remove FAQ');
+        return Helper::returnSuccess('menghapus FAQ');
     }
 }

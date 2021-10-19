@@ -25,7 +25,7 @@ class LandingHeroCarouselController extends Controller
             'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
-        return Helper::returnSuccess('add new hero');
+        return Helper::returnSuccess('menambah hero image');
     }
 
     /**
@@ -42,6 +42,6 @@ class LandingHeroCarouselController extends Controller
         ])->firstOrFail();
 
         $carouselToDelete->delete();
-        return Helper::returnSuccess('remove slide');
+        return Helper::returnSuccess('menghapus slide');
     }
 }
