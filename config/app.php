@@ -2,8 +2,6 @@
 
 return [
 
-    'domain_owner' => request()->getSchemeAndHttpHost(),
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
