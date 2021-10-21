@@ -26,7 +26,15 @@ class InvoicePayValidation extends FormRequest
         return [
             'account_name' => ['required', 'string', 'in:bca,mandiri,bni'],
             'total_payed' => ['required', 'integer', 'min:100'],
-            'proof_of_paying' => ['required', 'mimes:jpg,png,jpeg,webp']
+            'proof_of_paying_hidden' => ['required', 'base64image']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'proof_of_paying_hidden.base64image' => 
+                'Harap upload bukti transfer berupa .png, .jpg, atau .webp'
         ];
     }
 }

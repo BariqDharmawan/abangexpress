@@ -248,7 +248,7 @@ class BookingOrderController extends Controller
             "tujuan": {
                 "nama": "'.$penerima.'",
                 "nomor_ktp": "'.$ktp.'",
-                "file":"data:image/png;base64,'.$b64.'",
+                "file":"'.$b64.'",
                 "telepon": "'.$teleponpenerima.'",
                 "alamat": "'.$alamat.'",
                 "kode_pos": "'.$kodepos.'",

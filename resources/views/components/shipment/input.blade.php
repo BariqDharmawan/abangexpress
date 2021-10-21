@@ -8,7 +8,8 @@
     'iconAddon' => null,
     'textAddon' => null,
     'required' => null,
-    'label' => null
+    'label' => null,
+    'inputHidden' => null
 ])
 
 
@@ -32,7 +33,8 @@
             'type' => 'file',
             'id' => $id,
             'required' => $required,
-            'value' => old($name)
+            'value' => old($name),
+            'data-input-hidden' => $inputHidden
             ]) }} />
         <label for="{{ $id }}" class="custom-file__label">
             <span>{{ $placeholder }}</span>
@@ -46,10 +48,10 @@
         <div class="input-group mb-0">
             <span class="input-group-addon">
                 @isset($iconAddon)
-                <i class="material-icons">{{ $iconAddon }}</i>
+                    <i class="material-icons">{{ $iconAddon }}</i>
                 @endisset
                 @isset($textAddon)
-                {{ $textAddon }}
+                    {{ $textAddon }}
                 @endisset
             </span>
             <div class="form-line">
@@ -93,13 +95,28 @@
         @endif
     @endif
 
-    @error($name)
-        <small class="text-danger d-block" style="margin-top: 5px">{{ $message }}</small>
-    @else
-        @isset($smallText)
-        <small class="text-black-50">{{ $smallText }}</small>
+    @if ($type == 'file' and $inputHidden != null)
+        @error($inputHidden)
+            <small class="text-danger d-block mt-2">
+                {{ $message }}
+            </small>
         @else
-        <small class="text-danger error-ajax-{{ $name }} d-block" style="margin-top: 5px"></small>
-        @endisset
-    @enderror
+            @isset($smallText)
+            <small class="text-black-50">{{ $smallText }}</small>
+            @else
+            <small class="text-danger error-ajax-{{ $inputHidden }} 
+            d-block mt-2"></small>
+            @endisset
+        @enderror
+    @else 
+        @error($name)
+            <small class="text-danger d-block mt-2">{{ $message }}</small>
+        @else
+            @isset($smallText)
+            <small class="text-black-50">{{ $smallText }}</small>
+            @else
+            <small class="text-danger error-ajax-{{ $name }} d-block mt-2"></small>
+            @endisset
+        @enderror
+    @endif
 </div>

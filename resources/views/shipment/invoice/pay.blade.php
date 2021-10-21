@@ -15,8 +15,13 @@
                 <x-shipment.input class="input-decimal-dot-without-padding"
                 label="Jumlah Pembayaran" text-addon="Rp. "
                 name="total_payed" required />
-                <x-shipment.input type="file" placeholder="Bukti Transfer"
+
+                <x-shipment.input type="file" input-hidden="proof_of_paying_hidden" 
+                placeholder="Bukti Transfer"
                 name="proof_of_paying" accept="image/*" required />
+
+                <input type="hidden" id="proof_of_paying_hidden" 
+                name="proof_of_paying_hidden" required readonly>
                 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

@@ -19,10 +19,9 @@ class InvoicePayingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $invoiceNumber)
+    public function store(InvoicePayValidation $request, $invoiceNumber)
     {
-        dd($request->all());
-        return 'success';
+        dd($request->validated(), $invoiceNumber);
     }
 
 }

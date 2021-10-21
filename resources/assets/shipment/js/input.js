@@ -57,7 +57,7 @@ $(document).ready(function() {
             decimalCharacter: '.',
             digitGroupSeparator: ',',
             allowDecimalPadding: false,
-            outputFormat: 'number'
+            unformatOnSubmit: true
         })
     })
 
@@ -65,7 +65,7 @@ $(document).ready(function() {
         new AutoNumeric(`#${$(this).attr('id')}`, {
             decimalCharacter: '.',
             digitGroupSeparator: ',',
-            outputFormat: 'number'
+            unformatOnSubmit: true
         })
     })
 
@@ -73,7 +73,7 @@ $(document).ready(function() {
         new AutoNumeric(`#${$(this).attr('id')}`, {
             decimalCharacter: ',',
             digitGroupSeparator: '.',
-            outputFormat: 'number'
+            unformatOnSubmit: true
         })
     })
 
@@ -95,8 +95,6 @@ $(document).ready(function() {
         })
     }
 
-
-
     $(".input-currency").each(function() {
         new AutoNumeric(`#${$(this).attr('id')}`, {
             decimalCharacter: ',',
@@ -104,16 +102,6 @@ $(document).ready(function() {
             allowDecimalPadding: true,
             alwaysAllowDecimalCharacter: true
         })
-    })
-
-    $("[data-input-hidden]").change(function(e) {
-        // const inputHidden = $(this).data('input-hidden')
-        // console.log(`changed: ${e.target.files[0].name}`)
-        // $(inputHidden).val(e.target.files[0].name)
-    })
-
-    $("#idcard_input_hidden").change(function() {
-        // console.log($(this).val())
     })
 
     $("[accept='image/*']").change(function() {
@@ -125,10 +113,9 @@ $(document).ready(function() {
             reader.onload = function(e) {
                 previewImgUpload(imgPreview, e.target.result)
                 const str = e.target.result
-                const arku = str.split("base64,")
-                $(inputHidden).val(arku[1])
-                console.log(arku[1])
-                    // $(imgPreview).attr('src', e.target.result).removeClass('d-none')
+                // const arku = str.split("base64,")
+                $(`#${inputHidden}`).val(str)
+                console.log(str)
             }
             reader.readAsDataURL(this.files[0]);
         } else {
