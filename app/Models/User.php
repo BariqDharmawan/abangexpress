@@ -51,4 +51,14 @@ class User extends Authenticatable
         return $this->hasOne(TemplateChoosen::class);
     }
 
+    public static function getKeyApi()
+    {
+        $postdata = [
+            'akun' => auth()->user()->code_api,
+            'key' => auth()->user()->token_api
+        ];
+
+        return json_encode($postdata);
+    }
+
 }
