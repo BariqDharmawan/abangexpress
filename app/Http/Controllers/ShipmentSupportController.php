@@ -9,12 +9,16 @@ class ShipmentSupportController extends Controller
     public function guide()
     {
         $title = 'Panduan Penggunaan';
-        return view('shipment.support.guide', compact('title'));
+        $pdf = 'files/dummies.pdf';
+
+        return view('shipment.support.guide', compact('title', 'pdf'));
     }
 
     public function regulation()
     {
         $title = 'Regulasi Pengiriman';
-        return view('shipment.support.regulation', compact('title'));
+        $pdf = 'files/dummies.pdf';
+        
+        return view('shipment.support.regulation', compact('title', 'pdf'));
     }
 }
