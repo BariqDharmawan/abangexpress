@@ -5,10 +5,10 @@
     <link rel="stylesheet" href="{{ asset('admin/css/app.css') }}">
     @stack('style-plugins')
 </head>
-<body>
+<body class="sidebar-toggled">
     <div id="wrapper">
 
-        <ul class="navbar-nav bg-gradient-red sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-red sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
             <a class="sidebar-brand d-flex align-items-center justify-content-center" 
             href="{{ route('admin.about-us.identity') }}">
