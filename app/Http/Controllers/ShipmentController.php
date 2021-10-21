@@ -48,11 +48,20 @@ class ShipmentController extends Controller
         curl_close($curl);
 
         $res = json_decode($response);
-        abort_if($res->status == 'failed', 403);
-        
-        $quickReport = collect($res->response);
 
-        return view('shipment.index', compact('quickReport'));
+        if ($res->status == 'failed') {
+            Auth::guard('web')->logout();
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+
+            return redirect('/')->with('error', 'Kamu tidak bisa mengakses shipping');
+        }
+        else {
+            $quickReport = collect($res->response);
+
+            return view('shipment.index', compact('quickReport'));
+        }
+        
     }
 
     public function zipcode()
