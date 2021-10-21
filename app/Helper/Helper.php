@@ -34,4 +34,22 @@ class Helper
         'http://127.0.0.1:8000',
         'http://127.0.0.1:9000'
     ];
+
+    public static function getKeyApi()
+    {
+        $postdata = [
+            'akun' => auth()->user()->code_api,
+            'key' => auth()->user()->token_api
+        ];
+
+        return json_encode($postdata);
+    }
+
+    public static function getKeyApiArray()
+    {
+        return [
+            'akun' => auth()->user()->code_api,
+            'key' => auth()->user()->token_api
+        ];
+    }
 }

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Http\Requests\BookOrderValidation;
 use App\Http\Requests\StoreInvoiceValidation;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class BookingOrderController extends Controller
 {
@@ -16,82 +18,32 @@ class BookingOrderController extends Controller
     {
         $title = 'Form Booking Order';
 
-        $postdata = [
-            'akun' => Auth::user()->code_api,
-            'key' => Auth::user()->token_api
-        ];
-        $postdata = json_encode($postdata);
+        $response = Http::retry(10, 0)->withOptions([
+            'CURLOPT_RETURNTRANSFER' => true
+        ])->acceptJson()->post(
+            'https://res.abangexpress.id/shipments/pull/consigneedata/',
+            Helper::getKeyApiArray()
+        );
 
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/consigneedata/',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $postdata,
-            CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json'
-            ),
-        ));
+        $prevRecipient = json_decode($response)->response;
 
-        $response = curl_exec($curl);
+        $response = Http::retry(10, 0)->withOptions([
+            'CURLOPT_RETURNTRANSFER' => true
+        ])->acceptJson()->post(
+            'https://res.abangexpress.id/shipments/pull/countrylist/',
+            Helper::getKeyApiArray()
+        );
 
-        curl_close($curl);
+        $countryList = json_decode($response)->response;
 
-        $res = json_decode($response);
-        $prevRecipient = $res->response;
+        $response = Http::retry(10, 0)->withOptions([
+            'CURLOPT_RETURNTRANSFER' => true
+        ])->acceptJson()->post(
+            'https://res.abangexpress.id/shipments/pull/commoditylist/',
+            Helper::getKeyApiArray()
+        );
 
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/countrylist/',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $postdata,
-            CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json'
-            ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        $res = json_decode($response);
-
-        $countryList = $res->response;
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/commoditylist/',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => $postdata,
-        CURLOPT_HTTPHEADER => array(
-            'Content-Type: application/json'
-        ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        $res = json_decode($response);
-
-        $commodityList = $res->response;
+        $commodityList = json_decode($response)->response;
 
         return view('shipment.order.book', compact(
             'title', 'prevRecipient','countryList','commodityList'
