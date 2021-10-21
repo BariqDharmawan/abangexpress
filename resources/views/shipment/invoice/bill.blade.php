@@ -10,7 +10,7 @@
             <div class="header"></div>
             <div class="body">
                 <div class="table-responsive">
-                    <table id="{{ $tableClass}}" class="table table-bordered table-striped table-hover js-basic-example dataTable w-100">
+                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable w-100">
                         <thead>
                             <tr>
                                 <th>Tanggal</th>
@@ -36,9 +36,18 @@
                                             <form method="POST"  action="{{ route('shipping.order.print') }}" target="_blank">
                                                 @csrf
                                                 <input type="hidden" name="link" value="view-tagihan/{{ $xdata->nomor}}">
-                                                <button type="submit" class="btn btn-big btn-primary"><i class="material-icons">print</i> Cetak</button>
+                                                <button type="submit" class="btn btn-big btn-primary w-100">
+                                                    <i class="material-icons">print</i> 
+                                                    Cetak
+                                                </button>
                                             </form>
-                                            {{-- <a type="submit" href="https://duniaexportimport.com/view-tagihan/{{ $xdata->nomor}}" target="_blank" class="btn btn-big btn-primary"><i class="material-icons">print</i>Detail Tagihan</a> --}}
+                                            <a target="_blank" 
+                                            href="{{ route(
+                                                'shipping.invoice.pay.index', '809sa7fsa87f9safe'
+                                            ) }}"
+                                            class="btn btn-big btn-success w-100 mt-4">
+                                                Upload pembayaran
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

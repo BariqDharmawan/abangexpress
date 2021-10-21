@@ -52,17 +52,28 @@ $(document).ready(function() {
         this.value = this.value.replace(/\d+/g, '')
     })
 
+    $(".input-decimal-dot-without-padding").each(function () {
+        new AutoNumeric(`#${$(this).attr('id')}`, {
+            decimalCharacter: '.',
+            digitGroupSeparator: ',',
+            allowDecimalPadding: false,
+            outputFormat: 'number'
+        })
+    })
+
     $(".input-decimal-dot").each(function () {
         new AutoNumeric(`#${$(this).attr('id')}`, {
             decimalCharacter: '.',
-            digitGroupSeparator: ','
+            digitGroupSeparator: ',',
+            outputFormat: 'number'
         })
     })
 
     $(".input-decimal-comma").each(function() {
         new AutoNumeric(`#${$(this).attr('id')}`, {
             decimalCharacter: ',',
-            digitGroupSeparator: '.'
+            digitGroupSeparator: '.',
+            outputFormat: 'number'
         })
     })
 

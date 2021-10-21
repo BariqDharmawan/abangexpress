@@ -48,7 +48,7 @@ class ShipmentController extends Controller
         curl_close($curl);
 
         $res = json_decode($response);
-        // dd($postdata);
+        // dd($res);
         $quickReport = collect($res->response);
 
         return view('shipment.index', compact('quickReport'));

@@ -1,7 +1,7 @@
 @props([
     'type' => 'text',
     'name',
-    'placeholder',
+    'placeholder' => null,
     'rows' => 4,
     'id' => null,
     'smallText' => null,
@@ -16,14 +16,13 @@
     @if ($type == 'select')
         <label for="{{ $id }}" class="form-label 
         @isset($required)form-label--required @endisset">
-            {{ $placeholder }}
+            {{ $label ?? $placeholder }}
         </label>
         <select {{ $attributes->class(['select2'])->merge([
             'name' => $name,
-            'id' => $id,
-            'required' => $required
-        ]) }} style="width: 100%">
-            <option selected disabled>{{ $placeholder }}</option>
+            'id' => $id
+        ]) }} style="width: 100%" required>
+            <option selected disabled>{{ $placeholder ?? "Pilih $label" }}</option>
             {{ $slot }}
         </select>
     @elseif($type == 'file')
@@ -56,7 +55,7 @@
             <div class="form-line">
                 <input {{ $attributes->class(['form-control'])->merge([
                     'type' => $type,
-                    'id' => $id,
+                    'id' => $id ?? Str::slug($label),
                     'name' => $name,
                     'required' => $required,
                     'placeholder' => $placeholder,
@@ -72,19 +71,23 @@
                     'name' => $name, 
                     'type' => $type,
                     'rows' => $rows,
-                    'id' => $id,
+                    'id' => $id ?? Str::slug($label),
                     'required' => $required
                 ]) }}>{{ old($name) }}</textarea>
-                <label class="form-label mb-0" for="{{ $id }}">{{ $placeholder }}</label>
+                <label class="form-label mb-0" for="{{ $id ?? Str::slug($label) }}">
+                    {{ $label ?? $placeholder }}
+                </label>
             @else
                 <input {{ $attributes->class(['form-control'])->merge([
                     'name' => $name, 
                     'type' => $type,
-                    'id' => $id,
+                    'id' => $id ?? Str::slug($label),
                     'required' => $required,
                     'value' => old($name)
                 ]) }} />
-                <label class="form-label mb-0" for="{{ $id }}">{{ $placeholder }}</label>
+                <label class="form-label mb-0" for="{{ $id ?? Str::slug($label) }}">
+                    {{ $label ?? $placeholder }}
+                </label>
             @endif
         </div>
         @endif
