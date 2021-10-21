@@ -6,6 +6,24 @@ if ($(".select2").length > 0) {
         theme: 'classic',
         allowClear: true
     })
+
+    // $(".select2-ajax").select2({
+    //     theme: 'classic',
+    //     ajax: {
+    //         url: 'https://res.abangexpress.id/shipments/pull/consigneedata/',
+    //         dataType: 'json',
+    //         type: 'POST',
+    //         params: {
+    //             contentType: "application/json; charset=utf-8",
+    //         },
+    //         data: function (params) {
+    //             return {
+    //                 akun: 'AAX0013',
+    //                 key: 'ee03bf171b3e655950ad1b40da4bad66'
+    //             }
+    //         },
+    //     }
+    // })
 }
 
 $(document).ready(function() {

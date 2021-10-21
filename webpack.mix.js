@@ -1,6 +1,5 @@
 const mix = require('laravel-mix');
 
-require('laravel-mix-serve')
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -123,5 +122,3 @@ mix.js(`${template2Path}/js/app.js`, 'public/template2/js')
     .copy(`${template2Path}/img`, 'public/template2/img')
     .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/template2/webfonts')
     .sourceMaps();
-
-// mix.serve()
