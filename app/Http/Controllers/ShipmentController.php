@@ -48,7 +48,8 @@ class ShipmentController extends Controller
         curl_close($curl);
 
         $res = json_decode($response);
-        // dd($res);
+        abort_if($res->status == 'failed', 403);
+        
         $quickReport = collect($res->response);
 
         return view('shipment.index', compact('quickReport'));
