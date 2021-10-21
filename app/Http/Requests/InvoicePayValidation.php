@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\AlphaSpaceRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class InvoicePayValidation extends FormRequest
@@ -24,6 +25,7 @@ class InvoicePayValidation extends FormRequest
     public function rules()
     {
         return [
+            'behalf_of' => ['required', 'string', 'min:3', new AlphaSpaceRule],
             'account_name' => ['required', 'string', 'in:bca,mandiri,bni'],
             'total_payed' => ['required', 'integer', 'min:100'],
             'proof_of_paying_hidden' => ['required', 'base64image']

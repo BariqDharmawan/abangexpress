@@ -6,12 +6,17 @@
         <x-shipment.card heading="Verifikasi Pembayaran">
             <form action="{{ route('shipping.invoice.pay.store', $invoiceNumber) }}" method="POST">
                 @csrf
+
+                <x-shipment.input class="not-allow-number"
+                label="Atas Nama" name="behalf_of" required />
+
                 <x-shipment.input type="select" name="account_name" 
                 label="Nama Rekening Anda" required>
                     <option value="bca">BCA</option>
                     <option value="mandiri">Mandiri</option>
                     <option value="bni">BNI</option>
                 </x-shipment.input>
+                
                 <x-shipment.input class="input-decimal-dot-without-padding"
                 label="Jumlah Pembayaran" text-addon="Rp. "
                 name="total_payed" required />
