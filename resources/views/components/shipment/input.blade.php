@@ -1,29 +1,32 @@
 @props([
     'type' => 'text',
     'name',
-    'placeholder',
+    'placeholder' => null,
     'rows' => 4,
     'id' => null,
     'smallText' => null,
     'iconAddon' => null,
     'textAddon' => null,
     'required' => null,
-    'label' => null
+    'label' => null,
+    'inputHidden' => null
 ])
 
 
 <div class="form-group form-float form-group-lg">
-    @if ($type == 'select')
+    @if ($type == 'select' or $type == 'select-ajax')
         <label for="{{ $id }}" class="form-label 
         @isset($required)form-label--required @endisset">
-            {{ $placeholder }}
+            {{ $label ?? $placeholder }}
         </label>
-        <select {{ $attributes->class(['select2'])->merge([
+        <select {{ $attributes->class([
+            'select2' => $type == 'select',
+            'select2-ajax' => $type == 'select-ajax'
+        ])->merge([
             'name' => $name,
-            'id' => $id,
-            'required' => $required
-        ]) }} style="width: 100%">
-            <option selected disabled>{{ $placeholder }}</option>
+            'id' => $id
+        ]) }} style="width: 100%" required>
+            <option selected disabled>{{ $placeholder ?? "Pilih $label" }}</option>
             {{ $slot }}
         </select>
     @elseif($type == 'file')
@@ -33,7 +36,8 @@
             'type' => 'file',
             'id' => $id,
             'required' => $required,
-            'value' => old($name)
+            'value' => old($name),
+            'data-input-hidden' => $inputHidden
             ]) }} />
         <label for="{{ $id }}" class="custom-file__label">
             <span>{{ $placeholder }}</span>
@@ -47,16 +51,16 @@
         <div class="input-group mb-0">
             <span class="input-group-addon">
                 @isset($iconAddon)
-                <i class="material-icons">{{ $iconAddon }}</i>
+                    <i class="material-icons">{{ $iconAddon }}</i>
                 @endisset
                 @isset($textAddon)
-                {{ $textAddon }}
+                    {{ $textAddon }}
                 @endisset
             </span>
             <div class="form-line">
                 <input {{ $attributes->class(['form-control'])->merge([
                     'type' => $type,
-                    'id' => $id,
+                    'id' => $id ?? Str::slug($label),
                     'name' => $name,
                     'required' => $required,
                     'placeholder' => $placeholder,
@@ -72,31 +76,50 @@
                     'name' => $name, 
                     'type' => $type,
                     'rows' => $rows,
-                    'id' => $id,
+                    'id' => $id ?? Str::slug($label),
                     'required' => $required
                 ]) }}>{{ old($name) }}</textarea>
-                <label class="form-label mb-0" for="{{ $id }}">{{ $placeholder }}</label>
+                <label class="form-label mb-0" for="{{ $id ?? Str::slug($label) }}">
+                    {{ $label ?? $placeholder }}
+                </label>
             @else
                 <input {{ $attributes->class(['form-control'])->merge([
                     'name' => $name, 
                     'type' => $type,
-                    'id' => $id,
+                    'id' => $id ?? Str::slug($label),
                     'required' => $required,
                     'value' => old($name)
                 ]) }} />
-                <label class="form-label mb-0" for="{{ $id }}">{{ $placeholder }}</label>
+                <label class="form-label mb-0" for="{{ $id ?? Str::slug($label) }}">
+                    {{ $label ?? $placeholder }}
+                </label>
             @endif
         </div>
         @endif
     @endif
 
-    @error($name)
-        <small class="text-danger d-block" style="margin-top: 5px">{{ $message }}</small>
-    @else
-        @isset($smallText)
-        <small class="text-black-50">{{ $smallText }}</small>
+    @if ($type == 'file' and $inputHidden != null)
+        @error($inputHidden)
+            <small class="text-danger d-block mt-2">
+                {{ $message }}
+            </small>
         @else
-        <small class="text-danger error-ajax-{{ $name }} d-block" style="margin-top: 5px"></small>
-        @endisset
-    @enderror
+            @isset($smallText)
+            <small class="text-black-50">{{ $smallText }}</small>
+            @else
+            <small class="text-danger error-ajax-{{ $inputHidden }} 
+            d-block mt-2"></small>
+            @endisset
+        @enderror
+    @else 
+        @error($name)
+            <small class="text-danger d-block mt-2">{{ $message }}</small>
+        @else
+            @isset($smallText)
+            <small class="text-black-50">{{ $smallText }}</small>
+            @else
+            <small class="text-danger error-ajax-{{ $name }} d-block mt-2"></small>
+            @endisset
+        @enderror
+    @endif
 </div>

@@ -58,6 +58,12 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
 
     Route::prefix('invoices')->name('invoice.')->group(function (){
         Route::get('bill', 'ShipmentInvoiceController@bill')->name('bill');
+
+        Route::get('pay/{invoiceNumber}', 'InvoicePayingController@index')
+        ->name('pay.index');
+        Route::post('pay/store/{invoiceNumber}', 'InvoicePayingController@store')
+        ->name('pay.store');
+
         Route::get('verifying', 'ShipmentInvoiceController@verifying')->name(
             'verifying'
         );

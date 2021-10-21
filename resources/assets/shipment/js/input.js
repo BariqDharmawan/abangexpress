@@ -6,6 +6,24 @@ if ($(".select2").length > 0) {
         theme: 'classic',
         allowClear: true
     })
+
+    // $(".select2-ajax").select2({
+    //     theme: 'classic',
+    //     ajax: {
+    //         url: 'https://res.abangexpress.id/shipments/pull/consigneedata/',
+    //         dataType: 'json',
+    //         type: 'POST',
+    //         params: {
+    //             contentType: "application/json; charset=utf-8",
+    //         },
+    //         data: function (params) {
+    //             return {
+    //                 akun: 'AAX0013',
+    //                 key: 'ee03bf171b3e655950ad1b40da4bad66'
+    //             }
+    //         },
+    //     }
+    // })
 }
 
 $(document).ready(function() {
@@ -52,17 +70,28 @@ $(document).ready(function() {
         this.value = this.value.replace(/\d+/g, '')
     })
 
+    $(".input-decimal-dot-without-padding").each(function () {
+        new AutoNumeric(`#${$(this).attr('id')}`, {
+            decimalCharacter: '.',
+            digitGroupSeparator: ',',
+            allowDecimalPadding: false,
+            unformatOnSubmit: true
+        })
+    })
+
     $(".input-decimal-dot").each(function () {
         new AutoNumeric(`#${$(this).attr('id')}`, {
             decimalCharacter: '.',
-            digitGroupSeparator: ','
+            digitGroupSeparator: ',',
+            unformatOnSubmit: true
         })
     })
 
     $(".input-decimal-comma").each(function() {
         new AutoNumeric(`#${$(this).attr('id')}`, {
             decimalCharacter: ',',
-            digitGroupSeparator: '.'
+            digitGroupSeparator: '.',
+            unformatOnSubmit: true
         })
     })
 
@@ -84,8 +113,6 @@ $(document).ready(function() {
         })
     }
 
-
-
     $(".input-currency").each(function() {
         new AutoNumeric(`#${$(this).attr('id')}`, {
             decimalCharacter: ',',
@@ -93,16 +120,6 @@ $(document).ready(function() {
             allowDecimalPadding: true,
             alwaysAllowDecimalCharacter: true
         })
-    })
-
-    $("[data-input-hidden]").change(function(e) {
-        // const inputHidden = $(this).data('input-hidden')
-        // console.log(`changed: ${e.target.files[0].name}`)
-        // $(inputHidden).val(e.target.files[0].name)
-    })
-
-    $("#idcard_input_hidden").change(function() {
-        // console.log($(this).val())
     })
 
     $("[accept='image/*']").change(function() {
@@ -114,10 +131,9 @@ $(document).ready(function() {
             reader.onload = function(e) {
                 previewImgUpload(imgPreview, e.target.result)
                 const str = e.target.result
-                const arku = str.split("base64,")
-                $(inputHidden).val(arku[1])
-                console.log(arku[1])
-                    // $(imgPreview).attr('src', e.target.result).removeClass('d-none')
+                // const arku = str.split("base64,")
+                $(`#${inputHidden}`).val(str)
+                console.log(str)
             }
             reader.readAsDataURL(this.files[0]);
         } else {

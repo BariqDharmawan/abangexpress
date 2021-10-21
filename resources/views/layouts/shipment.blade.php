@@ -135,7 +135,7 @@
             <div class="legal">
                 <div class="copyright">
                     <small>&copy; {{ date('Y') }}</small>
-                    <a href="javascript:void(0);">{{ config('app.name') }}</a>.
+                    <span class="text-danger">{{ config('app.name') }}</span>
                 </div>
             </div>
         </aside>
