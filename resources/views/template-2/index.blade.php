@@ -192,10 +192,10 @@
                 <div class="col-lg-6 d-flex align-items-stretch">
                     <ul class="info">
                         @foreach ($ourContactList as $contactList)
-                        <li id="{{ $contactList['id'] }}">
-                            <i class="bi {{ $contactList['icon'] }}"></i>
+                        <li id="{{ $contactList->id }}">
+                            <i class="bi {{ $contactList->icon }}"></i>
                             <h4 class="list-group-simple__text">
-                                {{ $contactList['title'] }}
+                                {{ $contactList->title }}
                             </h4>
                             <p class="list-group-simple__subtext">
                                 <a href="" target="__blank"></a>

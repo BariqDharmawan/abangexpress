@@ -33,11 +33,7 @@ class TemplateDuaController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->orderBy('title', 'asc')->get();
 
-        $ourContactList = [
-            ['id' =>  'location', 'icon' => 'bi-geo-alt', 'title' => 'Location'],
-            ['id' => 'email', 'icon' => 'bi-envelope', 'title' => 'Email'],
-            ['id' => 'phone', 'icon' => 'bi-phone', 'title' => 'Call'],
-        ];
+        $ourContactList = Helper::getJson('our-contact-list.json');
 
         if ($aboutUs) {
             $isProfileVideoExist = $aboutUs->our_video ? true : false;

@@ -1,0 +1,17 @@
+[
+    {
+        "id": "location",
+        "icon": "bi-geo-alt",
+        "title": "Location"
+    },
+    {
+        "id": "email",
+        "icon": "bi-envelope",
+        "title": "Email"
+    },
+    {
+        "id": "phone",
+        "icon": "bi-phone",
+        "title": "Call"
+    }
+]
