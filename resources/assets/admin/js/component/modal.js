@@ -1,7 +1,16 @@
 $(document).ready(function () {
-    $("form").each(function () {
-        if ($(this).find('.text-danger').length) {
-            $(this).parents('.modal').modal('show')
-        }
+
+    $(".modal").on('shown.bs.modal', function (event) {
+        localStorage.setItem('modal-open', $(this).attr('id'))
+        console.log(localStorage.getItem('modal-open'))
     })
+
+    if (localStorage.getItem('modal-open')) {
+        console.log(localStorage.getItem('modal-open'))
+        
+        if ($(`#${localStorage.getItem('modal-open')}`).find('.text-danger').length > 0) {
+            $(`#${localStorage.getItem('modal-open')}`).modal('show')
+        }
+    }
+
 })
