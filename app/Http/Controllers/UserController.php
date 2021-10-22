@@ -37,19 +37,14 @@ class UserController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'domain_owner' => request()->getSchemeAndHttpHost(),
-            'plain_password' =>  $request->sandi,
+            'plain_password' => md5($request->sandi),
             'code_api' =>  $request->kodeagen,
             'lt' =>  $anak,
             'token_api' =>  $request->tokenkey,
-            'password' => Hash::make( $request->sandi)
+            'password' => Hash::make($request->sandi)
         ]);
 
         return Helper::returnSuccess('menambah sub admin');
-    }
-
-    public function edit($id)
-    {
-        //
     }
 
     public function update(Request $request, $id)
@@ -60,8 +55,8 @@ class UserController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'domain_owner' => $request->domain_owner,
-            'plain_password' => $request->password,
-            'password' => Hash::make('password')
+            'plain_password' => md5($request->sandi),
+            'password' => Hash::make($request->sandi)
         ]);
 
         return Helper::returnSuccess("update sub-admin $peopleName");
