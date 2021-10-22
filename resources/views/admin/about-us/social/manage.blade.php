@@ -19,7 +19,7 @@
     </div>
     <div class="row mt-4">
         <div class="col-12">
-            <x-admin.card title="">
+            <x-admin.card>
                 <ul class="list-group">
                     @foreach ($socialMedia as $social)
                     <li class="list-group-item d-flex align-items-center">
