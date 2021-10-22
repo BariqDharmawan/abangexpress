@@ -75,7 +75,7 @@ function getContact(urlApi) {
             },
             "#phone": {
                 "link": `tel:${datas.telephone}`,
-                "value": datas.telephone
+                "value": `+62${datas.telephone}`
             }
         }
 

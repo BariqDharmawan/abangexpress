@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     @include('partials.meta', ['prefixTitle' => 'Template 2'])
     @include('partials.styles', ['path' => 'template2'])
 </head>
+
 <body>
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center">
-    
+
             <h1 class="logo me-auto">
                 <a href="index.html">{{ $ourName }}</a>
             </h1>
-    
+
             <nav id="navbar" class="navbar">
                 <ul>
                     @foreach ($menus as $menu)
@@ -19,7 +21,7 @@
                         <a class="nav-link scrollto @if($loop->first) active @endif" href="{{ $menu->url }}">
                             {{ $menu->text }}
                         </a>
-                    </li>    
+                    </li>
                     @endforeach
 
                     @guest
@@ -30,8 +32,7 @@
                     </li>
                     @else
                     <li>
-                        <a class="getstarted scrollto" 
-                        href="{{ route('admin.about-us.identity') }}">
+                        <a class="getstarted scrollto" href="{{ route('admin.about-us.identity') }}">
                             Go to dashboard
                         </a>
                     </li>
@@ -39,11 +40,26 @@
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
-    
+
         </div>
     </header>
+
     @yield('content')
-    @include('partials.btn-back-to-top')
+    
+    @include('partials.btn-back-to-top', ['style' => 'blue'])
     @include('partials.scripts', ['path' => 'template2'])
+
+    <footer>
+        <div class="container d-flex flex-column align-items-center">
+            <p class="text-white h3 mb-0">Our Social Network</p>
+            <div class="my-4">
+                @include('partials.our-social')
+            </div>
+            <small class="text-white">
+                @include('partials.copyright')
+            </small>
+        </div>
+    </footer>
 </body>
+
 </html>

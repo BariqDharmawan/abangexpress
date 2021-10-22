@@ -25,7 +25,11 @@
                                 <span class="text-capitalize">
                                     {{ $titles[$key] }}
                                 </span> : 
-                                {{ $contact->{$column} }}
+                                @if ($column == 'telephone')
+                                    {{ '+62' . $contact->{$column} }}
+                                @else
+                                    {{ $contact->{$column} }}
+                                @endif
                             </li>
                         @endforeach
                     @endisset

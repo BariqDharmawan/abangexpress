@@ -17,5 +17,12 @@
 @import './../../general/sass/panel';
 @import './../../general/sass/text';
 
+@import './reset';
+
 @import './hero';
+
+@import './header';
+@import './nav';
+
 @import 'main';
+@import './footer';
