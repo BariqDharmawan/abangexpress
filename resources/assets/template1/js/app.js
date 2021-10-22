@@ -5,7 +5,7 @@ import './main'
 import './alert'
 import './panel'
 import './scroll-to'
-import './input'
+import './../../general/js/utilities'
 
 getFaq('/api/faq')
 getContact('/api/our-contact')

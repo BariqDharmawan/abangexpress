@@ -1,4 +1,3 @@
-import AutoNumeric from 'autonumeric'
 import { previewImgUpload } from './utilities'
 
 if ($(".select2").length > 0) {
@@ -6,24 +5,6 @@ if ($(".select2").length > 0) {
         theme: 'classic',
         allowClear: true
     })
-
-    // $(".select2-ajax").select2({
-    //     theme: 'classic',
-    //     ajax: {
-    //         url: 'https://res.abangexpress.id/shipments/pull/consigneedata/',
-    //         dataType: 'json',
-    //         type: 'POST',
-    //         params: {
-    //             contentType: "application/json; charset=utf-8",
-    //         },
-    //         data: function (params) {
-    //             return {
-    //                 akun: 'AAX0013',
-    //                 key: 'ee03bf171b3e655950ad1b40da4bad66'
-    //             }
-    //         },
-    //     }
-    // })
 }
 
 $(document).ready(function() {
@@ -52,49 +33,6 @@ $(document).ready(function() {
         }
     })
 
-    $('.only-number').on('input', function() {
-        this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
-    });
-
-    $('.prevent-enter').keypress(function(e) {
-        if (e.keyCode == 13) {
-            e.preventDefault();
-        }
-    });
-
-    $(".not-allow-space").on('input', function(e) {
-        this.value = this.value.replace(/ /g, '')
-    })
-
-    $(".not-allow-number").on('input', function(e) {
-        this.value = this.value.replace(/\d+/g, '')
-    })
-
-    $(".input-decimal-dot-without-padding").each(function () {
-        new AutoNumeric(`#${$(this).attr('id')}`, {
-            decimalCharacter: '.',
-            digitGroupSeparator: ',',
-            allowDecimalPadding: false,
-            unformatOnSubmit: true
-        })
-    })
-
-    $(".input-decimal-dot").each(function () {
-        new AutoNumeric(`#${$(this).attr('id')}`, {
-            decimalCharacter: '.',
-            digitGroupSeparator: ',',
-            unformatOnSubmit: true
-        })
-    })
-
-    $(".input-decimal-comma").each(function() {
-        new AutoNumeric(`#${$(this).attr('id')}`, {
-            decimalCharacter: ',',
-            digitGroupSeparator: '.',
-            unformatOnSubmit: true
-        })
-    })
-
     if ($(".only-number-not-allow-decimal").length > 0) {
         $('form button[type="submit"]').click(function(e) {
             e.preventDefault()
@@ -112,15 +50,6 @@ $(document).ready(function() {
 
         })
     }
-
-    $(".input-currency").each(function() {
-        new AutoNumeric(`#${$(this).attr('id')}`, {
-            decimalCharacter: ',',
-            digitGroupSeparator: '.',
-            allowDecimalPadding: true,
-            alwaysAllowDecimalCharacter: true
-        })
-    })
 
     $("[accept='image/*']").change(function() {
         const imgPreview = $(this).data('img-preview');

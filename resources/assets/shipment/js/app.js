@@ -4,6 +4,7 @@ import './../template/js/demo'
 import './get-ajax'
 import './input'
 import './localstorage'
+import './../../general/js/utilities'
 import PDFObject from 'pdfobject'
 
 $(".preview-pdf--without-header").each(function () {

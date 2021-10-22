@@ -40,7 +40,9 @@
         <form action="{{ route('admin.user.store') }}" method="post">
             @csrf
             <x-admin.input name="name" class="not-allow-number" label="People name" required/>
-            <x-admin.input name="username" label="Username" required/>
+            <x-admin.input name="username" class="not-allow-space" 
+            pattern=".{3,20}" 
+            title="Username minimal 3 karakter dan maksimal 20 karakter" label="Username" required/>
             <x-admin.input name="sandi" label="Password" type="password" required/>
             <hr class="my-4">
             <x-admin.input name="kodeagen" label="Kode Agen" required/>

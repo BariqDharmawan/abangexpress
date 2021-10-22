@@ -41,7 +41,7 @@
     <input {{ $attributes->class(['form-control'])->merge([
         'id' => Str::slug($name),
         'name' => $name,
-        'type' => $type ? $type : 'text',
+        'type' => $type,
         'value' => old($name) ?? (isset($value) ? $value : '')
     ]) }}>
     @endif
