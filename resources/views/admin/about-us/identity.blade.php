@@ -16,7 +16,7 @@
             modal-target="edit-idendity" />
         </x-slot>
 
-        <x-admin.table id="dataTable" :thead="[
+        <x-admin.table class="datatable-disable-pagination-ordering" :thead="[
             'Our Vision',
             'Our Mission',
             'Heading',
