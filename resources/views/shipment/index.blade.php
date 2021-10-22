@@ -84,8 +84,6 @@
                     <div class="info-box info-box--120px bg-green hover-expand-effect">
                         <div class="icon d-inline-flex items-center justify-center
                         pt-5 pb-5">
-                            {{-- <img alt="" width="80px" class="pl-4 pr-4"
-                            src="{{ asset('img/icon/shipping-fast-solid.svg') }}"> --}}
                             <i  class="material-icons">insert_chart</i>
                         </div>
                         <div class="content w-100 d-flex items-center pt-5 pb-5">
