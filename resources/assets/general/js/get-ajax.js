@@ -56,13 +56,6 @@ function getContact(urlApi) {
         let accordionToggler = null
         datas = response.data;
 
-        //put email to #cta-email button
-        const ctaEmail = document.querySelector('#cta-email')
-        if (ctaEmail) {
-            ctaEmail.href = `mailto:${datas.email}`
-            ctaEmail.textContent = datas.email
-        }
-
         //put our contact to each id element on landing page section contact
         const ourContacts = {
             "#location": {

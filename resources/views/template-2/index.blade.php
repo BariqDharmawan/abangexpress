@@ -127,25 +127,6 @@
         </div>
     </section>
 
-    <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
-        <div class="container" data-aos="zoom-in">
-
-            <div class="row">
-                <div class="col-lg-9 text-center text-lg-start">
-                    <h2 class="text-white">{{ $landingSection[2]->section_name }}</h2>
-                    <p>{!! $landingSection[2]->first_desc !!}</p>
-                </div>
-                <div class="col-lg-3 cta-btn-container text-center">
-                    <a class="cta-btn align-middle" id="cta-email">
-                        Email To Action
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
     <!-- ======= Team Section ======= -->
     <section id="team" class="team section-bg">
         <div class="container" data-aos="fade-up">
