@@ -2,8 +2,8 @@
 
 namespace App\Helper;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class Helper
 {
@@ -51,5 +51,14 @@ class Helper
             'akun' => auth()->user()->code_api,
             'key' => auth()->user()->token_api
         ];
+    }
+
+    public static function logout()
+    {
+        Auth::guard('web')->logout();
+
+        request()->session()->invalidate();
+
+        request()->session()->regenerateToken();
     }
 }

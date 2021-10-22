@@ -24,9 +24,7 @@ class ShipmentController extends Controller
         $res = json_decode($response);
 
         if ($res->status == 'failed') {
-            Auth::guard('web')->logout();
-            request()->session()->invalidate();
-            request()->session()->regenerateToken();
+            Helper::logout();
 
             return redirect('/')->with('error', 'Kamu tidak bisa mengakses shipping');
         }
