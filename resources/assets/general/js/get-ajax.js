@@ -60,7 +60,7 @@ function getContact(urlApi) {
         const ourContacts = {
             "#location": {
                 "link": datas.link_address,
-                "value": datas.address
+                "value": datas.address,
             },
             "#email": {
                 "link": `mailto:${datas.email}`,
@@ -74,11 +74,12 @@ function getContact(urlApi) {
 
         for (const contact in ourContacts) {
             const subtextContactValue = document.querySelector(
-                `${contact} .list-group-simple__subtext`
+                `${contact} .list-group-simple__subtext a`
             )
             const plainContactValue = document.querySelector(`${contact} .contact-value`)
             
             if (subtextContactValue) {
+                subtextContactValue.href = ourContacts[contact].link
                 subtextContactValue.textContent = ourContacts[contact].value
             }
             else if (plainContactValue) {

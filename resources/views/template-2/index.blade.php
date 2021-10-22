@@ -191,27 +191,17 @@
 
                 <div class="col-lg-6 d-flex align-items-stretch">
                     <ul class="info">
-                        <li id="location">
-                            <i class="bi bi-geo-alt"></i>
-                            <h4 class="list-group-simple__text">Location</h4>
+                        @foreach ($ourContactList as $contactList)
+                        <li id="{{ $contactList['id'] }}">
+                            <i class="bi {{ $contactList['icon'] }}"></i>
+                            <h4 class="list-group-simple__text">
+                                {{ $contactList['title'] }}
+                            </h4>
                             <p class="list-group-simple__subtext">
-                                <a href="https://goo.gl/maps/rqzr6U6AZnDLdedQ6" target="__blank"></a>
+                                <a href="" target="__blank"></a>
                             </p>
                         </li>
-                        <li id="email">
-                            <i class="bi bi-envelope"></i>
-                            <h4 class="list-group-simple__text">Email</h4>
-                            <p class="list-group-simple__subtext">
-                                <a href="mailto:" target="__blank"></a>
-                            </p>
-                        </li>
-                        <li id="phone">
-                            <i class="bi bi-phone"></i>
-                            <h4 class="list-group-simple__text">Call</h4>
-                            <p class="list-group-simple__subtext">
-                                <a href="tel:" target="__blank"></a>
-                            </p>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
 
