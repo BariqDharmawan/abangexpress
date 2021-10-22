@@ -40,7 +40,7 @@
 
                 <div class="col-lg-6 content">
                     <x-section-header text="{{ $landingSection[0]->section_name }}"
-                    desc="{{ $landingSection[0]->first_desc }}" />
+                    desc="{!! $landingSection[0]->first_desc !!}" />
                     <div class="row mt-4">
                         <div class="col-lg">
                             <h5 class="fw-bold text-primary">Visi Kami</h5>
