@@ -86,7 +86,7 @@
         </div>
     </footer>
 
-    @include('partials.btn-back-to-top')
+    @include('partials.btn-back-to-top', ['style' => 'green'])
     @include('partials.scripts', ['path' => 'template1'])
 </body>
 
