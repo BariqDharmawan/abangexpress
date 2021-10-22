@@ -89,6 +89,8 @@
     "/admin/webfonts/fa-solid-900.ttf": "/admin/webfonts/fa-solid-900.ttf",
     "/admin/webfonts/fa-solid-900.woff": "/admin/webfonts/fa-solid-900.woff",
     "/admin/webfonts/fa-solid-900.woff2": "/admin/webfonts/fa-solid-900.woff2",
+    "/json/list-icon-service.json": "/json/list-icon-service.json",
+    "/json/our-contact-list.json": "/json/our-contact-list.json",
     "/json/prev-recipient.json": "/json/prev-recipient.json",
     "/json/shipping-quick-report.json": "/json/shipping-quick-report.json",
     "/json/social-media.json": "/json/social-media.json",

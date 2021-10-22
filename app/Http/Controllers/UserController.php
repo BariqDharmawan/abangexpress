@@ -59,7 +59,7 @@ class UserController extends Controller
             'password' => Hash::make($request->sandi)
         ]);
 
-        return Helper::returnSuccess("update sub-admin $peopleName");
+        return Helper::returnSuccess("mengubah sub-admin $peopleName");
     }
 
     public function destroy($id)
@@ -68,6 +68,6 @@ class UserController extends Controller
         $peopleName = $subAdmin->name;
 
         $subAdmin->delete();
-        return Helper::returnSuccess("Remove sub-admin $peopleName");
+        return Helper::returnSuccess("menghapus sub-admin $peopleName");
     }
 }

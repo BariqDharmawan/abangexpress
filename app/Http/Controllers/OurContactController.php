@@ -59,6 +59,6 @@ class OurContactController extends Controller
         $updateContact->link_address = $request->link_address;
     
         $updateContact->save();
-        return Helper::returnSuccess('update kontact');
+        return Helper::returnSuccess('mengubah kontak');
     }
 }

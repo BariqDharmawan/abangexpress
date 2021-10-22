@@ -49,7 +49,7 @@ class FaqController extends Controller
             'answer' => $request->answer_edit
         ]);
 
-        return Helper::returnSuccess('update FAQ');
+        return Helper::returnSuccess('mengubah FAQ');
     }
 
     public function destroy($id)
