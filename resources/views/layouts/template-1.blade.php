@@ -31,6 +31,7 @@
     
             <div id="logo">
                 <h1 class="fs-3">
+                    @isset($aboutUs)
                     <a href="index.html">
                         {{ strtok($aboutUs->our_name, ' ') }}
                         <span>
@@ -39,6 +40,7 @@
                             ) }}
                         </span>
                     </a>
+                    @endisset
                 </h1>
             </div>
     

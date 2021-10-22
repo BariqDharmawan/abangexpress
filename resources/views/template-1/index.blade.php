@@ -10,7 +10,9 @@
 
 <section id="hero">
     <div class="hero-content row mx-0" data-aos="fade-up">
+        @isset($aboutUs)
         <h2 class="w-100">{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h2>
+        @endisset
         @include('partials.search-tracking', ['errorText' => 'danger'])
     </div>
 
@@ -35,21 +37,25 @@
         <div class="container" data-aos="fade-up" id="fade-up-about">
             <div class="row">
                 <div class="col-lg-6 about-img">
+                    @isset($aboutUs)
                     <img src="{{ asset($aboutUs->cover_vision_mission) }}" alt="">
+                    @endisset
                 </div>
 
                 <div class="col-lg-6 content">
                     <x-section-header text="{{ $landingSection[0]->section_name }}"
                     desc="{!! $landingSection[0]->first_desc !!}" />
                     <div class="row mt-4">
-                        <div class="col-lg">
-                            <h5 class="fw-bold text-primary">Visi Kami</h5>
-                            <p>{{ $aboutUs->our_vision }}</p>
-                        </div>
-                        <div class="col-lg">
-                            <h5 class="fw-bold text-primary">Misi Kami</h5>
-                            {!! $aboutUs->our_mission  !!}
-                        </div>
+                        @isset($aboutUs)
+                            <div class="col-lg">
+                                <h5 class="fw-bold text-primary">Visi Kami</h5>
+                                <p>{{ $aboutUs->our_vision }}</p>
+                            </div>
+                            <div class="col-lg">
+                                <h5 class="fw-bold text-primary">Misi Kami</h5>
+                                {!! $aboutUs->our_mission  !!}
+                            </div>
+                        @endisset
                     </div>
                 </div>
             </div>
@@ -171,7 +177,9 @@
         </div>
 
         <div class="container mb-4 embeded-full">
-            {!! $aboutUs->address_embed !!}
+            @isset($aboutUs)
+                {!! $aboutUs->address_embed !!}
+            @endisset
         </div>
     </section><!-- End Contact Section -->
 </main><!-- End #main -->

@@ -14,13 +14,14 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+                @isset($aboutUs)
                 <h1>{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h1>
-                <h2>{{ $aboutUs->sub_slogan }}</h2>
+                @endisset
                 @include('partials.search-tracking', ['errorText' => 'pink'])
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img position-relative" 
             data-aos="zoom-in" data-aos-delay="200">
-                @if ($isProfileVideoExist)
+                @if (isset($isProfileVideoExist) and $isProfileVideoExist)
                     <a href="{{ $aboutUs->our_video }}"
                     class="glightbox btn-watch-video hero-img__btn-center">
                         <i class="bi bi-play-circle me-0"></i>
@@ -75,29 +76,34 @@
                     <div class="accordion-list">
                         <ul id="load-vision-mission">
 
-                            <x-template2.accordion-list
-                            heading="Visi Kami" icon-title="bx-help-circle icon-help"
-                            parent-list="accordion-list" :is-open="true">
-                                <p>{{ $aboutUs->our_vision }}</p>
-                            </x-template2.accordion-list>
+                            @isset($aboutUs)
+                                <x-template2.accordion-list
+                                heading="Visi Kami" icon-title="bx-help-circle icon-help"
+                                parent-list="accordion-list" :is-open="true">
+                                    <p>{{ $aboutUs->our_vision }}</p>
+                                </x-template2.accordion-list>
 
-                            <x-template2.accordion-list
-                            heading="Misi Kami" icon-title="bx-help-circle icon-help"
-                            parent-list="accordion-list">
-                                {!! $aboutUs->our_mission !!}
-                            </x-template2.accordion-list>
+                                <x-template2.accordion-list
+                                heading="Misi Kami" icon-title="bx-help-circle icon-help"
+                                parent-list="accordion-list">
+                                    {!! $aboutUs->our_mission !!}
+                                </x-template2.accordion-list>
+                            @endisset
 
                         </ul>
                     </div>
 
                 </div>
 
-                <div class="col-lg-5 order-1 order-lg-2 align-items-stretch d-flex"
-                data-aos="zoom-in" data-aos-delay="150">
-                    <div class="img w-100 rounded" style='background-image: url(
-                        "{{ asset($aboutUs->cover_vision_mission) }}"
-                    );height: 100%'></div>
-                </div>
+                @isset($aboutUs)
+                    <div class="col-lg-5 order-1 order-lg-2 align-items-stretch d-flex"
+                    data-aos="zoom-in" data-aos-delay="150">
+                        <div class="img w-100 rounded" style='background-image: url(
+                            "{{ asset($aboutUs->cover_vision_mission) }}"
+                        );height: 100%'></div>
+                    </div>
+                @endisset
+
             </div>
 
         </div>
@@ -206,7 +212,9 @@
                 </div>
 
                 <div class="col-lg-6 d-flex align-items-stretch shadow embeded-full">
-                    {!! $aboutUs->address_embed !!}
+                    @isset($aboutUs)
+                        {!! $aboutUs->address_embed !!}
+                    @endisset
                 </div>
             </div>
 
