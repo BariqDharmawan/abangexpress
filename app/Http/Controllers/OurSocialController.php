@@ -81,7 +81,7 @@ class OurSocialController extends Controller
         $social = OurSocial::findOrFail($id);
         $platforms = Helper::getListSocialPlatform();
 
-        $listIcon = Helper::getJson('list-icon-service.json', true);
+        $listIcon = Helper::getJson('list-icon-social.json', true);
 
         return view('admin.about-us.social.edit', compact(
             'social', 'platforms', 'listIcon'

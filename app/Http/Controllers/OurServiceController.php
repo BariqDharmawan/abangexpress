@@ -16,17 +16,7 @@ class OurServiceController extends Controller
     {
         $ourService = OurService::orderBy('title', 'asc')
                     ->where('domain_owner', request()->getSchemeAndHttpHost())->get();
-        $listIcon = [
-            'fab fa-angellist',
-            'fas fa-anchor',
-            'fab fa-angular',
-            'fas fa-battery-full', 
-            'fab fa-affiliatetheme',
-            'fab fa-algolia', 
-            'fab fa-amazon-pay',
-            'far fa-building',
-            'fas fa-chart-pie'
-        ];
+        $listIcon = Helper::getJson('list-icon-service.json', true);
 
 
         $landingSection = LandingSectionDesc::where('id', 2)->first();
