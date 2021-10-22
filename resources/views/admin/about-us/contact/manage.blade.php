@@ -1,5 +1,7 @@
 @extends('layouts/admin')
 
+@section('title', 'Kontak')
+
 @section('content')
     @if (session('success'))
     <div class="row mx-0">

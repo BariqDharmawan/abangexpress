@@ -27,7 +27,6 @@ class AboutUsController extends Controller
         )->first();
 
         $aboutUs = LandingSectionDesc::first();
-        // dd($aboutUs);
 
         return view('admin.about-us.identity', compact('identity', 'aboutUs'));
     }
