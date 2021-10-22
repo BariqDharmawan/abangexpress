@@ -30,7 +30,7 @@ class UserFactory extends Factory
                 'admincompany1', 'admincompany2'
             ]),
             'password' => Hash::make('passwordadmin'),
-            'plain_password' => 'passwordadmin',
+            'plain_password' => md5('passwordadmin'),
             'role' => 'admin',
             'code_api' => 'CAX0135',
             'token_api' => 'a6a78cedf2d91fc0c794adf2aa7237f5',
@@ -54,7 +54,7 @@ class UserFactory extends Factory
                 'password' => Hash::make('passwordsubadmin'),
                 'lt' => null,
                 'token_api' => 'f03e563b71454776e2cb1e7b5f5ea5c4',
-                'plain_password' => 'passwordsubadmin'
+                'plain_password' => md5('passwordsubadmin')
             ];
         });
     }
