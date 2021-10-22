@@ -7,9 +7,12 @@ $(document).ready(function () {
 
     if (localStorage.getItem('modal-open')) {
         console.log(localStorage.getItem('modal-open'))
-        
+
         if ($(`#${localStorage.getItem('modal-open')}`).find('.text-danger').length > 0) {
             $(`#${localStorage.getItem('modal-open')}`).modal('show')
+        }
+        else {
+            localStorage.removeItem('modal-open')
         }
     }
 

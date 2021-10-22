@@ -15,7 +15,7 @@
         'id' => Str::slug($name),
         'name' => $name,
         'rows' => $rows ?? 4,
-    ]) }}>{{ old($name) ?? $value }}</textarea>
+    ]) }}>{{ old($name) ?? (isset($value) ? $value : '') }}</textarea>
 
     @elseif($type == 'select')
     <select {{ $attributes->merge([
@@ -42,7 +42,7 @@
         'id' => Str::slug($name),
         'name' => $name,
         'type' => $type ? $type : 'text',
-        'value' => isset($value) ? (old($name) ?? $value) : old($name)
+        'value' => old($name) ?? (isset($value) ? $value : '')
     ]) }}>
     @endif
     

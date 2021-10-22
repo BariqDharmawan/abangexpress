@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper\Helper;
 use App\Http\Requests\StoreServiceValidation;
+use App\Http\Requests\UpdateServiceValidation;
 use App\Models\LandingSectionDesc;
 use App\Models\OurService;
 use Illuminate\Http\Request;
@@ -22,7 +23,9 @@ class OurServiceController extends Controller
             'fas fa-battery-full', 
             'fab fa-affiliatetheme',
             'fab fa-algolia', 
-            'fab fa-amazon-pay'
+            'fab fa-amazon-pay',
+            'far fa-building',
+            'fas fa-chart-pie'
         ];
 
 
@@ -64,12 +67,13 @@ class OurServiceController extends Controller
         return Helper::returnSuccess('menambah service baru');
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateServiceValidation $request, $id)
     {
         $serviceToUpdate = OurService::where([
             ['domain_owner', request()->getSchemeAndHttpHost()],
             ['id', $id]
         ])->firstOrFail();
+
         $serviceToUpdate->icon = $request->icon;
         $serviceToUpdate->title = $request->title;
         $serviceToUpdate->desc = $request->desc;
