@@ -81,13 +81,7 @@ class OurSocialController extends Controller
         $social = OurSocial::findOrFail($id);
         $platforms = Helper::getListSocialPlatform();
 
-        $listIcon = [
-            "fab fa-instagram",
-            "fab fa-facebook-square",
-            "fab fa-linkedin",
-            "fab fa-twitter",
-            "fab fa-youtube"
-        ];
+        $listIcon = Helper::getJson('list-icon-social.json', true);
 
         return view('admin.about-us.social.edit', compact(
             'social', 'platforms', 'listIcon'
@@ -136,6 +130,6 @@ class OurSocialController extends Controller
         $platformName = $socialToDelete->platform;
         $socialToDelete->delete();
 
-        return Helper::returnSuccess("remove our $platformName");
+        return Helper::returnSuccess("menghapus $platformName kita");
     }
 }

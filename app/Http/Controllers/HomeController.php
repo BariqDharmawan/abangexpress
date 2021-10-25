@@ -80,7 +80,7 @@ class HomeController extends Controller
 
         $ourIdentity->save();
 
-        return Helper::returnSuccess("change heading");
+        return Helper::returnSuccess("mengubah heading");
     }
 
     /**

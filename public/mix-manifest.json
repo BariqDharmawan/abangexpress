@@ -117,5 +117,6 @@
     "/template2/webfonts/fa-solid-900.svg": "/template2/webfonts/fa-solid-900.svg",
     "/template2/webfonts/fa-solid-900.ttf": "/template2/webfonts/fa-solid-900.ttf",
     "/template2/webfonts/fa-solid-900.woff": "/template2/webfonts/fa-solid-900.woff",
-    "/template2/webfonts/fa-solid-900.woff2": "/template2/webfonts/fa-solid-900.woff2"
+    "/template2/webfonts/fa-solid-900.woff2": "/template2/webfonts/fa-solid-900.woff2",
+    "/json/list-icon-social.json": "/json/list-icon-social.json"
 }

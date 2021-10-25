@@ -34,7 +34,11 @@ class TemplateSatuController extends Controller
 
         $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
                 ->first();
-        $firstWordAppName = strtok($aboutUs->our_name, ' ');
+        
+        $firstWordAppName = '';
+        if ($aboutUs) {
+            $firstWordAppName = strtok($aboutUs->our_name, ' ');
+        }
 
         $ourService = OurService::where(
             'domain_owner', request()->getSchemeAndHttpHost()

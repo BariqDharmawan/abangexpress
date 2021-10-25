@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper\Helper;
 use App\Http\Requests\StoreServiceValidation;
+use App\Http\Requests\UpdateServiceValidation;
 use App\Models\LandingSectionDesc;
 use App\Models\OurService;
 use Illuminate\Http\Request;
@@ -15,15 +16,7 @@ class OurServiceController extends Controller
     {
         $ourService = OurService::orderBy('title', 'asc')
                     ->where('domain_owner', request()->getSchemeAndHttpHost())->get();
-        $listIcon = [
-            'fab fa-angellist',
-            'fas fa-anchor',
-            'fab fa-angular',
-            'fas fa-battery-full', 
-            'fab fa-affiliatetheme',
-            'fab fa-algolia', 
-            'fab fa-amazon-pay'
-        ];
+        $listIcon = Helper::getJson('list-icon-service.json', true);
 
 
         $landingSection = LandingSectionDesc::where('id', 2)->first();
@@ -64,12 +57,13 @@ class OurServiceController extends Controller
         return Helper::returnSuccess('menambah service baru');
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateServiceValidation $request, $id)
     {
         $serviceToUpdate = OurService::where([
             ['domain_owner', request()->getSchemeAndHttpHost()],
             ['id', $id]
         ])->firstOrFail();
+
         $serviceToUpdate->icon = $request->icon;
         $serviceToUpdate->title = $request->title;
         $serviceToUpdate->desc = $request->desc;

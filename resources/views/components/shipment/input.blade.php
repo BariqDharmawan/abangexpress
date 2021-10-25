@@ -14,12 +14,15 @@
 
 
 <div class="form-group form-float form-group-lg">
-    @if ($type == 'select')
+    @if ($type == 'select' or $type == 'select-ajax')
         <label for="{{ $id }}" class="form-label 
         @isset($required)form-label--required @endisset">
             {{ $label ?? $placeholder }}
         </label>
-        <select {{ $attributes->class(['select2'])->merge([
+        <select {{ $attributes->class([
+            'select2' => $type == 'select',
+            'select2-ajax' => $type == 'select-ajax'
+        ])->merge([
             'name' => $name,
             'id' => $id
         ]) }} style="width: 100%" required>

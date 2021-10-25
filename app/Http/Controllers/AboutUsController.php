@@ -27,7 +27,6 @@ class AboutUsController extends Controller
         )->first();
 
         $aboutUs = LandingSectionDesc::first();
-        // dd($aboutUs);
 
         return view('admin.about-us.identity', compact('identity', 'aboutUs'));
     }
@@ -37,7 +36,7 @@ class AboutUsController extends Controller
         AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())->first()->update([
                     'address_embed' => $request->address_embed
                 ]);
-        return Helper::returnSuccess('update our embed map');
+        return Helper::returnSuccess('mengubah embed map');
     }
 
     public function update(IdentityValidation $request)
@@ -69,7 +68,7 @@ class AboutUsController extends Controller
             'second_desc' => $request->second_desc
         ]);
 
-        return Helper::returnSuccess("change about us");
+        return Helper::returnSuccess("mengubah tentang kita");
         
     }
 

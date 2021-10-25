@@ -5,6 +5,7 @@ namespace App\Helper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class Helper
 {
@@ -36,6 +37,32 @@ class Helper
         'http://127.0.0.1:9000'
     ];
 
+    public static function getKeyApi()
+    {
+        $postdata = [
+            'akun' => auth()->user()->code_api,
+            'key' => auth()->user()->token_api
+        ];
+
+        return json_encode($postdata);
+    }
+
+    public static function getKeyApiArray()
+    {
+        return [
+            'akun' => auth()->user()->code_api,
+            'key' => auth()->user()->token_api
+        ];
+    }
+
+    public static function logout()
+    {
+        Auth::guard('web')->logout();
+
+        request()->session()->invalidate();
+
+        request()->session()->regenerateToken();
+    }
     public static function responseDataOrder($res)
     {
         return collect($res)->map(function ($item, $key){

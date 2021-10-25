@@ -8,10 +8,10 @@
     @endisset
 
     <x-admin.input label="Service name" name="title" minlength="3" maxlength="20" 
-    value="{{ $data->title ?? '' }}" required />
+    value="{{ old('title') ?? (isset($data) ? $data->title : '') }}" required />
 
     <x-admin.input label="Service desc" type="textarea" name="desc" minlength="5" 
-    value="{{ isset($data) ? (old('desc') ?? $data->desc) : old('desc') }}" 
+    value="{{ old('desc') ?? (isset($data) ? $data->desc : '') }}" 
     class="resize-none" required></x-admin.input>
 
     <div class="d-flex flex-wrap mb-3">

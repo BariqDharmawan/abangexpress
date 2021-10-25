@@ -71,7 +71,7 @@ class OurTeamController extends Controller
         $editMember->short_desc = $request->short_desc;
         $editMember->save();
 
-        return Helper::returnSuccess('update info member');
+        return Helper::returnSuccess('mengubah info member');
     }
 
     /**

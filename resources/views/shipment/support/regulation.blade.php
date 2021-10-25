@@ -10,7 +10,9 @@
             {{-- buat component filter dsbnya --}}
             <div class="header"></div>
             <div class="body text-center">
-                <div class="preview-pdf preview-pdf--full preview-pdf--without-header" id="pdf-guide" data-pdf-src="{{ Storage::url('files/dummies.pdf') }}"></div>
+                @if ($pdf)
+                <div class="preview-pdf preview-pdf--full preview-pdf--without-header" id="pdf-regulation" data-pdf-src="{{ Storage::url($pdf) }}"></div>
+                @endif
             </div>
         </div>
     </div>

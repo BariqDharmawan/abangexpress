@@ -32,7 +32,6 @@ class AboutUsFactory extends Factory
             'our_video' => $this->faker->unique(true)->randomElement([
                 'https://www.youtube.com/watch?v=GectaFWLNZQ',
                 'https://www.youtube.com/watch?v=-Luq277seyM',
-                'https://www.youtube.com/watch?v=-Luq277seyM',
             ]),
             'cover_vision_mission' => $this->faker->unique()->randomElement([
                 Storage::url('cover-vision-mission/why-us.png'),
@@ -43,10 +42,10 @@ class AboutUsFactory extends Factory
                 '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.3041319359836!2d106.77262911460798!3d-6.35466186393653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69eee3577291d7%3A0xab8861739a5712af!2sUpn%20%22Veteran%22%20Jakarta%2C%20Limo!5e0!3m2!1sid!2sid!4v1633583655574!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
                 '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.2908294261492!2d106.77329061460806!3d-6.356387563953197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69efc47d65aa19%3A0xaad8fe09fac18ba1!2sPancong%20Ruang%20Rasa%20Limo!5e0!3m2!1sid!2sid!4v1633583685705!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
             ]),
-            'domain_owner' => $this->faker->unique()->randomElement($array = array(
+            'domain_owner' => $this->faker->unique()->randomElement([
                 'http://127.0.0.1:8000', 
                 'http://127.0.0.1:9000'
-            )),
+            ]),
         ];
     }
 }

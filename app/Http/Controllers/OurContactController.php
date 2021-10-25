@@ -17,7 +17,7 @@ class OurContactController extends Controller
         $contact = OurContact::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
-        $titles = ['Alamat', 'Email', 'Telepon'];
+        $titles = ['Alamat', 'Telepon', 'Email'];
         $columns = ['address', 'telephone', 'email'];
 
         $addressEmbed = AboutUs::select('address_embed')
@@ -59,6 +59,6 @@ class OurContactController extends Controller
         $updateContact->link_address = $request->link_address;
     
         $updateContact->save();
-        return Helper::returnSuccess('update kontact');
+        return Helper::returnSuccess('mengubah kontak');
     }
 }

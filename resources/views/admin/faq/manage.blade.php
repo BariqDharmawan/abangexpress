@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'FAQ')
+
 @section('content')
 <div class="row mx-0">
     @if (session('success'))
@@ -10,8 +12,8 @@
     <div class="col-12 mb-4">
         <div class="d-flex justify-content-between align-items-center">
             <h1 class="h4 mb-0">Tanya kami</h1>
-            <x-admin.modal.trigger text="Add new faq"
-            modal-target="Tambah pertanyaan" />
+            <x-admin.modal.trigger text="Tambah pertanyaan"
+            modal-target="add-new-faq" />
         </div>
     </div>
     <div class="col-12">

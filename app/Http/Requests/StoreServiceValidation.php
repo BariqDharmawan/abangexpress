@@ -24,8 +24,20 @@ class StoreServiceValidation extends FormRequest
     public function rules()
     {
         return [
-            'icon' => ['required', 'string', 'min:4', 'starts_with:fa'],
-            'title' => ['required', 'string', 'max:20', 'min:3'],
+            'icon' => [
+                'required',
+                'unique:App\Models\OurService,icon',
+                'string',
+                'min:4',
+                'starts_with:fa'
+            ],
+            'title' => [
+                'required',
+                'unique:App\Models\OurService,title',
+                'string',
+                'max:20',
+                'min:3'
+            ],
             'desc' => ['required', 'string', 'min:5'],
         ];
     }

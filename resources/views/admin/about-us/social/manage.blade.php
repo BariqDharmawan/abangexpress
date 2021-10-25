@@ -1,10 +1,12 @@
 @extends('layouts/admin')
 
+@section('title', 'Sosial media')
+
 @section('content')
     <div class="row mx-0">
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center">
-                <h1 class="h4 mb-0">Social media</h1>
+                <h1 class="h4 mb-0">Manage sosial media kita</h1>
                 <x-admin.modal.trigger text="Tambah social media"
                 modal-target="add-social-media" />
             </div>
@@ -17,7 +19,7 @@
     </div>
     <div class="row mt-4">
         <div class="col-12">
-            <x-admin.card title="">
+            <x-admin.card>
                 <ul class="list-group">
                     @foreach ($socialMedia as $social)
                     <li class="list-group-item d-flex align-items-center">

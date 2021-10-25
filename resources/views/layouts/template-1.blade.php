@@ -31,6 +31,7 @@
     
             <div id="logo">
                 <h1 class="fs-3">
+                    @isset($aboutUs)
                     <a href="index.html">
                         {{ strtok($aboutUs->our_name, ' ') }}
                         <span>
@@ -39,6 +40,7 @@
                             ) }}
                         </span>
                     </a>
+                    @endisset
                 </h1>
             </div>
     
@@ -69,11 +71,7 @@
                 <div class="col-lg footer-links text-center">
                     <h4>Our Social Networks</h4>
                     <div class="social-links mt-3">
-                        @foreach ($ourSocial as $social)
-                        <a href="{{ $social->link }}" class="h2 @if(!$loop->last) me-2 @endif">
-                            <i class="{{ $social->icon }}"></i>
-                        </a>
-                        @endforeach
+                        @include('partials.our-social')
                     </div>
                 </div>
 
@@ -82,10 +80,7 @@
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright 
-                <strong class="text-capitalize">
-                    {{ $ourName . ' ' . date('Y') }}
-                </strong>. All Rights Reserved
+                @include('partials.copyright')
             </div>
             <div class="credits d-none">
                 Designed by <a href="#">Pastigo</a>
@@ -93,7 +88,7 @@
         </div>
     </footer>
 
-    @include('partials.btn-back-to-top')
+    @include('partials.btn-back-to-top', ['style' => 'green'])
     @include('partials.scripts', ['path' => 'template1'])
 </body>
 

@@ -33,18 +33,20 @@ class TemplateDuaController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->orderBy('title', 'asc')->get();
 
+        $ourContactList = Helper::getJson('our-contact-list.json');
+
         if ($aboutUs) {
             $isProfileVideoExist = $aboutUs->our_video ? true : false;
 
             return view('template-2.index', compact(
                 'landingSection', 'aboutUs', 'isProfileVideoExist', 
-                'ourTeam', 'aboutUs', 'ourService', 'menus'
+                'ourTeam', 'aboutUs', 'ourService', 'menus', 'ourContactList'
             ));
         }
         else {
             return view('template-2.index', compact(
                 'landingSection', 'aboutUs',
-                'ourTeam', 'aboutUs', 'ourService', 'menus'
+                'ourTeam', 'aboutUs', 'ourService', 'menus', 'ourContactList'
             ));
         }
 

@@ -88,7 +88,7 @@
                 recipient_previous is not 'penerima-baru' --}}
                 <x-shipment.input type="file" id="id-card"
                 placeholder="Foto KTP penerima" class="preview-upload"
-                accept="image/*" data-input-hidden="idcard_input_hidden"
+                accept="image/*" input-hidden="idcard_input_hidden"
                 name="recipient_idcard" maxlength="8" minlength="3"
                 small-text="Gambar hanya boleh berekstensi .jpg, .jpeg, .png, .svg"
                 data-img-preview="#idcard-preview" />

@@ -40,10 +40,25 @@
         <form action="{{ route('admin.user.store') }}" method="post">
             @csrf
             <x-admin.input name="name" class="not-allow-number" label="People name" required/>
-            <x-admin.input name="username" label="Username" required/>
+            <x-admin.input name="username" class="not-allow-space" 
+            pattern=".{3,20}" 
+            title="Username minimal 3 karakter dan maksimal 20 karakter" label="Username" required/>
             <x-admin.input name="sandi" label="Password" type="password" required/>
+            <hr class="my-4">
             <x-admin.input name="kodeagen" label="Kode Agen" required/>
             <x-admin.input name="tokenkey" label="Token Key" required/>
+
+            <small class="mb-4 d-block text-dark">
+                Untuk mendapatkan kode agen dan token key, dapat menghubungi
+                <a href="https://web.whatsapp.com/send?phone=6281278989998"
+                target="_blank" class="d-none d-lg-block">
+                    kami
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=6281278989998"
+                target="_blank" class="d-block d-lg-none">
+                    kami
+                </a>
+            </small>
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

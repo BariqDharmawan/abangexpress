@@ -12,7 +12,7 @@ class Card extends Component
      *
      * @return void
      */
-    public function __construct($title, $header = null, $hasShadow = true, $isHeaderTransparent = false, $footer = null, $reverseHeader = false, $footerClass = null)
+    public function __construct($title = null, $header = null, $hasShadow = true, $isHeaderTransparent = false, $footer = null, $reverseHeader = false, $footerClass = null)
     {
         $this->title = $title;
         $this->header = $header;
