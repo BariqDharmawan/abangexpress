@@ -42,9 +42,7 @@
                                                 </button>
                                             </form>
                                             <a target="_blank" 
-                                            href="{{ route(
-                                                'shipping.invoice.pay.index', '809sa7fsa87f9safe'
-                                            ) }}"
+                                            href=""
                                             class="btn btn-big btn-success w-100 mt-4">
                                                 Upload pembayaran
                                             </a>

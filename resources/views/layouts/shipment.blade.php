@@ -115,27 +115,13 @@
                         text="Regulasi Pengiriman" />
                     </x-shipment.dropdown-item>
 
-                    <x-shipment.dropdown-item text="Akun"
-                    icon="person_outline" :is-dropdown="true">
-                        <li>
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" style="padding-left: 18px"
-                                class="btn btn-white btn-block text-left">
-                                    <i class="material-icons">input</i>
-                                    <span>Logout</span>
-                                </button>
-                            </form>
-                        </li>
-                    </x-shipment.dropdown-item>
-
                 </ul>
             </div>
 
             <div class="legal">
                 <div class="copyright">
                     <small>&copy; {{ date('Y') }}</small>
-                    <span class="text-danger">{{ config('app.name') }}</span>
+                    <a href="javascript:void(0);">{{ $ourName }}</a>.
                 </div>
             </div>
         </aside>

@@ -2,6 +2,8 @@
 
 namespace App\Helper;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,5 +62,22 @@ class Helper
         request()->session()->invalidate();
 
         request()->session()->regenerateToken();
+    }
+    public static function responseDataOrder($res)
+    {
+        return collect($res)->map(function ($item, $key){
+            return [
+                'noresi' => $item->noresi,
+                'pengirim' => $item->pengirim,
+                'telepon' => $item->telepon,
+                'penerima' => $item->penerima,
+                'teleponp' => $item->teleponp,
+                'alamat' => $item->alamat,
+                'tujuan' => $item->tujuan,
+                'berat' => $item->berat,
+                'qty' => $item->qty,
+                'tglOrder' => Carbon::parse($item->tglOrder)->format('d F Y')
+            ];
+        });
     }
 }

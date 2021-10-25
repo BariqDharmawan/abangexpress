@@ -6,30 +6,15 @@ use App\Helper\Helper;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class ShipmentOrderController extends Controller
 {
-    public function index()
+
+    private function getDataOrder($requiredParam)
     {
-        $title = 'Data order';
-        $tableClass='dataOrder';
-
-        $uid=Auth::user()->username;
-        $user = User::where([
-            ['username', $uid]
-        ])->first();
-
-        $akun = $user->code_api;
-        $tokenkey = $user->token_api;
-        $postdata = '{
-            "akun": "'.$akun.'",
-            "key": "'.$tokenkey.'",
-            "param":"and statustransaksi=`0`"
-
-        }';
-
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/dataorder/',
@@ -40,18 +25,33 @@ class ShipmentOrderController extends Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $postdata,
-            CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json'
-            ),
+            CURLOPT_POSTFIELDS => $requiredParam,
+            CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
         ));
 
         $response = curl_exec($curl);
 
         curl_close($curl);
 
-        $res = json_decode($response);
-        $orderData = $res->response;
+        return json_decode($response);
+    }
+
+    public function index()
+    {
+        $title = 'Data order';
+        $tableClass='dataOrder';
+
+        $postdata = '{
+            "akun": "'.Auth::user()->code_api.'",
+            "key": "'.Auth::user()->token_api.'",
+            "param":"and statustransaksi=`0`"
+
+        }';
+
+        $res = $this->getDataOrder($postdata);
+
+        $orderData = Helper::responseDataOrder($res->response);
+        
         $statusRes = $res->status;
         $underling = $res->underling;
         // dd($res);
@@ -72,16 +72,9 @@ class ShipmentOrderController extends Controller
         $title = 'Dalam Proses';
         $tableClass='dataOrder';
 
-        $uid=Auth::user()->username;
-        $user = User::where([
-            ['username', $uid]
-        ])->first();
-
-        $akun = $user->code_api;
-        $tokenkey = $user->token_api;
         $postdata = '{
-            "akun": "'.$akun.'",
-            "key": "'.$tokenkey.'",
+            "akun": "'.Auth::user()->code_api.'",
+            "key": "'.Auth::user()->token_api.'",
             "param":"and statustransaksi=`2`"
 
         }';
@@ -118,16 +111,9 @@ class ShipmentOrderController extends Controller
         $title = 'Pending Proses';
         $tableClass='dataOrder';
 
-        $uid=Auth::user()->username;
-        $user = User::where([
-            ['username', $uid]
-        ])->first();
-
-        $akun = $user->code_api;
-        $tokenkey = $user->token_api;
         $postdata = '{
-            "akun": "'.$akun.'",
-            "key": "'.$tokenkey.'",
+            "akun": "'.Auth::user()->code_api.'",
+            "key": "'.Auth::user()->token_api.'",
             "param":"and statustransaksi=`1`"
 
         }';
@@ -164,16 +150,9 @@ class ShipmentOrderController extends Controller
         $title = 'History Kiriman';
         $tableClass='dataOrder';
 
-        $uid=Auth::user()->username;
-        $user = User::where([
-            ['username', $uid]
-        ])->first();
-
-        $akun = $user->code_api;
-        $tokenkey = $user->token_api;
         $postdata = '{
-            "akun": "'.$akun.'",
-            "key": "'.$tokenkey.'",
+            "akun": "'.Auth::user()->code_api.'",
+            "key": "'.Auth::user()->token_api.'",
             "param":"and statustransaksi=`3`"
 
         }';
@@ -210,17 +189,10 @@ class ShipmentOrderController extends Controller
     {
         $title = 'Cetak Ulang Resi';
         $tableClass='dataOrder';
-
-        $uid=Auth::user()->username;
-        $user = User::where([
-            ['username', $uid]
-        ])->first();
-
-        $akun = $user->code_api;
-        $tokenkey = $user->token_api;
+        
         $postdata = '{
-            "akun": "'.$akun.'",
-            "key": "'.$tokenkey.'",
+            "akun": "'.Auth::user()->code_api.'",
+            "key": "'.Auth::user()->token_api.'",
             "param":"and not(statustransaksi=`C`)"
 
         }';
@@ -255,9 +227,9 @@ class ShipmentOrderController extends Controller
 
     public function filterOrder(Request $request)
     {
-
         $title = 'Data order';
         $tableClass='dataOrder';
+
         $qw="";
         if (!empty($request->awal) || !empty($request->akhir) || !empty($request->pengirim) || !empty($request->kodeanak)){
             $t1=$request->awal;
@@ -277,48 +249,26 @@ class ShipmentOrderController extends Controller
             }
             // dd($qw);
         }
-        $qw=str_replace("'","`",$qw);
-        $uid=Auth::user()->username;
-        $user = User::where([
-            ['username', $uid]
-        ])->first();
 
-        $akun = $user->code_api;
-        $tokenkey = $user->token_api;
+        $qw=str_replace("'","`",$qw);
+
         $postdata = '{
-            "akun": "'.$akun.'",
-            "key": "'.$tokenkey.'",
+            "akun": "'.Auth::user()->code_api.'",
+            "key": "'.Auth::user()->token_api.'",
             "param":"and statustransaksi=`0` '.$qw.'"
 
         }';
 
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/dataorder/',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $postdata,
-            CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json'
-            ),
-        ));
+        $res = $this->getDataOrder($postdata);
 
-        $response = curl_exec($curl);
+        $orderData = Helper::responseDataOrder($res->response);
 
-        curl_close($curl);
-
-        $res = json_decode($response);
-        $orderData = $res->response;
         $statusRes = $res->status;
         $underling = $res->underling;
         // dd($postdata);
-        return view('shipment.order.index', compact('title','tableClass','orderData','statusRes','underling'));
-        // return redirect()->back()->with(['title'=>$title,'tableClass'=>$tableClass,'statusRes'=>$statusRes,'orderData'=>$orderData,'title'=>$unde]);
+        return view('shipment.order.index', compact(
+            'title','tableClass','orderData','statusRes','underling'
+        ));
 
     }
 

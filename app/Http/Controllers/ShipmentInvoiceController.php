@@ -44,8 +44,9 @@ class ShipmentInvoiceController extends Controller
         $res = json_decode($response);
         $orderData = $res->response;
         $statusRes = $res->status;
+        // dd($res);
 
-        return view('shipment.invoice.bill', compact('title', 'tableClass', 'orderData', 'statusRes'));
+        return view('shipment.invoice.bill', compact('title','tableClass','orderData','statusRes'));
     }
 
     public function verifying()
@@ -91,7 +92,7 @@ class ShipmentInvoiceController extends Controller
     public function settled()
     {
         $title = 'Lunas';
-        
+
         // api pull data tagihan here
         $tableClass = 'dataOrder';
 
