@@ -97,10 +97,12 @@ class BookingOrderController extends Controller
             'title', 'prevRecipient','countryList','commodityList'
         ));
     }
+
     public function order(BookOrderValidation $request)
     {
-        return redirect('/shipping/order/book/invoice');
+        return redirect()->route('shipping.order.book.save-invoice');
     }
+
     public function ambilPenerima($id)
     {
         $uid=Auth::user()->username;
@@ -176,7 +178,7 @@ class BookingOrderController extends Controller
     //     }
 
     //     // return redirect()->route('shipping.order.book.invoice');
-    //     return redirect('/shipping/order/book/invoice');
+    //     return redirect()->route('shipping.order.book.save-invoice);
     // }
 
     public function invoice(Request $request)
@@ -196,11 +198,6 @@ class BookingOrderController extends Controller
             'data' => $commercialInvoice,
             'message' => 'success'
         ]);
-    }
-
-    public function create()
-    {
-        //
     }
 
     public function store(Request $request)
@@ -298,44 +295,6 @@ class BookingOrderController extends Controller
         ]);
     }
 
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
     public function prints(Request $request)
     {
         $token=$request->link;

@@ -50,7 +50,7 @@ class ShipmentInvoiceController extends Controller
         $orderData = $res->response;
         $statusRes = $res->status;
         // dd($res);
-        // return view('shipment.order.index', compact('title','tableClass','orderData','statusRes','underling'));
+        
         return view('shipment.invoice.bill', compact('title','tableClass','orderData','statusRes'));
     }
 

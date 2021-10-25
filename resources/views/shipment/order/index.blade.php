@@ -63,7 +63,7 @@
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table id="{{ $tableClass}}" class="table table-bordered table-striped table-hover js-basic-example dataTable w-100">
+                    <table id="{{ $tableClass}}" class="table table-bordered table-striped table-hover w-100 datatable-export-excel">
                         <thead>
                             <tr>
                                 <th>Tanggal</th>
@@ -72,19 +72,18 @@
                                 <th>Penerima</th>
                                 <th>Tujuan</th>
                                 <th>Detail</th>
-                                {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
                         <tbody>
                             @if ($statusRes =='success')
                                 @foreach ($orderData as $xdata)
                                     <tr>
-                                        <td>{{ $xdata->tglOrder }}</td>
-                                        <td>{{ $xdata->noresi }}</td>
-                                        <td>{{ $xdata->pengirim }} <br> {{ $xdata->telepon }}</td>
-                                        <td>{{ $xdata->penerima }} <br> {{ $xdata->teleponp }} <br> {{ $xdata->alamat }}</td>
-                                        <td>{{ $xdata->tujuan }}</td>
-                                        <td>Berat : {{ $xdata->berat }} <br> Qty : {{ $xdata->qty }}</td>
+                                        <td>{{ $xdata['tglOrder'] }}</td>
+                                        <td>{{ $xdata['noresi'] }}</td>
+                                        <td>{{ $xdata['pengirim'] }} <br> {{ $xdata['telepon'] }}</td>
+                                        <td>{{ $xdata['penerima'] }} <br> {{ $xdata['teleponp'] }} <br> {{ $xdata['alamat'] }}</td>
+                                        <td>{{ $xdata['tujuan'] }}</td>
+                                        <td>Berat : {{ $xdata['berat'] }} <br> Qty : {{ $xdata['qty'] }}</td>
                                         {{-- <td></td> --}}
                                     </tr>
                                 @endforeach

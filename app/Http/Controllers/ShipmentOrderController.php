@@ -6,6 +6,7 @@ use App\Helper\Helper;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -51,7 +52,24 @@ class ShipmentOrderController extends Controller
         curl_close($curl);
 
         $res = json_decode($response);
-        $orderData = $res->response;
+
+        $orderData = collect($res->response)->map(function ($item, $key){
+            return [
+                'noresi' => $item->noresi,
+                'pengirim' => $item->pengirim,
+                'telepon' => $item->telepon,
+                'penerima' => $item->penerima,
+                'teleponp' => $item->teleponp,
+                'alamat' => $item->alamat,
+                'tujuan' => $item->tujuan,
+                'berat' => $item->berat,
+                'qty' => $item->qty,
+                'tglOrder' => Carbon::parse($item->tglOrder)->format('d F Y')
+            ];
+        });
+
+        // dd($orderData);
+        
         $statusRes = $res->status;
         $underling = $res->underling;
         // dd($res);
@@ -318,7 +336,6 @@ class ShipmentOrderController extends Controller
         $underling = $res->underling;
         // dd($postdata);
         return view('shipment.order.index', compact('title','tableClass','orderData','statusRes','underling'));
-        // return redirect()->back()->with(['title'=>$title,'tableClass'=>$tableClass,'statusRes'=>$statusRes,'orderData'=>$orderData,'title'=>$unde]);
 
     }
 
