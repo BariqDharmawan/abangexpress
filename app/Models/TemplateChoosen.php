@@ -15,4 +15,14 @@ class TemplateChoosen extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getTemplateNameAttribute()
+    {
+        if ($this->version == 2) {
+            return "Just Blue";
+        }
+        else {
+            return "Pure White";
+        }
+    }
 }

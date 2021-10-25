@@ -90,6 +90,7 @@
     "/admin/webfonts/fa-solid-900.woff": "/admin/webfonts/fa-solid-900.woff",
     "/admin/webfonts/fa-solid-900.woff2": "/admin/webfonts/fa-solid-900.woff2",
     "/json/list-icon-service.json": "/json/list-icon-service.json",
+    "/json/list-icon-social.json": "/json/list-icon-social.json",
     "/json/our-contact-list.json": "/json/our-contact-list.json",
     "/json/prev-recipient.json": "/json/prev-recipient.json",
     "/json/shipping-quick-report.json": "/json/shipping-quick-report.json",
@@ -116,6 +117,5 @@
     "/template2/webfonts/fa-solid-900.svg": "/template2/webfonts/fa-solid-900.svg",
     "/template2/webfonts/fa-solid-900.ttf": "/template2/webfonts/fa-solid-900.ttf",
     "/template2/webfonts/fa-solid-900.woff": "/template2/webfonts/fa-solid-900.woff",
-    "/template2/webfonts/fa-solid-900.woff2": "/template2/webfonts/fa-solid-900.woff2",
-    "/json/list-icon-social.json": "/json/list-icon-social.json"
+    "/template2/webfonts/fa-solid-900.woff2": "/template2/webfonts/fa-solid-900.woff2"
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\IdentityValidation;
 use App\Http\Requests\UpdateEmbedMapValidation;
 use App\Models\AboutUs;
 use App\Models\LandingSectionDesc;
+use App\Models\TemplateChoosen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -27,8 +28,13 @@ class AboutUsController extends Controller
         )->first();
 
         $aboutUs = LandingSectionDesc::first();
+        $templateChoosen = TemplateChoosen::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->select('version')->first();
 
-        return view('admin.about-us.identity', compact('identity', 'aboutUs'));
+        return view('admin.about-us.identity', compact(
+            'identity', 'aboutUs', 'templateChoosen'
+        ));
     }
 
     public function updateEmbedMap(UpdateEmbedMapValidation $request)
