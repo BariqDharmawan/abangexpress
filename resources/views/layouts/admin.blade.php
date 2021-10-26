@@ -10,8 +10,8 @@
 
         <ul class="navbar-nav bg-gradient-red sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" 
-            href="{{ route('admin.about-us.identity') }}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"
+            href="{{ url('/') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -19,13 +19,13 @@
                     {{ $ourName }}
                 </div>
             </a>
-        
+
             <hr class="sidebar-divider">
 
-            <x-admin.sidebar.menu :href="route('admin.home.index')" 
+            <x-admin.sidebar.menu :href="route('admin.home.index')"
             text="Home" icon="fas fa-home" />
 
-            <x-admin.sidebar.menu text="Edit company profile" class="collapsed" 
+            <x-admin.sidebar.menu text="Edit company profile" class="collapsed"
             data-toggle="collapse" icon="fas fa-building" data-target="#dropdown-edit-company" aria-expanded="true" aria-controls="dropdown-edit-company">
                 <x-admin.sidebar.dropdown id="dropdown-edit-company" parent="accordionSidebar">
                     <x-admin.sidebar.link text="Tentang Kami" icon="fas fa-info-circle" :href="route('admin.about-us.identity')" />
@@ -36,31 +36,31 @@
                     <x-admin.sidebar.link text="Social Media" icon="fas fa-share-alt" :href="route('admin.our-social.manage')" />
                 </x-admin.sidebar.dropdown>
             </x-admin.sidebar.menu>
-            
-            <x-admin.sidebar.menu text="Shipment" 
+
+            <x-admin.sidebar.menu text="Shipment"
             :href="route('shipping.index')" target="_blank" icon="fas fa-shipping-fast" />
 
             @if (auth()->user()->role == 'admin')
-                <x-admin.sidebar.menu :href="route('admin.user.index')" 
+                <x-admin.sidebar.menu :href="route('admin.user.index')"
                 text="Anak cabang" icon="fas fa-users" />
             @endif
-        
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
-        
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-        
+
         </ul>
 
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                <nav class="navbar navbar-expand navbar-light 
+                <nav class="navbar navbar-expand navbar-light
                 bg-white topbar mb-4 static-top shadow">
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" 
+                    <button id="sidebarToggleTop"
                     class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
@@ -68,11 +68,11 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span 
+                                <span
                                 class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     {{ Auth::user()->username }}
                                 </span>
-                                <img class="img-profile rounded-circle" 
+                                <img class="img-profile rounded-circle"
                                 src="{{ asset('admin/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -80,7 +80,7 @@
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
-                                        <i class="fas fa-sign-out-alt 
+                                        <i class="fas fa-sign-out-alt
                                         fa-sm fa-fw mr-2"></i>
                                         Logout
                                     </button>
@@ -101,7 +101,7 @@
                         </span>
                     </div>
                 </div>
-            </footer>            
+            </footer>
         </div>
         @include('admin.partials.btn-back-to-top')
     </div>
