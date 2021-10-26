@@ -22,15 +22,15 @@ class OurTeamFactory extends Factory
      */
     public function definition()
     {
-        $avatarPath = 'team/team-';
+        $avatarPath = 'public/team-';
 
         return [
             'name' => $this->faker->name(),
             'avatar' => $this->faker->randomElement([
-                Storage::url($avatarPath . '1.jpg'), 
-                Storage::url($avatarPath . '2.jpg'), 
-                Storage::url($avatarPath . '3.jpg'), 
-                Storage::url($avatarPath . '4.jpg')
+                $avatarPath . '1.jpg',
+                $avatarPath . '2.jpg',
+                $avatarPath . '3.jpg',
+                $avatarPath . '4.jpg'
             ]),
             'position_id' => $this->faker->numberBetween(1, 4),
             'short_desc' => $this->faker->sentence(3),

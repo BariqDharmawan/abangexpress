@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             AboutUsSeeder::class,
             OurServiceSeeder::class,
             PositionListSeeder::class,
-            OurTeamSeeder::class,
+            // OurTeamSeeder::class,
             FaqSeeder::class,
             OurContactSeeder::class,
             LandingSectionDescSeeder::class,

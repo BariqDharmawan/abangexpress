@@ -34,8 +34,8 @@ class AboutUsFactory extends Factory
                 'https://www.youtube.com/watch?v=-Luq277seyM',
             ]),
             'cover_vision_mission' => $this->faker->unique()->randomElement([
-                Storage::url('cover-vision-mission/why-us.png'),
-                Storage::url('cover-vision-mission/about-us1.jpg'),
+                'public/cover-vision-mission/why-us.png',
+                'public/cover-vision-mission/about-us1.jpg'
             ]),
             'address_embed' => $this->faker->unique()->randomElement([
                 '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22864.11283411948!2d-73.96468908098944!3d40.630720240038435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sbg!4v1540447494452" width="100%" height="380" frameborder="0"  style="border:0" allowfullscreen></iframe>',
@@ -43,7 +43,7 @@ class AboutUsFactory extends Factory
                 '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.2908294261492!2d106.77329061460806!3d-6.356387563953197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69efc47d65aa19%3A0xaad8fe09fac18ba1!2sPancong%20Ruang%20Rasa%20Limo!5e0!3m2!1sid!2sid!4v1633583685705!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
             ]),
             'domain_owner' => $this->faker->unique()->randomElement([
-                'http://127.0.0.1:8000', 
+                'http://127.0.0.1:8000',
                 'http://127.0.0.1:9000'
             ]),
         ];

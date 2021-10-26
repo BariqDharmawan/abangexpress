@@ -19,7 +19,7 @@
                 @endisset
                 @include('partials.search-tracking', ['errorText' => 'pink'])
             </div>
-            <div class="col-lg-6 order-1 order-lg-2 hero-img position-relative" 
+            <div class="col-lg-6 order-1 order-lg-2 hero-img position-relative"
             data-aos="zoom-in" data-aos-delay="200">
                 @if (isset($isProfileVideoExist) and $isProfileVideoExist)
                     <a href="{{ $aboutUs->our_video }}"
@@ -45,7 +45,7 @@
     <section id="about" class="about">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title 
+            <x-template2.section-title
             heading="{{ $landingSection[0]->section_name }}" />`
 
             <div class="content row">
@@ -99,7 +99,7 @@
                     <div class="col-lg-5 order-1 order-lg-2 align-items-stretch d-flex"
                     data-aos="zoom-in" data-aos-delay="150">
                         <div class="img w-100 rounded" style='background-image: url(
-                            "{{ asset($aboutUs->cover_vision_mission) }}"
+                            "{{ asset('storage/' . str_replace('public/', '', $aboutUs->cover_vision_mission)) }}"
                         );height: 100%'></div>
                     </div>
                 @endisset
@@ -116,7 +116,7 @@
             <x-template2.section-title heading="{{ $landingSection[1]->section_name }}" />
 
             <div class="row" id="load-our-service">
-                
+
                 @foreach ($ourService as $service)
                 <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-5"
                 data-aos="zoom-in" data-aos-delay="{{ $loop->iteration * 100 }}">
@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 @endforeach
-                
+
             </div>
 
         </div>
@@ -137,17 +137,17 @@
     <section id="team" class="team section-bg">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title 
+            <x-template2.section-title
             heading="{{ $landingSection[3]->section_name }}" />
 
             <div class="row">
-
                 @foreach ($ourTeam as $team)
                 <div class="col-lg-6 mb-4 member-item">
                     <div class="member d-flex align-items-start"
                     data-aos="zoom-in" data-aos-delay="{{ 100 * $loop->iteration }}">
                         <div class="pic">
-                            <img src="{{ $team->avatar }}" alt=""
+                            <img height="180px" width="180px" src="{{ asset('storage/' .
+                            str_replace('public/', '', $team->avatar)) }}" alt=""
                             class="img-fluid member-info__avatar" />
                         </div>
                         <div class="member-info">
