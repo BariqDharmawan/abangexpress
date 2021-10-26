@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include('partials.meta', ['prefixTitle' => 'Template 2'])
+    @include('partials.meta')
     @include('partials.styles', ['path' => 'template2'])
 </head>
 
@@ -45,7 +45,7 @@
     </header>
 
     @yield('content')
-    
+
     @include('partials.btn-back-to-top', ['style' => 'blue'])
     @include('partials.scripts', ['path' => 'template2'])
 

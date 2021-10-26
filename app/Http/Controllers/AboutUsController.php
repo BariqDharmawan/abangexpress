@@ -7,6 +7,7 @@ use App\Http\Requests\IdentityValidation;
 use App\Http\Requests\UpdateEmbedMapValidation;
 use App\Models\AboutUs;
 use App\Models\LandingSectionDesc;
+use App\Models\TemplateChoosen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -27,8 +28,27 @@ class AboutUsController extends Controller
         )->first();
 
         $aboutUs = LandingSectionDesc::first();
+        $templateChoosen = TemplateChoosen::select('version')->where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
 
-        return view('admin.about-us.identity', compact('identity', 'aboutUs'));
+        $columnsIdentity = [
+            'Our Vision',
+            'Our Mission',
+            'Heading',
+            'Deskripsi 1',
+            'Video / gambar'
+        ];
+
+        if ($templateChoosen->version == 2) {
+            array_splice($columnsIdentity, 4, 0, ['Deskripsi 2']);
+        }
+
+        // dd($identity);
+
+        return view('admin.about-us.identity', compact(
+            'identity', 'aboutUs', 'templateChoosen', 'columnsIdentity'
+        ));
     }
 
     public function updateEmbedMap(UpdateEmbedMapValidation $request)
@@ -42,22 +62,59 @@ class AboutUsController extends Controller
     public function update(IdentityValidation $request)
     {
         //todo: add validation
+        // dd($request->validated());
+
         $ourIdentity = AboutUs::where(
             'domain_owner', request()->getSchemeAndHttpHost()
-        )->first();
+        )->firstOrFail();
 
         $ourIdentity->our_vision = $request->our_vision;
         $ourIdentity->our_mission = $request->our_mission;
         $ourIdentity->our_video = $request->our_video;
-        
+
         if ($request->hasFile('cover_vision_mission')) {
             $coverVisionMission = $request->file('cover_vision_mission');
-            $pathcoverVisionMission = Storage::putFile(
-                'public/cover-vision-mission', $coverVisionMission
+            $pathcoverVisionMission = $coverVisionMission->store(
+                'public/cover-vision-mission'
             );
-            $ourIdentity->cover_vision_mission = Str::replaceFirst(
-                'public/', '/storage/', $pathcoverVisionMission
-            );
+            $ourIdentity->cover_vision_mission = $pathcoverVisionMission;
+
+            // $xfiles = Str::replaceFirst('public/', 'storage/', $pathcoverVisionMission);
+            // if(isset($_FILES['cover_vision_mission'])){
+            //     define('UPLOAD_DIR', 'storage/cover-vision-mission/');
+
+            //     if (!is_dir(UPLOAD_DIR)) {
+            //         //Create our directory if it does not exist
+            //         mkdir(UPLOAD_DIR);
+            //     }
+
+            //     $errors = array();
+
+            //     $file_name = $_FILES['cover_vision_mission']['name'];
+            //     $file_size = $_FILES['cover_vision_mission']['size'];
+            //     $file_tmp = $_FILES['cover_vision_mission']['tmp_name'];
+            //     $file_type = $_FILES['cover_vision_mission']['type'];
+            //     // $file_ext=strtolower(end(explode('.',$file_name)));
+
+            //     // $extensions= array("jpeg","jpg","png");
+            //     // if(in_array($file_ext,$extensions)=== false){
+            //     //     $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+            //     // }
+
+            //     if ($file_size > 2097152){
+            //         $errors[] = 'File size must be excately 2 MB';
+            //     }
+
+            //     if (empty($errors)==true){
+            //         move_uploaded_file($file_tmp,$xfiles);
+            //         // echo "Success";
+            //     } else{
+            //         // print_r($errors);
+            //     }
+            // }
+            // else {
+            //    // echo "gambar gk ada";
+            // }
         }
 
         $ourIdentity->save();
@@ -69,7 +126,7 @@ class AboutUsController extends Controller
         ]);
 
         return Helper::returnSuccess("mengubah tentang kita");
-        
+
     }
 
 }

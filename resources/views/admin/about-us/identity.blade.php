@@ -18,29 +18,37 @@
             modal-target="edit-idendity" />
         </x-slot>
 
-        <x-admin.table class="datatable-disable-pagination-ordering" :thead="[
-            'Our Vision',
-            'Our Mission',
-            'Heading',
-            'Deskripsi 1',
-            'Deskripsi 2',
-            'Video / gambar'
-        ]">
+        <x-admin.table class="datatable-disable-pagination-ordering"
+        :thead="$columnsIdentity">
             <tr>
-                <td>{{ Str::words($identity->our_vision, 5, '...') }}</td>
-                <td>{!! $identity->our_mission  !!}</td>
+                <td>
+                    @isset($identity->our_vision)
+                        {{ Str::words($identity->our_vision, 5, '...') }}
+                    @endisset
+                </td>
+                <td>
+                    @isset($identity->our_mission)
+                        {!! $identity->our_mission  !!}
+                    @endisset
+                </td>
                 <td>{{ $aboutUs->section_name }}</td>
                 <td>{!! $aboutUs->first_desc !!}</td>
-                <td>{!! $aboutUs->second_desc !!}</td>
+                @if ($templateChoosen->version == 2)
                 <td>
-                    @if ($identity->our_video)
-                        <a href="{{ $identity->our_video }}" 
-                        target="_blank">
-                            Lihat video
-                        </a>
+                    {!! $aboutUs->second_desc !!}
+                </td>
+                @endif
+                <td>
+                    @isset($identity->our_video)
+                        @if ($templateChoosen->version == 1 and $identity->our_video)
+                            <a href="{{ $identity->our_video }}"
+                            target="_blank">
+                                Lihat video
+                            </a>
+                    @endisset
                     @else
                         <img alt="" height="100px"
-                        src="{{ asset($identity->cover_vision_mission) }}">
+                        src="{{ Storage::url($identity->cover_vision_mission) }}">
                     @endif
                 </td>
             </tr>
@@ -63,7 +71,7 @@
                 </label>
                 <input type="text" class="form-control"
                 id="edit-identity-vision" name="our_vision" required
-                value="{{ old('our_vision') ?? $identity->our_vision }}">
+                value="{{ isset($identity->our_vision) ? $identity->our_vision : '' }}">
 
                 @error('our_vision')
                     <div class="text-danger">{{ $message }}</div>
@@ -75,7 +83,7 @@
                 <textarea name="our_mission" id="edit-mission"
                 class="form-control summernote"
                 style="resize: none;" rows="3"
-                required>{{ old('our_mission') ?? $identity->our_mission }}</textarea>
+                required>{{ isset($identity->our_mission) ? $identity->our_mission : '' }}</textarea>
                 @error('our_mission')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -102,31 +110,42 @@
                 @enderror
             </div>
 
-            <div class="form-group">
-                <label for="edit-second-desc">Deskripsi 2</label>
-                <textarea name="second_desc" id="edit-second-desc"
-                class="form-control summernote"
-                style="resize: none;" rows="3"
-                required>{!! $aboutUs->second_desc !!}</textarea>
-                @error('second_desc')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <x-admin.input label="Ubah video youtube" name="our_video" 
-            placeholder="Taruh video youtube disini"
-            value="{{ old('our_video') ?? $identity->our_video }}" 
-            required></x-admin.input>
-
-            <div class="form-group">
-                <img src="{{ asset($identity->cover_vision_mission) }}" 
-                height="100px" alt="" class="mb-3">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input"
-                    name="cover_vision_mission" id="cover">
-                    <label class="custom-file-label" for="cover">Ubah gambar</label>
+            @if ($templateChoosen->version == 2)
+                <div class="form-group">
+                    <label for="edit-second-desc">Deskripsi 2</label>
+                    <textarea name="second_desc" id="edit-second-desc"
+                    class="form-control summernote"
+                    style="resize: none;" rows="3"
+                    required>{!! $aboutUs->second_desc !!}</textarea>
+                    @error('second_desc')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
-            </div>
+            @endif
+
+            @if ($templateChoosen->version == 1)
+            <x-admin.input label="Ubah video youtube" name="our_video"
+            placeholder="Taruh video youtube disini"
+            value="{{ old('our_video') ?? isset($identity->our_video) ? $identity->our_video : '' }}"></x-admin.input>
+            @endif
+
+            @isset($identity->cover_vision_mission)
+                <div class="form-group">
+                    <img src="{{ asset('storage/' .
+                    str_replace('public/', '', $identity->cover_vision_mission)) }}"
+                    height="100px" alt="" class="mb-3">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input"
+                        name="cover_vision_mission" id="cover" accept="image/*">
+                        <label class="custom-file-label" for="cover">
+                            Ubah gambar
+                        </label>
+                    </div>
+                    @error('cover_vision_mission')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            @endisset
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -135,9 +154,6 @@
     <x-admin.modal id="change-video-popup" heading="Change video promo" >
         <form action="{{ route('admin.about-us.update') }}" method="post">
             @csrf @method('PUT')
-
-            
-
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </x-admin.modal>

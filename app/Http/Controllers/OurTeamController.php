@@ -19,30 +19,72 @@ class OurTeamController extends Controller
         $teams = OurTeam::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->get();
-        $positionList = PositionList::where('domain_owner', request()->getSchemeAndHttpHost())->get();
+
+        $positionList = PositionList::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->get();
 
         $landingSection = LandingSectionDesc::where('id', 4)->first();
 
         return view('admin.team.manage', compact(
-            'teams', 'positionList', 'landingSection'
+            'teams',
+            'positionList',
+            'landingSection'
         ));
     }
 
     public function store(StoreMemberValidation $request)
     {
         $avatar = $request->file('avatar');
-        $pathAvatar = Storage::putFile('public/team', $avatar);
-        
+        $pathAvatar = $avatar->store('public/team');
+
+        // $xfiles = Str::replaceFirst('public/', 'storage/', $pathAvatar);
+            // if (isset($_FILES['avatar'])) {
+            //     define('UPLOAD_DIR', 'storage/team/');
+
+
+            //     if (!is_dir(UPLOAD_DIR)) {
+            //         //Create our directory if it does not exist
+            //         mkdir(UPLOAD_DIR);
+            //     }
+            //     $errors = array();
+            //     $file_name = $_FILES['avatar']['name'];
+            //     $file_size = $_FILES['avatar']['size'];
+            //     $file_tmp = $_FILES['avatar']['tmp_name'];
+            //     $file_type = $_FILES['avatar']['type'];
+            //     // $file_ext=strtolower(end(explode('.',$file_name)));
+
+            //     // $extensions= array("jpeg","jpg","png");
+
+            //     // if(in_array($file_ext,$extensions)=== false){
+            //     //     $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+            //     // }
+
+            //     if ($file_size > 2097152) {
+            //         $errors[] = 'File size must be excately 2 MB';
+            //     }
+
+            //     if (empty($errors) == true) {
+            //         move_uploaded_file($file_tmp, $xfiles);
+            //         // echo "Success";
+            //         // dd("Success");
+            //     } else {
+            //         print_r($errors);
+            //     }
+            // }
+            // else {
+            //     // echo "gambar gk ada";
+        // }
+
         OurTeam::create([
             'name' => $request->name,
-            'avatar' => Str::replaceFirst('public/', '/storage/', $pathAvatar),
+            'avatar' => $pathAvatar,
             'position_id' => $request->position_id,
             'short_desc' => $request->short_desc,
             'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
         return Helper::returnSuccess('menambah anggota member baru');
-
     }
 
     /**

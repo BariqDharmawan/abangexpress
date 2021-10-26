@@ -23,17 +23,19 @@
 
     <div class="col-12 px-0">
         <div class="row mx-0">
-            @foreach ($teams as $person)
+            @forelse ($teams as $person)
             <div class="col-lg-3 mb-4">
-                <x-admin.card title="{{ Str::words($person->name, 3, '...') }}" 
-                :reverse-header="true" 
+                <x-admin.card title="{{ Str::words($person->name, 3, '...') }}"
+                :reverse-header="true"
                 footer-class="d-flex justify-content-between bg-transparent">
                     <x-slot name="header">
-                        <img src="{{ $person->avatar }}" height="90px" width="90px"
-                        class="rounded-circle mx-auto d-block object-cover mb-3" 
+                        <img src="{{ asset('storage/' .
+                        str_replace('public/', '', $person->avatar)) }}"
+                        height="90px" width="90px"
+                        class="rounded-circle mx-auto d-block object-cover mb-3"
                         alt="{{ $person->name }}">
                     </x-slot>
-                    
+
                     <p class="card-text font-weight-bold text-info">
                         {{ $person->position->name }}
                     </p>
@@ -52,10 +54,16 @@
                         :is-default-style="false"
                         class="btn-link text-danger px-0" />
                     </x-slot>
-                    
+
                 </x-admin.card>
             </div>
-            @endforeach
+            @empty
+            <div class="col-12">
+                <div class="alert alert-info show text-center" role="alert">
+                    Tidak ada data member, silahkan tambah member
+                </div>
+            </div>
+            @endforelse
         </div>
     </div>
 
@@ -65,14 +73,14 @@
 @section('components')
 
     @include('admin.partials.change-heading-desc')
-    
-    <x-admin.modal id="add-new-person" 
+
+    <x-admin.modal id="add-new-person"
         heading="Tambah member baru">
         @include('admin.team.form', ['action' => route('admin.team.store')])
     </x-admin.modal>
 
     @foreach ($teams as $person)
-        <x-admin.modal id="edit-person-{{ $loop->iteration }}" 
+        <x-admin.modal id="edit-person-{{ $loop->iteration }}"
             heading="Ubah info {{ $person->name }}">
             @include('admin.team.form', [
                 'action' => route('admin.team.update', $person->id),
@@ -83,8 +91,8 @@
         @include('admin.partials.popup-delete', [
             'id' => 'remove-person-' . $loop->iteration,
             'heading' => 'Hapus member ' . $person->name,
-            'warningMesssage' => 
-                'Apakah kamu yakin ingin menghapus member <b>' 
+            'warningMesssage' =>
+                'Apakah kamu yakin ingin menghapus member <b>'
                 . $person->name . '</b>' . ' from our team?',
             'action' => route('admin.team.destroy', $person->id)
         ])

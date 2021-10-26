@@ -15,4 +15,9 @@ class TemplateChoosen extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getVersionNameAttribute()
+    {
+        return $this->version == 1 ? "Pure white" : "Just Blue";
+    }
 }

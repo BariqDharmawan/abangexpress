@@ -493,27 +493,7 @@ section {
 /*--------------------------------------------------------------
 # Portfolio
 --------------------------------------------------------------*/
-.portfolio #portfolio-flters {
-  list-style: none;
-  margin-bottom: 20px;
-}
-.portfolio #portfolio-flters li {
-  cursor: pointer;
-  display: inline-block;
-  margin: 10px 5px;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1;
-  color: #444444;
-  transition: all 0.3s;
-  padding: 8px 20px;
-  border-radius: 50px;
-  font-family: "Poppins", sans-serif;
-}
-.portfolio #portfolio-flters li:hover, .portfolio #portfolio-flters li.filter-active {
-  background: #47b2e4;
-  color: #fff;
-}
+
 .portfolio .portfolio-item {
   margin-bottom: 30px;
 }

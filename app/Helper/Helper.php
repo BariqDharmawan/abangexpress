@@ -63,6 +63,7 @@ class Helper
 
         request()->session()->regenerateToken();
     }
+
     public static function responseDataOrder($res)
     {
         return collect($res)->map(function ($item, $key){

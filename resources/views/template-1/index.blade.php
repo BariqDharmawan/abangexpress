@@ -27,7 +27,7 @@
 </section>
 
 <main id="main">
-    
+
     @if (session('trackingstatus'))
         @include('partials.result-tracking', ['templateUsing' => 1])
     @endif
@@ -38,7 +38,8 @@
             <div class="row">
                 <div class="col-lg-6 about-img">
                     @isset($aboutUs)
-                    <img src="{{ asset($aboutUs->cover_vision_mission) }}" alt="">
+                    <img src="{{ asset('storage/' .
+                    str_replace('public/', '', $aboutUs->cover_vision_mission)) }}" alt="">
                     @endisset
                 </div>
 
@@ -106,7 +107,8 @@
                                     'template1/img/quote-sign-right.png'
                                 ) }}" class="quote-sign-right" alt="">
                             </p>
-                            <img src="{{ asset($team->avatar) }}"
+                            <img src="{{ asset('storage/' .
+                            str_replace('public/', '', $team->avatar)) }}"
                             class="testimonial-img" alt="">
                             <h3>{{ $team->name }}</h3>
                             <h4>{{ $team->position->name }}</h4>
