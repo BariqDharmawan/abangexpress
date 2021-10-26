@@ -71,7 +71,7 @@ class ShipmentOrderController extends Controller
         }';
 
         $res = $this->getDataOrder($postdata);
-        $orderData = Helper::responseDataOrder($res->response);
+        $orderData = $res->response;
 
         $statusRes = $res->status;
         // dd($orderData);
