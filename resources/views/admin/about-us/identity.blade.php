@@ -39,13 +39,10 @@
                 </td>
                 @endif
                 <td>
-                    @isset($identity->our_video)
-                        @if ($templateChoosen->version == 1 and $identity->our_video)
-                            <a href="{{ $identity->our_video }}"
-                            target="_blank">
-                                Lihat video
-                            </a>
-                    @endisset
+                    @if ($templateChoosen->version == 1 and isset($identity->our_video))
+                        <a href="{{ $identity->our_video }}" target="_blank">
+                            Lihat video
+                        </a>
                     @else
                         <img alt="" height="100px"
                         src="{{ Storage::url($identity->cover_vision_mission) }}">
