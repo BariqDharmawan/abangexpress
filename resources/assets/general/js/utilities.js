@@ -1,6 +1,9 @@
 import AutoNumeric from 'autonumeric'
 
 $(document).ready(function () {
+
+    $(".alert").delay(2000).fadeOut('slow')
+
     $(".not-allow-space").on('input', function(e) {
         this.value = this.value.replace(/ /g, '')
     })
