@@ -18,14 +18,8 @@
             modal-target="edit-idendity" />
         </x-slot>
 
-        <x-admin.table class="datatable-disable-pagination-ordering" :thead="[
-            'Our Vision',
-            'Our Mission',
-            'Heading',
-            'Deskripsi 1',
-            'Deskripsi 2',
-            'Video / gambar'
-        ]">
+        <x-admin.table class="datatable-disable-pagination-ordering"
+        :thead="$columnsIdentity">
             <tr>
                 <td>
                     @isset($identity->our_vision)
@@ -39,13 +33,11 @@
                 </td>
                 <td>{{ $aboutUs->section_name }}</td>
                 <td>{!! $aboutUs->first_desc !!}</td>
+                @if ($templateChoosen->version == 2)
                 <td>
-                    @if ($templateChoosen->version == 2)
-                        {!! $aboutUs->second_desc !!}
-                    @else
-                        <span>-</span>
-                    @endif
+                    {!! $aboutUs->second_desc !!}
                 </td>
+                @endif
                 <td>
                     @isset($identity->our_video)
                         @if ($templateChoosen->version == 1 and $identity->our_video)
@@ -53,11 +45,11 @@
                             target="_blank">
                                 Lihat video
                             </a>
-                        @else
-                            <img alt="" height="100px"
-                            src="{{ Storage::url($identity->cover_vision_mission) }}">
-                        @endif
                     @endisset
+                    @else
+                        <img alt="" height="100px"
+                        src="{{ Storage::url($identity->cover_vision_mission) }}">
+                    @endif
                 </td>
             </tr>
         </x-admin.table>

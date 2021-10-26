@@ -32,8 +32,22 @@ class AboutUsController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
 
+        $columnsIdentity = [
+            'Our Vision',
+            'Our Mission',
+            'Heading',
+            'Deskripsi 1',
+            'Video / gambar'
+        ];
+
+        if ($templateChoosen->version == 2) {
+            array_splice($columnsIdentity, 4, 0, ['Deskripsi 2']);
+        }
+
+        // dd($identity);
+
         return view('admin.about-us.identity', compact(
-            'identity', 'aboutUs', 'templateChoosen'
+            'identity', 'aboutUs', 'templateChoosen', 'columnsIdentity'
         ));
     }
 
