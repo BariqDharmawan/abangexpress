@@ -1,19 +1,17 @@
 @extends('layouts.shipment')
 
-{{-- @section('title', $title) --}}
+@section('title', 'Data order')
 
 @section('content')
 
 <div class="row clearfix">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="parent-{{ $tableClass}}">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="parent-dataOrder">
         <div class="card">
             <div class="header">
-                <h2>
-                    {{$title}}
-                </h2>
+                <h2>Data order</h2>
             </div>
             <div class="header">
-                <div class="datas-action" data-datable-id="#{{ $tableClass }}">
+                <div class="datas-action" data-datable-id="#dataOrder">
                     <button type="button" class="btn m-b-10 bg-grey waves-effect" data-toggle="collapse"
                     data-target="#filter-order" aria-expanded="true" aria-controls="filter-order">
                         <i class="material-icons">filter_list</i>
@@ -24,10 +22,10 @@
                         <i class="material-icons">
                             file_download
                         </i>
-                        <span>Excel</span>
+                        <span>Export ke excel</span>
                     </button>
                 </div>
-                
+
                 <div class="collapse" id="filter-order" aria-expanded="true">
                     <div class="well">
                         <div class="row">
@@ -72,8 +70,8 @@
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table id="{{ $tableClass }}"
-                        class="table table-bordered table-striped table-hover w-100 datatable-export-excel">
+                    <table id="dataOrder"
+                        class="table table-bordered table-striped table-hover w-100 datatable-export-excel-without-action">
                         <thead>
                             <tr>
                                 <th>Tanggal</th>
@@ -82,20 +80,25 @@
                                 <th>Penerima</th>
                                 <th>Tujuan</th>
                                 <th>Detail</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if ($statusRes =='success')
                             @foreach ($orderData as $xdata)
                             <tr>
-                                <td>{{ $xdata['tglOrder'] }}</td>
+                                <td>
+                                    {{ $xdata['tglOrder'] }}
+                                </td>
                                 <td>{{ $xdata['noresi'] }}</td>
                                 <td>{{ $xdata['pengirim'] }} <br> {{ $xdata['telepon'] }}</td>
                                 <td>{{ $xdata['penerima'] }} <br> {{ $xdata['teleponp'] }} <br> {{ $xdata['alamat'] }}
                                 </td>
                                 <td>{{ $xdata['tujuan'] }}</td>
                                 <td>Berat : {{ $xdata['berat'] }} <br> Qty : {{ $xdata['qty'] }}</td>
-                                {{-- <td></td> --}}
+                                <td>
+                                    <a href="" class="btn btn-danger">Cancel</a>
+                                </td>
                             </tr>
                             @endforeach
                             @endif

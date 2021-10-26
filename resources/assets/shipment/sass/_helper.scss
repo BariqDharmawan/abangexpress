@@ -138,3 +138,7 @@ $sides: ("b": bottom, "t": top, 'l': left, 'r': right);
 .h1 {
     font-size: 20px !important;
 }
+
+.bg-gradient-red {
+    background-image: linear-gradient(194deg,#af0000 10%,#2e0002);
+}

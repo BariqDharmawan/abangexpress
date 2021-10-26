@@ -8,7 +8,7 @@
 <body class="theme-red">
     @include('partials.preload-shipment')
 
-    <nav class="navbar navbar--red">
+    <nav class="navbar bg-gradient-red">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="bars"></a>

@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper\Helper;
 use Illuminate\Support\Facades\Auth;
-
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class ShipmentOrderController extends Controller
 {
@@ -38,24 +34,20 @@ class ShipmentOrderController extends Controller
 
     public function index()
     {
-        $title = 'Data order';
-        $tableClass='dataOrder';
-
         $postdata = '{
             "akun": "'.Auth::user()->code_api.'",
             "key": "'.Auth::user()->token_api.'",
             "param":"and statustransaksi=`0`"
-
         }';
 
         $res = $this->getDataOrder($postdata);
 
         $orderData = Helper::responseDataOrder($res->response);
-        
+
         $statusRes = $res->status;
         $underling = $res->underling;
         // dd($res);
-        return view('shipment.order.index', compact('title','tableClass','orderData','statusRes','underling'));
+        return view('shipment.order.index', compact('orderData','statusRes','underling'));
 
     }
 
@@ -70,7 +62,6 @@ class ShipmentOrderController extends Controller
     public function process()
     {
         $title = 'Dalam Proses';
-        $tableClass='dataOrder';
 
         $postdata = '{
             "akun": "'.Auth::user()->code_api.'",
@@ -79,37 +70,17 @@ class ShipmentOrderController extends Controller
 
         }';
 
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/dataorder/',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $postdata,
-            CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json'
-            ),
-        ));
+        $res = $this->getDataOrder($postdata);
+        $orderData = Helper::responseDataOrder($res->response);
 
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-
-        $res = json_decode($response);
-        $orderData = $res->response;
         $statusRes = $res->status;
         // dd($orderData);
-        return view('shipment.order.process', compact('title','tableClass','orderData','statusRes'));
+        return view('shipment.order.process', compact('title','orderData','statusRes'));
     }
 
     public function pending()
     {
         $title = 'Pending Proses';
-        $tableClass='dataOrder';
 
         $postdata = '{
             "akun": "'.Auth::user()->code_api.'",
@@ -118,37 +89,17 @@ class ShipmentOrderController extends Controller
 
         }';
 
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/dataorder/',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $postdata,
-            CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json'
-            ),
-        ));
+        $res = $this->getDataOrder($postdata);
+        $orderData = Helper::responseDataOrder($res->response);
 
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-
-        $res = json_decode($response);
-        $orderData = $res->response;
         $statusRes = $res->status;
         // dd($orderData);
-        return view('shipment.order.pending', compact('title','tableClass','orderData','statusRes'));
+        return view('shipment.order.pending', compact('title','orderData','statusRes'));
     }
 
     public function history()
     {
         $title = 'History Kiriman';
-        $tableClass='dataOrder';
 
         $postdata = '{
             "akun": "'.Auth::user()->code_api.'",
@@ -179,17 +130,17 @@ class ShipmentOrderController extends Controller
 
         $res = json_decode($response);
         $orderData = $res->response;
+
         $statusRes = $res->status;
         $underling = $res->underling;
         // dd($orderData);
-        return view('shipment.order.history', compact('title','tableClass','orderData','statusRes','underling'));
+        return view('shipment.order.history', compact('title','orderData','statusRes','underling'));
     }
 
     public function receipt()
     {
         $title = 'Cetak Ulang Resi';
-        $tableClass='dataOrder';
-        
+
         $postdata = '{
             "akun": "'.Auth::user()->code_api.'",
             "key": "'.Auth::user()->token_api.'",
@@ -197,40 +148,17 @@ class ShipmentOrderController extends Controller
 
         }';
 
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/dataorder/',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $postdata,
-            CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json'
-            ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-
-        $res = json_decode($response);
+        $res = $this->getDataOrder($postdata);
         $orderData = $res->response;
         $statusRes = $res->status;
-        // dd($orderData);
-        return view('shipment.order.receipt', compact('title','tableClass','orderData','statusRes'));
+
+        return view('shipment.order.receipt', compact('title','orderData','statusRes'));
     }
 
 
     public function filterOrder(Request $request)
     {
-        $title = 'Data order';
-        $tableClass='dataOrder';
-
-        $qw="";
+        $qw = "";
         if (!empty($request->awal) || !empty($request->akhir) || !empty($request->pengirim) || !empty($request->kodeanak)){
             $t1=$request->awal;
             if (!empty($request->akhir)){
@@ -247,7 +175,6 @@ class ShipmentOrderController extends Controller
             if (!empty($request->kodeanak)){
                 $qw=$qw."and kodeagen='".$request->kodeanak."'";
             }
-            // dd($qw);
         }
 
         $qw=str_replace("'","`",$qw);
@@ -260,14 +187,13 @@ class ShipmentOrderController extends Controller
         }';
 
         $res = $this->getDataOrder($postdata);
-
         $orderData = Helper::responseDataOrder($res->response);
 
         $statusRes = $res->status;
         $underling = $res->underling;
-        // dd($postdata);
+
         return view('shipment.order.index', compact(
-            'title','tableClass','orderData','statusRes','underling'
+            'orderData','statusRes','underling'
         ));
 
     }
@@ -276,7 +202,6 @@ class ShipmentOrderController extends Controller
     {
 
         $title = 'Data order';
-        $tableClass='dataOrder';
         $qw="";
         if (!empty($request->awal) || !empty($request->akhir) || !empty($request->pengirim) ){
             $t1=$request->awal;
@@ -297,16 +222,10 @@ class ShipmentOrderController extends Controller
             // dd($qw);
         }
         $qw=str_replace("'","`",$qw);
-        $uid=Auth::user()->username;
-        $user = User::where([
-            ['username', $uid]
-        ])->first();
 
-        $akun = $user->code_api;
-        $tokenkey = $user->token_api;
         $postdata = '{
-            "akun": "'.$akun.'",
-            "key": "'.$tokenkey.'",
+            "akun": "'.Auth::user()->code_api.'",
+            "key": "'.Auth::user()->token_api.'",
             "param":"and statustransaksi=`3` '.$qw.'"
 
         }';
@@ -333,10 +252,11 @@ class ShipmentOrderController extends Controller
 
         $res = json_decode($response);
         $orderData = $res->response;
+
         $statusRes = $res->status;
         $underling = $res->underling;
         // dd($postdata);
-        return view('shipment.order.history', compact('title','tableClass','orderData','statusRes','underling'));
+        return view('shipment.order.history', compact('title','orderData','statusRes','underling'));
 
     }
 

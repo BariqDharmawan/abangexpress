@@ -6,7 +6,7 @@
 
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-    id="parent-{{ $tableClass}}">
+    id="parent-dataOrder">
         <div class="card">
             <div class="header">
                 <h2>
@@ -15,7 +15,7 @@
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table id="{{ $tableClass}}" class="table table-bordered table-striped table-hover js-basic-example dataTable w-100">
+                    <table id="dataOrder" class="table table-bordered table-striped table-hover js-basic-example dataTable w-100">
                         <thead>
                             <tr>
                                 <th>Tanggal</th>

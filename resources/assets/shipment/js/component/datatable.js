@@ -1,17 +1,25 @@
 $(document).ready(function () {
-    $(".datatable-export-excel").DataTable({
+    let currentTimestamp = new Intl.DateTimeFormat('id-ID', {
+        timeZone: 'Asia/Jakarta', timeStyle: 'medium',
+        dateStyle: 'long'
+    }).format(new Date())
+
+    $(".datatable-export-excel-without-action").DataTable({
         dom: 'Bfrtip',
         buttons: [
             {
                 extend: 'excel',
-                text: 'Convert ke excel'
+                title: currentTimestamp,
+                exportOptions: {
+                    columns: [0, 1, 2, 3,]
+                }
             }
         ],
         initComplete: function () {
             var $buttons = $('.dt-buttons').hide();
             const btnExportCustom = $(
                 `.datas-action[data-datable-id="#${$(
-                    ".datatable-export-excel"
+                    ".datatable-export-excel-without-action"
                 ).attr('id')}"]`
             )
 

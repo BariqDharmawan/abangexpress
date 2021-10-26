@@ -1,5 +1,7 @@
 @extends('layouts/shipment')
 
+@section('title', 'Tagihan')
+
 @section('content')
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -37,11 +39,11 @@
                                                 @csrf
                                                 <input type="hidden" name="link" value="view-tagihan/{{ $xdata->nomor}}">
                                                 <button type="submit" class="btn btn-big btn-primary w-100">
-                                                    <i class="material-icons">print</i> 
+                                                    <i class="material-icons">print</i>
                                                     Cetak
                                                 </button>
                                             </form>
-                                            <a target="_blank" 
+                                            <a target="_blank"
                                             href=""
                                             class="btn btn-big btn-success w-100 mt-4">
                                                 Upload pembayaran

@@ -11,7 +11,7 @@ async function getAjax(urlApi, parentEl) {
         datas = response.data
 
         const parentData = document.querySelector(parentEl).cloneNode(true)
-        
+
         return {parentData, datas}
 
     } catch (error) {
@@ -33,14 +33,14 @@ function getFaq(urlApi) {
             elRecord = result.parentData.querySelector('.accordion-faq').cloneNode(true)
             elRecord.querySelector('.accordion__heading').textContent = record.question
             elRecord.querySelector('.accordion__text p').textContent = record.answer
-            
+
             accordionToggler = elRecord.querySelector('.toggler-accordion')
             accordionToggler.setAttribute(
                 'data-bs-target', `#accordion-list-${idFaq}`
             )
 
             elRecord.querySelector('.accordion__text').id = `accordion-list-${idFaq}`
-            
+
             document.querySelector(`#${result.parentData.id}`).appendChild(elRecord)
         }
 
@@ -77,7 +77,7 @@ function getContact(urlApi) {
                 `${contact} .list-group-simple__subtext a`
             )
             const plainContactValue = document.querySelector(`${contact} .contact-value`)
-            
+
             if (subtextContactValue) {
                 subtextContactValue.href = ourContacts[contact].link
                 subtextContactValue.textContent = ourContacts[contact].value
@@ -99,11 +99,11 @@ function getContact(urlApi) {
             navEmail.textContent = datas.email
             navEmail.href = `mailto:${datas.email}`
 
-            navPhone.textContent = datas.telephone
-            navPhone.href = `mailto:${datas.telephone}`
+            navPhone.textContent = `+62${datas.telephone}`
+            navPhone.href = `tel:${datas.telephone}`
         }
         //end of that
-        
+
 
     })
     .catch(error => console.error(error))

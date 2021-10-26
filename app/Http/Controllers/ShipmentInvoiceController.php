@@ -10,11 +10,6 @@ class ShipmentInvoiceController extends Controller
 {
     public function bill()
     {
-        $title = 'Tagihan';
-
-        // api pull data tagihan here
-        $tableClass = 'dataOrder';
-
         $postdata = '{
             "akun": "' . Auth::user()->code_api . '",
             "key": "' . Auth::user()->token_api . '",
@@ -46,15 +41,12 @@ class ShipmentInvoiceController extends Controller
         $statusRes = $res->status;
         // dd($res);
 
-        return view('shipment.invoice.bill', compact('title','tableClass','orderData','statusRes'));
+        return view('shipment.invoice.bill', compact('orderData','statusRes'));
     }
 
     public function verifying()
     {
-        $title = 'Dalam Prose Verifikasi';
-
         // api pull data tagihan here
-        $tableClass = 'dataOrder';
 
         $postdata = '{
             "akun": "' . Auth::user()->code_api . '",
@@ -86,16 +78,11 @@ class ShipmentInvoiceController extends Controller
         $orderData = $res->response;
         $statusRes = $res->status;
 
-        return view('shipment.invoice.verifying', compact('title', 'tableClass', 'orderData', 'statusRes'));
+        return view('shipment.invoice.verifying', compact('orderData', 'statusRes'));
     }
 
     public function settled()
     {
-        $title = 'Lunas';
-
-        // api pull data tagihan here
-        $tableClass = 'dataOrder';
-
         $akun = Auth::user()->code_api;
         $tokenkey = Auth::user()->token_api;
         $postdata = '{
@@ -128,6 +115,6 @@ class ShipmentInvoiceController extends Controller
         $orderData = $res->response;
         $statusRes = $res->status;
 
-        return view('shipment.invoice.settled', compact('title', 'tableClass', 'orderData', 'statusRes'));
+        return view('shipment.invoice.settled', compact('orderData', 'statusRes'));
     }
 }

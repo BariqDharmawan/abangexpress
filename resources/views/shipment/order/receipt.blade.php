@@ -6,7 +6,7 @@
 
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-    id="parent-{{ $tableClass}}">
+    id="parent-dataOrder">
         <div class="card">
             <div class="header">
                 <h2>
@@ -15,7 +15,7 @@
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table id="{{ $tableClass}}" class="table table-bordered table-striped table-hover js-basic-example dataTable w-100">
+                    <table id="dataOrder" class="table table-bordered table-striped table-hover js-basic-example dataTable w-100">
                         <thead>
                             <tr>
                                 <th>Tanggal</th>
@@ -38,12 +38,18 @@
                                         <td>{{ $xdata->tujuan }}</td>
                                         <td>Berat : {{ $xdata->berat }} <br> Qty : {{ $xdata->qty }}</td>
                                         <td>
-                                            <form method="POST"  action="{{ route('shipping.order.print') }}" target="_blank">
+                                            <form method="POST"  action="{{ route(
+                                                'shipping.order.print'
+                                            ) }}" target="_blank">
                                                 @csrf
                                                 <input type="hidden" name="link" value="resi/{{ $xdata->token}}">
-                                                <button type="submit" class="btn btn-big btn-primary"><i class="material-icons">print</i>Cetak Ulang</button>
+                                                <button type="submit" class="btn btn-big btn-primary">
+                                                    <i class="material-icons">
+                                                        print
+                                                    </i>
+                                                    Cetak Ulang
+                                                </button>
                                             </form>
-                                            {{-- <a type="submit" href="resi/{{ $xdata->token}}" target="_blank" class="btn btn-big btn-primary"><i class="material-icons">print</i>Cetak Ulang</a> --}}
                                         </td>
                                     </tr>
                                 @endforeach
