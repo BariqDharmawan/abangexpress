@@ -21,12 +21,6 @@
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img position-relative"
             data-aos="zoom-in" data-aos-delay="200">
-                @if (isset($isProfileVideoExist) and $isProfileVideoExist)
-                    <a href="{{ $aboutUs->our_video }}"
-                    class="glightbox btn-watch-video hero-img__btn-center">
-                        <i class="bi bi-play-circle me-0"></i>
-                    </a>
-                @endif
                 <img src="{{ asset('template2/img/hero-img.png') }}"
                 class="img-fluid animated" alt="">
             </div>
