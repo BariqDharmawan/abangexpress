@@ -27,14 +27,13 @@
                     <ul class="col-lg-3">
                         @foreach ( session('datetime') as $dateRes)
                         <li class="panel-scroll__item
-                        @if(strpos(strtolower($dateRes['status']),"delivered")  !==false )
-                        {{-- coloring for delivery --}}
+                            @if(strpos(strtolower($dateRes['status']),"delivered")  !==false )
+                            {{-- coloring for delivery --}}
                             current-day
-                        @elseif(strpos(strtolower($dateRes['status']),"delivery")  !==false || strpos(strtolower($dateRes['status']),"delivering")  !==false )
-                        {{-- coloring for out for delivery --}}
+                            @elseif(strpos(strtolower($dateRes['status']),"delivery")  !==false || strpos(strtolower($dateRes['status']),"delivering")  !==false )
+                            {{-- coloring for out for delivery --}}
                             out-for-delivery
-                        @endif
-                        ">
+                            @endif">
 
                             @if (strpos(strtolower($dateRes['status']),"delivered")  !==false )
                             {{-- delivered icon --}}

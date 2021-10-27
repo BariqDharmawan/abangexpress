@@ -26,9 +26,9 @@ class RedirectIfAuthenticated
                 $role = Auth::user()->role;
                 switch ($role) {
                     case 'admin':
-                        return redirect('/admin/about-us/identity');
+                        return redirect(RouteServiceProvider::HOME);
                     break;
-                        
+
                     case 'sub-admin':
                         return redirect('/shipping');
                     break;

@@ -65,7 +65,8 @@
                     </button>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="" class="nav-link text-dark font-weight-bold">
+                            <a href="{{ route('admin.home.index') }}"
+                            class="nav-link text-dark font-weight-bold">
                                 Template: {{ $templateChoosen->version_name }}
                             </a>
                         </li>

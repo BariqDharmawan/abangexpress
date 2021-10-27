@@ -10,13 +10,6 @@
 </div>
 @endif
 
-<div class="col-12 mb-4">
-    <x-admin.card title="Template yang dipilih">
-        <p class="mb-0">{{ $templateChoosen->template_name }}</p>
-        @include('admin.partials.helper-wa-ax')
-    </x-admin.card>
-</div>
-
 <div class="col-12">
 
     <x-admin.card title="Tentang kita" class="mb-4">

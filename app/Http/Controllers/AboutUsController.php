@@ -49,7 +49,7 @@ class AboutUsController extends Controller
         // dd($identity);
 
         return view('admin.about-us.identity', compact(
-            'identity', 'aboutUs', 'templateChoosen', 'columnsIdentity'
+            'identity', 'aboutUs', 'columnsIdentity'
         ));
     }
 

@@ -33,13 +33,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $redirectAfterLogin = '/admin/about-us/identity';
+        $redirectAfterLogin = RouteServiceProvider::HOME;
         $role = Auth::user()->role;
         switch ($role) {
             case 'admin':
                 $redirectAfterLogin = $redirectAfterLogin;
             break;
-                
+
             case 'sub-admin':
                 $redirectAfterLogin = '/shipping';
             break;
