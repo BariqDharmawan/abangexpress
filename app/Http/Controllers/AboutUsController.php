@@ -27,7 +27,9 @@ class AboutUsController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
 
-        $aboutUs = LandingSectionDesc::first();
+        $aboutUs = LandingSectionDesc::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
         $templateChoosen = TemplateChoosen::select('version')->where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
@@ -119,7 +121,9 @@ class AboutUsController extends Controller
 
         $ourIdentity->save();
 
-        LandingSectionDesc::first()->update([
+        LandingSectionDesc::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->firstOrFail()->update([
             'section_name' => $request->section_name,
             'first_desc' => $request->first_desc,
             'second_desc' => $request->second_desc
