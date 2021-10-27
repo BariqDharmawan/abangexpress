@@ -2,25 +2,25 @@
     <div class="container" data-aos="fade-up">
         <div id="panel-resi">
             @if ($templateUsing == 1)
-                <x-section-header text="Hasil pencarian 
-                {{ session('trackingstatus') == 'success' ? 
+                <x-section-header text="Hasil pencarian
+                {{ session('trackingstatus') == 'success' ?
                 session('trackUpdate')->awb : old('receipt_number') }}" />
             @elseif($templateUsing == 2)
-                <x-template2.section-title heading="Hasil pencarian 
-                {{ session('trackingstatus') == 'success' ? 
+                <x-template2.section-title heading="Hasil pencarian
+                {{ session('trackingstatus') == 'success' ?
                 session('trackUpdate')->awb : old('receipt_number') }}" />
             @endif
-            
+
             @if (session('trackingstatus')=="success")
-            <div class="panel-scroll__header bg-success p-3 
+            <div class="panel-scroll__header bg-success p-3
             text-white text-center fw-bold text-uppercase rounded-top">
-                {{ session('trackUpdate')->lastupdate }} To 
+                {{ session('trackUpdate')->lastupdate }} To
                 {{ session('trackUpdate')->name }}
             </div>
             @endif
 
             <div class="row panel-scroll border p-3 alert-dismissible mx-0
-                @if(session('trackingstatus') == 'failed') 
+                @if(session('trackingstatus') == 'failed')
                     panel-scroll--empty
                 @endif">
                 @if (session('trackingstatus')=="success")
@@ -48,7 +48,7 @@
                             @endif
 
                             <time datetime="{{  $dateRes['date'] }}" class="fw-bold fs-5">
-                                {{ $dateRes['date']  }}<br>{{ $dateRes['time']  }}
+                                {{ $dateRes['date'] . ' ' . $dateRes['time']  }}
                             </time>
                         </li>
                         @endforeach
@@ -70,10 +70,10 @@
                     </ul>
                 @elseif(session('trackingstatus') == 'failed')
                     <p class="fs-1 fw-bold">
-                        Nomor resi tidak ditemukan, <br> 
+                        Nomor resi tidak ditemukan, <br>
                         silahkan telusuri ulang
                     </p>
-                @endif                            
+                @endif
 
                 <button type="button" class="btn-close btn-close--div btn-show-hidden-section-aos" data-section-closed-aos="#fade-up-about"
                 data-close-div="#panel-resi"></button>
