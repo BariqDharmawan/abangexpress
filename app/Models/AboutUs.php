@@ -14,7 +14,6 @@ class AboutUs extends Model
         'our_vision',
         'our_mission',
         'address_embed',
-        'our_video',
         'sub_slogan',
         'slogan',
         'cover_vision_mission',

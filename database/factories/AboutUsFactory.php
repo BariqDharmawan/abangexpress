@@ -29,10 +29,6 @@ class AboutUsFactory extends Factory
             'sub_slogan' => $this->faker->sentence(8),
             'our_vision' => $this->faker->paragraph(1),
             'our_mission' => '<ol><li>misi 1</li><li>misi 2</li></ol>',
-            'our_video' => $this->faker->unique(true)->randomElement([
-                'https://www.youtube.com/watch?v=GectaFWLNZQ',
-                'https://www.youtube.com/watch?v=-Luq277seyM',
-            ]),
             'cover_vision_mission' => $this->faker->unique()->randomElement([
                 'public/cover-vision-mission/why-us.png',
                 'public/cover-vision-mission/about-us1.jpg'

@@ -18,7 +18,6 @@ class CreateAboutUsTable extends Migration
             $table->string('our_name', 20);
             $table->string('our_vision');
             $table->text('our_mission');
-            $table->string('our_video')->nullable();
             $table->text('address_embed')->nullable();
             $table->string('slogan');
             $table->string('sub_slogan')->nullable();

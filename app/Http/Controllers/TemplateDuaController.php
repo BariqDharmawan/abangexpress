@@ -26,7 +26,7 @@ class TemplateDuaController extends Controller
 
         $ourTeam = OurTeam::where('domain_owner', request()->getSchemeAndHttpHost())
                 ->get();
-        
+
         $faqs = Faq::where('domain_owner', request()->getSchemeAndHttpHost())->get();
 
         $ourService = OurService::where(
@@ -35,20 +35,10 @@ class TemplateDuaController extends Controller
 
         $ourContactList = Helper::getJson('our-contact-list.json');
 
-        if ($aboutUs) {
-            $isProfileVideoExist = $aboutUs->our_video ? true : false;
-
-            return view('template-2.index', compact(
-                'landingSection', 'aboutUs', 'isProfileVideoExist', 
-                'ourTeam', 'aboutUs', 'ourService', 'menus', 'ourContactList'
-            ));
-        }
-        else {
-            return view('template-2.index', compact(
-                'landingSection', 'aboutUs',
-                'ourTeam', 'aboutUs', 'ourService', 'menus', 'ourContactList'
-            ));
-        }
+        return view('template-2.index', compact(
+            'landingSection', 'aboutUs',
+            'ourTeam', 'aboutUs', 'ourService', 'menus', 'ourContactList'
+        ));
 
     }
 }

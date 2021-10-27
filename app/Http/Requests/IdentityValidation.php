@@ -28,9 +28,6 @@ class IdentityValidation extends FormRequest
             'our_vision' => ['required', 'string', 'min:3'],
             'our_mission' => ['required', 'string', 'min:3'],
             'sub_slogan' => ['sometimes', 'string', 'min:3', 'max:255'],
-            'our_video' => [
-                'sometimes', 'url', 'nullable', 'starts_with:https://www.youtube.com/watch?'
-            ],
             'cover_vision_mission' => [
                 'sometimes', 'mimes:png,jpg,jpeg,webp,svg'
             ]

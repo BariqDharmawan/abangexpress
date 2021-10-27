@@ -48,17 +48,7 @@
             <x-admin.input name="kodeagen" label="Kode Agen" required/>
             <x-admin.input name="tokenkey" label="Token Key" required/>
 
-            <small class="mb-4 d-block text-dark">
-                Untuk mendapatkan kode agen dan token key, dapat menghubungi
-                <a href="https://web.whatsapp.com/send?phone=6281278989998"
-                target="_blank" class="d-none d-lg-block">
-                    kami
-                </a>
-                <a href="https://api.whatsapp.com/send?phone=6281278989998"
-                target="_blank" class="d-block d-lg-none">
-                    kami
-                </a>
-            </small>
+            @include('admin.partials.helper-wa-ax')
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

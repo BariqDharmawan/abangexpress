@@ -6,16 +6,22 @@
 
 @if (session('success'))
 <div class="col-12 mt-4">
-    <x-admin.alert-success/>
+    <x-admin.alert-success />
 </div>
 @endif
+
+<div class="col-12 mb-4">
+    <x-admin.card title="Template yang dipilih">
+        <p class="mb-0">{{ $templateChoosen->template_name }}</p>
+        @include('admin.partials.helper-wa-ax')
+    </x-admin.card>
+</div>
 
 <div class="col-12">
 
     <x-admin.card title="Tentang kita" class="mb-4">
         <x-slot name="header">
-            <x-admin.modal.trigger text="Ubah tentang kita"
-            modal-target="edit-idendity" />
+            <x-admin.modal.trigger text="Ubah tentang kita" modal-target="edit-idendity" />
         </x-slot>
 
         <x-admin.table class="datatable-disable-pagination-ordering"
@@ -39,14 +45,8 @@
                 </td>
                 @endif
                 <td>
-                    @if ($templateChoosen->version == 1 and isset($identity->our_video))
-                        <a href="{{ $identity->our_video }}" target="_blank">
-                            Lihat video
-                        </a>
-                    @else
-                        <img alt="" height="100px"
-                        src="{{ Storage::url($identity->cover_vision_mission) }}">
-                    @endif
+                    <img alt="" height="100px"
+                    src="{{ Storage::url($identity->cover_vision_mission) }}">
                 </td>
             </tr>
         </x-admin.table>
@@ -92,18 +92,16 @@
                 id="edit-heading" name="section_name" required
                 value="{{ old('section_name') ?? $aboutUs->section_name }}">
                 @error('section_name')
-                    <div class="text-danger">{{ $message }}</div>
+                <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="form-group">
                 <label for="edit-first-desc">Deskripsi 1</label>
-                <textarea name="first_desc" id="edit-first-desc"
-                class="form-control summernote"
-                style="resize: none;" rows="3"
-                required>{!! $aboutUs->first_desc !!}</textarea>
+                <textarea name="first_desc" id="edit-first-desc" class="form-control summernote" style="resize: none;"
+                    rows="3" required>{!! $aboutUs->first_desc !!}</textarea>
                 @error('first_desc')
-                    <div class="text-danger">{{ $message }}</div>
+                <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -118,12 +116,6 @@
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-            @endif
-
-            @if ($templateChoosen->version == 1)
-            <x-admin.input label="Ubah video youtube" name="our_video"
-            placeholder="Taruh video youtube disini"
-            value="{{ old('our_video') ?? isset($identity->our_video) ? $identity->our_video : '' }}"></x-admin.input>
             @endif
 
             @isset($identity->cover_vision_mission)

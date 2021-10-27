@@ -72,7 +72,6 @@ class AboutUsController extends Controller
 
         $ourIdentity->our_vision = $request->our_vision;
         $ourIdentity->our_mission = $request->our_mission;
-        $ourIdentity->our_video = $request->our_video;
 
         if ($request->hasFile('cover_vision_mission')) {
             $coverVisionMission = $request->file('cover_vision_mission');
