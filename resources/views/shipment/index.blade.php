@@ -144,7 +144,7 @@
                             @endif
 
                             <time datetime="{{  $dateRes['date'] }}" class="fw-bold fs-5">
-                                {{ $dateRes['date']  }}<br>{{ $dateRes['time']  }}
+                                {{ $dateRes['date']  }} {{ $dateRes['time']  }}
                             </time>
                         </li>
                         @endforeach
