@@ -54,7 +54,7 @@
                         @endforeach
                     </ul>
 
-                    <ul class="col-7 pe-0 ps-4-half panel-scroll__right">
+                    <ul class="col-7 pe-0 ps-almost-5 ps-lg-5 panel-scroll__right">
                         @foreach (session('trackresult') as $trackresult )
                             <li class="panel-scroll__text"
                             id="panel-text-{{ $loop->iteration }}">

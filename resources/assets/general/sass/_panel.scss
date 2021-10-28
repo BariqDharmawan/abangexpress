@@ -38,14 +38,14 @@
             position: absolute;
             bottom: 0;
             right: -15px;
-            transform: translateX(50%) translateY(3px);
+            transform: translate(50%, 3px);
             z-index: 2;
             border-radius: 50%;
             font-size: 28px;
             padding: 8px;
 
-            &--55px {
-                transform: translateX(50%) translateY(3px);
+            @media screen and (min-width: 960px) {
+                transform: translate(50%, -3px);
             }
         }
 
