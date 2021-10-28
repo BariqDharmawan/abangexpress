@@ -108,11 +108,10 @@
                 </h3>
             </div>
 
-            @if (session('trackingstatus')=="success")
+            @if (!empty(session('lastUpdate')))
             <div class="panel-scroll__header bg-green p-5
             text-white text-center fw-bold text-uppercase rounded-top">
-                {{ session('trackUpdate')->lastupdate }} To
-                {{ session('trackUpdate')->name }}
+                {{ session('lastUpdate') }}
             </div>
             @endif
 
