@@ -38,43 +38,43 @@ class OurTeamController extends Controller
         $avatar = $request->file('avatar');
         $pathAvatar = $avatar->store('public/team');
 
-        // $xfiles = Str::replaceFirst('public/', 'storage/', $pathAvatar);
-            // if (isset($_FILES['avatar'])) {
-            //     define('UPLOAD_DIR', 'storage/team/');
+        $xfiles = Str::replaceFirst('public/', 'storage/', $pathAvatar);
+            if (isset($_FILES['avatar'])) {
+                define('UPLOAD_DIR', 'storage/team/');
 
 
-            //     if (!is_dir(UPLOAD_DIR)) {
-            //         //Create our directory if it does not exist
-            //         mkdir(UPLOAD_DIR);
-            //     }
-            //     $errors = array();
-            //     $file_name = $_FILES['avatar']['name'];
-            //     $file_size = $_FILES['avatar']['size'];
-            //     $file_tmp = $_FILES['avatar']['tmp_name'];
-            //     $file_type = $_FILES['avatar']['type'];
-            //     // $file_ext=strtolower(end(explode('.',$file_name)));
+                if (!is_dir(UPLOAD_DIR)) {
+                    //Create our directory if it does not exist
+                    mkdir(UPLOAD_DIR);
+                }
+                $errors = array();
+                $file_name = $_FILES['avatar']['name'];
+                $file_size = $_FILES['avatar']['size'];
+                $file_tmp = $_FILES['avatar']['tmp_name'];
+                $file_type = $_FILES['avatar']['type'];
+                // $file_ext=strtolower(end(explode('.',$file_name)));
 
-            //     // $extensions= array("jpeg","jpg","png");
+                // $extensions= array("jpeg","jpg","png");
 
-            //     // if(in_array($file_ext,$extensions)=== false){
-            //     //     $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-            //     // }
+                // if(in_array($file_ext,$extensions)=== false){
+                //     $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+                // }
 
-            //     if ($file_size > 2097152) {
-            //         $errors[] = 'File size must be excately 2 MB';
-            //     }
+                if ($file_size > 2097152) {
+                    $errors[] = 'File size must be excately 2 MB';
+                }
 
-            //     if (empty($errors) == true) {
-            //         move_uploaded_file($file_tmp, $xfiles);
-            //         // echo "Success";
-            //         // dd("Success");
-            //     } else {
-            //         print_r($errors);
-            //     }
-            // }
-            // else {
-            //     // echo "gambar gk ada";
-        // }
+                if (empty($errors) == true) {
+                    move_uploaded_file($file_tmp, $xfiles);
+                    // echo "Success";
+                    // dd("Success");
+                } else {
+                    // print_r($errors);
+                }
+            }
+            else {
+                // echo "gambar gk ada";
+        }
 
         OurTeam::create([
             'name' => $request->name,
@@ -107,6 +107,45 @@ class OurTeamController extends Controller
             $pathAvatar = Storage::putFile('public/team', $avatar);
 
             $editMember->avatar = Str::replaceFirst('public/', '/storage/', $pathAvatar);
+
+
+            $xfiles = Str::replaceFirst('public/', 'storage/', $pathAvatar);
+            if (isset($_FILES['avatar_edit'])) {
+                define('UPLOAD_DIR', 'storage/team/');
+
+
+                if (!is_dir(UPLOAD_DIR)) {
+                    //Create our directory if it does not exist
+                    mkdir(UPLOAD_DIR);
+                }
+                $errors = array();
+                $file_name = $_FILES['avatar_edit']['name'];
+                $file_size = $_FILES['avatar_edit']['size'];
+                $file_tmp = $_FILES['avatar_edit']['tmp_name'];
+                $file_type = $_FILES['avatar_edit']['type'];
+                // $file_ext=strtolower(end(explode('.',$file_name)));
+
+                // $extensions= array("jpeg","jpg","png");
+
+                // if(in_array($file_ext,$extensions)=== false){
+                //     $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+                // }
+
+                if ($file_size > 2097152) {
+                    $errors[] = 'File size must be excately 2 MB';
+                }
+
+                if (empty($errors) == true) {
+                    move_uploaded_file($file_tmp, $xfiles);
+                    // echo "Success";
+                    // dd("Success");
+                } else {
+                    // print_r($errors);
+                }
+            }
+            else {
+                // echo "gambar gk ada";
+            }
         }
 
         $editMember->position_id = $request->position_id_edit;

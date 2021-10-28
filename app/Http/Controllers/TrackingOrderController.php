@@ -34,12 +34,12 @@ class TrackingOrderController extends Controller
 
         $response = curl_exec($curl);
         curl_close($curl);
-        
+
         $res = json_decode($response);
         $trackStatus = $res->status;
         $trackUpdate = $res->result;
 
-        if ($trackStatus == "success"){
+        if ($trackStatus == "success" && count($res->trackresult)>0){
 
             $response = collect($res->trackresult,true);
 
@@ -58,13 +58,18 @@ class TrackingOrderController extends Controller
                 ];
             });
 
+            $lastUpdate=$tanggal->first();
+            $lastUpdate=$lastUpdate['status'];
+
             return redirect(url()->previous() . '#search-resi-section')->with([
                 'trackingstatus' => $trackStatus,
                 'datetime'=>$tanggal,
-                'trackresult'=>$result, 
+                'trackresult'=>$result,
+                'lastUpdate' => $lastUpdate,
                 'trackUpdate' => $trackUpdate
             ]);
         }else{
+            $trackStatus="failed";
             return redirect(url()->previous() . '#search-resi-section')->with(
                 'trackingstatus', $trackStatus
             );

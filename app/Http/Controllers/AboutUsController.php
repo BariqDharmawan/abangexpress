@@ -80,42 +80,42 @@ class AboutUsController extends Controller
             );
             $ourIdentity->cover_vision_mission = $pathcoverVisionMission;
 
-            // $xfiles = Str::replaceFirst('public/', 'storage/', $pathcoverVisionMission);
-            // if(isset($_FILES['cover_vision_mission'])){
-            //     define('UPLOAD_DIR', 'storage/cover-vision-mission/');
+            $xfiles = Str::replaceFirst('public/', 'storage/', $pathcoverVisionMission);
+            if(isset($_FILES['cover_vision_mission'])){
+                define('UPLOAD_DIR', 'storage/cover-vision-mission/');
 
-            //     if (!is_dir(UPLOAD_DIR)) {
-            //         //Create our directory if it does not exist
-            //         mkdir(UPLOAD_DIR);
-            //     }
+                if (!is_dir(UPLOAD_DIR)) {
+                    //Create our directory if it does not exist
+                    mkdir(UPLOAD_DIR);
+                }
 
-            //     $errors = array();
+                $errors = array();
 
-            //     $file_name = $_FILES['cover_vision_mission']['name'];
-            //     $file_size = $_FILES['cover_vision_mission']['size'];
-            //     $file_tmp = $_FILES['cover_vision_mission']['tmp_name'];
-            //     $file_type = $_FILES['cover_vision_mission']['type'];
-            //     // $file_ext=strtolower(end(explode('.',$file_name)));
+                $file_name = $_FILES['cover_vision_mission']['name'];
+                $file_size = $_FILES['cover_vision_mission']['size'];
+                $file_tmp = $_FILES['cover_vision_mission']['tmp_name'];
+                $file_type = $_FILES['cover_vision_mission']['type'];
+                // $file_ext=strtolower(end(explode('.',$file_name)));
 
-            //     // $extensions= array("jpeg","jpg","png");
-            //     // if(in_array($file_ext,$extensions)=== false){
-            //     //     $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-            //     // }
+                // $extensions= array("jpeg","jpg","png");
+                // if(in_array($file_ext,$extensions)=== false){
+                //     $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+                // }
 
-            //     if ($file_size > 2097152){
-            //         $errors[] = 'File size must be excately 2 MB';
-            //     }
+                if ($file_size > 2097152){
+                    $errors[] = 'File size must be excately 2 MB';
+                }
 
-            //     if (empty($errors)==true){
-            //         move_uploaded_file($file_tmp,$xfiles);
-            //         // echo "Success";
-            //     } else{
-            //         // print_r($errors);
-            //     }
-            // }
-            // else {
-            //    // echo "gambar gk ada";
-            // }
+                if (empty($errors)==true){
+                    move_uploaded_file($file_tmp,$xfiles);
+                    // echo "Success";
+                } else{
+                    // print_r($errors);
+                }
+            }else {
+               // echo "gambar gk ada";
+            }
+
         }
 
         $ourIdentity->save();
