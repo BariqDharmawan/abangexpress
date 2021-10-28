@@ -112,10 +112,10 @@ class AboutUsController extends Controller
                 } else{
                     // print_r($errors);
                 }
-            }
-            else {
+            }else {
                // echo "gambar gk ada";
             }
+
         }
 
         $ourIdentity->save();
