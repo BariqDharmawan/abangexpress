@@ -1,16 +1,15 @@
 import './../vendor/php-email-form/validate.js'
 
 import './glightbox'
-import './btn'
 import './nav'
 import './preloader'
 import './slider'
 import './aos'
 import './header'
+import './../../general/js/btn'
 
 import './waypoint'
 
-import { onscroll, select, on, scrollto } from './helper.js'
 import { AOS } from './aos';
 
 /**

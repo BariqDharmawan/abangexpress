@@ -24,33 +24,45 @@
     }
 
     &-back-to-top {
+        position: fixed;
+        visibility: hidden;
+        opacity: 0;
+        right: 15px;
+        bottom: 15px;
+        z-index: 996;
+        width: 40px;
+        height: 40px;
+        border-radius: 50px;
+        transition: all 0.4s;
+
+        &:hover {
+            color: #fff;
+        }
+
+        &.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        i {
+            font-size: 24px;
+            color: #fff;
+            line-height: 0;
+        }
+
         &--blue {
-            position: fixed;
-            visibility: hidden;
-            opacity: 0;
-            right: 15px;
-            bottom: 15px;
-            z-index: 996;
             background: #47b2e4;
-            width: 40px;
-            height: 40px;
-            border-radius: 50px;
-            transition: all 0.4s;
 
             &:hover {
                 background: #6bc1e9;
-                color: #fff;
             }
 
-            &.active {
-                visibility: visible;
-                opacity: 1;
-            }
+        }
+        &--green {
+            background-color: #50d8af;
 
-            i {
-                font-size: 24px;
-                color: #fff;
-                line-height: 0;
+            &:hover {
+                background-color: #61e9c0;
             }
         }
     }
