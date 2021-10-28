@@ -6,5 +6,7 @@ import './../../general/js/panel'
 import './scroll-to'
 import './../../general/js/utilities'
 
-getFaq('/api/faq')
+if (document.querySelector('#load-faq')) {
+    getFaq('/api/faq')
+}
 getContact('/api/our-contact')

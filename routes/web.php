@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('tracking-order', 'TrackingOrderController');
 
+Route::get('tentang-kami', 'TemplateSatuController@aboutUs');
+
 Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function (){
     Route::get('/', 'ShipmentController@index')->name('index');
     Route::get('zipcode', 'ShipmentController@zipCode')->name('zipcode');
@@ -88,7 +90,7 @@ try {
     $templateChoosen = (int)$templateChoosen->version;
 
     if ($templateChoosen == 1) {
-        Route::get('/', 'TemplateSatuController');
+        Route::get('/', 'TemplateSatuController@index');
     }
     else {
         Route::get('/', 'TemplateDuaController');

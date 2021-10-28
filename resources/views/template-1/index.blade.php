@@ -29,38 +29,6 @@
         @include('partials.result-tracking', ['templateUsing' => 1])
     @endif
 
-    <!-- ======= About Section ======= -->
-    <section id="about">
-        <div class="container" data-aos="fade-up" id="fade-up-about">
-            <div class="row">
-                <div class="col-lg-6 about-img">
-                    @isset($aboutUs)
-                    <img src="{{ asset('storage/' .
-                    str_replace('public/', '', $aboutUs->cover_vision_mission)) }}" alt="">
-                    @endisset
-                </div>
-
-                <div class="col-lg-6 content">
-                    <x-section-header text="{{ $landingSection[0]->section_name }}"
-                    desc="{!! $landingSection[0]->first_desc !!}" />
-                    <div class="row mt-4">
-                        @isset($aboutUs)
-                            <div class="col-lg">
-                                <h5 class="fw-bold text-primary">Visi Kami</h5>
-                                <p>{{ $aboutUs->our_vision }}</p>
-                            </div>
-                            <div class="col-lg">
-                                <h5 class="fw-bold text-primary">Misi Kami</h5>
-                                {!! $aboutUs->our_mission  !!}
-                            </div>
-                        @endisset
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section><!-- End About Section -->
-
     <!-- ======= Services Section ======= -->
     @if (count($ourService) > 0)
     <section id="services">

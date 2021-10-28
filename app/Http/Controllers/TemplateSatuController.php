@@ -14,13 +14,8 @@ use Illuminate\Http\Request;
 
 class TemplateSatuController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function __invoke(Request $request)
+
+    public function index(Request $request)
     {
         $menus = Helper::getJson('template-1-menu.json');
         $menus = collect($menus);
@@ -72,5 +67,20 @@ class TemplateSatuController extends Controller
             'firstWordAppName', 'heroCarousel', 'menus', 'aboutUs',
             'ourService', 'ourTeam', 'ourContact', 'landingSection'
         ));
+    }
+
+    public function aboutUs()
+    {
+        $menus = Helper::getJson('template-1-menu.json');
+        $menus = collect($menus);
+
+        $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
+                ->first();
+
+        $landingSection = LandingSectionDesc::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->get();
+
+        return view('about', compact('landingSection', 'menus', 'aboutUs'));
     }
 }

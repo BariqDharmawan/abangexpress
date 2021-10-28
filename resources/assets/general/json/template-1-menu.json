@@ -4,8 +4,8 @@
         "text": "Home"
     },
     {
-        "url": "#about",
-        "text": "Tentang Kami"
+        "url": "/tentang-kami",
+        "text": "About Us"
     },
     {
         "url": "#services",
