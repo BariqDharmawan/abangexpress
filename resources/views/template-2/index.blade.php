@@ -140,8 +140,8 @@
                     <div class="member d-flex align-items-start"
                     data-aos="zoom-in" data-aos-delay="{{ 100 * $loop->iteration }}">
                         <div class="pic">
-                            <img height="180px" width="180px" src="{{ asset('storage/' .
-                            str_replace('public/', '', $team->avatar)) }}" alt=""
+                            <img height="180px" width="180px"
+                            src="{{ asset($team->avatar) }}" alt=""
                             class="img-fluid member-info__avatar" />
                         </div>
                         <div class="member-info">

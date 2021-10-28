@@ -23,8 +23,8 @@ class LandingSectionDescSeeder extends Seeder
                     'first_desc' => 'Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet
                     veniam enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute
                     nulla ipsum velit export irure minim illum fore.',
-                    'second_desc' => '<p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
+                    'second_desc' => '<p>Ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                             proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                         </p>'
                 ],
@@ -44,7 +44,7 @@ class LandingSectionDescSeeder extends Seeder
                 ],
                 [
                     'domain_owner' => $domain,
-                    'section_name' => 'Team Kami',
+                    'section_name' => 'Mitra Kami',
                     'first_desc' => '',
                     'second_desc' => ''
                 ],

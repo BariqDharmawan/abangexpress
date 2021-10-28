@@ -14,7 +14,7 @@
 
     <div class="col-12 mb-4">
         <div class="d-flex justify-content-between align-items-center">
-            <h1 class="h4 mb-0">Team kami</h1>
+            <h1 class="h4 mb-0">Daftar Mitra</h1>
 
             <x-admin.modal.trigger text="Tambah member"
             modal-target="add-new-person" />
@@ -29,8 +29,7 @@
                 :reverse-header="true"
                 footer-class="d-flex justify-content-between bg-transparent">
                     <x-slot name="header">
-                        <img src="{{ asset('storage/' .
-                        str_replace('public/', '', $person->avatar)) }}"
+                        <img src="{{ asset($person->avatar) }}"
                         height="90px" width="90px"
                         class="rounded-circle mx-auto d-block object-cover mb-3"
                         alt="{{ $person->name }}">

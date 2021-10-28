@@ -22,7 +22,7 @@ class OurTeamFactory extends Factory
      */
     public function definition()
     {
-        $avatarPath = 'public/team-';
+        $avatarPath = '/storage/team/team-';
 
         return [
             'name' => $this->faker->name(),
