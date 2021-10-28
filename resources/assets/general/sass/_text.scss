@@ -8,3 +8,21 @@
 .text-bold-hover:hover {
     font-weight: bold;
 }
+
+.fs {
+    &-quarter-normal {
+        font-size: 0.75rem;
+    }
+    &-almost-normal {
+        font-size: 0.9rem;
+    }
+    @media screen and (min-width: 960px) {
+        &-lg {
+            @each $size, $font-size in $font-sizes {
+                &-#{$size} {
+                    font-size: $font-size;
+                }
+            }
+        }
+    }
+}

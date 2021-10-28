@@ -23,9 +23,10 @@
                     panel-scroll--empty
                 @endif">
                 @if (session('trackingstatus')=="success")
-                    <ul class="col-lg-3">
+                    <ul class="col-5 ps-0 panel-scroll__left">
                         @foreach ( session('datetime') as $dateRes)
-                        <li class="panel-scroll__item
+                        <li data-panel-attached="#panel-text-{{ $loop->iteration }}"
+                        class="panel-scroll__item
                             @if(strpos(strtolower($dateRes['status']),"delivered")  !==false )
                             {{-- coloring for delivery --}}
                             current-day
@@ -45,21 +46,23 @@
                                 <i class="fas fa-circle text-secondary special-indicator"></i>
                             @endif
 
-                            <time datetime="{{  $dateRes['date'] }}" class="fw-bold fs-5">
+                            <time datetime="{{  $dateRes['date'] }}"
+                            class="fw-bold fs-lg-5 fs-almost-normal">
                                 {{ $dateRes['date'] . ' ' . $dateRes['time']  }}
                             </time>
                         </li>
                         @endforeach
                     </ul>
 
-                    <ul class="col-lg-9">
+                    <ul class="col-7 pe-0 ps-4-half panel-scroll__right">
                         @foreach (session('trackresult') as $trackresult )
-                            <li class="panel-scroll__text px-5">
-                                <p class="mb-1 fw-bold fs-5">
+                            <li class="panel-scroll__text"
+                            id="panel-text-{{ $loop->iteration }}">
+                                <p class="mb-1 fw-bold fs-lg-5 fs-almost-normal">
                                     {{-- tracking detail --}}
                                     {{ $trackresult['desc'] }}
                                 </p>
-                                <address class="m-0 fs-6">
+                                <address class="m-0 fs-lg-6 fs-quarter-normal">
                                     {{-- location --}}
                                     {{ $trackresult['location'] }}
                                 </address>
@@ -67,7 +70,7 @@
                         @endforeach
                     </ul>
                 @elseif(session('trackingstatus') == 'failed')
-                    <p class="fs-1 fw-bold">
+                    <p class="fs-lg-1 fw-bold">
                         Nomor resi tidak ditemukan, <br>
                         silahkan telusuri ulang
                     </p>
