@@ -10,9 +10,6 @@
 
 <section id="hero">
     <div class="hero-content row mx-0" data-aos="fade-up">
-        @isset($aboutUs)
-        <h2 class="w-100">{!! wordwrap($aboutUs->slogan, 20, '<br>') !!}</h2>
-        @endisset
         @include('partials.search-tracking', ['errorText' => 'danger'])
     </div>
 
