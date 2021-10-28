@@ -1,4 +1,4 @@
-import { select } from './helper'
+import { select } from './../../general/js/helper'
 const Isotope = require('isotope-layout');
 
 /**

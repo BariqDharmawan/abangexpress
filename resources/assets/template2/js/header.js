@@ -1,5 +1,4 @@
-import { select, onscroll } from './helper'
-
+import { onscroll, select } from './../../general/js/helper'
 /**
  * Toggle .header-scrolled class to #header when page is scrolled
  */

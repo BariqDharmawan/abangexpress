@@ -1,4 +1,4 @@
-import { onscroll, select, on, scrollto } from './helper'
+import { onscroll, select, on, scrollto } from './../../general/js/helper'
 
 /**
  * Mobile nav toggle

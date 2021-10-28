@@ -1,4 +1,4 @@
-import { onscroll, select } from "../../template2/js/helper"
+import { onscroll, select } from "./../../general/js/helper"
 
 /**
   * Back to top button

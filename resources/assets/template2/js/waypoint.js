@@ -1,5 +1,5 @@
 import './../vendor/waypoints/noframework.waypoints'
-import { select } from './helper';
+import { select } from './../../general/js/helper';
 
 /**
      * Skills animation

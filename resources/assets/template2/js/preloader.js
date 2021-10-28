@@ -1,4 +1,4 @@
-const { select } = require("./helper");
+const { select } = require("./../../general/js/helper");
 
 /**
 * Preloader
