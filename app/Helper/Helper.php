@@ -81,4 +81,10 @@ class Helper
             ];
         });
     }
+
+    public static function checkOrderStatus($data, $statusToCheck)
+    {
+        return strpos(strtolower($data), $statusToCheck) !== false;
+    }
+
 }

@@ -1,5 +1,7 @@
 <section id="search-resi-section">
+    @if($templateUsing != 'shipping')
     <div class="container" data-aos="fade-up">
+    @endif
         <div id="panel-resi">
             @if ($templateUsing == 1)
                 <x-section-header text="Hasil pencarian
@@ -9,52 +11,89 @@
                 <x-template2.section-title heading="Hasil pencarian
                 {{ session('trackingstatus') == 'success' ?
                 session('trackUpdate')->awb : old('receipt_number') }}" />
+            @elseif($templateUsing == 'shipping')
+            <div class="block-header">
+                <h3>
+                    Hasil pencarian
+                    {{ session('trackingstatus') == 'success' ?
+                    session('trackUpdate')->awb : old('receipt_number') }}
+                </h3>
+            </div>
             @endif
 
             @if (!empty(session('lastUpdate')))
-            <div class="panel-scroll__header bg-success p-3
-            text-white text-center fw-bold text-uppercase rounded-top">
+            <div class="panel-scroll__header">
                 {{ session('lastUpdate') }}
             </div>
             @endif
 
-            <div class="row panel-scroll border p-3 alert-dismissible mx-0
+            <div class="row panel-scroll alert-dismissible
                 @if(session('trackingstatus') == 'failed')
                     panel-scroll--empty
                 @endif">
                 @if (session('trackingstatus')=="success")
-                    <ul class="col-5 ps-0 panel-scroll__left">
-                        @foreach ( session('datetime') as $dateRes)
-                        <li data-panel-attached="#panel-text-{{ $loop->iteration }}"
-                        class="panel-scroll__item
-                            @if(strpos(strtolower($dateRes['status']),"delivered")  !==false )
+                    <ul class="@if($templateUsing != 'shipping') col-5 @else col-sm-5 col-md-5 col-lg-5 @endif panel-scroll__left">
+                        @foreach (session('datetime') as $dateRes)
+                            <li data-panel-attached="#panel-text-{{ $loop->iteration }}"
+                            class="panel-scroll__item
+                            @if(Helper::checkOrderStatus($dateRes['status'], 'delivered'))
                             {{-- coloring for delivery --}}
                             current-day
-                            @elseif(strpos(strtolower($dateRes['status']),"delivery")  !==false || strpos(strtolower($dateRes['status']),"delivering")  !==false )
+                            @elseif(
+                                Helper::checkOrderStatus($dateRes['status'], 'delivery') or
+                                Helper::checkOrderStatus($dateRes['status'], 'delivering')
+                            )
                             {{-- coloring for out for delivery --}}
                             out-for-delivery
                             @endif">
+                                @if (
+                                    Helper::checkOrderStatus(
+                                        $dateRes['status'], 'delivered'
+                                    )
+                                )
+                                    @if ($templateUsing != 'shipping')
+                                        <i class="fas fa-check text-white
+                                        special-indicator"></i>
+                                    @else
+                                        @include('partials.special-indicator', [
+                                            'icon' => 'check-solid.svg'
+                                        ])
+                                    @endif
+                                @elseif (
+                                    Helper::checkOrderStatus(
+                                        $dateRes['status'], 'delivery'
+                                    ) or Helper::checkOrderStatus(
+                                        $dateRes['status'], 'delivering'
+                                    )
+                                )
+                                    @if ($templateUsing != 'shipping')
+                                        <i class="fas fa-box text-white
+                                        special-indicator"></i>
+                                    @else
+                                        @include('partials.special-indicator', [
+                                            'icon' => 'box-solid.svg'
+                                        ])
+                                    @endif
+                                @else
+                                    @if ($templateUsing != 'shipping')
+                                        <i class="fas fa-circle text-secondary
+                                        special-indicator"></i>
+                                    @else
+                                        @include('partials.special-indicator', [
+                                            'icon' => 'circle-solid.svg'
+                                        ])
+                                    @endif
+                                @endif
 
-                            @if (strpos(strtolower($dateRes['status']),"delivered")  !==false )
-                            {{-- delivered icon --}}
-                                <i class="fas fa-check text-white special-indicator"></i>
-                            @elseif (strpos(strtolower($dateRes['status']),"delivery")  !==false || strpos(strtolower($dateRes['status']),"delivering")  !==false )
-                            {{-- icon out for delivery --}}
-                                <i class="fas fa-box text-white special-indicator"></i>
-                            @else
-                            {{-- other icon a.k.a intransit --}}
-                                <i class="fas fa-circle text-secondary special-indicator"></i>
-                            @endif
-
-                            <time datetime="{{  $dateRes['date'] }}"
-                            class="fw-bold fs-lg-5 fs-almost-normal">
-                                {{ $dateRes['date'] . ' ' . $dateRes['time']  }}
-                            </time>
-                        </li>
+                                <time datetime="{{  $dateRes['date'] }}"
+                                class="fw-bold fs-lg-5 fs-almost-normal">
+                                    {{ $dateRes['date'] . ' ' . $dateRes['time']  }}
+                                </time>
+                            </li>
                         @endforeach
                     </ul>
 
-                    <ul class="col-7 pe-0 ps-almost-5 ps-lg-5 panel-scroll__right">
+                    <ul class="@if($templateUsing != 'shipping') col-7 pl-0 pl-lg-5 @else col-sm-7 col-md-7 col-lg-7 pe-0 ps-lg-5 @endif ps-almost-5 panel-scroll__right">
                         @foreach (session('trackresult') as $trackresult )
                             <li class="panel-scroll__text"
                             id="panel-text-{{ $loop->iteration }}">
@@ -70,15 +109,19 @@
                         @endforeach
                     </ul>
                 @elseif(session('trackingstatus') == 'failed')
-                    <p class="fs-lg-1 fw-bold">
+                    <p class="fs-lg-1 fw-bold text-center">
                         Nomor resi tidak ditemukan, <br>
                         silahkan telusuri ulang
                     </p>
                 @endif
 
-                <button type="button" class="btn-close btn-close--div btn-show-hidden-section-aos" data-section-closed-aos="#fade-up-about"
-                data-close-div="#panel-resi"></button>
+                @if ($templateUsing != 'shipping')
+                    <button type="button" class="btn-close btn-close--div btn-show-hidden-section-aos" data-section-closed-aos="#fade-up-about"
+                    data-close-div="#panel-resi"></button>
+                @endif
+
             </div>
+            @if ($templateUsing != 'shipping')
             <div class="row mt-4 justify-content-end">
                 <div class="col-auto">
                     <a href="javascript:void(0);" data-to-section="#topbar"
@@ -87,6 +130,9 @@
                     </a>
                 </div>
             </div>
+            @endif
         </div>
+    @if($templateUsing != 'shipping')
     </div>
+    @endif
 </section>

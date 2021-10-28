@@ -5,6 +5,12 @@
     align-items: flex-start;
     border-top: 0 !important;
     background-color: white;
+    padding: 2rem 0;
+    margin: {
+        left: 0;
+        right: 0;
+    }
+    border: 1px solid #dee2e6;
 
     $heightItem: 85px;
     $spaceBetween: 3rem;
@@ -13,6 +19,23 @@
         align-items: center;
         justify-content: center;
         height: 350px;
+    }
+
+    &__left {
+        padding: 0 0.5rem;
+        @media screen and (min-width: 960px) {
+            padding: 0 1rem;
+        }
+    }
+
+    &__header {
+        padding: 1rem 0;
+        background-color: rgb(25, 135, 84);
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        color: white;
+        border-radius: 0.25rem 0.25rem 0 0;
     }
 
     &__item {
@@ -34,6 +57,17 @@
             }
         }
 
+        @mixin coloredImgIndicator() {
+            transform: translateX(50%) translateY(-4px);
+            width: 30px;
+            height: 30px;
+
+            @media screen and (min-width: 960px) {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
         .special-indicator {
             position: absolute;
             bottom: 0;
@@ -44,6 +78,11 @@
             font-size: 28px;
             padding: 8px;
 
+            &--img {
+                height: 45px;
+                width: 45px;
+            }
+
             @media screen and (min-width: 960px) {
                 transform: translate(50%, -3px);
             }
@@ -53,8 +92,8 @@
             .special-indicator {
                 @include coloredIndicator($orange);
 
-                &--40px {
-                    transform: translateX(50%) translateY(-5px);
+                &--img {
+                    @include coloredImgIndicator;
                 }
             }
         }
@@ -62,8 +101,9 @@
         &.current-day {
             .special-indicator {
                 @include coloredIndicator($dark-blue);
-                &--40px {
-                    transform: translateX(50%) translateY(-5px);
+
+                &--img {
+                    @include coloredImgIndicator;
                 }
             }
         }
