@@ -11,11 +11,10 @@
                 session('trackUpdate')->awb : old('receipt_number') }}" />
             @endif
 
-            @if (session('trackingstatus')=="success")
+            @if (!empty(session('lastUpdate')))
             <div class="panel-scroll__header bg-success p-3
             text-white text-center fw-bold text-uppercase rounded-top">
-                {{ session('trackUpdate')->lastupdate }} To
-                {{ session('trackUpdate')->name }}
+                {{ session('lastUpdate') }}
             </div>
             @endif
 
