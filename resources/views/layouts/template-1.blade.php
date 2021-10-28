@@ -28,11 +28,11 @@
     </section>
     <header id="header" class="d-flex align-items-center">
         <div class="container d-flex justify-content-between">
-    
+
             <div id="logo">
                 <h1 class="fs-3">
                     @isset($aboutUs)
-                    <a href="index.html">
+                    <a href="{{ url('/') }}">
                         {{ strtok($aboutUs->our_name, ' ') }}
                         <span>
                             {{ Str::after(
@@ -43,21 +43,21 @@
                     @endisset
                 </h1>
             </div>
-    
+
             <nav id="navbar" class="navbar">
                 <ul>
                     @foreach ($menus as $menu)
                         <x-template1.nav-link
-                        href="{{ $menu->url }}" text="{{ $menu->text }}" 
+                        href="{{ $menu->url }}" text="{{ $menu->text }}"
                         class="nav-link scrollto {{ $loop->first ? 'active' : '' }}" />
                     @endforeach
-    
-                    <x-template1.nav-link 
-                    text="{{ auth()->check() ? 'Go to dashboard' : 'Masuk' }}" 
+
+                    <x-template1.nav-link
+                    text="{{ auth()->check() ? 'Go to dashboard' : 'Masuk' }}"
                     href="{{ route('login') }}"
-                    class="btn btn--outline-dark-blue text-dark-blue text-center 
+                    class="btn btn--outline-dark-blue text-dark-blue text-center
                     mx-4 py-2 px-4 rounded-pill" />
-                    
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>

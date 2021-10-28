@@ -1,6 +1,6 @@
 [
     {
-        "url": "#hero",
+        "url": "/#hero",
         "text": "Home"
     },
     {
@@ -8,19 +8,19 @@
         "text": "About Us"
     },
     {
-        "url": "#services",
+        "url": "/#services",
         "text": "Layanan Kami"
     },
     {
-        "url": "#faq",
+        "url": "/#faq",
         "text": "Tanya Kami"
     },
     {
-        "url": "#our-team",
+        "url": "/#our-team",
         "text": "Team Kami"
     },
     {
-        "url": "#contact",
+        "url": "/#contact",
         "text": "Kontak Kami"
     }
 ]

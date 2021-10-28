@@ -28,7 +28,9 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
+
+@include('partials.contact')
+
 @endsection
