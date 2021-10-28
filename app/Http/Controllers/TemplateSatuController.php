@@ -23,18 +23,19 @@ class TemplateSatuController extends Controller
     public function __invoke(Request $request)
     {
         $menus = Helper::getJson('template-1-menu.json');
+        $menus = collect($menus);
 
         $landingSection = LandingSectionDesc::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->get();
-        
+
         $heroCarousel = FirstHeroCarouselLanding::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->get();
 
         $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
                 ->first();
-        
+
         $firstWordAppName = '';
         if ($aboutUs) {
             $firstWordAppName = strtok($aboutUs->our_name, ' ');
@@ -47,15 +48,29 @@ class TemplateSatuController extends Controller
         $ourTeam = OurTeam::where('domain_owner', request()->getSchemeAndHttpHost())
                 ->get();
 
-        $faqs = Faq::where('domain_owner', request()->getSchemeAndHttpHost())->get();
+        if (count($ourTeam) == 0) {
+            $menus = $menus->filter(function ($menu){
+                return $menu->url != '#our-team';
+            });
+        }
+        if (count($ourService) == 0) {
+            $menus = $menus->filter(function ($menu){
+                return $menu->url != '#services';
+            });
+        }
+        if (count($ourService) == 0) {
+            $menus = $menus->filter(function ($menu){
+                return $menu->url != '#services';
+            });
+        }
 
         $ourContact = OurContact::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
 
         return view('template-1.index', compact(
-            'firstWordAppName', 'heroCarousel', 'menus', 'aboutUs', 
-            'ourService', 'ourTeam', 'faqs', 'ourContact', 'landingSection'
+            'firstWordAppName', 'heroCarousel', 'menus', 'aboutUs',
+            'ourService', 'ourTeam', 'ourContact', 'landingSection'
         ));
     }
 }

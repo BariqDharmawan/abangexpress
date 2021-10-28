@@ -62,6 +62,7 @@
     </section><!-- End About Section -->
 
     <!-- ======= Services Section ======= -->
+    @if (count($ourService) > 0)
     <section id="services">
         <div class="container" data-aos="fade-up">
             <x-section-header text="{{ $landingSection[1]->section_name }}"/>
@@ -84,9 +85,11 @@
 
         </div>
     </section>
+    @endif
 
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials">
+
+    @if (count($ourTeam) > 0)
+    <section id="our-team">
         <div class="container" data-aos="fade-up">
             <x-section-header text="{{ $landingSection[3]->section_name }}"/>
 
@@ -104,8 +107,7 @@
                                     'template1/img/quote-sign-right.png'
                                 ) }}" class="quote-sign-right" alt="">
                             </p>
-                            <img src="{{ asset('storage/' .
-                            str_replace('public/', '', $team->avatar)) }}"
+                            <img src="{{ asset($team->avatar) }}"
                             class="testimonial-img" alt="">
                             <h3>{{ $team->name }}</h3>
                             <h4>{{ $team->position->name }}</h4>
@@ -115,9 +117,9 @@
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
-
         </div>
     </section>
+    @endif
 
     <!-- ======= Frequently Asked Questions Section ======= -->
     <section id="faq" class="faq section-bg my-4 bg-primary">
