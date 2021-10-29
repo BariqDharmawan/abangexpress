@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             HeroCarouselSeeder::class,
             AboutUsSeeder::class,
-            OurServiceSeeder::class,
+            // OurServiceSeeder::class,
             PositionListSeeder::class,
             OurTeamSeeder::class,
             FaqSeeder::class,

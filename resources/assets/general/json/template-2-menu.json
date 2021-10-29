@@ -1,30 +1,34 @@
 [
     {
-        "url": "#hero",
+        "url": "/#hero",
         "text": "Home"
     },
     {
-        "url": "#about",
+        "url": "/#about",
         "text": "Tentang Kami"
     },
     {
-        "url": "#why-us",
+        "url": "/#why-us",
         "text": "Visi & Misi"
     },
     {
-        "url": "#services",
+        "url": "/#services",
         "text": "Layanan"
     },
     {
-        "url": "#team",
+        "url": "/#team",
         "text": "Team"
     },
     {
-        "url": "#faq",
+        "url": "/#faq",
         "text": "Tanya Kami"
     },
     {
-        "url": "#contact",
+        "url": "/gallery",
+        "text": "Gallery"
+    },
+    {
+        "url": "/#contact",
         "text": "Kontak Kami"
     }
 ]

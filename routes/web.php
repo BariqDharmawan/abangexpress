@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('tracking-order', 'TrackingOrderController');
 
-Route::get('tentang-kami', 'TemplateSatuController@aboutUs');
-Route::get('gallery', 'TemplateSatuController@gallery')->name('gallery');
-
 Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function (){
     Route::get('/', 'ShipmentController@index')->name('index');
     Route::get('zipcode', 'ShipmentController@zipCode')->name('zipcode');
@@ -110,9 +107,12 @@ try {
 
     if ($templateChoosen == 1) {
         Route::get('/', 'TemplateSatuController@index');
+        Route::get('tentang-kami', 'TemplateSatuController@aboutUs');
+        Route::get('gallery', 'TemplateSatuController@gallery')->name('gallery');
     }
     else {
-        Route::get('/', 'TemplateDuaController');
+        Route::get('/', 'TemplateDuaController@index');
+        Route::get('gallery', 'TemplateDuaController@gallery')->name('gallery');
     }
 } catch (\Throwable $th) {}
 

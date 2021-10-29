@@ -25,21 +25,32 @@ on('click', '.navbar .dropdown > a', function (e) {
 let navbarlinks = select('#navbar .scrollto', true)
 const navbarlinksActive = () => {
     let position = window.scrollY + 200
-    navbarlinks.forEach(navbarlink => {
-        if (!navbarlink.hash) return
 
-        let section = select(navbarlink.hash)
+    if (window.location.pathname == '/') {
+        navbarlinks.forEach(navbarlink => {
+            if (!navbarlink.hash) return
 
-        if (!section) return
+            let section = select(navbarlink.hash)
 
-        if (position >= section.offsetTop && position <=
-            (section.offsetTop + section.offsetHeight)) {
-            navbarlink.classList.add('active')
-        }
-        else {
+            if (!section) return
+
+            if (position >= section.offsetTop && position <=
+                (section.offsetTop + section.offsetHeight)) {
+                navbarlink.classList.add('active')
+            }
+            else {
+                navbarlink.classList.remove('active')
+            }
+        })
+    }
+    else {
+        navbarlinks.forEach(navbarlink => {
             navbarlink.classList.remove('active')
-        }
-    })
+            if (window.location.pathname == navbarlink.getAttribute('href')) {
+                navbarlink.classList.add('active')
+            }
+        })
+    }
 }
 window.addEventListener('load', navbarlinksActive)
 onscroll(document, navbarlinksActive)

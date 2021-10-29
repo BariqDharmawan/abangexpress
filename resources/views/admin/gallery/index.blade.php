@@ -12,7 +12,7 @@
                 modal-target="add-video" />
             </x-slot>
 
-            @include('partials.gallery-list')
+            @include('partials.gallery-list', ['hasBtnDelete' => true])
         </x-admin.card>
     </div>
 @endsection

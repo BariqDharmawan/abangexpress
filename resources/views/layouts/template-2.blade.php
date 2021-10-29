@@ -6,12 +6,12 @@
     @include('partials.styles', ['path' => 'template2'])
 </head>
 
-<body>
+<body class="@yield('single-page')">
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center">
 
             <h1 class="logo me-auto">
-                <a href="index.html">{{ $ourName }}</a>
+                <a href="{{ url('/') }}">{{ $ourName }}</a>
             </h1>
 
             <nav id="navbar" class="navbar">

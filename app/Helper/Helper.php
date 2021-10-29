@@ -94,8 +94,6 @@ class Helper
             $menus = $menus->filter(function ($menu) use ($menuToRemove) {
                 return $menu->url != $menuToRemove;
             });
-
-            // dd($menus);
         }
 
         return $menus;

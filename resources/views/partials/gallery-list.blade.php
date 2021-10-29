@@ -10,9 +10,11 @@
             <img src="{{ asset('img/icon/bxs-zoom-in.svg') }}" height="40px" class="center-parent" alt=""
                 title="Klik untuk zoom">
         </a>
-        <x-admin.modal.trigger text="Hapus"
-        modal-target="remove-image-{{ $loop->iteration }}"
-            class="d-block w-100 mt-2 btn-danger" />
+        @if (isset($hasBtnDelete) and $hasBtnDelete)
+            <x-admin.modal.trigger text="Hapus"
+                modal-target="remove-image-{{ $loop->iteration }}"
+                class="d-block w-100 mt-2 btn-danger" />
+        @endif
     </div>
     @endforeach
 </div>
@@ -30,9 +32,12 @@
             ) }}/hqdefault.jpg" alt="" class="border rounded img-fluid" />
             <img src="{{ asset('img/icon/bx-play.svg') }}" height="60px" class="center-parent" alt="">
         </a>
+
+        @if (isset($hasBtnDelete) and $hasBtnDelete)
         <x-admin.modal.trigger text="Hapus"
         modal-target="remove-youtube-{{ $loop->iteration }}"
         class="d-block w-100 mt-2 btn-danger" />
+        @endif
     </div>
     @endforeach
 </div>
