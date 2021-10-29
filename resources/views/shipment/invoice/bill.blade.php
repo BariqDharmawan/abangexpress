@@ -1,6 +1,5 @@
 @extends('layouts/shipment')
 
-@section('title', 'Tagihan')
 
 @section('content')
 <div class="row clearfix">
@@ -43,11 +42,11 @@
                                                     Cetak
                                                 </button>
                                             </form>
-                                            <a target="_blank"
+                                            {{-- <a target="_blank"
                                             href=""
                                             class="btn btn-big btn-success w-100 mt-4">
                                                 Upload pembayaran
-                                            </a>
+                                            </a> --}}
                                         </td>
                                     </tr>
                                 @endforeach

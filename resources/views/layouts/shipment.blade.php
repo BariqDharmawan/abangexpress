@@ -70,9 +70,9 @@
                     <x-shipment.dropdown-item text="Dashboard"
                     icon="home" href="{{ route('shipping.index') }}" />
 
-                    {{-- <x-shipment.dropdown-item
+                    <x-shipment.dropdown-item
                     text="Kode Post Taiwan" icon="text_fields"
-                    href="{{ route('shipping.zipcode') }}" /> --}}
+                    href="https://postalcode-tpe.ekspres.co.id/" target="_blank" />
 
                     <x-shipment.dropdown-item text="Order"
                     icon="flight_takeoff" :is-dropdown="true">

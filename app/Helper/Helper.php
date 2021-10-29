@@ -77,6 +77,7 @@ class Helper
                 'tujuan' => $item->tujuan,
                 'berat' => $item->berat,
                 'qty' => $item->qty,
+                'token' => $item->token,
                 'tglOrder' => Carbon::parse($item->tglOrder)->format('d F Y')
             ];
         });
