@@ -60,3 +60,10 @@
         padding-left: 1.75rem;
     }
 }
+
+.center-parent {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

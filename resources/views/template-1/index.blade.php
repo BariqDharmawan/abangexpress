@@ -89,11 +89,42 @@
     </section>
     @endif
 
+    @if (count($ourBranch) > 0)
+    <section id="our-branch">
+        <div class="container" data-aos="fade-up">
+            <x-section-header text="{{ $landingSection[4]->section_name }}"/>
+
+            <div class="testimonials-slider swiper-container"
+            data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
+                    @foreach ($ourBranch as $branch)
+                    <div class="swiper-slide">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <img src="{{ asset($branch->icon) }}" height="70px"
+                                width="70px" alt="{{ $branch->name }}">
+                            </div>
+                            <div class="card-footer">
+                                <p class="card-text mb-3 fw-bold">
+                                    {{ $branch->telephone }}
+                                </p>
+                                <h3 class="card-title fs-5">{{ $branch->name }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+    @endif
+
     <!-- ======= Frequently Asked Questions Section ======= -->
     <section id="faq" class="faq section-bg my-4 bg-primary">
         <div class="container" data-aos="fade-up">
 
-            <x-section-header text="{{ $landingSection[4]->section_name }}"
+            <x-section-header text="{{ $landingSection[5]->section_name }}"
             class="text-white text-center no-before" />
 
             <div class="accordion accordion-flush shadow p-4 bg-white parent-load-data"
@@ -120,5 +151,6 @@
 
     <!-- ======= Contact Section ======= -->
     @include('partials.contact')
+
 </main><!-- End #main -->
 @endsection

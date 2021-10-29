@@ -7,4 +7,9 @@
 <meta content="" name="keywords">
 <link href="{{ asset('img/favicon/favicon.png') }}" rel="icon">
 <link href="{{ asset('img/favicon/apple-touch-icon.png') }}" rel="apple-touch-icon">
-<title>@yield('title')</title>
+<title>
+    @isset($prefixTitle)
+        {{ $prefixTitle . ' - ' }}
+    @endisset
+    @yield('title')
+</title>

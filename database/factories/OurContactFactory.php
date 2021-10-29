@@ -23,7 +23,7 @@ class OurContactFactory extends Factory
     {
         return [
             'address' => $this->faker->address(),
-            'telephone' => str_replace(' ', '', $this->faker->phoneNumber()),
+            'telephone' => str_replace('(+62)', '', str_replace(' ', '', $this->faker->phoneNumber())),
             'email' => $this->faker->safeEmail(),
             'link_address' => $this->faker->unique(true)->randomElement([
                 'https://goo.gl/maps/sqCg6dKMqWF4M2ZD8',

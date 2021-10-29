@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::resource('tracking-order', 'TrackingOrderController');
 
 Route::get('tentang-kami', 'TemplateSatuController@aboutUs');
+Route::get('gallery', 'TemplateSatuController@gallery')->name('gallery');
 
 Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function (){
     Route::get('/', 'ShipmentController@index')->name('index');

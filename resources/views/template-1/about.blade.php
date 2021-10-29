@@ -31,6 +31,6 @@
     </div>
 </section>
 
-@include('partials.contact')
+@include('partials.contact', ['sectionName' => $landingSection[1]->section_name])
 
 @endsection

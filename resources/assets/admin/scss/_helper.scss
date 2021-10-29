@@ -9,6 +9,12 @@
 .transition-default {
     transition: all 250ms;
 }
+.modal-body-without-padding .modal-body {
+    padding: 0;
+}
+.modal-body-flex .modal-body {
+    display: flex;
+}
 .rotate-180deg {
     transform: rotate(180deg);
 }

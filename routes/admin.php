@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin', 'checkDomain'])
 ->group(function() {
+
+    Route::resource('gallery', 'GalleryController');
+
     Route::resource('home', 'HomeController')->except('update');
     Route::put('home/update', 'HomeController@update')->name('home.update');
 

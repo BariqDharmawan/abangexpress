@@ -17,15 +17,16 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             HeroCarouselSeeder::class,
             AboutUsSeeder::class,
-            // OurServiceSeeder::class,
+            OurServiceSeeder::class,
             PositionListSeeder::class,
-            // OurTeamSeeder::class,
-            // FaqSeeder::class,
+            OurTeamSeeder::class,
+            FaqSeeder::class,
             OurBranchSeeder::class,
             OurContactSeeder::class,
             LandingSectionDescSeeder::class,
             OurSocialSeeder::class,
-            TemplateChoosenSeeder::class
+            TemplateChoosenSeeder::class,
+            GallerySeeder::class
         ]);
     }
 }

@@ -2,12 +2,12 @@ import {select, on, onscroll} from './../../general/js/helper'
 
 const Isotope = require('isotope-layout');
 
+import './glightbox'
 import './aos'
 import './nav'
 import './slider'
 import './header'
 import './../../general/js/btn'
-import './glightbox'
 import { AOS } from './aos';
 
 /**

@@ -6,7 +6,9 @@ use App\Helper\Helper;
 use App\Models\AboutUs;
 use App\Models\Faq;
 use App\Models\FirstHeroCarouselLanding;
+use App\Models\Gallery;
 use App\Models\LandingSectionDesc;
+use App\Models\OurBranch;
 use App\Models\OurContact;
 use App\Models\OurService;
 use App\Models\OurTeam;
@@ -43,24 +45,22 @@ class TemplateSatuController extends Controller
         $ourTeam = OurTeam::where('domain_owner', request()->getSchemeAndHttpHost())
                 ->get();
 
-        if (count($ourTeam) == 0) {
-            $menus = $menus->filter(function ($menu){
-                return $menu->url != '/#our-team';
-            });
-        }
-        if (count($ourService) == 0) {
-            $menus = $menus->filter(function ($menu){
-                return $menu->url != '/#services';
-            });
-        }
+        $ourBranch = OurBranch::where('domain_owner', request()->getSchemeAndHttpHost())
+                ->get();
+
+        $menus = Helper::removeMenuIfContentEmpty($menus, $ourTeam, '/#our-team');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $ourService, '/#services');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $ourBranch, '/#our-branch');
 
         $ourContact = OurContact::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
 
+        // dd($menus[6]);
+
         return view('template-1.index', compact(
             'firstWordAppName', 'heroCarousel', 'menus', 'aboutUs',
-            'ourService', 'ourTeam', 'ourContact', 'landingSection'
+            'ourService', 'ourTeam', 'ourContact', 'landingSection', 'ourBranch'
         ));
     }
 
@@ -72,10 +72,39 @@ class TemplateSatuController extends Controller
         $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
                 ->first();
 
-        $landingSection = LandingSectionDesc::where(
-            'domain_owner', request()->getSchemeAndHttpHost()
-        )->get();
+        $landingSection = LandingSectionDesc::where([
+            ['domain_owner', request()->getSchemeAndHttpHost()],
+            ['id', 1]
+        ])->orWhere([
+            ['domain_owner', request()->getSchemeAndHttpHost()],
+            ['id', 7]
+        ])->get();
 
-        return view('about', compact('landingSection', 'menus', 'aboutUs'));
+        return view('template-1.about', compact('landingSection', 'menus', 'aboutUs'));
+    }
+
+    public function gallery()
+    {
+        $menus = Helper::getJson('template-1-menu.json');
+        $menus = collect($menus);
+
+        $galleryImg = Gallery::where([
+            ['domain_owner', request()->getSchemeAndHttpHost()],
+            ['img', '!=', null]
+        ])->get();
+
+        $galleryYoutube = Gallery::where([
+            ['domain_owner', request()->getSchemeAndHttpHost()],
+            ['youtube', '!=', null]
+        ])->get();
+
+        $sectionName = LandingSectionDesc::where([
+            ['domain_owner', request()->getSchemeAndHttpHost()],
+            ['id', 7]
+        ])->first()->section_name;
+
+        return view('template-1.gallery', compact(
+            'menus', 'galleryYoutube', 'galleryImg', 'sectionName'
+        ));
     }
 }

@@ -1,14 +1,16 @@
 <div {{ $attributes->class(['card', 'shadow' => isset($hasShadow) and $hasShadow]) }}">
     @isset($title)
-    <div class="card-header d-flex align-items-center justify-content-between 
+    <div class="card-header d-flex align-items-center
     @if(isset($isHeaderTransparent) and $isHeaderTransparent) bg-transparent @endif
     @if(isset($reverseHeader) and $reverseHeader) flex-column-reverse @endif">
-        <h6 class="m-0 font-weight-bold 
+        <h6 class="m-0 font-weight-bold
         @if(isset($isHeaderTransparent) and $isHeaderTransparent) text-black @else text-primary @endif">
             {{ $title }}
         </h6>
         @isset($header)
+        <div class="ml-auto">
             {{ $header }}
+        </div>
         @endisset
     </div>
     @endisset

@@ -44,7 +44,13 @@ class LandingSectionDescSeeder extends Seeder
                 ],
                 [
                     'domain_owner' => $domain,
-                    'section_name' => 'Mitra Kami',
+                    'section_name' => 'Team Kami',
+                    'first_desc' => '',
+                    'second_desc' => ''
+                ],
+                [
+                    'domain_owner' => $domain,
+                    'section_name' => 'Cabang Kami',
                     'first_desc' => '',
                     'second_desc' => ''
                 ],

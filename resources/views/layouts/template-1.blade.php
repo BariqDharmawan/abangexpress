@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include('partials.meta', ['prefixTitle' => 'Template 1'])
+    @include('partials.meta')
     @include('partials.styles', ['path' => 'template1'])
 </head>
 

@@ -6,17 +6,18 @@ use Illuminate\View\Component;
 
 class Modal extends Component
 {
-    public $heading, $id, $size;
+    public $heading, $id, $size, $isCloseAble;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($heading, $id, $size=null)
+    public function __construct($heading, $id, $size=null, $isCloseAble = true)
     {
         $this->heading = $heading;
         $this->id = $id;
         $this->size = $size;
+        $this->isCloseAble = $isCloseAble;
     }
 
     /**

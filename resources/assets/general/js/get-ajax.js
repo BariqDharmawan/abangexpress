@@ -73,7 +73,7 @@ function getContact(urlApi) {
                 "value": datas.email
             },
             "#phone": {
-                "link": `tel:${datas.telephone}`,
+                "link": `tel:62${datas.telephone}`,
                 "value": `+62${datas.telephone}`
             }
         }

@@ -20,6 +20,14 @@
         "text": "Team Kami"
     },
     {
+        "url": "/#our-branch",
+        "text": "Cabang Kami"
+    },
+    {
+        "url": "/gallery",
+        "text": "Gallery"
+    },
+    {
         "url": "/#contact",
         "text": "Kontak Kami"
     }
