@@ -5,6 +5,9 @@
 @section('content')
 
 <div class="col-12">
+    @if (session('success'))
+        <x-admin.alert-success class="mb-4" />
+    @endif
 
     <x-admin.card title="Manage Cabang Kami">
         <x-slot name="header">
@@ -13,23 +16,23 @@
         </x-slot>
 
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable"
+            <table class="table table-bordered datatable-disable-action-ordering"
             width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th colspan="2">Nama Mitra</th>
+                        <th>Nama Mitra</th>
                         <th>Telepone</th>
                         <th>Alamat</th>
-                        <th colspan="2">Action</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($ourBranch as $branch)
                     <tr>
-                        <td class="text-center">
+                        <td>
                             <img src="{{ asset($branch->icon) }}" alt="{{ $branch->name }}" height="30px" width="30px">
+                            <span class="ml-2">{{ $branch->name }}</span>
                         </td>
-                        <td>{{ $branch->name }}</td>
                         <td>
                             {{ '+62' . $branch->telephone }}
                         </td>
@@ -38,8 +41,6 @@
                             <x-admin.modal.trigger text="Edit" :is-default-style="false"
                             class="btn-warning"
                             modal-target="edit-branch-{{ $loop->iteration }}" />
-                        </td>
-                        <td>
                             <x-admin.modal.trigger text="Hapus" :is-default-style="false"
                             class="btn-danger"
                             modal-target="delete-branch-{{ $loop->iteration }}" />
@@ -59,8 +60,7 @@
         enctype="multipart/form-data">
             @csrf
             <x-admin.input name="name" label="Nama Mitra" required />
-            <x-admin.input name="telephone" type="tel" inputmode="numeric"
-            label="Nomor Telepon" required />
+            <x-admin.input name="telephone" class="only-number" type="tel" inputmode="numeric" label="Nomor Telepon" required />
             <x-admin.input name="address" type="textarea" label="Alamat" required />
             <x-admin.input name="icon" type="file" accept="image/*"
             label="Pilih Logo" required>
@@ -77,17 +77,21 @@
         heading="Edit cabang {{ $branch->name }}">
             <form action="{{ route('admin.branch.update', $branch->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf @method('PUT')
+
+                <img src="{{ asset($branch->icon) }}" alt="{{ $branch->name }}" height="50px" class="mb-4 mx-auto d-block">
+
                 <x-admin.input name="name" value="{{ $branch->name }}"
                 label="Nama Mitra" required />
-                <x-admin.input name="telephone" type="tel"
+                <x-admin.input name="telephone" class="only-number" type="tel"
                 value="{{ $branch->telephone }}" label="Nomor Telepon" required />
                 <x-admin.input name="address" type="textarea"
                 value="{{ $branch->address }}" label="Alamat" required />
-                <x-admin.input name="icon" type="file" label="Pilih Logo" required>
+                <x-admin.input name="icon" type="file" label="Ganti Logo">
                     <small class="text-dark">
                         atau kosongkan, jika ingin menggunakan logo default
                     </small>
                 </x-admin.input>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </x-admin.modal>

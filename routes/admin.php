@@ -34,7 +34,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin', 'checkDom
     Route::get('services', 'OurServiceController@manage')->name('service.manage');
     Route::resource('services', 'OurServiceController')->except('index');
 
-    Route::resource('branch', 'OurBranchController');
+    Route::resource('branch', 'OurBranchController')->except('create', 'edit');
 
     Route::get('team/manage', 'OurTeamController@manage')->name('team.manage');
     Route::resource('team', 'OurTeamController');

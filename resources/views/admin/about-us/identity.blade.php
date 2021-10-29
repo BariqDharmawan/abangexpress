@@ -38,8 +38,10 @@
                 </td>
                 @endif
                 <td>
+                    @isset($identity->cover_vision_mission)
                     <img alt="" height="100px"
                     src="{{ Storage::url($identity->cover_vision_mission) }}">
+                    @endisset
                 </td>
             </tr>
         </x-admin.table>
@@ -72,8 +74,9 @@
                 <label for="edit-mission">Our Mission</label>
                 <textarea name="our_mission" id="edit-mission"
                 class="form-control summernote"
-                style="resize: none;" rows="3"
-                required>{{ isset($identity->our_mission) ? $identity->our_mission : '' }}</textarea>
+                style="resize: none;"
+                rows="3" required>{{ isset($identity->our_mission) ?
+                $identity->our_mission : '' }}</textarea>
                 @error('our_mission')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
