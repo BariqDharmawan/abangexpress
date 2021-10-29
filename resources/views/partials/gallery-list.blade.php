@@ -6,7 +6,8 @@
     @foreach ($galleryImg as $gallery)
     <div class="col-lg-3 mb-5">
         <a href="{{ asset($gallery->img) }}" class="glightbox position-relative d-block" data-gallery="gallery-img">
-            <img src="{{ asset($gallery->img) }}" class="img-fluid" alt="image" />
+            <img src="{{ asset($gallery->img) }}" width="100%" class="object-cover" height="300px"
+            alt="image" />
             <img src="{{ asset('img/icon/bxs-zoom-in.svg') }}" height="40px" class="center-parent" alt=""
                 title="Klik untuk zoom">
         </a>
