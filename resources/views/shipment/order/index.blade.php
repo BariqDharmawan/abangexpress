@@ -97,7 +97,18 @@
                                 <td>{{ $xdata['tujuan'] }}</td>
                                 <td>Berat : {{ $xdata['berat'] }} <br> Qty : {{ $xdata['qty'] }}</td>
                                 <td>
-                                    <a href="" class="btn btn-danger">Cancel</a>
+
+                                    <form method="POST"  action="{{ route('shipping.order.cancel.order') }}" >
+                                        @csrf
+                                        <input type="hidden" name="token" value="{{ $xdata['token']}}">
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="material-icons">
+                                                clear
+                                            </i>
+                                            Cancel
+                                        </button>
+                                    </form>
+                                    {{-- <a href="" class="btn btn-danger">Cancel</a> --}}
                                 </td>
                             </tr>
                             @endforeach

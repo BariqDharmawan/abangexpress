@@ -39,9 +39,10 @@ class ShipmentInvoiceController extends Controller
         $res = json_decode($response);
         $orderData = $res->response;
         $statusRes = $res->status;
+        $title="Tagihan";
         // dd($res);
 
-        return view('shipment.invoice.bill', compact('orderData','statusRes'));
+        return view('shipment.invoice.bill', compact('orderData','statusRes','title'));
     }
 
     public function verifying()

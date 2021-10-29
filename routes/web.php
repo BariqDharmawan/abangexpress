@@ -18,6 +18,8 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
         Route::post('history', 'ShipmentOrderController@filterHistory')->name(
             'filter.history'
         );
+        Route::post('/cancel', 'ShipmentOrderController@cancelOrder')->name('cancel.order');
+
         Route::get('process', 'ShipmentOrderController@process')->name('process');
         Route::get('pending', 'ShipmentOrderController@pending')->name('pending');
         Route::get('history', 'ShipmentOrderController@history')->name('history');
@@ -31,22 +33,38 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
         Route::match(['GET', 'POST'], 'print', 'BookingOrderController@prints')
         ->name('print');
 
-        Route::prefix('book')->name('book.')->group(function (){
-            Route::get('/', 'BookingOrderController@index')->name('index');
-            Route::get('invoice', 'BookingOrderController@invoice')->name(
-                'invoice'
-            );
-            Route::post('invoice', 'BookingOrderController@storeInvoice')->name(
-                'save-invoice'
-            );
-            Route::post('invoice/save', 'BookingOrderController@store')->name(
-                'invoice.save'
-            );
+        Route::get('book', 'BookingOrderController@index')->name('book');
+        Route::get('book/invoice', 'BookingOrderController@invoice')->name(
+            'book.invoice'
+        );
+        Route::post('book/invoice', 'BookingOrderController@storeInvoice')->name(
+            'book.save-invoice'
+        );
+        Route::post('book/invoice/save', 'BookingOrderController@store')->name(
+            'book.invoice.save'
+        );
 
-            Route::post('step-order', 'BookingOrderController@order')->name(
-                'book.step-order'
-            );
-        });
+        Route::post('book/step-order', 'BookingOrderController@order')->name(
+            'book.step-order'
+        );
+        Route::resource('book', 'BookingOrderController')->except('show');
+
+        // Route::prefix('book')->name('book.')->group(function (){
+        //     Route::get('/', 'BookingOrderController@index')->name('index');
+        //     Route::get('/invoice', 'BookingOrderController@invoice')->name(
+        //         'invoice'
+        //     );
+        //     Route::post('/invoice', 'BookingOrderController@storeInvoice')->name(
+        //         'save-invoice'
+        //     );
+        //     Route::post('/invoice/save', 'BookingOrderController@store')->name(
+        //         'invoice.save'
+        //     );
+
+        //     Route::post('/step-order', 'BookingOrderController@order')->name(
+        //         'book.step-order'
+        //     );
+        // });
 
     });
 
