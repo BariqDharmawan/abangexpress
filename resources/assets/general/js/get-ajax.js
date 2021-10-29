@@ -26,7 +26,7 @@ function getFaq(urlApi) {
     getAjax(urlApi, '#load-faq').then(result => {
         if (result.datas.length == 0) {
             document.querySelector('#faq').remove()
-            document.querySelector('#navbar li a[href="#faq"]').closest('li').remove()
+            document.querySelector('#navbar li a[href="/#faq"]').closest('li').remove()
         }
         else {
             for (const record of result.datas) {

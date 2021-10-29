@@ -8,7 +8,7 @@
     @if ($type != 'file')
     <label for="{{ Str::slug($name) }}">{{ $label }}</label>
     @endif
-    
+
     @if ($type == 'textarea')
     <textarea
     {{ $attributes->class(['form-control'])->merge([
@@ -19,7 +19,7 @@
 
     @elseif($type == 'select')
     <select {{ $attributes->merge([
-        'class' => 'custom-select text-capitalize', 
+        'class' => 'custom-select text-capitalize',
         'name' => $name,
         'id' => $id ?? Str::slug($name)
     ]) }}>
@@ -32,7 +32,7 @@
             'type' => 'file',
             'id' => $id ?? Str::slug($name),
             'name' => $name
-        ]) }} {{ $isRequired == true ? 'required' : '' }}>
+        ]) }} {{ isset($isRequired) and $isRequired == true ? 'required' : '' }}>
         <label class="custom-file-label" for="{{ $id ?? Str::slug($name) }}">
             {{ $label }}
         </label>
@@ -45,9 +45,13 @@
         'value' => old($name) ?? (isset($value) ? $value : '')
     ]) }}>
     @endif
-    
+
     @error($name)
         <div class="text-danger py-2">{{ $message }}</div>
+    @else
+        @if ($type != 'select')
+            {{ $slot }}
+        @endif
     @enderror
 
 </div>

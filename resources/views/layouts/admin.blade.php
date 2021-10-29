@@ -34,6 +34,7 @@
                     <x-admin.sidebar.link text="Tanya Kami" icon="fas fa-question-circle" :href="route('admin.faq.manage')" />
                     <x-admin.sidebar.link text="Kontak Kami" icon="fas fa-phone-alt" :href="route('admin.contact.manage')" />
                     <x-admin.sidebar.link text="Social Media" icon="fas fa-share-alt" :href="route('admin.our-social.manage')" />
+                    <x-admin.sidebar.link text="Cabang Kami" icon="fas fa-share-alt" :href="route('admin.branch.index')" />
                 </x-admin.sidebar.dropdown>
             </x-admin.sidebar.menu>
 

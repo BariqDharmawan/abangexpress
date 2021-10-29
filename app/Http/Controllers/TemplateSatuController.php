@@ -45,17 +45,12 @@ class TemplateSatuController extends Controller
 
         if (count($ourTeam) == 0) {
             $menus = $menus->filter(function ($menu){
-                return $menu->url != '#our-team';
+                return $menu->url != '/#our-team';
             });
         }
         if (count($ourService) == 0) {
             $menus = $menus->filter(function ($menu){
-                return $menu->url != '#services';
-            });
-        }
-        if (count($ourService) == 0) {
-            $menus = $menus->filter(function ($menu){
-                return $menu->url != '#services';
+                return $menu->url != '/#services';
             });
         }
 
