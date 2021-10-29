@@ -168,7 +168,7 @@
     <section id="faq" class="faq section-bg">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="{{ $landingSection[4]->section_name }}" />
+            <x-template2.section-title heading="{{ $landingSection[5]->section_name }}" />
 
             <div class="faq-list">
                 <ul id="load-faq">

@@ -45,6 +45,8 @@ class TemplateDuaController extends Controller
         $menus = Helper::removeMenuIfContentEmpty($menus, $ourService, '/#services');
         $menus = Helper::removeMenuIfContentEmpty($menus, $ourBranch, '/#our-branch');
 
+        // dd($landingSection);
+
         return view('template-2.index', compact(
             'landingSection', 'aboutUs', 'ourBranch',
             'ourTeam', 'aboutUs', 'ourService', 'menus', 'ourContactList'
@@ -72,7 +74,6 @@ class TemplateDuaController extends Controller
         ])->get();
 
         $ourContactList = Helper::getJson('our-contact-list.json');
-        // dd($landingSection);
 
         $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
                 ->first();
