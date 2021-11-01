@@ -62,7 +62,7 @@ $(document).ready(function() {
         }
     }
 
-    function FillCommercialInvoice() {
+    function fillCommercialInvoice() {
         // generate commercial invoice table data
         var oldCi = localStorage.getItem("commercialInvoice")
         if (oldCi === null) {
@@ -75,7 +75,7 @@ $(document).ready(function() {
 
     }
 
-    FillCommercialInvoice()
+    fillCommercialInvoice()
 
     //cancel submit form book and save data to localstorage
     $("#form-book-order").submit(function(e) {
@@ -230,7 +230,7 @@ $(document).ready(function() {
                     }
                 }
                 localStorage.setItem('commercialInvoice', str1)
-                FillCommercialInvoice()
+                fillCommercialInvoice()
 
                 window.location.reload()
             }
