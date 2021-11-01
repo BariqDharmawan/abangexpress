@@ -50,7 +50,6 @@
                             <tr>
                                 <th>No</th>
                                 <th>Description</th>
-                                <th>Unit</th>
                                 <th>Quantity</th>
                                 <th>Unit value</th>
                                 <th>Total value</th>

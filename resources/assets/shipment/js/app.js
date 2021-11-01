@@ -5,7 +5,7 @@ import './get-ajax'
 import './input'
 import './localstorage'
 import './../../general/js/utilities'
-import './component/datatable'
+import './datatable'
 import './../../general/js/panel'
 
 import PDFObject from 'pdfobject'

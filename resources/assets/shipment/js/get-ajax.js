@@ -1,4 +1,4 @@
-import { previewImgUpload, removePath } from "./utilities";
+import { previewImgUpload, removePath } from "./helper";
 
 $.ajaxSetup({
     headers: {
@@ -57,24 +57,3 @@ $(document).ready(function() {
     });
 
 });
-
-function getCommercialInvoice() {
-    const data = JSON.parse(
-        '[' + localStorage.getItem("commercialInvoice") + ']'
-    )
-    const commercialInvoice = data.map((invoice, index) => ({
-        ...invoice,
-        no: index + 1,
-        total_value: Number(invoice.quantity) *
-            Number(invoice.value_unit),
-        action: `<button class="btn waves-effect btn-danger"
-            data-toggle="modal" type="button"
-            data-target="#delete-data-${index + 1}">
-                <i class="material-icons">delete</i>
-            </button>`
-    }))
-
-    return commercialInvoice
-}
-
-export {getCommercialInvoice}

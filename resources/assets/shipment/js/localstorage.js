@@ -1,26 +1,81 @@
-import { enableOtherBtn, showElAfterClick } from "./btn"
-import { regenerateDatatableAjax } from "./datatable"
-import { getCommercialInvoice } from "./get-ajax"
-import { resetForm } from "./input"
+import { csrfToken, isAlreadyFillFormBook, isOnFormBookInvoicePage, regenerateDatatableAjax } from "./helper"
 import { appendModal } from "./modal"
 
 $(document).ready(function() {
 
-    const csrfToken = $("meta[name='csrf-token']").attr('content')
-
-    const isAlreadyFillFormBook = localStorage.getItem('sender_name') ? true : false
-    const isOnFormBookInvoicePage = (window.location.pathname ==
-        '/shipping/order/book/invoice') ? true : false
-
+    //redirect to invoice page if already fill book order
     if (isOnFormBookInvoicePage && !isAlreadyFillFormBook) {
         window.location.href = '/shipping/order/book'
     }
 
-    function addModalDelete(id, val) {
-        
+    function getCommercialInvoice() {
+        const commercialInvoice = JSON.parse(
+            '[' + localStorage.getItem("commercialInvoice") + ']'
+        )
+
+        return commercialInvoice.map((invoice, index) => ({
+            ...invoice,
+            no: index + 1,
+            quantity_pcs: `${invoice.quantity} ${invoice.unit}`,
+            value_unit: new Intl.NumberFormat('en-US').format(invoice.value_unit),
+            total_value: new Intl.NumberFormat('en-US').format(
+                Number(invoice.quantity) * Number(invoice.value_unit)
+            ),
+            action: `<button class="btn waves-effect btn-danger"
+                data-toggle="modal" type="button"
+                data-target="#delete-data-${index + 1}">
+                    <i class="material-icons">delete</i>
+                </button>`
+        }))
     }
 
-    
+    function showInvoiceResult() {
+        // refresh dataTable
+        regenerateDatatableAjax('#commercialInvoice', getCommercialInvoice(), [
+            { "data": "no" },
+            { "data": "desc" },
+            { "data": "quantity_pcs" },
+            { "data": "value_unit" },
+            { "data": "total_value" },
+            { "data": "action" }
+        ])
+
+        $("#btn-generate-pdf").removeAttr("disabled");
+
+        for (let i = 0; i < getCommercialInvoice().length; i++) {
+            appendModal(`delete-data-${i + 1}`, `Hapus data ${i + 1}`, 
+            `<p>
+                Apakah kamu yakin, ingin menghapus data ${i + 1}
+            </p>`,
+            `<div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">
+                        Tidak jadi
+                    </button>
+                    <input type="hidden" name="_token"
+                        value="${csrfToken}">
+                    <input type="hidden" name="_method"
+                        value="DELETE">
+                    <button type="button" value="${i + 1}" class="btn btn-danger waves-effect btn-delete-value-attr">
+                        Ya, hapus
+                    </button>
+            </div>`)
+        }
+    }
+
+    function FillCommercialInvoice() {
+        // generate commercial invoice table data
+        var oldCi = localStorage.getItem("commercialInvoice")
+        if (oldCi === null) {
+            // no data dont generate
+            $("#btn-generate-pdf").attr("disabled");
+        } else {
+            // generate data
+            showInvoiceResult()
+        }
+
+    }
+
+    FillCommercialInvoice()
 
     //cancel submit form book and save data to localstorage
     $("#form-book-order").submit(function(e) {
@@ -41,7 +96,6 @@ $(document).ready(function() {
     $("#form-invoice-order").submit(function(e) {
         e.preventDefault()
         const thisForm = $(this)[0]
-        const btnSubmit = $(this).find("button[type='submit']")
 
         const getBookOrderOnPrevRequest = new FormData()
         const formDataInvoice = new FormData(thisForm)
@@ -96,37 +150,7 @@ $(document).ready(function() {
                 $("#form-invoice-order .form-line").removeClass('focused')
                 $(".select2").val('').trigger('change')
 
-                // refresh dataTable
-                regenerateDatatableAjax('#commercialInvoice', getCommercialInvoice(), [
-                    { "data": "no" },
-                    { "data": "desc" },
-                    { "data": "unit" },
-                    { "data": "quantity" },
-                    { "data": "value_unit" },
-                    { "data": "total_value" },
-                    { "data": "action" }
-                ])
-
-                $("#btn-generate-pdf").removeAttr("disabled");
-
-                for (let i = 0; i < getCommercialInvoice().length; i++) {
-                    appendModal(`delete-data-${i + 1}`, `Hapus data ${i + 1}`, 
-                    `<p>
-                        Apakah kamu yakin, ingin menghapus data ${i + 1}
-                    </p>`,
-                    `<div class="d-flex justify-content-between">
-                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">
-                                Tidak jadi
-                            </button>
-                            <input type="hidden" name="_token"
-                                value="${csrfToken}">
-                            <input type="hidden" name="_method"
-                                value="DELETE">
-                            <button type="button" value="${i + 1}" class="btn btn-danger waves-effect btn-delete-value-attr">
-                                Ya, hapus
-                            </button>
-                    </div>`)
-                }
+                showInvoiceResult()
 
             },
             error: function(error) {
@@ -139,13 +163,11 @@ $(document).ready(function() {
     //submit form invoice and form booking order that saved on localstorage as well
     $("#print-invoice").submit(function(e) {
         e.preventDefault()
-        const thisForm = $(this)[0]
-        let xbookOrder = new FormData($(this)[0])
 
-        xbookOrder.delete('_token')
+        let formBookOrder = new FormData($(this)[0])
+        formBookOrder.delete('_token')
 
         const getBookOrderOnPrevRequest = new FormData()
-        const formDataInvoice = new FormData(thisForm)
 
         for (let key = 0; key < localStorage.length; key++) {
             const inputNameBookingOrder = localStorage.key(key)
@@ -180,62 +202,11 @@ $(document).ready(function() {
         })
 
     })
-
-    function FillCommercialInvoice() {
-        // generate commercial invoice table data
-        var oldCi = localStorage.getItem("commercialInvoice")
-        if (oldCi === null) {
-            // no data dont generate
-
-            $("#btn-generate-pdf").attr("disabled");
-        } else {
-            // generate data
-
-            const thisForm = $(this)[0]
-            const btnSubmit = $(this).find("button[type='submit']")
-
-            // refresh dataTable
-            regenerateDatatableAjax('#commercialInvoice', getCommercialInvoice(), [
-                { "data": "no" },
-                { "data": "desc" },
-                { "data": "unit" },
-                { "data": "quantity" },
-                { "data": "value_unit" },
-                { "data": "total_value" },
-                { "data": "action" }
-            ])
-
-            $("#btn-generate-pdf").removeAttr("disabled");
-
-            for (let i = 0; i < getCommercialInvoice().length; i++) {
-                // addModalDelete(`delete-data-${i + 1}`, i + 1)
-                appendModal(`delete-data-${i + 1}`, `Hapus data ${i + 1}`, 
-                `<p>
-                    Apakah kamu yakin, ingin menghapus data ${i + 1}
-                </p>`,
-                `<div class="d-flex justify-content-between">
-                        <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">
-                            Tidak jadi
-                        </button>
-                        <input type="hidden" name="_token"
-                            value="${csrfToken}">
-                        <input type="hidden" name="_method"
-                            value="DELETE">
-                        <button type="button" value="${i + 1}" class="btn btn-danger waves-effect btn-delete-value-attr">
-                            Ya, hapus
-                        </button>
-                </div>`)
-            }
-
-        }
-
-    }
-
-    FillCommercialInvoice()
     
     // delete commercial invoice content
     $(".btn-delete-value-attr").click(function() {
         $(this).parents('.modal').modal('hide')
+
         try {
             const ids = $(this).attr('value')
 
@@ -243,12 +214,10 @@ $(document).ready(function() {
             getCommercialInvoice = getCommercialInvoice.split("},")
 
             if (getCommercialInvoice.length > 1) {
-
-                let removeId = ids - 1;
                 let str1 = "";
                 let ct = 1;
                 for (let i = 0; i < getCommercialInvoice.length; i++) {
-                    if (i == ids - 1) {} else {
+                    if (i != ids - 1) {
                         let xstr2 = "";
                         xstr2 = getCommercialInvoice[i].replace("{", "")
                         xstr2 = xstr2.replace("}", "")
@@ -261,9 +230,10 @@ $(document).ready(function() {
                     }
                 }
                 localStorage.setItem('commercialInvoice', str1)
-
                 FillCommercialInvoice()
-            } 
+
+                window.location.reload()
+            }
             else {
                 localStorage.removeItem('commercialInvoice')
             }

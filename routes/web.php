@@ -9,6 +9,7 @@ Route::resource('tracking-order', 'TrackingOrderController');
 Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function (){
     Route::get('/', 'ShipmentController@index')->name('index');
     Route::get('zipcode', 'ShipmentController@zipCode')->name('zipcode');
+
     Route::prefix('order')->name('order.')->group(function (){
 
         Route::get('/', 'ShipmentOrderController@index')->name('index');
@@ -28,42 +29,15 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
             'get-recipient'
         );
 
-        Route::match(['GET', 'POST'], 'print', 'BookingOrderController@prints')
-        ->name('print');
+        Route::match(['GET', 'POST'], 'print', 'BookingOrderController@prints')->name('print');
 
-        Route::get('book', 'BookingOrderController@index')->name('book');
-        Route::get('book/invoice', 'BookingOrderController@invoice')->name(
-            'book.invoice'
-        );
-        Route::post('book/invoice', 'BookingOrderController@storeInvoice')->name(
-            'book.save-invoice'
-        );
-        Route::post('book/invoice/save', 'BookingOrderController@store')->name(
-            'book.invoice.save'
-        );
-
-        Route::post('book/step-order', 'BookingOrderController@order')->name(
-            'book.step-order'
-        );
-        Route::resource('book', 'BookingOrderController')->except('show');
-
-        // Route::prefix('book')->name('book.')->group(function (){
-        //     Route::get('/', 'BookingOrderController@index')->name('index');
-        //     Route::get('/invoice', 'BookingOrderController@invoice')->name(
-        //         'invoice'
-        //     );
-        //     Route::post('/invoice', 'BookingOrderController@storeInvoice')->name(
-        //         'save-invoice'
-        //     );
-        //     Route::post('/invoice/save', 'BookingOrderController@store')->name(
-        //         'invoice.save'
-        //     );
-
-        //     Route::post('/step-order', 'BookingOrderController@order')->name(
-        //         'book.step-order'
-        //     );
-        // });
-
+        Route::prefix('book')->name('book.')->group(function (){
+            Route::get('/', 'BookingOrderController@index')->name('index');
+            Route::get('invoice', 'BookingOrderController@invoice')->name('invoice');
+            Route::post('invoice', 'BookingOrderController@storeInvoice')->name('save-invoice');
+            Route::post('invoice/save', 'BookingOrderController@store')->name('invoice.save');
+            Route::post('step-order', 'BookingOrderController@order')->name('step-order'); 
+        });
     });
 
     Route::prefix('support')->name('support.')->group(function (){
@@ -88,6 +62,7 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
         );
         Route::get('settled', 'ShipmentInvoiceController@settled')->name('settled');
     });
+
     Route::prefix('support')->name('support.')->group(function (){
         Route::get('guide', 'ShipmentSupportController@guide')->name('guide');
         Route::get('regulation', 'ShipmentSupportController@regulation')->name(

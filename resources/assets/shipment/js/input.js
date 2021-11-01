@@ -1,4 +1,4 @@
-import { previewImgUpload } from './utilities'
+import { previewImgUpload } from './helper'
 
 if ($(".select2").length > 0) {
     $(".select2").select2({
