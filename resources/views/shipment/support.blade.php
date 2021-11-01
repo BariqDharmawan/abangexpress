@@ -10,9 +10,14 @@
             {{-- buat component filter dsbnya --}}
             <div class="header"></div>
             <div class="body text-center">
-                @if ($pdf)
-                <div class="preview-pdf preview-pdf--full preview-pdf--without-header" id="pdf-regulation" data-pdf-src="{{ Storage::url($pdf) }}"></div>
-                @endif
+                @isset ($pdf)
+                <div class="preview-pdf preview-pdf--full preview-pdf--without-header" id="pdf"
+                data-pdf-src="{{ Storage::url($pdf) }}"></div>
+                @else
+                <div>
+                    Tidak ada PDF mengenai {{ $title }}
+                </div>
+                @endisset
             </div>
         </div>
     </div>
