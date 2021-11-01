@@ -33,11 +33,6 @@ class TemplateSatuController extends Controller
         $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
                 ->first();
 
-        $firstWordAppName = '';
-        if ($aboutUs) {
-            $firstWordAppName = strtok($aboutUs->our_name, ' ');
-        }
-
         $ourService = OurService::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->orderBy('title', 'asc')->get();
@@ -59,7 +54,7 @@ class TemplateSatuController extends Controller
         // dd($menus[6]);
 
         return view('template-1.index', compact(
-            'firstWordAppName', 'heroCarousel', 'menus', 'aboutUs',
+            'heroCarousel', 'menus', 'aboutUs',
             'ourService', 'ourTeam', 'ourContact', 'landingSection', 'ourBranch'
         ));
     }
@@ -69,8 +64,7 @@ class TemplateSatuController extends Controller
         $menus = Helper::getJson('template-1-menu.json');
         $menus = collect($menus);
 
-        $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
-                ->first();
+        $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())->first();
 
         $landingSection = LandingSectionDesc::where([
             ['domain_owner', request()->getSchemeAndHttpHost()],
@@ -103,8 +97,10 @@ class TemplateSatuController extends Controller
             ['id', 7]
         ])->first()->section_name;
 
+        $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())->select('our_name')->first();
+
         return view('template-1.gallery', compact(
-            'menus', 'galleryYoutube', 'galleryImg', 'sectionName'
+            'menus', 'galleryYoutube', 'galleryImg', 'sectionName', 'aboutUs'
         ));
     }
 }
