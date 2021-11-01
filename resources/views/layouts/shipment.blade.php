@@ -54,7 +54,7 @@
 
             <div class="menu">
                 <a href="{{ route('shipping.order.book.index') }}"
-                class="remove-underline">
+                class="remove-underline" id="menu-add-new-order">
                     <div class="info-box-3 bg-green hover-zoom-effect
                     mb-0 mt-4 ml-4 mr-1 left-0">
                         <div class="icon">

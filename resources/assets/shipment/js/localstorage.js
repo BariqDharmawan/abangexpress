@@ -2,7 +2,6 @@ import { csrfToken, isAlreadyFillFormBook, isOnFormBookInvoicePage, regenerateDa
 import { appendModal } from "./modal"
 
 $(document).ready(function() {
-
     //redirect to invoice page if already fill book order
     if (isOnFormBookInvoicePage && !isAlreadyFillFormBook) {
         window.location.href = '/shipping/order/book'
@@ -43,7 +42,7 @@ $(document).ready(function() {
         $("#btn-generate-pdf").removeAttr("disabled");
 
         for (let i = 0; i < getCommercialInvoice().length; i++) {
-            appendModal(`delete-data-${i + 1}`, `Hapus data ${i + 1}`, 
+            appendModal(`delete-data-${i + 1}`, `Hapus data ${i + 1}`,
             `<p>
                 Apakah kamu yakin, ingin menghapus data ${i + 1}
             </p>`,
@@ -202,7 +201,7 @@ $(document).ready(function() {
         })
 
     })
-    
+
     // delete commercial invoice content
     $(".btn-delete-value-attr").click(function() {
         $(this).parents('.modal').modal('hide')

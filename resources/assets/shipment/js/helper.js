@@ -22,8 +22,18 @@ function regenerateDatatableAjax(tableId, data, columns) {
 
 const csrfToken = $("meta[name='csrf-token']").attr('content')
 
+const isOnFormBookPage = (window.location.pathname == '/shipping/order/book') ? true : false
+
 const isOnFormBookInvoicePage = (window.location.pathname == '/shipping/order/book/invoice') ? true : false
 
 const isAlreadyFillFormBook = localStorage.getItem('sender_name') ? true : false
 
-export {removePath, previewImgUpload, csrfToken, isOnFormBookInvoicePage, isAlreadyFillFormBook, regenerateDatatableAjax}
+export {
+    removePath,
+    previewImgUpload,
+    csrfToken,
+    isOnFormBookInvoicePage,
+    isAlreadyFillFormBook,
+    regenerateDatatableAjax,
+    isOnFormBookPage
+}
