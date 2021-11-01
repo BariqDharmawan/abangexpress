@@ -72,7 +72,7 @@
 
                     <x-shipment.dropdown-item
                     text="Kode Post Taiwan" icon="text_fields"
-                    href="https://postalcode-tpe.ekspres.co.id/" target="_blank" />
+                    href="https://postalcode-tpe.ekspres.co.id/" :is-new-tab="true" />
 
                     <x-shipment.dropdown-item text="Order"
                     icon="flight_takeoff" :is-dropdown="true">

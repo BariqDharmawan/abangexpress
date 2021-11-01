@@ -1,4 +1,4 @@
-@extends('layouts/shipment')
+@extends('layouts.shipment')
 
 @section('content')
 <div class="row clearfix">
