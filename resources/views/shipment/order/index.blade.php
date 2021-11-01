@@ -85,33 +85,27 @@
                         </thead>
                         <tbody>
                             @if ($statusRes =='success')
-                            @foreach ($orderData as $xdata)
-                            <tr>
-                                <td>
-                                    {{ $xdata['tglOrder'] }}
-                                </td>
-                                <td>{{ $xdata['noresi'] }}</td>
-                                <td>{{ $xdata['pengirim'] }} <br> {{ $xdata['telepon'] }}</td>
-                                <td>{{ $xdata['penerima'] }} <br> {{ $xdata['teleponp'] }} <br> {{ $xdata['alamat'] }}
-                                </td>
-                                <td>{{ $xdata['tujuan'] }}</td>
-                                <td>Berat : {{ $xdata['berat'] }} <br> Qty : {{ $xdata['qty'] }}</td>
-                                <td>
-
-                                    <form method="POST"  action="{{ route('shipping.order.cancel.order') }}" >
-                                        @csrf
-                                        <input type="hidden" name="token" value="{{ $xdata['token']}}">
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="material-icons">
-                                                clear
-                                            </i>
-                                            Cancel
-                                        </button>
-                                    </form>
-                                    {{-- <a href="" class="btn btn-danger">Cancel</a> --}}
-                                </td>
-                            </tr>
-                            @endforeach
+                                @foreach ($orderData as $order)
+                                    <tr>
+                                        <td>
+                                            {{ $order['tglOrder'] }}
+                                        </td>
+                                        <td>{{ $order['noresi'] }}</td>
+                                        <td>{{ $order['pengirim'] }} <br> {{ $order['telepon'] }}</td>
+                                        <td>
+                                            {{ $order['penerima'] }} <br>
+                                            {{ $order['teleponp'] }} <br>
+                                            {{ $order['alamat'] }}
+                                        </td>
+                                        <td>{{ $order['tujuan'] }}</td>
+                                        <td>Berat : {{ $order['berat'] }} <br> Qty : {{ $order['qty'] }}</td>
+                                        <td>
+                                            <x-shipment.modal-trigger text="Cancel"
+                                            class="btn-danger btn-small" icon="clear"
+                                            target="modal-cancel-order-{{ $loop->iteration }}" />
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @endif
                         </tbody>
                     </table>
@@ -122,4 +116,24 @@
 
 </div>
 
+@endsection
+
+@section('components')
+    @if ($statusRes =='success')
+        @foreach ($orderData as $order)
+            <x-shipment.modal id="modal-cancel-order-{{ $loop->iteration }}" title="Cancel Orderan {{ $order['noresi'] }}">
+                <p class="mt-5 mb-5">
+                    Apakah kamu yakin ingin cancel orderan dengan resi <b>{{ $order['noresi'] }}</b>? <br>
+                    <strong>Jika sudah tercancel, tidak bisa di-uncancel</strong>
+                </p>
+                <form method="POST" action="{{ route('shipping.order.cancel.order') }}">
+                    @csrf
+                    <input type="hidden" name="token" value="{{ $order['token'] }}">
+                    <button type="submit" class="btn btn-danger w-100">
+                        Yakin
+                    </button>
+                </form>
+            </x-shipment.modal>
+        @endforeach
+    @endif
 @endsection
