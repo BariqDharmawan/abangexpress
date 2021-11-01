@@ -90,48 +90,11 @@ class BookingOrderController extends Controller
 
         curl_close($curl);
         $res=json_decode($response);
-        $res1=json_encode($res->response);
-        // $prevRecipient = Helper::getJson('prev-recipient.json');
+
         $prevRecipient =$res->response;
         $prevRecipient=$prevRecipient[$id-1];
         return response()->json($prevRecipient);
     }
-    // public function order(Request $request)
-    // {
-    //     // dd($request->all());
-    //     $validatedData = $request->validate([
-    //         'sender_name' => ['required'],
-    //         'sender_telephone' => ['required'],
-    //         // 'recipient_previous' => ['required'],
-    //         'recipient_name' => ['required'],
-    //         'recipient_telephone' => ['required'],
-    //         'recipient_nik' => ['required'],
-    //         'recipient_zipcode' => ['required'],
-    //         'recipient_country' => ['required'],
-    //         'recipient_address' => ['required'],
-    //         'recipient_idcard' => ['required'],
-    //         'package_fee' => ['required'],
-    //         'package_weight' => ['required'],
-    //         'package_type' => ['required'],
-    //         'package_detail' => ['required'],
-    //         'package_koli' => ['required'],
-    //         'package_value' => ['required'],
-    //     ]);
-
-    //     if(empty($request->session()->get('book_order'))){
-    //         // $product = new Product();
-    //         // $product->fill($validatedData);
-    //         $request->session()->put('book_order', $validatedData);
-    //     }
-    //     else{
-    //         $product = $request->session()->get('book_order');
-    //         // $product->fill($validatedData);
-    //         $request->session()->put('book_order', $validatedData);
-    //     }
-
-    //     // return redirect()->route('shipping.order.book.invoice');
-    //     return redirect()->route('shipping.order.book.save-invoice);
-    // }
 
     public function invoice(Request $request)
     {
@@ -154,8 +117,6 @@ class BookingOrderController extends Controller
 
     public function store(Request $request)
     {
-
-
         $uid=Auth::user()->username;
         $users = User::where([
             ['username', $uid]
@@ -178,14 +139,10 @@ class BookingOrderController extends Controller
         $desc = $request->package_detail;
         $pcs = $request->package_koli;
         $commercialInvoice = $request->commercialInvoice;
-        // $customvalue=$_POST['package_value'];
         $customvalue = str_replace(".","",$request->package_value);
         $customvalue = str_replace(",",".",$customvalue);
 
-        // $file_tmp= file_get_contents($_FILES['recipient_idcard']['tmp_name']);
-        // $b64=base64_encode($file_tmp);
         $b64=$request->idcard_input_hidden;
-        // echo "<pre>".
         //todo: make this into table for better code
         $postdata='{
             "akun": "'.$akun.'",
@@ -219,25 +176,25 @@ class BookingOrderController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://res.abangexpress.id/shipments/tw/',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS =>$postdata,
-        CURLOPT_HTTPHEADER => array(
-            'Content-Type: application/json'
-        ),
+            CURLOPT_URL => 'https://res.abangexpress.id/shipments/tw/',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>$postdata,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+            ),
         ));
 
         $response = curl_exec($curl);
 
         curl_close($curl);
-        $response=json_decode($response);
-        $response=$response->response;
+        $response = json_decode($response);
+        $response = $response->response;
         // print_r($response);
 
 
@@ -249,12 +206,12 @@ class BookingOrderController extends Controller
 
     public function prints(Request $request)
     {
-        $token=$request->link;
+        $token = $request->link;
         if (!empty($token)){
-            $halaman=file_get_contents("https://duniaexportimport.com/".$token);
+            $halaman = file_get_contents("https://duniaexportimport.com/".$token);
         }else{
-            $token=$_GET['key'];
-            $halaman=file_get_contents("https://duniaexportimport.com/resi/".$token);
+            $token = $_GET['key'];
+            $halaman = file_get_contents("https://duniaexportimport.com/resi/".$token);
             // dd($token);
         }
 
