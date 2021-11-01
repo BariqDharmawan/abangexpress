@@ -30,7 +30,7 @@
                 <x-admin.sidebar.dropdown id="dropdown-edit-company" parent="accordionSidebar">
                     <x-admin.sidebar.link text="Tentang Kami" icon="fas fa-info-circle" :href="route('admin.about-us.identity')" />
                     <x-admin.sidebar.link text="Layanan Kami" icon="fa-fw fa-tachometer-alt" :href="route('admin.service.manage')" />
-                    <x-admin.sidebar.link text="Mitra Kami" icon="fas fa-people-carry" :href="route('admin.team.manage')" />
+                    <x-admin.sidebar.link text="Team Kami" icon="fas fa-people-carry" :href="route('admin.team.manage')" />
                     <x-admin.sidebar.link text="Tanya Kami" icon="fas fa-question-circle" :href="route('admin.faq.manage')" />
                     <x-admin.sidebar.link text="Kontak Kami" icon="fas fa-phone-alt" :href="route('admin.contact.manage')" />
                     <x-admin.sidebar.link text="Social Media" icon="fas fa-share-alt" :href="route('admin.our-social.manage')" />

@@ -14,7 +14,7 @@
 
     <div class="col-12 mb-4">
         <div class="d-flex justify-content-between align-items-center">
-            <h1 class="h4 mb-0">Daftar Mitra</h1>
+            <h1 class="h4 mb-0">Daftar Member</h1>
 
             <x-admin.modal.trigger text="Tambah member"
             modal-target="add-new-person" />
