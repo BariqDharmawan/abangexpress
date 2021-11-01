@@ -4,22 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Helper\Helper;
 use App\Models\LandingSectionDesc;
+use App\Models\LandingSectionTitle;
 use Illuminate\Http\Request;
 
 class LandingSectionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $sectionHeading = LandingSectionDesc::where(
-            'domain_owner', request()->getSchemeAndHttpHost()
-        )->get();
-        return view('admin.contents.section-heading', compact('sectionHeading'));
-    }
 
     /**
      * Update the specified resource in storage.
@@ -28,21 +17,44 @@ class LandingSectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $sectionToUpdate = LandingSectionDesc::where([
-            ['domain_owner', request()->getSchemeAndHttpHost()],
-            ['id', $id]
-        ])->firstOrFail();
-        $sectionToUpdate->section_name = $request->section_name;
-        if ($request->has('first_desc')) {
-            $sectionToUpdate->first_desc = $request->first_desc;
+        // dd($request->all());
+        if ($request->has('our_service_title')) {
+            LandingSectionTitle::updateOrCreate(
+                ['domain_owner' => request()->getSchemeAndHttpHost()],
+                ['our_service' => $request->our_service_title]
+            );
         }
-        if ($request->has('second_desc')) {
-            $sectionToUpdate->second_desc = $request->second_desc;
+
+        if ($request->has('our_team_title')) {
+            LandingSectionTitle::updateOrCreate(
+                ['domain_owner' => request()->getSchemeAndHttpHost()],
+                ['our_team' => $request->our_team_title]
+            );
         }
-        
-        $sectionToUpdate->save();
+
+        if ($request->has('faq_title')) {
+            LandingSectionTitle::updateOrCreate(
+                ['domain_owner' => request()->getSchemeAndHttpHost()],
+                ['faq' => $request->faq_title]
+            );
+        }
+
+        if ($request->has('our_contact_title')) {
+            LandingSectionTitle::updateOrCreate(
+                ['domain_owner' => request()->getSchemeAndHttpHost()],
+                ['our_contact' => $request->our_contact_title]
+            );
+        }
+
+        if ($request->has('our_contact_first_desc')) {
+            LandingSectionDesc::updateOrCreate(
+                ['domain_owner' => request()->getSchemeAndHttpHost()],
+                ['first_desc_contact_us' => $request->our_contact_first_desc]
+            );
+        }
+
         return Helper::returnSuccess('mengganti heading');
     }
 

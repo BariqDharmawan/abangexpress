@@ -12,8 +12,8 @@
             </div>
 
             <div class="col-12 content">
-                <x-section-header text="{{ $landingSection[0]->section_name }}"
-                desc="{!! $landingSection[0]->first_desc !!}" class="text-center my-5" />
+                <x-section-header text="{{ $sectionTitle->about_us }}"
+                desc="{!! $sectionDesc !!}" class="text-center my-5" />
                 <div class="row mt-4">
                     @isset($aboutUs)
                         <div class="col-lg">
@@ -31,6 +31,6 @@
     </div>
 </section>
 
-@include('partials.contact', ['sectionName' => $landingSection[1]->section_name])
+@include('partials.contact')
 
 @endsection

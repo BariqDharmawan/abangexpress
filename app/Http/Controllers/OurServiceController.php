@@ -6,6 +6,7 @@ use App\Helper\Helper;
 use App\Http\Requests\StoreServiceValidation;
 use App\Http\Requests\UpdateServiceValidation;
 use App\Models\LandingSectionDesc;
+use App\Models\LandingSectionTitle;
 use App\Models\OurService;
 use Illuminate\Http\Request;
 
@@ -18,11 +19,14 @@ class OurServiceController extends Controller
                     ->where('domain_owner', request()->getSchemeAndHttpHost())->get();
         $listIcon = Helper::getJson('list-icon-service.json', true);
 
+        $sectionTitle = LandingSectionTitle::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->select('our_service')->first()->our_service;
 
-        $landingSection = LandingSectionDesc::where('id', 2)->first();
+        // $landingSection = LandingSectionDesc::where('id', 2)->first();
 
         return view('admin.services.manage', compact(
-            'ourService', 'listIcon', 'landingSection'
+            'ourService', 'listIcon', 'sectionTitle'
         ));
     }
 
@@ -67,8 +71,13 @@ class OurServiceController extends Controller
         $serviceToUpdate->icon = $request->icon;
         $serviceToUpdate->title = $request->title;
         $serviceToUpdate->desc = $request->desc;
-
         $serviceToUpdate->save();
+
+        LandingSectionTitle::updateOrCreate(
+            ['domain_owner' => request()->getSchemeAndHttpHost()],
+            ['our_service' => $request->section_name]
+        );
+
         return redirect()->back()->with(
             'success', "Successfully change service $serviceToUpdate->title"
         );

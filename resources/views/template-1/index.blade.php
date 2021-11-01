@@ -33,7 +33,7 @@
     @if (count($ourService) > 0)
     <section id="services">
         <div class="container" data-aos="fade-up">
-            <x-section-header text="{{ $landingSection[1]->section_name }}"/>
+            <x-section-header text="{{ $sectionTitle->our_service }}"/>
 
             <div class="row gy-4">
                 @foreach ($ourService as $service)
@@ -59,7 +59,7 @@
     @if (count($ourTeam) > 0)
     <section id="our-team">
         <div class="container" data-aos="fade-up">
-            <x-section-header text="{{ $landingSection[3]->section_name }}"/>
+            <x-section-header text="{{ $sectionTitle->our_team }}"/>
 
             <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
                 <div class="swiper-wrapper">
@@ -92,7 +92,7 @@
     @if (count($ourBranch) > 0)
     <section id="our-branch">
         <div class="container" data-aos="fade-up">
-            <x-section-header text="{{ $landingSection[4]->section_name }}"/>
+            <x-section-header text="{{ $sectionTitle->our_branch }}"/>
 
             <div class="testimonials-slider swiper-container"
             data-aos="fade-up" data-aos-delay="100">
@@ -124,7 +124,7 @@
     <section id="faq" class="faq section-bg my-4 bg-primary">
         <div class="container" data-aos="fade-up">
 
-            <x-section-header text="{{ $landingSection[5]->section_name }}"
+            <x-section-header text="{{ $sectionTitle->faq }}"
             class="text-white text-center no-before" />
 
             <div class="accordion accordion-flush shadow p-4 bg-white parent-load-data"

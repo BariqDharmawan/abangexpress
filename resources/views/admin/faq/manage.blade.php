@@ -20,40 +20,40 @@
         <div class="accordion" id="accordion-faq">
             @foreach ($faqs as $faq)
                 <div class="card mb-3 border-bottom">
-                    <div class="card-header bg-light" 
+                    <div class="card-header bg-light"
                     id="heading-faq-{{ $loop->iteration }}">
                         <h2 class="mb-0">
                             <button class="btn btn-link btn-block text-left d-flex justify-content-between hover-no-underline"
                             type="button" data-toggle="collapse"
-                            data-target="#faq-{{ $loop->iteration }}" 
-                            @if($loop->first)aria-expanded="true" 
+                            data-target="#faq-{{ $loop->iteration }}"
+                            @if($loop->first)aria-expanded="true"
                             @else aria-expanded="false" @endif
                             aria-controls="faq-{{ $loop->iteration }}">
                                 {{ $faq->question }}
-                                <i class="fas fa-chevron-down 
+                                <i class="fas fa-chevron-down
                                 collapse-icon transition-default @if($loop->first) rotate-180deg @endif"></i>
                             </button>
                         </h2>
                     </div>
 
-                    <div id="faq-{{ $loop->iteration }}" 
-                        class="collapse @if($loop->first) show @endif" 
+                    <div id="faq-{{ $loop->iteration }}"
+                        class="collapse @if($loop->first) show @endif"
                         aria-labelledby="heading-faq-{{ $loop->iteration }}"
                         data-parent="#accordion-faq">
                         <div class="card-body">
                             {{ nl2br($faq->answer) }}
                         </div>
                         <div class="card-footer bg-transparent">
-                            <x-admin.modal.trigger text="Ubah detail" 
+                            <x-admin.modal.trigger text="Ubah detail"
                             :is-default-style="false"
                             class="btn-link text-primary px-0 mr-2"
                             modal-target="edit-faq-{{ $loop->iteration }}" />
 
-                            <x-admin.modal.trigger text="Hapus pertanyaan" 
+                            <x-admin.modal.trigger text="Hapus pertanyaan"
                             :is-default-style="false"
                             class="btn-link text-danger px-0"
                             modal-target="remove-faq-{{ $loop->iteration }}" />
-                            
+
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,17 @@
 @endsection
 
 @section('components')
-    @include('admin.partials.change-heading-desc')
+
+    <x-admin.modal id="change-desc-heading" heading="Ubah deskripsi dan heading">
+        <form action="{{ route('admin.content.section-heading.update') }}" method="POST">
+            @csrf @method('PUT')
+
+            <x-admin.input label="Heading Title" name="faq_title"
+            value="{{ $sectionTitle }}"  required />
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </x-admin.modal>
 
     <x-admin.modal id="add-new-faq" heading="Tambah pertanyaan">
         @include('admin.faq.form', ['action' => route('admin.faq.store')])
@@ -84,8 +94,8 @@
         @include('admin.partials.popup-delete', [
             'id' => 'remove-faq-' . $loop->iteration,
             'heading' => 'Hapus pertanyaan ' . $faq->question,
-            'warningMesssage' => 
-                'Apakah kamu yakin ingin menghapus pertanyaa <b>' 
+            'warningMesssage' =>
+                'Apakah kamu yakin ingin menghapus pertanyaa <b>'
                 . $faq->question . '</b>?',
             'action' => route('admin.faq.destroy', $faq->id)
         ])

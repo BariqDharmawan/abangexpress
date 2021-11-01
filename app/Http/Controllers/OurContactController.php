@@ -6,6 +6,7 @@ use App\Helper\Helper;
 use App\Http\Requests\UpdateContactValidation;
 use App\Models\AboutUs;
 use App\Models\LandingSectionDesc;
+use App\Models\LandingSectionTitle;
 use App\Models\OurContact;
 use Illuminate\Http\Request;
 
@@ -27,10 +28,16 @@ class OurContactController extends Controller
             $addressEmbed = $addressEmbed->address_embed;
         }
 
-        $landingSection = LandingSectionDesc::where('id', 5)->first();
+        $sectionTitle = LandingSectionTitle::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->select('our_contact')->first()->our_contact;
+
+        $sectionDesc = LandingSectionDesc::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->select('first_desc_contact_us')->first()->first_desc_contact_us;
 
         return view('admin.about-us.contact.manage', compact(
-            'contact', 'columns', 'addressEmbed', 'titles', 'landingSection'
+            'contact', 'columns', 'addressEmbed', 'titles', 'sectionTitle', 'sectionDesc'
         ));
     }
 
@@ -57,7 +64,7 @@ class OurContactController extends Controller
         $updateContact->telephone = $request->telephone;
         $updateContact->email = $request->email;
         $updateContact->link_address = $request->link_address;
-    
+
         $updateContact->save();
         return Helper::returnSuccess('mengubah kontak');
     }

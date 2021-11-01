@@ -71,7 +71,18 @@
 
 @section('components')
 
-    @include('admin.partials.change-heading-desc')
+    <x-admin.modal id="change-desc-heading" heading="Ubah deskripsi dan heading">
+        <form action="{{ route('admin.content.section-heading.update') }}" method="POST">
+            @csrf @method('PUT')
+
+            <x-admin.input label="Heading Title" name="our_team_title"
+            value="{{ $sectionTitle }}"  required />
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </x-admin.modal>
+
+    {{-- @include('admin.partials.change-heading-desc') --}}
 
     <x-admin.modal id="add-new-person"
         heading="Tambah member baru">

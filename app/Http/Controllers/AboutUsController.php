@@ -7,6 +7,7 @@ use App\Http\Requests\IdentityValidation;
 use App\Http\Requests\UpdateEmbedMapValidation;
 use App\Models\AboutUs;
 use App\Models\LandingSectionDesc;
+use App\Models\LandingSectionTitle;
 use App\Models\TemplateChoosen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -27,9 +28,20 @@ class AboutUsController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
 
-        $aboutUs = LandingSectionDesc::where(
+        // $aboutUs = LandingSectionDesc::where(
+        //     'domain_owner', request()->getSchemeAndHttpHost()
+        // )->first();
+
+        $sectionTitle = LandingSectionTitle::where(
             'domain_owner', request()->getSchemeAndHttpHost()
-        )->first();
+        )->select('about_us')->first()->about_us;
+
+        $sectionDesc = LandingSectionDesc::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->select('first_desc_about_us', 'second_desc_about_us')->first();
+
+        // dd($sectionDesc);
+
         $templateChoosen = TemplateChoosen::select('version')->where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
@@ -49,7 +61,7 @@ class AboutUsController extends Controller
         // dd($identity);
 
         return view('admin.about-us.identity', compact(
-            'identity', 'aboutUs', 'columnsIdentity'
+            'identity', 'sectionTitle', 'columnsIdentity', 'sectionDesc'
         ));
     }
 
@@ -120,13 +132,18 @@ class AboutUsController extends Controller
 
         $ourIdentity->save();
 
-        LandingSectionDesc::where(
-            'domain_owner', request()->getSchemeAndHttpHost()
-        )->firstOrFail()->update([
-            'section_name' => $request->section_name,
-            'first_desc' => $request->first_desc,
-            'second_desc' => $request->second_desc
-        ]);
+        LandingSectionTitle::updateOrCreate(
+            ['domain_owner' => request()->getSchemeAndHttpHost()],
+            ['about_us' => $request->section_name]
+        );
+
+        LandingSectionDesc::updateOrCreate(
+            ['domain_owner' => request()->getSchemeAndHttpHost()],
+            [
+                'first_desc_about_us' => $request->first_desc,
+                'second_desc_about_us' => $request->second_desc ?? null
+            ]
+        );
 
         return Helper::returnSuccess("mengubah tentang kita");
 

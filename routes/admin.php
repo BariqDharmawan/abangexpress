@@ -52,9 +52,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin', 'checkDom
             'store', 'destroy'
         );
 
-        Route::resource('section-heading', 'LandingSectionController')->only(
-            'index', 'update'
-        );
+        Route::put('section-heading', 'LandingSectionController@update')->name('section-heading.update');
 
     });
 });

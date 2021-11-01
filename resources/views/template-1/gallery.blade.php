@@ -10,6 +10,6 @@
     </div>
 </main>
 
-@include('partials.contact', ['sectionName' => $sectionName])
+@include('partials.contact')
 
 @endsection

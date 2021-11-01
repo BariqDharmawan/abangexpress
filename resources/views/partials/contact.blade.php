@@ -1,6 +1,6 @@
 <section id="contact">
     <div class="container" data-aos="fade-up">
-        <x-section-header text="{{ $sectionName ?? $landingSection[6]->section_name }}" />
+        <x-section-header text="{{ $sectionTitle->our_contact }}" />
 
         <div class="row contact-info">
 

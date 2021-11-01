@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLandingSectionDescsTable extends Migration
+class CreateLandingSectionTitlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateLandingSectionDescsTable extends Migration
      */
     public function up()
     {
-        Schema::create('landing_section_descs', function (Blueprint $table) {
+        Schema::create('landing_section_titles', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('first_desc_about_us');
-            $table->text('second_desc_about_us')->nullable();
-            $table->text('first_desc_contact_us')->nullable();
+            $table->string('about_us');
+            $table->string('our_service');
+            $table->string('contact_us');
+            $table->string('our_team');
+            $table->string('our_branch');
+            $table->string('faq');
+            $table->string('our_contact');
             $table->string('domain_owner')->unique();
             $table->timestamps();
         });
@@ -30,6 +34,6 @@ class CreateLandingSectionDescsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('landing_section_descs');
+        Schema::dropIfExists('landing_section_titles');
     }
 }

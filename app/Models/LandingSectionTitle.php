@@ -5,14 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LandingSectionDesc extends Model
+class LandingSectionTitle extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'first_desc_about_us',
-        'second_desc_about_us',
-        'first_desc_contact_us',
+        'about_us',
+        'our_service',
+        'contact_us',
+        'our_team',
+        'our_branch',
+        'faq',
+        'our_contact',
         'domain_owner'
     ];
 }

@@ -6,6 +6,7 @@ use App\Helper\Helper;
 use App\Http\Requests\StoreMemberValidation;
 use App\Http\Requests\UpdateMemberValidation;
 use App\Models\LandingSectionDesc;
+use App\Models\LandingSectionTitle;
 use App\Models\OurTeam;
 use App\Models\PositionList;
 use Illuminate\Support\Facades\Storage;
@@ -24,12 +25,16 @@ class OurTeamController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->get();
 
-        $landingSection = LandingSectionDesc::where('id', 4)->first();
+        $sectionTitle = LandingSectionTitle::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->select('our_team')->first()->our_team;
+
+        // $landingSection = LandingSectionDesc::where('id', 4)->first();
 
         return view('admin.team.manage', compact(
             'teams',
             'positionList',
-            'landingSection'
+            'sectionTitle'
         ));
     }
 

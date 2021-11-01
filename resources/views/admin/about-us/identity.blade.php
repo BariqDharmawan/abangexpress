@@ -30,11 +30,11 @@
                         {!! $identity->our_mission  !!}
                     @endisset
                 </td>
-                <td>{{ $aboutUs->section_name }}</td>
-                <td>{!! $aboutUs->first_desc !!}</td>
+                <td>{{ $sectionTitle }}</td>
+                <td>{!! $sectionDesc->first_desc_about_us !!}</td>
                 @if ($templateChoosen->version == 2)
                 <td>
-                    {!! $aboutUs->second_desc !!}
+                    {!! $sectionDesc->second_desc_about_us !!}
                 </td>
                 @endif
                 <td>
@@ -86,7 +86,7 @@
                 <label for="edit-heading">Heading</label>
                 <input type="text" class="form-control"
                 id="edit-heading" name="section_name" required
-                value="{{ old('section_name') ?? $aboutUs->section_name }}">
+                value="{{ old('section_name') ?? $sectionTitle }}">
                 @error('section_name')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -95,7 +95,7 @@
             <div class="form-group">
                 <label for="edit-first-desc">Deskripsi 1</label>
                 <textarea name="first_desc" id="edit-first-desc" class="form-control summernote" style="resize: none;"
-                    rows="3" required>{!! $aboutUs->first_desc !!}</textarea>
+                    rows="3" required>{!! $sectionDesc->first_desc_about_us !!}</textarea>
                 @error('first_desc')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -107,7 +107,7 @@
                     <textarea name="second_desc" id="edit-second-desc"
                     class="form-control summernote"
                     style="resize: none;" rows="3"
-                    required>{!! $aboutUs->second_desc !!}</textarea>
+                    required>{!! $sectionDesc->second_desc_about_us !!}</textarea>
                     @error('second_desc')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror

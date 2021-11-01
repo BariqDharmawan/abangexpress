@@ -48,13 +48,24 @@
 @endsection
 @section('components')
 
-    @include('admin.partials.change-heading-desc')
+    <x-admin.modal id="change-desc-heading" heading="Ubah deskripsi dan heading">
+        <form action="{{ route('admin.content.section-heading.update') }}" method="POST">
+            @csrf @method('PUT')
+
+            <x-admin.input label="Heading Title" name="our_service_title"
+            value="{{ $sectionTitle }}"  required />
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </x-admin.modal>
+
+    {{-- @include('admin.partials.change-heading-desc') --}}
 
     <x-admin.modal id="add-service" heading="Tambah layanan baru">
         @include('admin.services.form', ['action' => route('admin.services.store')])
     </x-admin.modal>
     @foreach ($ourService as $service)
-        <x-admin.modal id="edit-service-{{ $loop->iteration }}" 
+        <x-admin.modal id="edit-service-{{ $loop->iteration }}"
             heading="Ubah service {{ $service->title }}">
             @include('admin.services.form', [
                 'action' => route('admin.services.update', $service->id),
@@ -65,8 +76,8 @@
         @include('admin.partials.popup-delete', [
             'id' => 'remove-service-' . $loop->iteration,
             'heading' => 'Hapus service',
-            'warningMesssage' => 
-                'Apakah kamu yakin ingin menghapus layanan <b>' 
+            'warningMesssage' =>
+                'Apakah kamu yakin ingin menghapus layanan <b>'
                 . $service->title . '</b>?',
             'action' => route('admin.services.destroy', $service->id)
         ])
