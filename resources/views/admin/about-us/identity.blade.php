@@ -31,10 +31,10 @@
                     @endisset
                 </td>
                 <td>{{ $sectionTitle }}</td>
-                <td>{!! $sectionDesc->first_desc_about_us !!}</td>
+                <td>{!! $sectionDesc->first_desc_about_us ?? '' !!}</td>
                 @if ($templateChoosen->version == 2)
                 <td>
-                    {!! $sectionDesc->second_desc_about_us !!}
+                    {!! $sectionDesc->second_desc_about_us ?? '' !!}
                 </td>
                 @endif
                 <td>
@@ -95,7 +95,7 @@
             <div class="form-group">
                 <label for="edit-first-desc">Deskripsi 1</label>
                 <textarea name="first_desc" id="edit-first-desc" class="form-control summernote" style="resize: none;"
-                    rows="3" required>{!! $sectionDesc->first_desc_about_us !!}</textarea>
+                    rows="3" required>{!! $sectionDesc->first_desc_about_us ?? '' !!}</textarea>
                 @error('first_desc')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -107,18 +107,19 @@
                     <textarea name="second_desc" id="edit-second-desc"
                     class="form-control summernote"
                     style="resize: none;" rows="3"
-                    required>{!! $sectionDesc->second_desc_about_us !!}</textarea>
+                    required>{!! $sectionDesc->second_desc_about_us ?? '' !!}</textarea>
                     @error('second_desc')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             @endif
 
-            @isset($identity->cover_vision_mission)
-                <div class="form-group">
-                    <img src="{{ asset('storage/' .
+            <div class="form-group">
+                @isset($identity->cover_vision_mission)
+                <img src="{{ asset('storage/' .
                     str_replace('public/', '', $identity->cover_vision_mission)) }}"
                     height="100px" alt="" class="mb-3">
+                @endisset
                     <div class="custom-file">
                         <input type="file" class="custom-file-input"
                         name="cover_vision_mission" id="cover" accept="image/*">
@@ -130,7 +131,6 @@
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-            @endisset
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
