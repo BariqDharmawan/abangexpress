@@ -15,13 +15,13 @@ class CreateLandingSectionTitlesTable extends Migration
     {
         Schema::create('landing_section_titles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('about_us');
-            $table->string('our_service');
-            $table->string('contact_us');
-            $table->string('our_team');
-            $table->string('our_branch');
-            $table->string('faq');
-            $table->string('our_contact');
+            $table->string('about_us')->nullable();
+            $table->string('our_service')->nullable();
+            $table->string('contact_us')->nullable();
+            $table->string('our_team')->nullable();
+            $table->string('our_branch')->nullable();
+            $table->string('faq')->nullable();
+            $table->string('our_contact')->nullable();
             $table->string('domain_owner')->unique();
             $table->timestamps();
         });

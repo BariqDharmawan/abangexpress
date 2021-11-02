@@ -21,9 +21,7 @@ class OurServiceController extends Controller
 
         $sectionTitle = LandingSectionTitle::where(
             'domain_owner', request()->getSchemeAndHttpHost()
-        )->select('our_service')->first()->our_service;
-
-        // $landingSection = LandingSectionDesc::where('id', 2)->first();
+        )->select('our_service')->first()->our_service ?? '';
 
         return view('admin.services.manage', compact(
             'ourService', 'listIcon', 'sectionTitle'
