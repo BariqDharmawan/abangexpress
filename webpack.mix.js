@@ -20,13 +20,11 @@ const templateShipmentPath = 'resources/assets/shipment'
 //asset for admin
 mix.scripts([
         `${templateAdminPath}/template/vendor/jquery-easing/jquery.easing.min.js`,
-        `${templateAdminPath}/template/js/sb-admin-2.min.js`,
         `${templateAdminPath}/template/vendor/bootstrap/js/bootstrap.bundle.min.js`,
         `${templateAdminPath}/template/vendor/chart.js/Chart.min.js`,
         `${templateAdminPath}/template/vendor/datatables/jquery.dataTables.min.js`,
         `${templateAdminPath}/template/vendor/datatables/dataTables.bootstrap4.min.js`,
         `${templateAdminPath}/template/vendor/summernote/summernote-bs4.min.js`,
-        `${templateAdminPath}/template/vendor/glightbox/js/glightbox.min.js`
     ], 'public/admin/js/vendor.js')
     .js(`${templateAdminPath}/js/app.js`, 'public/admin/js/app.js')
     .sass(`${templateAdminPath}/scss/app.scss`, 'public/admin/css/app.css')
@@ -77,7 +75,7 @@ mix.scripts([
     .js(`${templateShipmentPath}/js/app.js`, 'public/shipment/js/app.js')
     .copy('node_modules/material-design-icons/iconfont', 'public/shipment/css')
     .copy(
-        `${templateShipmentPath}/template/plugins/jquery`, 
+        `${templateShipmentPath}/template/plugins/jquery`,
         'public/shipment/template/vendor/jquery'
     )
     .copy(`${templateShipmentPath}/template/images`, 'public/shipment/img')
@@ -91,7 +89,7 @@ mix.js(`${template1Path}/js/app.js`, 'public/template1/js')
     .js(`${template1Path}/js/vendor.js`, 'public/template1/js')
     .sass(`${template1Path}/sass/app.scss`, 'public/template1/css/app.css')
     .options({
-        processCssUrls: false 
+        processCssUrls: false
     })
     .copy(`${template1Path}/img`, 'public/template1/img')
     .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/template1/webfonts')
@@ -109,7 +107,7 @@ mix.copy('resources/assets/dummy', 'storage/app/public')
     .copy('resources/assets/general/vendor', 'public/vendor')
     .copy('resources/assets/general/video', 'public/video')
     .copy(
-        'resources/assets/admin/template/vendor/jquery', 
+        'resources/assets/admin/template/vendor/jquery',
         'public/admin/template/vendor/jquery'
     );
 
@@ -118,10 +116,11 @@ mix.js(`${template2Path}/js/app.js`, 'public/template2/js')
     .js(`${template2Path}/js/vendor.js`, 'public/template2/js')
     .sass(`${template2Path}/sass/app.scss`, 'public/template2/css/app.css')
     .options({
-        processCssUrls: false 
+        processCssUrls: false
     })
     .copy(`${template2Path}/img`, 'public/template2/img')
     .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/template2/webfonts')
     .sourceMaps();
 
 // mix.serve()
+

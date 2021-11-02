@@ -6,7 +6,7 @@
     @stack('style-plugins')
 </head>
 <body class="theme-red">
-    @include('partials.preload-shipment')
+    @include('shipment.preload')
 
     <nav class="navbar bg-gradient-red">
         <div class="container-fluid">

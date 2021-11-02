@@ -1,6 +1,6 @@
 import './../vendor/php-email-form/validate.js'
 
-import './glightbox'
+import './../../general/js/glightbox'
 import './nav'
 import './preloader'
 import './slider'
@@ -9,8 +9,6 @@ import './header'
 import './../../general/js/btn'
 
 import './waypoint'
-
-import { AOS } from './aos';
 
 /**
 * Template Name: Arsha - v4.4.0

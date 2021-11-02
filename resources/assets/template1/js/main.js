@@ -1,14 +1,11 @@
-import {select, on, onscroll} from './../../general/js/helper'
+require('isotope-layout');
 
-const Isotope = require('isotope-layout');
-
-import './glightbox'
+import './../../general/js/glightbox'
 import './aos'
 import './nav'
 import './slider'
 import './header'
 import './../../general/js/btn'
-import { AOS } from './aos';
 
 /**
 * Template Name: Reveal - v4.4.0

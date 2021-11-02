@@ -17,8 +17,6 @@ const heroSlider = new Swiper('.hero-slider', {
     }
 });
 
-console.log(heroSlider.autoplay.running)
-
 /**
  * Clients Slider
  */

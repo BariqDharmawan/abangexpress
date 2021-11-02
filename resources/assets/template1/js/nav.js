@@ -44,7 +44,6 @@ let navbarlinks = select('#navbar .scrollto', true)
 const navbarlinksActive = () => {
     let position = window.scrollY + 200
 
-    console.log(window.location.pathname)
     if (window.location.pathname == '/') {
         navbarlinks.forEach(navbarlink => {
             if (!navbarlink.hash) return
