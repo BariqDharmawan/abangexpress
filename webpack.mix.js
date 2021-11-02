@@ -24,14 +24,11 @@ mix.scripts([
         `${templateAdminPath}/template/vendor/chart.js/Chart.min.js`,
         `${templateAdminPath}/template/vendor/datatables/jquery.dataTables.min.js`,
         `${templateAdminPath}/template/vendor/datatables/dataTables.bootstrap4.min.js`,
-        `${templateAdminPath}/template/vendor/summernote/summernote-bs4.min.js`,
     ], 'public/admin/js/vendor.js')
     .js(`${templateAdminPath}/js/app.js`, 'public/admin/js/app.js')
     .sass(`${templateAdminPath}/scss/app.scss`, 'public/admin/css/app.css')
     .copy(`${templateAdminPath}/img`, 'public/admin/img')
-    .copy(
-        `${templateAdminPath}/template/vendor/summernote/font`, 'public/admin/css/font'
-    )
+    .copy('node_modules/summernote/dist/font', 'public/admin/css/font')
     .autoload({
         DataTable: 'datatables.net-bs4'
     });

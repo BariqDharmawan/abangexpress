@@ -1,11 +1,31 @@
 import bsCustomFileInput from 'bs-custom-file-input'
-import './../../template/vendor/summernote/summernote-bs4.min'
+import * as Quill from 'Quill';
+// require('summernote/dist/summernote-bs4')
+// import './../../template/vendor/summernote/summernote-bs4.min'
 
 $(document).ready(function () {
     bsCustomFileInput.init()
 
     if ($('.summernote').length > 0) {
-        $('.summernote').summernote();
+        $(".summernote").each(function () {
+            const summernoteId = $(this).attr('id')
+            const inputAttached = $(this).data('input-attached')
+
+            const summernote = new Quill(`#${summernoteId}`, {
+                modules: {
+                    toolbar: [
+                        ['bold', 'italic'],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        ['link', 'underline', 'blockquote', 'code-block']
+                      ]
+                },
+                theme: 'snow'
+            })
+
+            summernote.on('text-change', function (delta, oldDelta, source) {
+                document.querySelector(`input[name='${inputAttached}']`).value = summernote.root.innerHTML;
+            })
+        })
     }
 
     $(".not-allow-number").on('keydown', function (e) {
