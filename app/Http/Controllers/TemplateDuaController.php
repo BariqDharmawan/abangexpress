@@ -7,6 +7,7 @@ use App\Models\AboutUs;
 use App\Models\Faq;
 use App\Models\Gallery;
 use App\Models\LandingSectionDesc;
+use App\Models\LandingSectionTitle;
 use App\Models\OurBranch;
 use App\Models\OurContact;
 use App\Models\OurService;
@@ -20,9 +21,13 @@ class TemplateDuaController extends Controller
         $menus = Helper::getJson('template-2-menu.json');
         $menus = collect($menus);
 
-        $landingSection = LandingSectionDesc::where(
+        $sectionTitle = LandingSectionTitle::where(
             'domain_owner', request()->getSchemeAndHttpHost()
-        )->get();
+        )->first();
+
+        $sectionDesc = LandingSectionDesc::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
 
         $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
                 ->first();
@@ -45,10 +50,17 @@ class TemplateDuaController extends Controller
         $menus = Helper::removeMenuIfContentEmpty($menus, $ourService, '/#services');
         $menus = Helper::removeMenuIfContentEmpty($menus, $ourBranch, '/#our-branch');
 
-        // dd($landingSection);
+        // dd($aboutUs);
+        $menus = Helper::removeMenuIfContentEmpty($menus, $aboutUs, '/#why-us');
+        //remove menu if content empty
+        // if (!$aboutUs) {
+        //     $menus = $menus->filter(function ($menu) {
+        //         return $menu->url != '/#why-us';
+        //     });
+        // }
 
         return view('template-2.index', compact(
-            'landingSection', 'aboutUs', 'ourBranch',
+            'sectionTitle', 'aboutUs', 'ourBranch', 'sectionDesc',
             'ourTeam', 'aboutUs', 'ourService', 'menus', 'ourContactList'
         ));
 
@@ -69,9 +81,9 @@ class TemplateDuaController extends Controller
             ['youtube', '!=', null]
         ])->get();
 
-        $landingSection = LandingSectionDesc::where([
-            ['domain_owner', request()->getSchemeAndHttpHost()],
-        ])->get();
+        $sectionTitle = LandingSectionTitle::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->select('our_contact')->first();
 
         $ourContactList = Helper::getJson('our-contact-list.json');
 
@@ -79,7 +91,7 @@ class TemplateDuaController extends Controller
                 ->first();
 
         return view('template-2.gallery', compact(
-            'menus', 'galleryYoutube', 'galleryImg', 'landingSection',
+            'menus', 'galleryYoutube', 'galleryImg', 'sectionTitle',
             'ourContactList', 'aboutUs'
         ));
     }

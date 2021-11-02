@@ -89,7 +89,7 @@ class Helper
 
     public static function removeMenuIfContentEmpty($menus, $dataAttached, $menuToRemove)
     {
-        if (count($dataAttached) == 0) {
+        if ((is_array($dataAttached) and count($dataAttached) == 0) or !$dataAttached) {
             $menus = $menus->filter(function ($menu) use ($menuToRemove) {
                 return $menu->url != $menuToRemove;
             });

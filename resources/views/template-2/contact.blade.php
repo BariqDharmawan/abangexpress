@@ -1,7 +1,7 @@
 <section id="contact" class="contact">
     <div class="container" data-aos="fade-up">
 
-        <x-template2.section-title heading="{{ $landingSection[6]->section_name }}" />
+        <x-template2.section-title heading="{{ $sectionTitle->our_contact }}" />
 
         <div class="row">
 

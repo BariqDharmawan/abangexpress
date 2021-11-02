@@ -40,15 +40,14 @@
         <div class="container" data-aos="fade-up">
 
             <x-template2.section-title
-            heading="{{ $landingSection[0]->section_name }}" />`
+            heading="{{ $sectionTitle->about_us }}" />`
 
             <div class="content row">
                 <div class="col-lg-6">
-                    {!! $landingSection[0]->first_desc !!}
+                    {!! $sectionDesc->first_desc_about_us !!}
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0">
-                    {!! $landingSection[0]->second_desc !!}
-                    <a href="#" class="btn-learn-more">Learn More</a>
+                    {!! $sectionDesc->second_desc_about_us !!}
                 </div>
             </div>
 
@@ -56,6 +55,7 @@
     </section>
 
     <!-- ======= Why Us Section ======= -->
+    @isset($aboutUs)
     <section id="why-us" class="why-us section-bg">
         <div class="container-fluid" data-aos="fade-up">
 
@@ -70,19 +70,17 @@
                     <div class="accordion-list">
                         <ul id="load-vision-mission">
 
-                            @isset($aboutUs)
                                 <x-template2.accordion-list
-                                heading="Visi Kami" icon-title="bx-help-circle icon-help"
+                                heading="Visi Kami"
                                 parent-list="accordion-list" :is-open="true">
                                     <p>{{ $aboutUs->our_vision }}</p>
                                 </x-template2.accordion-list>
 
                                 <x-template2.accordion-list
-                                heading="Misi Kami" icon-title="bx-help-circle icon-help"
+                                heading="Misi Kami"
                                 parent-list="accordion-list">
                                     {!! $aboutUs->our_mission !!}
                                 </x-template2.accordion-list>
-                            @endisset
 
                         </ul>
                     </div>
@@ -102,13 +100,14 @@
 
         </div>
     </section>
+    @endisset
 
     <!-- ======= Services Section ======= -->
     @if (count($ourService) > 0)
     <section id="services" class="services section-bg">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="{{ $landingSection[1]->section_name }}" />
+            <x-template2.section-title heading="{{ $sectionTitle->our_service }}" />
 
             <div class="row" id="load-our-service">
 
@@ -135,7 +134,7 @@
         <div class="container" data-aos="fade-up">
 
             <x-template2.section-title
-            heading="{{ $landingSection[3]->section_name }}" />
+            heading="{{ $sectionTitle->our_team }}" />
 
             <div class="row">
                 @foreach ($ourTeam as $team)
@@ -168,7 +167,7 @@
     <section id="faq" class="faq section-bg">
         <div class="container" data-aos="fade-up">
 
-            <x-template2.section-title heading="{{ $landingSection[5]->section_name }}" />
+            <x-template2.section-title heading="{{ $sectionTitle->faq }}" />
 
             <div class="faq-list">
                 <ul id="load-faq">
