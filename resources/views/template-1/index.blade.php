@@ -150,7 +150,7 @@
     </section>
 
     <!-- ======= Contact Section ======= -->
-    @include('partials.contact')
+    @include('template-1.contact')
 
 </main><!-- End #main -->
 @endsection

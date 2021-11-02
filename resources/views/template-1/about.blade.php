@@ -31,6 +31,6 @@
     </div>
 </section>
 
-@include('partials.contact')
+@include('template-1.contact')
 
 @endsection
