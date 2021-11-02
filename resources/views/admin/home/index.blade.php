@@ -11,10 +11,11 @@
 
     <x-admin.card title="Nama kita" class="mt-5">
         <x-slot name="header">
-            <x-admin.modal.trigger text="Ganti nama kita"
-            modal-target="our-name" />
+            <x-admin.modal.trigger text="Ganti nama kita" modal-target="our-name" />
         </x-slot>
+        @isset($identity)
         <h1 class="h3">{{ $identity->our_name }}</h1>
+        @endisset
     </x-admin.card>
 
     <x-admin.card title="Header Carousel" class="mt-5">
@@ -58,7 +59,9 @@
                 <x-admin.modal.trigger text="Ganti heading"
                 modal-target="change-heading" />
             </x-slot>
+            @isset($identity)
             <h1 class="h3">{{ $identity->slogan }}</h1>
+            @endisset
         </x-admin.card>
     @endif
 </div>
@@ -76,7 +79,7 @@
                 <input type="text" required
                 class="form-control" id="edit-sub-slogan"
                 name="our_name"
-                value="{{ old('our_name') ?? $identity->our_name }}">
+                value="{{ old('our_name') ?? (isset($identity->our_name) ? $identity->our_name : '') }}">
                 @error('our_name')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -123,7 +126,7 @@
                 <input type="text" required
                 class="form-control" id="edit-sub-slogan"
                 name="slogan"
-                value="{{ old('slogan') ?? $identity->slogan }}">
+                value="{{ old('slogan') ?? ( isset($identity->slogan) ? $identity->slogan : '' ) }}">
                 @error('slogan')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror

@@ -15,11 +15,11 @@ class CreateAboutUsTable extends Migration
     {
         Schema::create('about_us', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('our_name', 20);
-            $table->string('our_vision');
-            $table->text('our_mission');
+            $table->string('our_name', 20)->nullable();
+            $table->string('our_vision')->nullable();
+            $table->text('our_mission')->nullable();
             $table->text('address_embed')->nullable();
-            $table->string('slogan');
+            $table->string('slogan')->nullable();
             $table->string('sub_slogan')->nullable();
             $table->string('cover_vision_mission')->nullable();
             $table->string('domain_owner');

@@ -16,9 +16,11 @@ class HomeController extends Controller
         $heroCarousel = FirstHeroCarouselLanding::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->get();
+
         $identity = AboutUs::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
+
         return view('admin.home.index', compact('heroCarousel', 'identity'));
     }
 
@@ -67,18 +69,19 @@ class HomeController extends Controller
 
     public function update(HomeHeadingValidation $request)
     {
-        $ourIdentity = AboutUs::where(
-            'domain_owner', request()->getSchemeAndHttpHost()
-        )->first();
-
         if ($request->has('slogan')) {
-            $ourIdentity->slogan = $request->slogan;
-        }
-        if ($request->has('our_name')) {
-            $ourIdentity->our_name = $request->our_name;
+            $ourIdentity = AboutUs::updateOrCreate(
+                ['domain_owner' => request()->getSchemeAndHttpHost()],
+                ['slogan' => $request->slogan]
+            );
         }
 
-        $ourIdentity->save();
+        if ($request->has('our_name')) {
+            $ourIdentity = AboutUs::updateOrCreate(
+                ['domain_owner' => request()->getSchemeAndHttpHost()],
+                ['our_name' => $request->our_name]
+            );
+        }
 
         return Helper::returnSuccess("mengubah heading");
     }
