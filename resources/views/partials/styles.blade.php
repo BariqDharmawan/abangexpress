@@ -1,3 +1,3 @@
 @stack('style-plugin')
-<link rel="stylesheet" href="{{ asset($path . '/css/app.css') }}">
-<script src="{{ asset($path . '/js/vendor.js') }}"></script>
+<link rel="stylesheet" href="{{ mix($path . '/css/app.css') }}">
+<script src="{{ mix($path . '/js/vendor.js') }}"></script>

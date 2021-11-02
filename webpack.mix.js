@@ -1,6 +1,5 @@
 const mix = require('laravel-mix');
 
-require('laravel-mix-serve')
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -31,7 +30,8 @@ mix.scripts([
     .copy('node_modules/summernote/dist/font', 'public/admin/css/font')
     .autoload({
         DataTable: 'datatables.net-bs4'
-    });
+    })
+    .version();
 
 //asset for shipment page
 mix.scripts([
@@ -80,6 +80,7 @@ mix.scripts([
         `${templateShipmentPath}/template/plugins/bootstrap/fonts`,
         'public/shipment/fonts'
     )
+    .version();
 
 //asset for template 1
 mix.js(`${template1Path}/js/app.js`, 'public/template1/js')
@@ -90,6 +91,7 @@ mix.js(`${template1Path}/js/app.js`, 'public/template1/js')
     })
     .copy(`${template1Path}/img`, 'public/template1/img')
     .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/template1/webfonts')
+    .version()
     .sourceMaps();
 
 //general asset
@@ -117,7 +119,6 @@ mix.js(`${template2Path}/js/app.js`, 'public/template2/js')
     })
     .copy(`${template2Path}/img`, 'public/template2/img')
     .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/template2/webfonts')
+    .version()
     .sourceMaps();
-
-// mix.serve()
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     @include('partials.meta', ['prefixTitle' => 'Admin'])
-    <link rel="stylesheet" href="{{ asset('admin/css/app.css') }}">
+    <link rel="stylesheet" href="{{ mix('admin/css/app.css') }}">
     @stack('style-plugins')
 </head>
 <body class="sidebar-toggled">
@@ -116,8 +116,8 @@
     </div>
 
     <script src="{{ asset('admin/template/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('admin/js/vendor.js') }}"></script>
-    <script src="{{ asset('admin/js/app.js') }}"></script>
+    <script src="{{ mix('admin/js/vendor.js') }}"></script>
+    <script src="{{ mix('admin/js/app.js') }}"></script>
 
     @stack('scripts')
     @yield('components')

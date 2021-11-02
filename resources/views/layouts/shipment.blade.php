@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     @include('partials.meta', ['prefixTitle' => 'Shipment'])
-    <link rel="stylesheet" href="{{ asset('shipment/css/app.css') }}">
+    <link rel="stylesheet" href="{{ mix('shipment/css/app.css') }}">
     @stack('style-plugins')
 </head>
 <body class="theme-red">
@@ -139,8 +139,8 @@
 
     <script src="{{ asset('shipment/template/vendor/jquery/jquery.min.js') }}"></script>
     @stack('scripts')
-    <script src="{{ asset('shipment/js/vendor.js') }}"></script>
-    <script src="{{ asset('shipment/js/app.js') }}"></script>
+    <script src="{{ mix('shipment/js/vendor.js') }}"></script>
+    <script src="{{ mix('shipment/js/app.js') }}"></script>
 
     @yield('components')
 </body>

@@ -1,3 +1,3 @@
 @stack('plugin')
-<script src="{{ asset($path . '/js/app.js') }}"></script>
+<script src="{{ mix($path . '/js/app.js') }}"></script>
 @stack('scripts')
