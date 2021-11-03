@@ -15,7 +15,7 @@
 
 <div class="form-group form-float form-group-lg">
     @if ($type == 'select' or $type == 'select-ajax')
-        <label for="{{ $id }}" class="form-label 
+        <label for="{{ $id }}" class="form-label
         @isset($required)form-label--required @endisset">
             {{ $label ?? $placeholder }}
         </label>
@@ -32,7 +32,7 @@
     @elseif($type == 'file')
     <div class="custom-file">
         <input {{ $attributes->class(['custom-file__input'])->merge([
-            'name' => $name, 
+            'name' => $name,
             'type' => 'file',
             'id' => $id,
             'required' => $required,
@@ -73,7 +73,7 @@
             @if ($type == 'textarea')
                 <textarea
                 {{ $attributes->class(['form-control', 'no-resize'])->merge([
-                    'name' => $name, 
+                    'name' => $name,
                     'type' => $type,
                     'rows' => $rows,
                     'id' => $id ?? Str::slug($label),
@@ -84,7 +84,7 @@
                 </label>
             @else
                 <input {{ $attributes->class(['form-control'])->merge([
-                    'name' => $name, 
+                    'name' => $name,
                     'type' => $type,
                     'id' => $id ?? Str::slug($label),
                     'required' => $required,
@@ -107,11 +107,11 @@
             @isset($smallText)
             <small class="text-black-50">{{ $smallText }}</small>
             @else
-            <small class="text-danger error-ajax-{{ $inputHidden }} 
+            <small class="text-danger error-ajax-{{ $inputHidden }}
             d-block mt-2"></small>
             @endisset
         @enderror
-    @else 
+    @else
         @error($name)
             <small class="text-danger d-block mt-2">{{ $message }}</small>
         @else

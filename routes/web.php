@@ -9,6 +9,7 @@ Route::resource('tracking-order', 'TrackingOrderController');
 Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function (){
     Route::get('/', 'ShipmentController@index')->name('index');
     Route::get('zipcode', 'ShipmentController@zipCode')->name('zipcode');
+    Route::post('check-zipcode', 'ValidateZipcodeController@validating');
 
     Route::prefix('order')->name('order.')->group(function (){
 
@@ -36,7 +37,7 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
             Route::get('invoice', 'BookingOrderController@invoice')->name('invoice');
             Route::post('invoice', 'BookingOrderController@storeInvoice')->name('save-invoice');
             Route::post('invoice/save', 'BookingOrderController@store')->name('invoice.save');
-            Route::post('step-order', 'BookingOrderController@order')->name('step-order'); 
+            Route::post('step-order', 'BookingOrderController@order')->name('step-order');
         });
     });
 

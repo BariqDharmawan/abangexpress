@@ -53,20 +53,10 @@
                     minlength="8" maxlength="15" required />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <x-shipment.input placeholder="Nomor ID Card Penerima"
-                    name="recipient_nik" class="not-allow-space" />
-                </div>
-                <div class="col-lg-6">
-                    <x-shipment.input placeholder="Kode pos"
-                    name="recipient_zipcode" inputmode="numeric"
-                    class="only-number" minlength="3" maxlength="8" required />
-                </div>
-            </div>
             <div class="col-12">
                 <x-shipment.input type="select"
-                placeholder="Negara penerima"
+                placeholder="Negara penerima" class="check-other-input-based-on-this-value"
+                data-value-to-check="TAIWAN" data-input-related="#recipient-zipcode"
                 name="recipient_country" required>
                     @foreach ($countryList as $country)
                         <option value="{{ $country->tujuan }}">
@@ -74,6 +64,21 @@
                         </option>
                     @endforeach
                 </x-shipment.input>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <x-shipment.input placeholder="Nomor ID Card Penerima"
+                    name="recipient_nik" class="not-allow-space" />
+                </div>
+                <div class="col-lg-6">
+                    <x-shipment.input placeholder="Kode pos"
+                    name="recipient_zipcode" id="recipient-zipcode" inputmode="numeric"
+                    class="only-number validate-value-from-db" data-url-api="/shipping/check-zipcode"
+                    data-akun="coloader"
+                    data-key="f03e563b71454776e2cb1e7b5f5ea5c4"
+                    data-country="TAIWAN" data-additional-from-val="zipcode"
+                    minlength="3" maxlength="8" required />
+                </div>
             </div>
             <div class="col-12">
                 <x-shipment.input type="textarea" id="recipient-address"
@@ -156,7 +161,7 @@
                     target="modal-tnc" />
                 </small>
                 <button type="submit" class="btn btn-big btn-primary"
-                form="form-book-order">Order</button>
+                form="form-book-order" disabled>Order</button>
             </div>
         </x-shipment.card>
     </form>

@@ -256,9 +256,9 @@ class ShipmentOrderController extends Controller
 
         $statusRes = $res->status;
         $underling = $res->underling;
+
         // dd($postdata);
         return view('shipment.order.history', compact('title','orderData','statusRes','underling'));
-
     }
 
     public function cancelOrder(Request $request)

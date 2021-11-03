@@ -17,7 +17,7 @@ $(document).ready(function() {
                 type: "GET",
                 url: `/shipping/order/get-recipient/${recipientId}`,
                 success: function(recipients) {
-                    
+
                     console.log(recipients)
 
                     if (recipients.country.includes('TAIWAN', 'KOREA SOUTH', 'INDIA')) {
@@ -45,7 +45,7 @@ $(document).ready(function() {
 
                     previewImgUpload("#idcard-preview", recipients.idcard_photo)
 
-                    
+
                 },
                 error: function(error) {
                     $("#data-recipient .form-line").removeClass('focused')
