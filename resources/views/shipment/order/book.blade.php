@@ -112,32 +112,47 @@
         <x-shipment.card heading="Detail paket" icon="card_giftcard">
 
             <div class="row d-flex">
-                <div class="col-lg-6">
-                    <x-shipment.input
-                    placeholder="Masukan Panjang Paket"
-                    name="package_length"
-                    class="d-none"
-                    text-addon="(cm)"
-                    id="package-length" />
-                </div>
-                <div class="col-lg-6">
-                    <x-shipment.input
-                    placeholder="Masukan Lebar Paket"
-                    name="package_width"
-                    text-addon="(cm)"
-                    class="d-none"
-                    id="package-width" />
-                </div>
-            </div>
-
-            <div class="row d-flex">
-                <div class="col-lg-6">
-                    <x-shipment.input
-                    placeholder="Masukan Tinggi Paket"
-                    name="package_height"
-                    text-addon="(cm)"
-                    class="d-none"
-                    id="package-height" />
+                <div class="row col-lg-6">
+                    <p class="form-label fw-bold pl-4 m-0">Dimensi paket (cm)</p>
+                    <div class="col-lg-4">
+                        <div class="form-group form-float form-group-lg">
+                            <div class="form-line">
+                                <input
+                                name="package_length"
+                                class="d-none form-control"
+                                id="package-length" />
+                                <label class="form-label mb-0 z-20" for="package-length">
+                                    panjang
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group form-float form-group-lg">
+                            <div class="form-line">
+                                <input
+                                name="package_width"
+                                class="d-none form-control"
+                                id="package-width" />
+                                <label class="form-label mb-0" for="package-width">
+                                    lebar
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group form-float form-group-lg">
+                            <div class="form-line">
+                                <input
+                                name="package_height"
+                                class="d-none form-control"
+                                id="package-height" />
+                                <label class="form-label mb-0" for="package-height">
+                                    tinggi
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-lg-6">

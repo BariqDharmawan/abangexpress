@@ -15,26 +15,19 @@ function showInputBaseOnOtherInput(condition, inputs) {
         if (condition) {
             $(allInput[i]).prop('required', false).removeClass('d-none').addClass('d-block')
             $(allInput[i]).closest("[class*='col-']").removeClass('d-none').addClass('d-block')
+            $(allInput[i]).closest("[class*='col-']").parent("[class*='col-']").addClass('d-block').removeClass('d-none')
         }
         else {
             $(allInput[i]).addClass('d-none').removeClass('d-block')
             $(allInput[i]).closest("[class*='col-']").addClass('d-none').removeClass('d-block')
+            $(allInput[i]).closest("[class*='col-']").parent("[class*='col-']").addClass('d-none').removeClass('d-block')
         }
-    }
-}
-
-function putMinMaxValidation(condition, inputToPutMinMax, min, max) {
-    if (condition) {
-        $(inputToPutMinMax).attr('min', min).attr('max', max)
-    }
-    else {
-        $(inputToPutMinMax).removeAttr('min').removeAttr('max')
     }
 }
 
 $(document).ready(function () {
 
-    $("input.d-none").closest("[class*='col-']").addClass('d-none')
+    $("input.d-none").closest("[class*='col-']").parent("[class*='col-']").addClass('d-none')
 
 
     $(".custom-file__input").each(function () {

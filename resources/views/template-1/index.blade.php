@@ -55,7 +55,6 @@
     </section>
     @endif
 
-
     @if (count($ourTeam) > 0)
     <section id="our-team">
         <div class="container" data-aos="fade-up">

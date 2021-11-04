@@ -24,6 +24,12 @@
     }
 }
 
+.fw {
+    &-bold {
+        font-weight: bold;
+    }
+}
+
 .embeded-full iframe {
     width: 100%;
 }
