@@ -73,10 +73,17 @@
                 <div class="col-lg-6">
                     <x-shipment.input placeholder="Kode pos"
                     name="recipient_zipcode" id="recipient-zipcode" inputmode="numeric"
-                    class="only-number validate-value-from-db" data-url-api="/shipping/check-zipcode"
-                    data-akun="coloader"
+                    class="only-number validate-if-response-api-is-something show-other-input put-min-max-to-other-input
+                    add-option-to-other-select-based-on-this-input"
+                    data-input-to-put-min-max="#package-weight"
+                    data-put-min="4"
+                    data-put-max="23"
+                    data-input-to-show="#package-length,#package-width,#package-height"
+                    data-url-api="/shipping/check-zipcode"
+                    data-akun="coloader" data-response-field-to-show="courier"
                     data-key="f03e563b71454776e2cb1e7b5f5ea5c4"
                     data-country="TAIWAN" data-additional-from-val="zipcode"
+                    data-response-api-wish="heimao"
                     minlength="3" maxlength="8" required />
                 </div>
             </div>
@@ -103,21 +110,52 @@
         </x-shipment.card>
 
         <x-shipment.card heading="Detail paket" icon="card_giftcard">
+
             <div class="row d-flex">
-                {{-- <div class="col-lg-6 d-flex items-center">
+                <div class="col-lg-6">
                     <x-shipment.input
-                    placeholder="Masukan tarif ke pelanggan anda"
-                    name="package_fee"
-                    id="package-fee" />
-                </div> --}}
+                    placeholder="Masukan Panjang Paket"
+                    name="package_length"
+                    class="d-none"
+                    text-addon="(cm)"
+                    id="package-length" />
+                </div>
+                <div class="col-lg-6">
+                    <x-shipment.input
+                    placeholder="Masukan Lebar Paket"
+                    name="package_width"
+                    text-addon="(cm)"
+                    class="d-none"
+                    id="package-width" />
+                </div>
+            </div>
+
+            <div class="row d-flex">
+                <div class="col-lg-6">
+                    <x-shipment.input
+                    placeholder="Masukan Tinggi Paket"
+                    name="package_height"
+                    text-addon="(cm)"
+                    class="d-none"
+                    id="package-height" />
+                </div>
+
                 <div class="col-lg-6">
                     <x-shipment.input
                     placeholder="Masukan berat paket"
-                    text-addon="(kg)"
-                    name="package_weight" id="package-weight"
-                    class="input-decimal-dot" required />
+                    text-addon="(kg)" type="number" class="disable-one-option-if-this-value-something"
+                    data-dropdown-target="#courier"
+                    data-option-to-disable="heimao"
+                    name="package_weight" id="package-weight" required />
                 </div>
             </div>
+
+            <div class="col-12">
+                <x-shipment.input type="select"
+                placeholder="Pilih kurir" id="courier"
+                name="courier" required></x-shipment.input>
+            </div>
+
             <div class="col-12">
                 <x-shipment.input type="select"
                 placeholder="Pilh jenis paket"

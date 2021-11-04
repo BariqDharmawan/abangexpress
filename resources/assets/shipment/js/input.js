@@ -9,7 +9,33 @@ if ($(".select2").length > 0) {
     })
 }
 
+function showInputBaseOnOtherInput(condition, inputs) {
+    let allInput = inputs.split(',')
+    for (let i = 0; i < allInput.length; i++) {
+        if (condition) {
+            $(allInput[i]).prop('required', false).removeClass('d-none').addClass('d-block')
+            $(allInput[i]).closest("[class*='col-']").removeClass('d-none').addClass('d-block')
+        }
+        else {
+            $(allInput[i]).addClass('d-none').removeClass('d-block')
+            $(allInput[i]).closest("[class*='col-']").addClass('d-none').removeClass('d-block')
+        }
+    }
+}
+
+function putMinMaxValidation(condition, inputToPutMinMax, min, max) {
+    if (condition) {
+        $(inputToPutMinMax).attr('min', min).attr('max', max)
+    }
+    else {
+        $(inputToPutMinMax).removeAttr('min').removeAttr('max')
+    }
+}
+
 $(document).ready(function () {
+
+    $("input.d-none").closest("[class*='col-']").addClass('d-none')
+
 
     $(".custom-file__input").each(function () {
         const label = $(this).next().find('span')
@@ -64,7 +90,6 @@ $(document).ready(function () {
                 const str = e.target.result
                 // const arku = str.split("base64,")
                 $(`#${inputHidden}`).val(str)
-                console.log(str)
             }
             reader.readAsDataURL(this.files[0]);
         } else {
@@ -74,21 +99,73 @@ $(document).ready(function () {
 
     function validateInputOnDb(inputToValidate) {
         inputToValidate.change(function () {
-
             const thisInput = $(this)
-            const form = thisInput.parents('form')
-            const urlToValidate = $(this).data('url-api')
 
-            let dataToValidate = $(this).data()
+            if (thisInput.val() != '') {
+                const form = thisInput.parents('form')
+                const urlToValidate = $(this).data('url-api')
 
-            if ($(this).data('additional-from-val')) {
-                const additionalData = $(this).data('additional-from-val')
-                delete dataToValidate['additionalFromVal']
+                let dataToValidate = $(this).data()
 
-                dataToValidate[additionalData] = $(this).val()
+                if ($(this).data('additional-from-val')) {
+                    const additionalData = $(this).data('additional-from-val')
+                    delete dataToValidate['additionalFromVal']
+                    delete dataToValidate['responseFieldToShow']
+                    delete dataToValidate['responseApiWish']
+                    delete dataToValidate['inputToShow']
+                    delete dataToValidate['putMin']
+                    delete dataToValidate['putMax']
+
+                    dataToValidate[additionalData] = $(this).val()
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: urlToValidate,
+                    contentType: 'application/json',
+                    data: JSON.stringify(dataToValidate),
+                }).always(function (response) {
+                    if (response.status === 'success') {
+                        $(`.error-ajax-${thisInput.attr('name')}`).text('').addClass('d-none').removeClass('d-block')
+                        form.find('button[type="submit"]').prop('disabled', false)
+                    }
+                    else {
+                        $(`.error-ajax-${thisInput.attr('name')}`).text('Kodepos tidak dapat ditemukan')
+                        .removeClass('d-none')
+                        form.find('button[type="submit"]').prop('disabled', true)
+                    }
+                })
+            }
+            else {
+                $(`.error-ajax-${thisInput.attr('name')}`).text('').addClass('d-none')
             }
 
-            console.log(dataToValidate)
+        })
+    }
+
+    $(".validate-if-response-api-is-something").change(function () {
+        const thisInput = $(this)
+
+        const responseApiWish = $(this).data('response-api-wish')
+        const urlToValidate = $(this).data('url-api')
+        const fieldToShow = $(this).data('response-field-to-show')
+
+        let dataToValidate = $(this).data()
+        if ($(this).data('additional-from-val')) {
+            const additionalData = $(this).data('additional-from-val')
+
+            delete dataToValidate['additionalFromVal']
+            delete dataToValidate['urlApi']
+            delete dataToValidate['responseFieldToShow']
+            delete dataToValidate['responseApiWish']
+            delete dataToValidate['inputToShow']
+            delete dataToValidate['inputToPutMinMax']
+            delete dataToValidate['putMin']
+            delete dataToValidate['putMax']
+
+            dataToValidate[additionalData] = $(this).val()
+        }
 
             $.ajax({
                 type: 'POST',
@@ -96,20 +173,46 @@ $(document).ready(function () {
                 url: urlToValidate,
                 contentType: 'application/json',
                 data: JSON.stringify(dataToValidate),
-            }).always(function (response) {
-                console.log(response)
-                if (response.status === 'success') {
-                    $(`.error-ajax-${thisInput.attr('name')}`).text('').addClass('d-none').removeClass('d-block')
-                    form.find('button[type="submit"]').prop('disabled', false)
+            }).always(function (data) {
+
+                let inputToShow = thisInput.data('input-to-show')
+
+                console.log(`status : ${data.status}`)
+
+                if (data.status == 'success') {
+                    const arrayResponse = data.response[0][fieldToShow]
+                    console.log(arrayResponse)
+
+                    if (thisInput.hasClass('add-option-to-other-select-based-on-this-input')) {
+                        $("#courier").empty()
+                        arrayResponse.forEach(option => {
+                            $("#courier").append(new Option(option, option)).trigger('change')
+                        });
+                    }
+
+
+                    if (thisInput.hasClass('show-other-input') && arrayResponse.includes(responseApiWish)) {
+                        showInputBaseOnOtherInput(true, inputToShow, thisInput)
+
+                        // if (thisInput.hasClass('put-min-max-to-other-input')) {
+                        //     const min = thisInput.data('put-min')
+                        //     const max = thisInput.data('put-max')
+                        //     putMinMaxValidation(true, $(thisInput.data('input-to-put-min-max')), min, max)
+                        // }
+                    }
                 }
                 else {
-                    $(`.error-ajax-${thisInput.attr('name')}`).text('Kodepos tidak dapat ditemukan').removeClass('d-none')
-                    form.find('button[type="submit"]').prop('disabled', true)
+                    if (thisInput.hasClass('show-other-input')) {
+                        showInputBaseOnOtherInput(false, inputToShow, thisInput)
+                    }
+                    if (thisInput.hasClass('put-min-max-to-other-input')) {
+                        // putMinMaxValidation(false, $(thisInput.data('input-to-put-min-max')))
+                    }
                 }
+
             })
 
-        })
-    }
+    })
 
 
     $(".check-other-input-based-on-this-value").change(function () {
@@ -120,6 +223,22 @@ $(document).ready(function () {
         if (isValue == valueToCheck) {
             validateInputOnDb($(inputRelated))
         }
+    })
+
+    $(".disable-one-option-if-this-value-something").change(function () {
+        const dropdownTarget = $(this).data('dropdown-target')
+        const optionToDisable = $(this).data('option-to-disable')
+
+        if ($(this).val() < 4 || $(this).val() > 23) {
+            $(`${dropdownTarget} option[value="${optionToDisable}"]`).prop('disabled', true)
+        }
+        else {
+            $(`${dropdownTarget} option[value="${optionToDisable}"]`).prop('disabled', false)
+        }
+
+        $(dropdownTarget).trigger('change')
+
+
     })
 
 

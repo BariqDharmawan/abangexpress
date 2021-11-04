@@ -14,12 +14,17 @@ class ShipmentController extends Controller
 
     public function index()
     {
-        $response = Http::retry(10, 0)->withOptions([
-            'CURLOPT_RETURNTRANSFER' => true
-        ])->acceptJson()->post(
-            'https://res.abangexpress.id/shipments/pull/dashboarddata/',
-            Helper::getKeyApiArray()
-        );
+        // dd(Helper::getKeyApiArray());
+        try {
+            $response = Http::retry(10, 0)->withOptions([
+                'CURLOPT_RETURNTRANSFER' => true
+            ])->acceptJson()->post(
+                'https://res.abangexpress.id/shipments/pull/dashboarddata/',
+                Helper::getKeyApiArray()
+            );
+        } catch (\Throwable $th) {
+            dd($th);
+        }
 
         $res = json_decode($response);
 
@@ -33,7 +38,7 @@ class ShipmentController extends Controller
 
             return view('shipment.index', compact('quickReport'));
         }
-        
+
     }
 
     public function zipcode()
