@@ -212,7 +212,6 @@ $(document).ready(function() {
 
 
         if (isValue == 'TAIWAN') {
-            // validateInputOnDb($(inputRelated))
             document.getElementById("recipient-zipcode").setAttribute("data-input-to-put-min-max", "#package-weight")
             document.getElementById("recipient-zipcode").setAttribute("data-put-min", "4")
             document.getElementById("recipient-zipcode").setAttribute("data-put-max", "23")
@@ -226,20 +225,19 @@ $(document).ready(function() {
             document.getElementById("recipient-zipcode").setAttribute("data-response-api-wish", "heimao")
             document.getElementById("recipient-zipcode").setAttribute("minlength", "3")
             document.getElementById("recipient-zipcode").setAttribute("maxlength", "8")
-
-
         }
+        validateInputOnDb($(inputRelated))
     })
 
-    function xCountry(str) {
-        const inputRelated = $(this).data('input-related')
-        const valueToCheck = $(this).data('value-to-check')
-        const isValue = $(this).val()
+    // function xCountry(str) {
+    //     const inputRelated = $(this).data('input-related')
+    //     const valueToCheck = $(this).data('value-to-check')
+    //     const isValue = $(this).val()
 
-        if (isValue == 'TAIWAN') {
-            validateInputOnDb($(inputRelated))
-        }
-    }
+    //     if (isValue == 'TAIWAN') {
+    //         validateInputOnDb($(inputRelated))
+    //     }
+    // }
 
     $(".disable-one-option-if-this-value-something").change(function() {
         const dropdownTarget = $(this).data('dropdown-target')

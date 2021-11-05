@@ -43,10 +43,10 @@ $(document).ready(function() {
 
         for (let i = 0; i < getCommercialInvoice().length; i++) {
             appendModal(`delete-data-${i + 1}`, `Hapus data ${i + 1}`,
-            `<p>
+                `<p>
                 Apakah kamu yakin, ingin menghapus data ${i + 1}
             </p>`,
-            `<div class="d-flex justify-content-between">
+                `<div class="d-flex justify-content-between">
                     <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">
                         Tidak jadi
                     </button>
@@ -232,8 +232,7 @@ $(document).ready(function() {
                 fillCommercialInvoice()
 
                 window.location.reload()
-            }
-            else {
+            } else {
                 localStorage.removeItem('commercialInvoice')
             }
         } catch (error) {

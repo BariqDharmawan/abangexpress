@@ -178,6 +178,7 @@ class BookingOrderController extends Controller
             "item_detail": ['.$commercialInvoice.']
 
         }';
+
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
