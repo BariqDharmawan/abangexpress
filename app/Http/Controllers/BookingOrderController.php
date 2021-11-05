@@ -138,6 +138,10 @@ class BookingOrderController extends Controller
         $jenis = $request->package_type;
         $desc = $request->package_detail;
         $pcs = $request->package_koli;
+        $height = $request->package_height;
+        $width = $request->package_width;
+        $length = $request->package_length;
+        $kurir = $request->courier;
         $commercialInvoice = $request->commercialInvoice;
         $customvalue = str_replace(".","",$request->package_value);
         $customvalue = str_replace(",",".",$customvalue);
@@ -158,16 +162,17 @@ class BookingOrderController extends Controller
                 "telepon": "'.$teleponpenerima.'",
                 "alamat": "'.$alamat.'",
                 "kode_pos": "'.$kodepos.'",
-                "negara_tujuan": "'.$tujuan.'"
+                "negara_tujuan": "'.$tujuan.'",
+                "kurir": "'.$kurir.'"
             },
             "item_data": {
                 "tipe": "'.$jenis.'",
                 "deskripsi": "'.$desc.'",
                 "berat": '.$berat.',
                 "pcs": '.$pcs.',
-                "panjang": 0,
-                "lebar": 0,
-                "tinggi": 0,
+                "panjang": '.$length.',
+                "lebar": '.$width.',
+                "tinggi": '.$height.',
                 "custom_value": '.$customvalue.'
             },
             "item_detail": ['.$commercialInvoice.']

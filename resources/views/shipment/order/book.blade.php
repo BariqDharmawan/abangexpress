@@ -75,16 +75,8 @@
                     name="recipient_zipcode" id="recipient-zipcode" inputmode="numeric"
                     class="only-number validate-if-response-api-is-something show-other-input put-min-max-to-other-input
                     add-option-to-other-select-based-on-this-input"
-                    data-input-to-put-min-max="#package-weight"
-                    data-put-min="4"
-                    data-put-max="23"
-                    data-input-to-show="#package-length,#package-width,#package-height"
-                    data-url-api="/shipping/check-zipcode"
-                    data-akun="coloader" data-response-field-to-show="courier"
-                    data-key="f03e563b71454776e2cb1e7b5f5ea5c4"
-                    data-country="TAIWAN" data-additional-from-val="zipcode"
-                    data-response-api-wish="heimao"
-                    minlength="3" maxlength="8" required />
+
+                    required />
                 </div>
             </div>
             <div class="col-12">
@@ -167,7 +159,7 @@
 
             <div class="col-12">
                 <x-shipment.input type="select"
-                placeholder="Pilih kurir" id="courier"
+                placeholder="Pilih kurir" id="courier" class="d-none form-control"
                 name="courier" required></x-shipment.input>
             </div>
 

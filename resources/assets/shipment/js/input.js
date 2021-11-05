@@ -16,8 +16,7 @@ function showInputBaseOnOtherInput(condition, inputs) {
             $(allInput[i]).prop('required', false).removeClass('d-none').addClass('d-block')
             $(allInput[i]).closest("[class*='col-']").removeClass('d-none').addClass('d-block')
             $(allInput[i]).closest("[class*='col-']").parent("[class*='col-']").addClass('d-block').removeClass('d-none')
-        }
-        else {
+        } else {
             $(allInput[i]).addClass('d-none').removeClass('d-block')
             $(allInput[i]).closest("[class*='col-']").addClass('d-none').removeClass('d-block')
             $(allInput[i]).closest("[class*='col-']").parent("[class*='col-']").addClass('d-none').removeClass('d-block')
@@ -25,16 +24,17 @@ function showInputBaseOnOtherInput(condition, inputs) {
     }
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
 
     $("input.d-none").closest("[class*='col-']").parent("[class*='col-']").addClass('d-none')
+    $("select.d-none").closest("[class*='col-']").addClass('d-none')
 
 
-    $(".custom-file__input").each(function () {
+    $(".custom-file__input").each(function() {
         const label = $(this).next().find('span')
         const labelText = label.text()
 
-        $(this).change(function (e) {
+        $(this).change(function(e) {
             if ($(this).val() !== '') {
                 label.text(e.target.files[0].name).addClass('no-after')
             } else {
@@ -48,14 +48,14 @@ $(document).ready(function () {
         $(".form-line :input").parents(".form-line").addClass('focused')
     }
 
-    $(".form-line :input").change(function () {
+    $(".form-line :input").change(function() {
         if ($(this).val() !== '') {
             $(this).parents(".form-line").addClass('focused')
         }
     })
 
     if ($(".only-number-not-allow-decimal").length > 0) {
-        $('form button[type="submit"]').click(function (e) {
+        $('form button[type="submit"]').click(function(e) {
             e.preventDefault()
 
             if ($(".only-number-not-allow-decimal")[0].validity.stepMismatch) {
@@ -72,16 +72,16 @@ $(document).ready(function () {
         })
     }
 
-    $("[accept='image/*']").change(function () {
+    $("[accept='image/*']").change(function() {
         const imgPreview = $(this).data('img-preview');
         const inputHidden = $(this).data('input-hidden')
         if (this.files && this.files[0]) {
             let reader = new FileReader();
 
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 previewImgUpload(imgPreview, e.target.result)
                 const str = e.target.result
-                // const arku = str.split("base64,")
+                    // const arku = str.split("base64,")
                 $(`#${inputHidden}`).val(str)
             }
             reader.readAsDataURL(this.files[0]);
@@ -91,7 +91,7 @@ $(document).ready(function () {
     })
 
     function validateInputOnDb(inputToValidate) {
-        inputToValidate.change(function () {
+        inputToValidate.change(function() {
             const thisInput = $(this)
 
             if (thisInput.val() != '') {
@@ -118,26 +118,24 @@ $(document).ready(function () {
                     url: urlToValidate,
                     contentType: 'application/json',
                     data: JSON.stringify(dataToValidate),
-                }).always(function (response) {
+                }).always(function(response) {
                     if (response.status === 'success') {
                         $(`.error-ajax-${thisInput.attr('name')}`).text('').addClass('d-none').removeClass('d-block')
                         form.find('button[type="submit"]').prop('disabled', false)
-                    }
-                    else {
+                    } else {
                         $(`.error-ajax-${thisInput.attr('name')}`).text('Kodepos tidak dapat ditemukan')
-                        .removeClass('d-none')
+                            .removeClass('d-none')
                         form.find('button[type="submit"]').prop('disabled', true)
                     }
                 })
-            }
-            else {
+            } else {
                 $(`.error-ajax-${thisInput.attr('name')}`).text('').addClass('d-none')
             }
 
         })
     }
 
-    $(".validate-if-response-api-is-something").change(function () {
+    $(".validate-if-response-api-is-something").change(function() {
         const thisInput = $(this)
 
         const responseApiWish = $(this).data('response-api-wish')
@@ -160,79 +158,134 @@ $(document).ready(function () {
             dataToValidate[additionalData] = $(this).val()
         }
 
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: urlToValidate,
-                contentType: 'application/json',
-                data: JSON.stringify(dataToValidate),
-            }).always(function (data) {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: urlToValidate,
+            contentType: 'application/json',
+            data: JSON.stringify(dataToValidate),
+        }).always(function(data) {
 
-                let inputToShow = thisInput.data('input-to-show')
+            let inputToShow = thisInput.data('input-to-show')
 
-                console.log(`status : ${data.status}`)
+            console.log(`status : ${data.status}`)
 
-                if (data.status == 'success') {
-                    const arrayResponse = data.response[0][fieldToShow]
-                    console.log(arrayResponse)
+            if (data.status == 'success') {
+                const arrayResponse = data.response[0][fieldToShow]
+                    // console.log(arrayResponse)
 
-                    if (thisInput.hasClass('add-option-to-other-select-based-on-this-input')) {
-                        $("#courier").empty()
-                        arrayResponse.forEach(option => {
-                            $("#courier").append(new Option(option, option)).trigger('change')
-                        });
-                    }
-
-
-                    if (thisInput.hasClass('show-other-input') && arrayResponse.includes(responseApiWish)) {
-                        showInputBaseOnOtherInput(true, inputToShow, thisInput)
-
-                        // if (thisInput.hasClass('put-min-max-to-other-input')) {
-                        //     const min = thisInput.data('put-min')
-                        //     const max = thisInput.data('put-max')
-                        //     putMinMaxValidation(true, $(thisInput.data('input-to-put-min-max')), min, max)
-                        // }
-                    }
-                }
-                else {
-                    if (thisInput.hasClass('show-other-input')) {
-                        showInputBaseOnOtherInput(false, inputToShow, thisInput)
-                    }
-                    if (thisInput.hasClass('put-min-max-to-other-input')) {
-                        // putMinMaxValidation(false, $(thisInput.data('input-to-put-min-max')))
-                    }
+                if (thisInput.hasClass('add-option-to-other-select-based-on-this-input')) {
+                    $("#courier").empty()
+                    arrayResponse.forEach(option => {
+                        $("#courier").append(new Option(option, option)).trigger('change')
+                    });
                 }
 
-            })
+
+                if (thisInput.hasClass('show-other-input') && arrayResponse.includes(responseApiWish)) {
+                    showInputBaseOnOtherInput(true, inputToShow, thisInput)
+
+                    // if (thisInput.hasClass('put-min-max-to-other-input')) {
+                    //     const min = thisInput.data('put-min')
+                    //     const max = thisInput.data('put-max')
+                    //     putMinMaxValidation(true, $(thisInput.data('input-to-put-min-max')), min, max)
+                    // }
+                }
+            } else {
+                if (thisInput.hasClass('show-other-input')) {
+                    showInputBaseOnOtherInput(false, inputToShow, thisInput)
+                }
+                if (thisInput.hasClass('put-min-max-to-other-input')) {
+                    // putMinMaxValidation(false, $(thisInput.data('input-to-put-min-max')))
+                }
+            }
+
+        })
 
     })
 
 
-    $(".check-other-input-based-on-this-value").change(function () {
+    $(".check-other-input-based-on-this-value").change(function() {
         const inputRelated = $(this).data('input-related')
         const valueToCheck = $(this).data('value-to-check')
         const isValue = $(this).val()
 
-        if (isValue == valueToCheck) {
-            validateInputOnDb($(inputRelated))
+
+        if (isValue == 'TAIWAN') {
+            // validateInputOnDb($(inputRelated))
+            document.getElementById("recipient-zipcode").setAttribute("data-input-to-put-min-max", "#package-weight")
+            document.getElementById("recipient-zipcode").setAttribute("data-put-min", "4")
+            document.getElementById("recipient-zipcode").setAttribute("data-put-max", "23")
+            document.getElementById("recipient-zipcode").setAttribute("data-input-to-show", "#package-length,#package-width,#package-height,#courier")
+            document.getElementById("recipient-zipcode").setAttribute("data-url-api", "/shipping/check-zipcode")
+            document.getElementById("recipient-zipcode").setAttribute("data-akun", "coloader")
+            document.getElementById("recipient-zipcode").setAttribute("data-response-field-to-show", "courier")
+            document.getElementById("recipient-zipcode").setAttribute("data-key", "f03e563b71454776e2cb1e7b5f5ea5c4")
+            document.getElementById("recipient-zipcode").setAttribute("data-country", "" + isValue + "")
+            document.getElementById("recipient-zipcode").setAttribute("data-additional-from-val", "zipcode")
+            document.getElementById("recipient-zipcode").setAttribute("data-response-api-wish", "heimao")
+            document.getElementById("recipient-zipcode").setAttribute("minlength", "3")
+            document.getElementById("recipient-zipcode").setAttribute("maxlength", "8")
+
+
         }
     })
 
-    $(".disable-one-option-if-this-value-something").change(function () {
+    function xCountry(str) {
+        const inputRelated = $(this).data('input-related')
+        const valueToCheck = $(this).data('value-to-check')
+        const isValue = $(this).val()
+
+        if (isValue == 'TAIWAN') {
+            validateInputOnDb($(inputRelated))
+        }
+    }
+
+    $(".disable-one-option-if-this-value-something").change(function() {
         const dropdownTarget = $(this).data('dropdown-target')
         const optionToDisable = $(this).data('option-to-disable')
+        var packHeight = document.getElementById('package-height').value
+        var packWidth = document.getElementById('package-width').value
+        var packLength = document.getElementById('package-length').value
+        let dim = parseInt(packHeight) + parseInt(packLength) + parseInt(packWidth)
 
-        if ($(this).val() < 4 || $(this).val() > 23) {
-            $(`${dropdownTarget} option[value="${optionToDisable}"]`).prop('disabled', true)
+        if (packHeight == '' || packWidth == '' || packLength == '') {
+            console.log('please fill all data')
+        } else {
+            // console.log(dim)
+            if ($(this).val() < 4 || $(this).val() > 23 || dim > 150) {
+                $(`${dropdownTarget} option[value="${optionToDisable}"]`).prop('disabled', true)
+            } else {
+                $(`${dropdownTarget} option[value="${optionToDisable}"]`).prop('disabled', false)
+            }
         }
-        else {
-            $(`${dropdownTarget} option[value="${optionToDisable}"]`).prop('disabled', false)
-        }
-
         $(dropdownTarget).trigger('change')
 
 
     })
+
+    $(".disable-one-option-if-this-value-something").focusout(function() {
+        const dropdownTarget = $(this).data('dropdown-target')
+        const optionToDisable = $(this).data('option-to-disable')
+        var packHeight = document.getElementById('package-height').value
+        var packWidth = document.getElementById('package-width').value
+        var packLength = document.getElementById('package-length').value
+        var dim = parseInt(packHeight) + parseInt(packLength) + parseInt(packWidth)
+
+        if (packHeight == '' || packWidth == '' || packLength == '') {
+            console.log('please fill all data')
+        } else {
+            console.log(dim)
+            if ($(this).val() < 4 || $(this).val() > 23 || dim > 150) {
+                $(`${dropdownTarget} option[value="${optionToDisable}"]`).prop('disabled', true)
+            } else {
+                $(`${dropdownTarget} option[value="${optionToDisable}"]`).prop('disabled', false)
+            }
+        }
+        $(dropdownTarget).trigger('change')
+
+    })
+
 
 
 })
