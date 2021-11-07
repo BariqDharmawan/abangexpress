@@ -138,7 +138,7 @@ class BookingOrderController extends Controller
         $penerima = $request->recipient_name;
         $teleponpenerima = $request->recipient_telephone;
         $ktp = $request->recipient_nik;
-        $tujuan = $request->destination_country;
+        $tujuan = $request->recipient_country;
         $alamat = $request->recipient_address;
         $kodepos = $request->recipient_zipcode;
         $berat = str_replace(",",".",$request->package_weight);
@@ -213,6 +213,7 @@ class BookingOrderController extends Controller
 
         return response()->json([
             'data' => $response,
+            'xPD'=>$postdata,
             'message' => 'success'
         ]);
     }

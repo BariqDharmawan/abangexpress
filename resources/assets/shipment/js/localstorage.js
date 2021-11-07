@@ -187,10 +187,10 @@ $(document).ready(function() {
             contentType: false,
             type: 'POST',
             success: function(response) {
-                localStorage.clear()
-
+                // localStorage.clear()
+                console.log(response.xPD)
                 window.open('/shipping/order/print?key=' + response.data.token_resi, '_blank');
-                window.open('/shipping', '_self');
+                // window.open('/shipping', '_self');
 
 
 
