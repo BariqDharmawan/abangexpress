@@ -8,7 +8,7 @@
 <body class="theme-red">
     @include('shipment.preload')
 
-    <nav class="navbar bg-gradient-red">
+    <nav class="navbar bg-red">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="bars"></a>
@@ -57,7 +57,7 @@
             <div class="menu">
                 <a href="{{ route('shipping.order.book.index') }}"
                 class="remove-underline" id="menu-add-new-order">
-                    <div class="info-box-3 bg-green hover-zoom-effect
+                    <div class="info-box-3 bg-red hover-zoom-effect
                     mb-0 mt-4 ml-4 mr-1 left-0">
                         <div class="icon">
                             <i class="material-icons">flight_takeoff</i>

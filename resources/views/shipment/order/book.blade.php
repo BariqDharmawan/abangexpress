@@ -53,6 +53,18 @@
                     minlength="8" maxlength="15" required />
                 </div>
             </div>
+
+            @if(strpos(strtolower($akun),'arm') !== false)
+
+            <div class="col-12">
+                <x-shipment.input type="select"
+                placeholder="Negara penerima" class="check-other-input-based-on-this-value"
+                data-value-to-check="TAIWAN" data-input-related="#recipient-zipcode"
+                name="recipient_country" required>
+                    <option value="TAIWAN">TAIWAN</option>
+                </x-shipment.input>
+            </div>
+            @else
             <div class="col-12">
                 <x-shipment.input type="select"
                 placeholder="Negara penerima" class="check-other-input-based-on-this-value"
@@ -65,6 +77,7 @@
                     @endforeach
                 </x-shipment.input>
             </div>
+            @endif
             <div class="row">
                 <div class="col-lg-6">
                     <x-shipment.input placeholder="Nomor ID Card Penerima"
@@ -111,7 +124,7 @@
                             <div class="form-line">
                                 <input
                                 name="package_length"
-                                class="d-none form-control"
+                                class="form-control"
                                 id="package-length" />
                                 <label class="form-label mb-0 z-20" for="package-length">
                                     panjang
@@ -124,7 +137,7 @@
                             <div class="form-line">
                                 <input
                                 name="package_width"
-                                class="d-none form-control"
+                                class="form-control"
                                 id="package-width" />
                                 <label class="form-label mb-0" for="package-width">
                                     lebar
@@ -137,7 +150,7 @@
                             <div class="form-line">
                                 <input
                                 name="package_height"
-                                class="d-none form-control"
+                                class="form-control"
                                 id="package-height" />
                                 <label class="form-label mb-0" for="package-height">
                                     tinggi
@@ -156,12 +169,15 @@
                     name="package_weight" id="package-weight" required />
                 </div>
             </div>
-
+            @if(strpos(strtolower($akun),'arm') !== false)
+            @else
             <div class="col-12">
                 <x-shipment.input type="select"
                 placeholder="Pilih kurir" id="courier" class="d-none form-control"
                 name="courier" required></x-shipment.input>
             </div>
+
+            @endif
 
             <div class="col-12">
                 <x-shipment.input type="select"
@@ -216,6 +232,6 @@
 
 @section('components')
 <x-shipment.modal id="modal-tnc" title="Syarat dan ketentuan">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. A quos necessitatibus, labore maiores molestiae sed atque, beatae mollitia distinctio nam similique libero reprehenderit totam culpa iusto excepturi ipsam tempore hic!
+    Mohon untuk mengisi data dengan valid..!!
 </x-shipment.modal>
 @endsection

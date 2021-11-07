@@ -45,8 +45,15 @@ class BookingOrderController extends Controller
 
         $commodityList = json_decode($response)->response;
 
+        $uid=Auth::user()->username;
+        $user = User::where([
+            ['username', $uid]
+        ])->first();
+
+        $akun=$user->code_api;
+
         return view('shipment.order.book', compact(
-            'title', 'prevRecipient','countryList','commodityList'
+            'title', 'prevRecipient','countryList','commodityList','akun'
         ));
     }
 

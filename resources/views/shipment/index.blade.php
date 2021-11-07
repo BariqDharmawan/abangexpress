@@ -29,7 +29,7 @@
                     <h2>Kiriman belum ditagih</h2>
                 </div>
                 <div class="body p-0">
-                    <div class="info-box info-box--120px bg-green hover-expand-effect">
+                    <div class="info-box info-box--120px bg-red hover-expand-effect">
                         <div class="icon d-inline-flex items-center justify-center
                         pt-5 pb-5">
                             {{-- <img src="{{ asset('img/icon/savings_white_24dp.svg') }}"
@@ -81,7 +81,7 @@
                     <h2>Kiriman di proses {{ $quickReport['waktu'] }}</h2>
                 </div>
                 <div class="body p-0">
-                    <div class="info-box info-box--120px bg-green hover-expand-effect">
+                    <div class="info-box info-box--120px bg-red hover-expand-effect">
                         <div class="icon d-inline-flex items-center justify-center
                         pt-5 pb-5">
                             <i  class="material-icons">insert_chart</i>

@@ -209,7 +209,7 @@ $(document).ready(function() {
         const inputRelated = $(this).data('input-related')
         const valueToCheck = $(this).data('value-to-check')
         const isValue = $(this).val()
-
+        const form = $(this).parents('form')
 
         if (isValue == 'TAIWAN') {
             document.getElementById("recipient-zipcode").setAttribute("data-input-to-put-min-max", "#package-weight")
@@ -225,8 +225,11 @@ $(document).ready(function() {
             document.getElementById("recipient-zipcode").setAttribute("data-response-api-wish", "heimao")
             document.getElementById("recipient-zipcode").setAttribute("minlength", "3")
             document.getElementById("recipient-zipcode").setAttribute("maxlength", "8")
+            validateInputOnDb($(inputRelated))
+        } else {
+            form.find('button[type="submit"]').prop('disabled', false)
         }
-        validateInputOnDb($(inputRelated))
+
     })
 
     // function xCountry(str) {
