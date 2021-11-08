@@ -105,7 +105,7 @@
             </small>
         @else
             @isset($smallText)
-            <small class="text-black-50">{{ $smallText }}</small>
+            <small class="text-black-50 helper-input" data-default-helper="{{ $smallText }}">{{ $smallText }}</small>
             @else
             <small class="text-danger error-ajax-{{ $inputHidden }}
             d-block mt-2"></small>
@@ -116,7 +116,7 @@
             <small class="text-danger d-block mt-2">{{ $message }}</small>
         @else
             @isset($smallText)
-            <small class="text-black-50">{{ $smallText }}</small>
+            <small class="text-black-50 helper-input" data-default-helper="{{ $smallText }}">{{ $smallText }}</small>
             @else
             <small class="text-danger error-ajax-{{ $name }} d-block mt-2"></small>
             @endisset

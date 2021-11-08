@@ -55,11 +55,11 @@
             </div>
 
             @if(strpos(strtolower($akun),'arm') !== false)
-
             <div class="col-12">
                 <x-shipment.input type="select"
-                placeholder="Negara penerima" class="check-other-input-based-on-this-value"
-                data-value-to-check="TAIWAN" data-input-related="#recipient-zipcode"
+                placeholder="Negara penerima" class="validate-receiver-package"
+                data-value-to-check="TAIWAN" data-url-api="/shipping/check-zipcode"
+                data-input-related="#recipient-zipcode"
                 name="recipient_country" required>
                     <option value="TAIWAN">TAIWAN</option>
                 </x-shipment.input>
@@ -67,8 +67,9 @@
             @else
             <div class="col-12">
                 <x-shipment.input type="select"
-                placeholder="Negara penerima" class="check-other-input-based-on-this-value"
-                data-value-to-check="TAIWAN" data-input-related="#recipient-zipcode"
+                placeholder="Negara penerima" class="validate-receiver-package"
+                data-value-to-check="TAIWAN" data-url-api="/shipping/check-zipcode"
+                data-input-related="#recipient-zipcode"
                 name="recipient_country" required>
                     @foreach ($countryList as $country)
                         <option value="{{ $country->tujuan }}">
@@ -86,10 +87,7 @@
                 <div class="col-lg-6">
                     <x-shipment.input placeholder="Kode pos"
                     name="recipient_zipcode" id="recipient-zipcode" inputmode="numeric"
-                    class="only-number validate-if-response-api-is-something show-other-input put-min-max-to-other-input
-                    add-option-to-other-select-based-on-this-input"
-
-                    required />
+                    class="only-number" data-akun="coloader" data-key="f03e563b71454776e2cb1e7b5f5ea5c4" data-country="TAIWAN" required />
                 </div>
             </div>
             <div class="col-12">
@@ -116,7 +114,8 @@
 
         <x-shipment.card heading="Detail paket" icon="card_giftcard">
 
-            <div class="row d-flex">
+            <div class="row d-flex parent-validate-package" data-dropdown-target="#courier"
+            data-option-to-disable="heimao">
                 <div class="row col-lg-6">
                     <p class="form-label fw-bold pl-4 m-0">Dimensi paket (cm)</p>
                     <div class="col-lg-4">
@@ -163,21 +162,18 @@
                 <div class="col-lg-6">
                     <x-shipment.input
                     placeholder="Masukan berat paket"
-                    text-addon="(kg)" type="number" class="disable-one-option-if-this-value-something"
-                    data-dropdown-target="#courier"
-                    data-option-to-disable="heimao"
+                    text-addon="(kg)" type="number"
                     name="package_weight" id="package-weight" required />
                 </div>
             </div>
-            @if(strpos(strtolower($akun),'arm') !== false)
-            @else
-            <div class="col-12">
+            {{-- @if(strpos(strtolower($akun),'arm') !== false) --}}
+            <div class="col-12 d-none" id="select-courier">
                 <x-shipment.input type="select"
-                placeholder="Pilih kurir" id="courier" class="d-none form-control"
-                name="courier" required></x-shipment.input>
+                placeholder="Pilih kurir" class="form-control"
+                name="courier" id="courier"></x-shipment.input>
             </div>
-
-            @endif
+            {{-- @else
+            @endif --}}
 
             <div class="col-12">
                 <x-shipment.input type="select"
