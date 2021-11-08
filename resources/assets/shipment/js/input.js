@@ -9,21 +9,6 @@ if ($(".select2").length > 0) {
     })
 }
 
-// function showInputBaseOnOtherInput(condition, inputs) {
-//     let allInput = inputs.split(',')
-//     for (let i = 0; i < allInput.length; i++) {
-//         if (condition) {
-//             $(allInput[i]).prop('required', false).removeClass('d-none').addClass('d-block')
-//             $(allInput[i]).closest("[class*='col-']").removeClass('d-none').addClass('d-block')
-//             $(allInput[i]).closest("[class*='col-']").parent("[class*='col-']").addClass('d-block').removeClass('d-none')
-//         } else {
-//             $(allInput[i]).addClass('d-none').removeClass('d-block')
-//             $(allInput[i]).closest("[class*='col-']").addClass('d-none').removeClass('d-block')
-//             $(allInput[i]).closest("[class*='col-']").parent("[class*='col-']").addClass('d-none').removeClass('d-block')
-//         }
-//     }
-// }
-
 $(document).ready(function () {
 
     $("input.d-none").closest("[class*='col-']").parent("[class*='col-']").addClass('d-none')
@@ -46,30 +31,6 @@ $(document).ready(function () {
 
     if ($(".form-line :input").val() !== '') {
         $(".form-line :input").parents(".form-line").addClass('focused')
-    }
-
-    $(".form-line :input").change(function () {
-        if ($(this).val() !== '') {
-            $(this).parents(".form-line").addClass('focused')
-        }
-    })
-
-    if ($(".only-number-not-allow-decimal").length > 0) {
-        $('form button[type="submit"]').click(function (e) {
-            e.preventDefault()
-
-            if ($(".only-number-not-allow-decimal")[0].validity.stepMismatch) {
-                $(".only-number-not-allow-decimal")[0].setCustomValidity(
-                    'Jangan inputkan angka decimal'
-                )
-            } else {
-                $(".only-number-not-allow-decimal")[0].setCustomValidity(' ')
-                $(this).parents("form").trigger('submit')
-
-            }
-            $(".only-number-not-allow-decimal")[0].reportValidity()
-
-        })
     }
 
     $("[accept='image/*']").change(function () {
@@ -128,12 +89,9 @@ $(document).ready(function () {
                         $("#select-courier").removeClass('d-none')
                     }
 
-                    form.find('button[type="submit"]').prop('disabled', false)
-
                 } else {
                     $(`.error-ajax-${$(input).attr('name')}`).text('Kodepos tidak dapat ditemukan')
                         .removeClass('d-none')
-                    form.find('button[type="submit"]').prop('disabled', true)
                 }
             })
         } else {
@@ -194,8 +152,6 @@ $(document).ready(function () {
             if (!$('#select-courier').hasClass('d-none')) {
                 $('#select-courier').addClass('d-none')
             }
-
-            form.find('button[type="submit"]').prop('disabled', false)
         }
     })
 

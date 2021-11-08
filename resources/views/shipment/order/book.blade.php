@@ -117,7 +117,7 @@
             <div class="row d-flex parent-validate-package" data-dropdown-target="#courier"
             data-option-to-disable="heimao">
                 <div class="row col-lg-6">
-                    <p class="form-label fw-bold pl-4 m-0">Dimensi paket (cm)</p>
+                    <p class="form-label fw-bold pl-4 m-b-2">Dimensi paket (cm)</p>
                     <div class="col-lg-4">
                         <div class="form-group form-float form-group-lg">
                             <div class="form-line">
@@ -126,7 +126,7 @@
                                 class="form-control"
                                 id="package-length" />
                                 <label class="form-label mb-0 z-20" for="package-length">
-                                    panjang
+                                    Panjang
                                 </label>
                             </div>
                         </div>
@@ -139,7 +139,7 @@
                                 class="form-control"
                                 id="package-width" />
                                 <label class="form-label mb-0" for="package-width">
-                                    lebar
+                                    Lebar
                                 </label>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                                 class="form-control"
                                 id="package-height" />
                                 <label class="form-label mb-0" for="package-height">
-                                    tinggi
+                                    Tinggi
                                 </label>
                             </div>
                         </div>
@@ -197,7 +197,8 @@
                     <x-shipment.input type="number"
                     placeholder="Masukan jumlah paket / koli"
                     name="package_koli" id="package-koli" min="1" step="1"
-                    class="only-number-not-allow-decimal" required />
+                    class="only-number-not-allow-decimal" required
+                    small-text="Jangan inputkan angka decimal, wajib angka bulat" />
                 </div>
                 <div class="col-lg-6">
                     <x-shipment.input type="text" icon-addon="attach_money"
@@ -218,7 +219,7 @@
                     target="modal-tnc" />
                 </small>
                 <button type="submit" class="btn btn-big btn-primary"
-                form="form-book-order" disabled>Order</button>
+                form="form-book-order">Order</button>
             </div>
         </x-shipment.card>
     </form>
