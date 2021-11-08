@@ -117,15 +117,17 @@
             <div class="row d-flex parent-validate-package" data-dropdown-target="#courier"
             data-option-to-disable="heimao">
                 <div class="row col-lg-6">
-                    <p class="form-label fw-bold pl-4 m-b-2">Dimensi paket (cm)</p>
+                    <p class="form-label fw-bold pl-4 m-b-2 form-label--required">Dimensi paket (cm)</p>
                     <div class="col-lg-4">
                         <div class="form-group form-float form-group-lg">
                             <div class="form-line">
                                 <input
+                                type="number"
+                                min="1"
                                 name="package_length"
                                 class="form-control"
-                                id="package-length" />
-                                <label class="form-label mb-0 z-20" for="package-length">
+                                id="package-length" required />
+                                <label class="form-label mb-0" for="package-length">
                                     Panjang
                                 </label>
                             </div>
@@ -135,9 +137,11 @@
                         <div class="form-group form-float form-group-lg">
                             <div class="form-line">
                                 <input
+                                type="number"
+                                min="1"
                                 name="package_width"
                                 class="form-control"
-                                id="package-width" />
+                                id="package-width" required />
                                 <label class="form-label mb-0" for="package-width">
                                     Lebar
                                 </label>
@@ -148,9 +152,11 @@
                         <div class="form-group form-float form-group-lg">
                             <div class="form-line">
                                 <input
+                                type="number"
+                                min="1"
                                 name="package_height"
                                 class="form-control"
-                                id="package-height" />
+                                id="package-height" required />
                                 <label class="form-label mb-0" for="package-height">
                                     Tinggi
                                 </label>
@@ -162,7 +168,7 @@
                 <div class="col-lg-6">
                     <x-shipment.input
                     placeholder="Masukan berat paket"
-                    text-addon="(kg)" type="number"
+                    text-addon="(kg)" type="number" min="1"
                     name="package_weight" id="package-weight" required />
                 </div>
             </div>

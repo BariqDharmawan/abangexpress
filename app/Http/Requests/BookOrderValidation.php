@@ -40,11 +40,15 @@ class BookOrderValidation extends FormRequest
             'recipient_country' => ['required'],
             'recipient_address' => ['required'],
             'idcard_input_hidden' => ['sometimes'],
-            'package_weight' => ['required'],
+            'package_length' => ['required', 'numeric', 'min:1'],
+            'package_width' => ['required', 'numeric', 'min:1'],
+            'package_height' => ['required', 'numeric', 'min:1'],
+            'package_weight' => ['required', 'numeric', 'min:1'],
             'package_type' => ['required'],
             'package_detail' => ['required'],
             'package_koli' => ['required'],
             'package_value' => ['required'],
+            'courier' => ['required_if:recipient_country,TAIWAN']
         ];
     }
 }

@@ -9,21 +9,22 @@
 
 %requiredMark {
     &::after {
+        position: relative;
+        top: 0;
+        right: 0;
         color: $red;
         content: ' *';
     }
 }
 
 input {
-    &:not([type='file']):required + label {
-        @extend %requiredMark;
-    }
     &[type="file"]:required + label span {
         @extend %requiredMark;
     }
 }
 
 .form-label--required {
+    position: relative;
     @extend %requiredMark;
 }
 

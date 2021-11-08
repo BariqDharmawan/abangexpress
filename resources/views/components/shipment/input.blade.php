@@ -45,7 +45,7 @@
     </div>
     @else
         @if (isset($iconAddon) || isset($textAddon))
-        <label class="form-label z-20 mb-0" for="{{ $id }}">
+        <label class="form-label mb-0 @if(isset($required) and $required)form-label--required @endif" for="{{ $id }}">
             {{ $label ?? $placeholder }}
         </label>
         <div class="input-group mb-0">

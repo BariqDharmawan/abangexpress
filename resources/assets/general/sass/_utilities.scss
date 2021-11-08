@@ -11,9 +11,12 @@
 .d-none {
     display: none !important;
 }
-.top-60px {
-    top: 60px;
+.top {
+    &-60px {
+        top: 60px;
+    }
 }
+
 .left-1\/2 {
     left: 50%;
     transform: translateX(-50%);
@@ -75,4 +78,11 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.center-right-parent {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }

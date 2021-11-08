@@ -80,6 +80,7 @@ $(document).ready(function () {
 
                     $(`.error-ajax-${$(input).attr('name')}`).text('').addClass('d-none').removeClass('d-block')
 
+                    $("#courier").empty()
                     listCourier.forEach(courier => {
                         console.log(`courier: ${courier}`)
                         $("#courier").append(new Option(courier, courier))
@@ -87,11 +88,16 @@ $(document).ready(function () {
 
                     if (listCourier.includes('heimao')) {
                         $("#select-courier").removeClass('d-none')
+                        $("#courier").prop('required', true)
                     }
 
                 } else {
                     $(`.error-ajax-${$(input).attr('name')}`).text('Kodepos tidak dapat ditemukan')
                         .removeClass('d-none')
+                    $("#select-courier").addClass('d-none')
+                    $("#select-courier label").removeClass('form-label--required')
+                    $("#courier").empty()
+                    $("#courier").prop('required', false)
                 }
             })
         } else {
@@ -134,6 +140,7 @@ $(document).ready(function () {
 
                         if (totalDimension > 150 || !isValueAlreadyInRange) {
                             console.log('total dimensi atau berat melebihi syarat', dropdownTarget, optionToDisable)
+                            $(dropdownTarget).val('')
                             $(`${dropdownTarget} option[value="${optionToDisable}"]`).prop('disabled', true)
 
                         } else {
