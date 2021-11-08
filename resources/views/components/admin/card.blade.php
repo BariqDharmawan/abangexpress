@@ -4,7 +4,7 @@
     @if(isset($isHeaderTransparent) and $isHeaderTransparent) bg-transparent @endif
     @if(isset($reverseHeader) and $reverseHeader) flex-column-reverse @endif">
         <h6 class="m-0 font-weight-bold
-        @if(isset($isHeaderTransparent) and $isHeaderTransparent) text-black @else text-primary @endif">
+        @if(isset($isHeaderTransparent) and $isHeaderTransparent) text-black @else text-danger @endif">
             {{ $title }}
         </h6>
         @isset($header)

@@ -8,7 +8,7 @@
 <body class="sidebar-toggled">
     <div id="wrapper">
 
-        <ul class="navbar-nav bg-gradient-red sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+        <ul class="navbar-nav bg-red sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
             href="{{ url('/') }}">
@@ -59,8 +59,8 @@
 
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                <nav class="navbar navbar-expand navbar-light
-                bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-dark
+                bg-custom-dark topbar mb-4 static-top shadow">
                     <button id="sidebarToggleTop"
                     class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -68,7 +68,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a href="{{ route('admin.home.index') }}"
-                            class="nav-link text-dark font-weight-bold">
+                            class="nav-link text-light font-weight-bold">
                                 Template: {{ $templateChoosen->version_name }}
                             </a>
                         </li>
@@ -78,7 +78,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
-                                class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                class="mr-2 d-none d-lg-inline text-light small">
                                     {{ Auth::user()->username }}
                                 </span>
                                 <img class="img-profile rounded-circle"
