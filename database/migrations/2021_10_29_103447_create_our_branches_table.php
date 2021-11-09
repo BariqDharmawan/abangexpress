@@ -19,7 +19,7 @@ class CreateOurBranchesTable extends Migration
             $table->string('icon');
             $table->string('telephone', 36);
             $table->mediumText('address');
-            $table->string('domain_owner', 30);
+            $table->string('domain_owner', 45);
             $table->timestamps();
         });
     }
