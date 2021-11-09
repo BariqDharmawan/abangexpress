@@ -15,8 +15,7 @@
 
 <div class="form-group form-float form-group-lg">
     @if ($type == 'select' or $type == 'select-ajax')
-        <label for="{{ $id }}" class="form-label
-        @isset($required)form-label--required @endisset">
+        <label for="{{ $id }}" class="form-label {{ isset($required) ? 'form-label--required' : '' }}">
             {{ $label ?? $placeholder }}
         </label>
         <select {{ $attributes->class([
@@ -40,7 +39,7 @@
             'data-input-hidden' => $inputHidden
             ]) }} />
         <label for="{{ $id }}" class="custom-file__label">
-            <span>{{ $placeholder }}</span>
+            <span class="{{ isset($required) ? 'form-label--required' : '' }}">{{ $placeholder }}</span>
         </label>
     </div>
     @else
@@ -79,7 +78,7 @@
                     'id' => $id ?? Str::slug($label),
                     'required' => $required
                 ]) }}>{{ old($name) }}</textarea>
-                <label class="form-label mb-0" for="{{ $id ?? Str::slug($label) }}">
+                <label class="form-label mb-0 {{ isset($required) ? 'form-label--required' : '' }}" for="{{ $id ?? Str::slug($label) }}">
                     {{ $label ?? $placeholder }}
                 </label>
             @else
@@ -90,7 +89,7 @@
                     'required' => $required,
                     'value' => old($name)
                 ]) }} />
-                <label class="form-label mb-0" for="{{ $id ?? Str::slug($label) }}">
+                <label class="form-label mb-0 {{ isset($required) ? 'form-label--required' : '' }}" for="{{ $id ?? Str::slug($label) }}">
                     {{ $label ?? $placeholder }}
                 </label>
             @endif

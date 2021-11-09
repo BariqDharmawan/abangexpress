@@ -9,7 +9,22 @@ if ($(".select2").length > 0) {
     })
 }
 
+function indicatorInputValid(input) {
+    if (input[0].checkValidity()) {
+        input.parents('.form-line').addClass('validated-valid')
+    }
+    else {
+        console.log('invalid')
+        input.parents('.form-line').removeClass('validated-valid')
+    }
+}
+
 $(document).ready(function () {
+
+    $(".form-line input, .form-line textarea").change(function () {
+        console.log('changed')
+        indicatorInputValid($(this))
+    })
 
     $("input.d-none").closest("[class*='col-']").parent("[class*='col-']").addClass('d-none')
     $("select.d-none").closest("[class*='col-']").addClass('d-none')
@@ -51,7 +66,6 @@ $(document).ready(function () {
     })
 
     function validateZipcode(input, urlApi) {
-        const form = $(input).parents('form')
         console.log(input)
 
         if ($(input).val() != '') {
@@ -79,6 +93,7 @@ $(document).ready(function () {
                     const listCourier = response.response[0].courier
 
                     $(`.error-ajax-${$(input).attr('name')}`).text('').addClass('d-none').removeClass('d-block')
+                    .parents(".form-group").find(".form-line").removeClass('validated-invalid')
 
                     $("#courier").empty()
                     listCourier.forEach(courier => {
@@ -92,8 +107,9 @@ $(document).ready(function () {
                     }
 
                 } else {
-                    $(`.error-ajax-${$(input).attr('name')}`).text('Kodepos tidak dapat ditemukan')
-                        .removeClass('d-none')
+                    $(`.error-ajax-${$(input).attr('name')}`).text('Kodepos tidak dapat ditemukan').removeClass('d-none')
+                        .parents(".form-group").find(".form-line").removeClass('validated-valid')
+                        .addClass('validated-invalid')
                     $("#select-courier").addClass('d-none')
                     $("#select-courier label").removeClass('form-label--required')
                     $("#courier").empty()
@@ -109,7 +125,6 @@ $(document).ready(function () {
         const inputRelated = $(this).data('input-related')
         const valueToCheck = $(this).data('value-to-check')
         const isValue = $(this).val()
-        const form = $(this).parents('form')
         const urlApi = $(this).data('url-api')
 
         console.log(isValue)

@@ -17,6 +17,19 @@
     }
 }
 
+.validated {
+    &-valid {
+        &::after {
+            border-bottom-color: #3c763d !important;
+        }
+    }
+    &-invalid {
+        &::after {
+            border-bottom-color: $red !important;
+        }
+    }
+}
+
 input {
     &[type="file"]:required + label span {
         @extend %requiredMark;

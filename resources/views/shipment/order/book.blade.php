@@ -25,11 +25,11 @@
 
         <x-shipment.card heading="Detail Penerima" icon="person_add" id="data-recipient">
             <div class="col-12">
-                <x-shipment.input type="select" placeholder="Penerima Sebelumnya"
+                <x-shipment.input type="select" placeholder="Pilih penerima"
                 name="recipient_previous" id="get-previous-recipient" required>
                     <optgroup label="Pilih penerima baru jika penerima tidak ada
                     di data sebelumnya">
-                        <option value="penerima-baru" class="fw-bold">
+                        <option value="penerima-baru" class="fw-bold" selected>
                             Penerima Baru
                         </option>
                     </optgroup>
@@ -82,7 +82,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <x-shipment.input placeholder="Nomor ID Card Penerima"
-                    name="recipient_nik" class="not-allow-space" />
+                    name="recipient_nik" class="not-allow-space" maxlength="40" />
                 </div>
                 <div class="col-lg-6">
                     <x-shipment.input placeholder="Kode pos"
@@ -106,7 +106,7 @@
                 accept="image/*" input-hidden="idcard_input_hidden"
                 name="recipient_idcard" maxlength="8" minlength="3"
                 small-text="Gambar hanya boleh berekstensi .jpg, .jpeg, .png, .svg"
-                data-img-preview="#idcard-preview" />
+                data-img-preview="#idcard-preview" required />
                 <input type="hidden" name="idcard_input_hidden"
                 id="idcard_input_hidden" />
             </div>

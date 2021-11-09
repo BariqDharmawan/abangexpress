@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\WithoutSpace;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -34,7 +35,10 @@ class BookOrderValidation extends FormRequest
                     $this->recipient_country == 'TAIWAN' or
                     $this->recipient_country == 'KOREA SOUTH' or
                     $this->recipient_country == 'INDIA'
-                )
+                ),
+                'string',
+                'max:40',
+                new WithoutSpace
             ],
             'recipient_zipcode' => ['required'],
             'recipient_country' => ['required'],
