@@ -14,7 +14,7 @@
             </div>
             <div class="body d-flex flex-wrap flex-column items-end">
                 <div class="w-100">
-                    <x-shipment.input type="textarea" minlength="5"
+                    <x-shipment.input type="textarea" minlength="3"
                     placeholder="Deskripsi barang" name="desc" required />
                 </div>
                 <div class="w-100">

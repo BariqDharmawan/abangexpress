@@ -1,3 +1,4 @@
+import { appendCommercialInvoiceFormatJson, appendInvoiceToBookOrder, fillCommercialInvoice, getBookOrderOnPrevRequest, getLocalstorageBookOrder, removeCommercialInvoice, showInvoiceResult } from "./function-task"
 import { csrfToken, isAlreadyFillFormBook, isOnFormBookInvoicePage, regenerateDatatableAjax } from "./helper"
 import { appendModal } from "./modal"
 
@@ -5,73 +6,6 @@ $(document).ready(function() {
     //redirect to invoice page if already fill book order
     if (isOnFormBookInvoicePage && !isAlreadyFillFormBook) {
         window.location.href = '/shipping/order/book'
-    }
-
-    function getCommercialInvoice() {
-        const commercialInvoice = JSON.parse(
-            '[' + localStorage.getItem("commercialInvoice") + ']'
-        )
-
-        return commercialInvoice.map((invoice, index) => ({
-            ...invoice,
-            no: index + 1,
-            quantity_pcs: `${invoice.quantity} ${invoice.unit}`,
-            value_unit: new Intl.NumberFormat('en-US').format(invoice.value_unit),
-            total_value: new Intl.NumberFormat('en-US').format(
-                Number(invoice.quantity) * Number(invoice.value_unit)
-            ),
-            action: `<button class="btn waves-effect btn-danger"
-                data-toggle="modal" type="button"
-                data-target="#delete-data-${index + 1}">
-                    <i class="material-icons">delete</i>
-                </button>`
-        }))
-    }
-
-    function showInvoiceResult() {
-        // refresh dataTable
-        regenerateDatatableAjax('#commercialInvoice', getCommercialInvoice(), [
-            { "data": "no" },
-            { "data": "desc" },
-            { "data": "quantity_pcs" },
-            { "data": "value_unit" },
-            { "data": "total_value" },
-            { "data": "action" }
-        ])
-
-        $("#btn-generate-pdf").removeAttr("disabled");
-
-        for (let i = 0; i < getCommercialInvoice().length; i++) {
-            appendModal(`delete-data-${i + 1}`, `Hapus data ${i + 1}`,
-                `<p>
-                Apakah kamu yakin, ingin menghapus data ${i + 1}
-            </p>`,
-                `<div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">
-                        Tidak jadi
-                    </button>
-                    <input type="hidden" name="_token"
-                        value="${csrfToken}">
-                    <input type="hidden" name="_method"
-                        value="DELETE">
-                    <button type="button" value="${i + 1}" class="btn btn-danger waves-effect btn-delete-value-attr">
-                        Ya, hapus
-                    </button>
-            </div>`)
-        }
-    }
-
-    function fillCommercialInvoice() {
-        // generate commercial invoice table data
-        var oldCi = localStorage.getItem("commercialInvoice")
-        if (oldCi === null) {
-            // no data dont generate
-            $("#btn-generate-pdf").attr("disabled");
-        } else {
-            // generate data
-            showInvoiceResult()
-        }
-
     }
 
     fillCommercialInvoice()
@@ -96,28 +30,14 @@ $(document).ready(function() {
         e.preventDefault()
         const thisForm = $(this)[0]
 
-        const getBookOrderOnPrevRequest = new FormData()
         const formDataInvoice = new FormData(thisForm)
+        const getBookOrder = getLocalstorageBookOrder(true)
 
-        for (let key = 0; key < localStorage.length; key++) {
-            const inputNameBookingOrder = localStorage.key(key)
-
-            //form data booking order
-            getBookOrderOnPrevRequest.append(
-                inputNameBookingOrder,
-                localStorage.getItem(inputNameBookingOrder)
-            )
-        }
-
-        for (const invoice of formDataInvoice) {
-            const inputNameInvoice = invoice[0]
-            const inputValueInvoice = invoice[1]
-
-            getBookOrderOnPrevRequest.append(inputNameInvoice, inputValueInvoice)
-        }
+        appendInvoiceToBookOrder(getBookOrder, formDataInvoice)
         // create json format to store commercialInvoice data on localStorage
+
         var ciform = new FormData(thisForm),
-            ciresult = {};
+        ciresult = {};
 
         ciform.delete('_token')
 
@@ -126,34 +46,40 @@ $(document).ready(function() {
         }
         ciresult = JSON.stringify(ciresult)
 
-        // check if there commercialInvoice on localStorage
         var oldCi = localStorage.getItem("commercialInvoice")
-        if (oldCi === null) {
-            localStorage.setItem('commercialInvoice', ciresult)
-        } else {
-            localStorage.setItem('commercialInvoice', oldCi + ',' + ciresult)
-        }
 
 
         // Todo: submit ajax here
         $.ajax({
             url: "/shipping/order/book/invoice",
-            data: getBookOrderOnPrevRequest,
+            data: getBookOrder,
             cache: false,
             processData: false,
             contentType: false,
             type: 'POST',
             success: function(response) {
-
                 thisForm.reset()
+
                 $("#form-invoice-order .form-line").removeClass('focused')
                 $(".select2").val('').trigger('change')
+
+                $('[class*="error-ajax-"]').text("").addClass('d-none')
+
+                // check if there commercialInvoice on localStorage
+                if (oldCi === null) {
+                    localStorage.setItem('commercialInvoice', ciresult)
+                } else {
+                    localStorage.setItem('commercialInvoice', oldCi + ',' + ciresult)
+                }
 
                 showInvoiceResult()
 
             },
-            error: function(error) {
-                console.log(error)
+            error: function(response) {
+                const responseError = response.responseJSON.errors
+                for (var key in responseError) {
+                    $(`.error-ajax-${key}`).text(responseError[key]).removeClass('d-none')
+                }
             }
         })
 
@@ -163,38 +89,21 @@ $(document).ready(function() {
     $("#print-invoice").submit(function(e) {
         e.preventDefault()
 
-        let formBookOrder = new FormData($(this)[0])
-        formBookOrder.delete('_token')
+        const getBookOrder = getBookOrderOnPrevRequest($(this)[0])
 
-        const getBookOrderOnPrevRequest = new FormData()
-
-        for (let key = 0; key < localStorage.length; key++) {
-            const inputNameBookingOrder = localStorage.key(key)
-
-            //form data booking order
-            getBookOrderOnPrevRequest.append(
-                inputNameBookingOrder,
-                localStorage.getItem(inputNameBookingOrder)
-            )
-        }
-
-        // Todo: submit ajax here
         $.ajax({
             url: "/shipping/order/book/invoice/save",
-            data: getBookOrderOnPrevRequest,
+            data: getBookOrder,
             cache: false,
             processData: false,
             contentType: false,
             type: 'POST',
             success: function(response) {
-                // localStorage.clear()
                 console.log(response.xPD)
+
                 window.open('/shipping/order/print?key=' + response.data.token_resi, '_blank');
-                // window.open('/shipping', '_self');
-
                 localStorage.clear()
-
-
+                window.location.href = '/shipping/order/receipt'
 
             },
             error: function(error) {
@@ -205,41 +114,10 @@ $(document).ready(function() {
     })
 
     // delete commercial invoice content
-    $(".btn-delete-value-attr").click(function() {
+    $("body").on('click', ".btn-delete-value-attr", function() {
         $(this).parents('.modal').modal('hide')
-
-        try {
-            const ids = $(this).attr('value')
-
-            let getCommercialInvoice = localStorage.getItem("commercialInvoice")
-            getCommercialInvoice = getCommercialInvoice.split("},")
-
-            if (getCommercialInvoice.length > 1) {
-                let str1 = "";
-                let ct = 1;
-                for (let i = 0; i < getCommercialInvoice.length; i++) {
-                    if (i != ids - 1) {
-                        let xstr2 = "";
-                        xstr2 = getCommercialInvoice[i].replace("{", "")
-                        xstr2 = xstr2.replace("}", "")
-                        if (ct == 1) {
-                            str1 = str1.concat('{' + xstr2 + '}')
-                        } else {
-                            str1 = str1.concat(',{' + xstr2 + '}')
-                        }
-                        ct++
-                    }
-                }
-                localStorage.setItem('commercialInvoice', str1)
-                fillCommercialInvoice()
-
-                window.location.reload()
-            } else {
-                localStorage.removeItem('commercialInvoice')
-            }
-        } catch (error) {
-            console.error(error)
-        }
+        console.log(`val: ${Number($(this).val()) - 1}`)
+        removeCommercialInvoice($(this))
     });
 
 

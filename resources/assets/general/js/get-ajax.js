@@ -59,7 +59,6 @@ function getContact(urlApi) {
 
     axios.get(urlApi).then((response) => {
 
-        let accordionToggler = null
         datas = response.data;
 
         //put our contact to each id element on landing page section contact
@@ -78,36 +77,35 @@ function getContact(urlApi) {
             }
         }
 
-        for (const contact in ourContacts) {
-            const subtextContactValue = document.querySelector(
-                `${contact} .list-group-simple__subtext a`
-            )
-            const plainContactValue = document.querySelector(`${contact} .contact-value`)
+        if (datas.hasOwnProperty('key')) {
+            for (const contact in ourContacts) {
+                const subtextContactValue = document.querySelector(
+                    `${contact} .list-group-simple__subtext a`
+                )
+                const plainContactValue = document.querySelector(`${contact} .contact-value`)
 
-            if (subtextContactValue) {
-                subtextContactValue.href = ourContacts[contact].link
-                subtextContactValue.textContent = ourContacts[contact].value
+                if (subtextContactValue) {
+                    subtextContactValue.href = ourContacts[contact].link
+                    subtextContactValue.textContent = ourContacts[contact].value
+                }
+                else if (plainContactValue) {
+
+                    plainContactValue.href = ourContacts[contact].link
+
+                    plainContactValue.textContent = ourContacts[contact].value
+                }
             }
-            else if (plainContactValue) {
 
-                plainContactValue.href = ourContacts[contact].link
-
-                plainContactValue.textContent = ourContacts[contact].value
-            }
-        }
-        //end of that
-
-        //put contact to navbar template 1
-        const navEmail = document.querySelector('#nav-email .contact-value')
-        const navPhone = document.querySelector('#nav-telephone .contact-value')
-
-
-        if (navEmail && navPhone && datas.hasOwnProperty('key')) {
+            //put contact to navbar template 1
+            const navEmail = document.querySelector('#nav-email .contact-value')
+            const navPhone = document.querySelector('#nav-telephone .contact-value')
             navEmail.textContent = datas.email
             navEmail.href = `mailto:${datas.email}`
 
             navPhone.textContent = `+62${datas.telephone}`
             navPhone.href = `tel:${datas.telephone}`
+
+            //end of that
         }
         //end of that
 
