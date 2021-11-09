@@ -101,7 +101,8 @@ function getContact(urlApi) {
         const navEmail = document.querySelector('#nav-email .contact-value')
         const navPhone = document.querySelector('#nav-telephone .contact-value')
 
-        if (navEmail && navPhone) {
+
+        if (navEmail && navPhone && datas.hasOwnProperty('key')) {
             navEmail.textContent = datas.email
             navEmail.href = `mailto:${datas.email}`
 
@@ -109,7 +110,6 @@ function getContact(urlApi) {
             navPhone.href = `tel:${datas.telephone}`
         }
         //end of that
-
 
     })
     .catch(error => console.error(error))
