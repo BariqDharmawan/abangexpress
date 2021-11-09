@@ -1,5 +1,7 @@
 @extends('layouts.template-1')
 
+@section('title', 'Tentang kami')
+
 @section('content')
 <section id="about">
     <div class="container" data-aos="fade-up" id="fade-up-about">

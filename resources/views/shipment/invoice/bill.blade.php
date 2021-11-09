@@ -1,5 +1,6 @@
 @extends('layouts/shipment')
 
+@section('title', 'Tagihan')
 
 @section('content')
 <div class="row clearfix">

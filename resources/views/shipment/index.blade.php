@@ -1,5 +1,7 @@
 @extends('layouts.shipment')
 
+@section('title', 'Dashboard')
+
 @section('content')
 
     <form method="GET" class="card mt-3" action="{{ route('tracking-order.index') }}">

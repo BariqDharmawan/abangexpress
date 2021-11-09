@@ -1,6 +1,6 @@
 @extends('layouts/shipment')
 
-{{-- @section('title', $title) --}}
+@section('title', 'History')
 
 @section('content')
 
