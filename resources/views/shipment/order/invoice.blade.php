@@ -23,11 +23,11 @@
                 </div>
                 <div class="w-100">
                     <x-shipment.input type="select" placeholder="Satuan unit" name="unit" required>
-                        <option value="PCS" selected>Default : PCS</option>
-                        <option value="BOX">BOX</option>
-                        <option value="PACK">PACK</option>
-                        <option value="PCS">PCS</option>
-                        <option value="UNIT">UNIT</option>
+                        @foreach ($units as $unit)
+                        <option value="{{ $unit->name }}" @if($loop->first) selected @endif>
+                            {{ strtoupper($unit->name) }}
+                        </option>
+                        @endforeach
                     </x-shipment.input>
                 </div>
                 <div class="w-100">

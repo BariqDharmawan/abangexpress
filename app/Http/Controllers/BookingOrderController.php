@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper\Helper;
 use App\Http\Requests\BookOrderValidation;
 use App\Http\Requests\StoreInvoiceValidation;
+use App\Models\ItemUnit;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
@@ -107,8 +108,9 @@ class BookingOrderController extends Controller
     {
         $title = 'Form Invoice';
         $booked = $request->session()->get('book_order');
+        $units = ItemUnit::where('domain_owner', request()->getSchemeAndHttpHost())->get();
 
-        return view('shipment.order.invoice', compact('title', 'booked'));
+        return view('shipment.order.invoice', compact('title', 'booked', 'units'));
     }
 
     public function storeInvoice(StoreInvoiceValidation $request)

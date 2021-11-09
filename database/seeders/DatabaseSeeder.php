@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             LandingSectionDescSeeder::class,
             OurSocialSeeder::class,
             TemplateChoosenSeeder::class,
-            GallerySeeder::class
+            GallerySeeder::class,
+            ItemUnitSeeder::class
         ]);
     }
 }
