@@ -38,7 +38,6 @@ mix.scripts([
     `${templateShipmentPath}/template/plugins/bootstrap/js/bootstrap.js`,
     `${templateShipmentPath}/template/plugins/bootstrap-select/js/bootstrap-select.js`,
     `${templateShipmentPath}/template/plugins/jquery-slimscroll/jquery.slimscroll.js`,
-    `${templateShipmentPath}/template/plugins/node-waves/waves.js`,
     `${templateShipmentPath}/template/plugins/autosize/autosize.js`,
     `${templateShipmentPath}/template/plugins/momentjs/moment.js`,
     `${templateShipmentPath}/template/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js`,
@@ -90,7 +89,6 @@ mix.js(`${template1Path}/js/app.js`, 'public/template1/js')
         processCssUrls: false
     })
     .copy(`${template1Path}/img`, 'public/template1/img')
-    .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/template1/webfonts')
     .version()
     .sourceMaps();
 
@@ -100,7 +98,6 @@ mix.copy('resources/assets/dummy', 'storage/app/public')
     .copy('node_modules/bootstrap-icons/font/fonts', 'public/template2/css/fonts')
     .copy('node_modules/boxicons/fonts', 'public/template1/fonts')
     .copy('node_modules/boxicons/fonts', 'public/template2/fonts')
-    .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/admin/webfonts')
     .copy('resources/assets/img', 'public/img')
     .copy('resources/assets/general/json', 'public/json')
     .copy('resources/assets/general/vendor', 'public/vendor')
@@ -118,7 +115,6 @@ mix.js(`${template2Path}/js/app.js`, 'public/template2/js')
         processCssUrls: false
     })
     .copy(`${template2Path}/img`, 'public/template2/img')
-    .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/template2/webfonts')
     .version()
     .sourceMaps();
 

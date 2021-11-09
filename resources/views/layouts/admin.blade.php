@@ -43,7 +43,7 @@
             :href="route('shipping.index')" target="_blank" icon="fas fa-shipping-fast" />
 
             <x-admin.sidebar.menu text="Shipment Item Unit"
-            :href="route('admin.item-unit.index')" icon="fas fa-shipping-fast" />
+            :href="route('admin.item-unit.index')" icon="fas fa-mountain" />
 
             @if (auth()->user()->role == 'admin')
                 <x-admin.sidebar.menu :href="route('admin.user.index')"
