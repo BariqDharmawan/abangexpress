@@ -1,6 +1,5 @@
-import { appendCommercialInvoiceFormatJson, appendInvoiceToBookOrder, fillCommercialInvoice, getBookOrderOnPrevRequest, getLocalstorageBookOrder, removeCommercialInvoice, showInvoiceResult } from "./function-task"
-import { csrfToken, isAlreadyFillFormBook, isOnFormBookInvoicePage, regenerateDatatableAjax } from "./helper"
-import { appendModal } from "./modal"
+import { appendInvoiceToBookOrder, fillCommercialInvoice, getBookOrderOnPrevRequest, getLocalstorageBookOrder, removeCommercialInvoice, showInvoiceResult } from "./function-task"
+import { isAlreadyFillFormBook, isOnFormBookInvoicePage } from "./helper"
 
 $(document).ready(function() {
     //redirect to invoice page if already fill book order

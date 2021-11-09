@@ -147,18 +147,4 @@ function appendInvoiceToBookOrder(bookOrder, form) {
     }
 }
 
-function appendCommercialInvoiceFormatJson(form) {
-    var ciform = new FormData(form),
-        ciresult = {};
-
-    ciform.delete('_token')
-
-    for (const entry of ciform.entries()) {
-        ciresult[entry[0]] = entry[1]
-    }
-
-    return JSON.stringify(ciresult)
-
-}
-
-export {fillCommercialInvoice, getCommercialInvoice, showInvoiceResult, removeCommercialInvoice, getBookOrderOnPrevRequest, getLocalstorageBookOrder, appendInvoiceToBookOrder, appendCommercialInvoiceFormatJson}
+export {fillCommercialInvoice, getCommercialInvoice, showInvoiceResult, removeCommercialInvoice, getBookOrderOnPrevRequest, getLocalstorageBookOrder, appendInvoiceToBookOrder}
