@@ -9,11 +9,12 @@
     'textAddon' => null,
     'required' => null,
     'label' => null,
-    'inputHidden' => null
+    'inputHidden' => null,
+    'haveNoMargin' => false
 ])
 
 
-<div class="form-group form-float form-group-lg">
+<div class="form-group form-float form-group-lg {{ $haveNoMargin ? 'mb-0' : '' }}">
     @if ($type == 'select' or $type == 'select-ajax')
         <label for="{{ $id }}" class="form-label {{ isset($required) ? 'form-label--required' : '' }}">
             {{ $label ?? $placeholder }}

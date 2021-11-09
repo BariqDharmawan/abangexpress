@@ -192,6 +192,8 @@ $(document).ready(function() {
                 window.open('/shipping/order/print?key=' + response.data.token_resi, '_blank');
                 // window.open('/shipping', '_self');
 
+                localStorage.clear()
+
 
 
             },

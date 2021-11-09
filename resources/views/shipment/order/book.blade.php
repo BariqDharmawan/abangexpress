@@ -106,7 +106,7 @@
                 accept="image/*" input-hidden="idcard_input_hidden"
                 name="recipient_idcard" maxlength="8" minlength="3"
                 small-text="Gambar hanya boleh berekstensi .jpg, .jpeg, .png, .svg"
-                data-img-preview="#idcard-preview" required />
+                data-img-preview="#idcard-preview" />
                 <input type="hidden" name="idcard_input_hidden"
                 id="idcard_input_hidden" />
             </div>
@@ -203,7 +203,7 @@
                     <x-shipment.input type="number"
                     placeholder="Masukan jumlah paket / koli"
                     name="package_koli" id="package-koli" min="1" step="1"
-                    class="only-number-not-allow-decimal" required
+                    class="only-number-not-allow-decimal" :have-no-margin="true" required
                     small-text="Jangan inputkan angka decimal, wajib angka bulat" />
                 </div>
                 <div class="col-lg-6">

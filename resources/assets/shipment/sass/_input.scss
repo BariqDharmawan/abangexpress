@@ -36,6 +36,16 @@ input {
     }
 }
 
+.form-group {
+    .input-group {
+        .form-line {
+            &::after {
+                bottom: -2px !important;
+            }
+        }
+    }
+}
+
 .form-label--required {
     position: relative;
     @extend %requiredMark;

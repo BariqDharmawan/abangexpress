@@ -13,9 +13,6 @@ $(document).ready(function() {
         if (recipientId != 'penerima-baru') {
 
             $("#data-recipient .form-line").addClass('focused')
-            const idInputFile = $(".custom-file__input[required]").attr('id')
-            $(".custom-file__input[required]").prop('required', false)
-            $(`label[for='${idInputFile}'] span`).removeClass('form-label--required')
 
             $.ajax({
                 type: "GET",
