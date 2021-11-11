@@ -24,7 +24,9 @@ function getContact(urlApi) {
 
     axios.get(urlApi).then((response) => {
 
+        // response.data = 0
         datas = response.data;
+        console.log(datas)
 
         //put our contact to each id element on landing page section contact
         const ourContacts = {
@@ -42,7 +44,7 @@ function getContact(urlApi) {
             }
         }
 
-        if (datas.hasOwnProperty('key')) {
+        if (Object.keys(datas).length > 0) {
             for (const contact in ourContacts) {
                 const subtextContactValue = document.querySelector(
                     `${contact} .list-group-simple__subtext a`

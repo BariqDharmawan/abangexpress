@@ -19,7 +19,7 @@ class CreateOurContactsTable extends Migration
             $table->string('telephone');
             $table->string('email', 45);
             $table->string('link_address');
-            $table->string('domain_owner');
+            $table->string('domain_owner')->unique();
             $table->timestamps();
         });
     }
