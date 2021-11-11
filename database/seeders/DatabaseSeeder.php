@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             OurSocialSeeder::class,
             TemplateChoosenSeeder::class,
             GallerySeeder::class,
-            ItemUnitSeeder::class
+            ItemUnitSeeder::class,
+            IconListSeeder::class
         ]);
     }
 }

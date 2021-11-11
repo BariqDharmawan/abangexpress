@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Helper\Helper;
 use App\Http\Requests\StoreServiceValidation;
 use App\Http\Requests\UpdateServiceValidation;
-use App\Models\LandingSectionDesc;
+use App\Models\IconList;
 use App\Models\LandingSectionTitle;
 use App\Models\OurService;
-use Illuminate\Http\Request;
 
 class OurServiceController extends Controller
 {
@@ -17,7 +16,7 @@ class OurServiceController extends Controller
     {
         $ourService = OurService::orderBy('title', 'asc')
                     ->where('domain_owner', request()->getSchemeAndHttpHost())->get();
-        $listIcon = Helper::getJson('list-icon-service.json', true);
+        $listIcon = IconList::where('content', 'service')->get();
 
         $sectionTitle = LandingSectionTitle::where(
             'domain_owner', request()->getSchemeAndHttpHost()
