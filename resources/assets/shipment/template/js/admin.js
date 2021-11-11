@@ -1,4 +1,4 @@
-// import Waves from "../plugins/node-waves/waves";
+import Waves from 'node-waves/dist/waves';
 
 if (typeof jQuery === "undefined") {
     throw new Error("jQuery plugins need to be before this file");
@@ -46,7 +46,7 @@ $.AdminBSB.options = {
 
 /* Left Sidebar - Function =================================================================================================
 *  You can manage the left sidebar menu options
-*  
+*
 */
 $.AdminBSB.leftSideBar = {
     activate: function () {
@@ -73,7 +73,7 @@ $.AdminBSB.leftSideBar = {
         if ($('.menu .list li.active').length > 0) {
             $.each($('.menu .list li.active'), function (i, val) {
                 var $activeAnchors = $(val).find('a:eq(0)');
-    
+
                 $activeAnchors.addClass('toggled');
                 $activeAnchors.next().show();
             });
@@ -161,7 +161,7 @@ $.AdminBSB.leftSideBar = {
 
 /* Right Sidebar - Function ================================================================================================
 *  You can manage the right sidebar menu options
-*  
+*
 */
 $.AdminBSB.rightSideBar = {
     activate: function () {
@@ -193,7 +193,7 @@ $.AdminBSB.rightSideBar = {
 
 /* Searchbar - Function ================================================================================================
 *  You can manage the search bar
-*  
+*
 */
 var $searchBar = $('.search-bar');
 $.AdminBSB.search = {
@@ -230,7 +230,7 @@ $.AdminBSB.search = {
 
 /* Navbar - Function =======================================================================================================
 *  You can manage the navbar
-*  
+*
 */
 $.AdminBSB.navbar = {
     activate: function () {
@@ -260,7 +260,7 @@ $.AdminBSB.navbar = {
 
 /* Input - Function ========================================================================================================
 *  You can manage the inputs(also textareas) with name of class 'form-control'
-*  
+*
 */
 $.AdminBSB.input = {
     activate: function () {
@@ -297,7 +297,7 @@ $.AdminBSB.input = {
 
 /* Form - Select - Function ================================================================================================
 *  You can manage the 'select' of form elements
-*  
+*
 */
 $.AdminBSB.select = {
     activate: function () {
@@ -308,7 +308,7 @@ $.AdminBSB.select = {
 
 /* DropdownMenu - Function =================================================================================================
 *  You can manage the dropdown menu
-*  
+*
 */
 
 $.AdminBSB.dropdownMenu = {
@@ -386,7 +386,7 @@ $.AdminBSB.dropdownMenu = {
 
 /* Browser - Function ======================================================================================================
 *  You can manage browser
-*  
+*
 */
 var edge = 'Microsoft Edge';
 var ie10 = 'Internet Explorer 10';

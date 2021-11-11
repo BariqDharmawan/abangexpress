@@ -15,7 +15,7 @@ class CreateItemUnitsTable extends Migration
     {
         Schema::create('item_units', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('domain_owner');
             $table->timestamps();
         });

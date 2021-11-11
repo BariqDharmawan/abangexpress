@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\ItemUnit;
 use App\Rules\AlphaSpaceRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreItemUnitValidation extends FormRequest
 {
@@ -24,8 +26,16 @@ class StoreItemUnitValidation extends FormRequest
      */
     public function rules()
     {
+        $isUnitExistOnThisDomain = ItemUnit::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->select('name')->get()->contains('name', 'unit');
+
         return [
-            'name' => ['required', 'string', 'min:2', 'unique:item_units', new AlphaSpaceRule]
+            'name' => [
+                'required', 'string', 'min:2',
+                Rule::when($isUnitExistOnThisDomain, ['unique:item_units,name']),
+                new AlphaSpaceRule
+            ]
         ];
     }
 
