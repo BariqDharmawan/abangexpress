@@ -22,7 +22,7 @@
         @endforeach
     </div>
 @else
-    <small>Tidak ada gallery berupa gambar saat ini, tambahkan sekarang</small>
+    <small>Tidak ada gallery berupa gambar saat ini</small>
 @endif
 
 <h2 class="mt-4">Video</h2>
@@ -49,5 +49,5 @@
         @endforeach
     </div>
 @else
-    <small>Tidak ada gallery berupa video saat ini, tambahkan sekarang</small>
+    <small>Tidak ada gallery berupa video saat ini</small>
 @endif
