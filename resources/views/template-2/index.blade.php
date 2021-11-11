@@ -164,6 +164,7 @@
     @endif
 
     <!-- ======= Frequently Asked Questions Section ======= -->
+    @if ($totalFaqs > 0)
     <section id="faq" class="faq section-bg">
         <div class="container" data-aos="fade-up">
 
@@ -183,9 +184,12 @@
 
         </div>
     </section>
+    @endif
 
     <!-- ======= Contact Section ======= -->
-    @include('template-2.contact')
+    @if ($ourContact)
+        @include('template-2.contact')
+    @endif
 
 </main>
 @endsection

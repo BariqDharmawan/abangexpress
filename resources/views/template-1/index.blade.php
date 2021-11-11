@@ -120,6 +120,7 @@
     @endif
 
     <!-- ======= Frequently Asked Questions Section ======= -->
+    @if (count($faqs) > 0)
     <section id="faq" class="faq section-bg my-4 bg-primary">
         <div class="container" data-aos="fade-up">
 
@@ -128,25 +129,29 @@
 
             <div class="accordion accordion-flush shadow p-4 bg-white parent-load-data"
             id="load-faq">
-                {{-- get faq using ajax [this is 'shadow' element] --}}
+                @foreach ($faqs as $faq)
                 <div class="accordion-item accordion-faq">
-                    <a class="accordion-button accordion__heading collapsed toggler-accordion" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#accordion-list" aria-expanded="false"
-                    aria-controls="accordion-list"></a>
-                    <div id="accordion-list"
+                    <a class="accordion-button accordion__heading collapsed toggler-accordion"
+                    type="button" data-bs-toggle="collapse"
+                    data-bs-target="#accordion-list-faq-{{ $loop->iteration }}"
+                    aria-expanded="false" aria-controls="accordion-list-faq-{{ $loop->iteration }}">
+                        {{ $faq->question }}
+                    </a>
+                    <div id="accordion-list-faq-{{ $loop->iteration }}"
                         class="collapse accordion__text"
                         aria-labelledby="flush-faq"
                         data-bs-parent="#load-faq">
                         <div class="accordion-body">
-                            <p></p>
+                            <p>{{ $faq->answer }}</p>
                         </div>
                     </div>
                 </div>
-                {{-- end of that --}}
+                @endforeach
             </div>
 
         </div>
     </section>
+    @endif
 
     <!-- ======= Contact Section ======= -->
     @include('template-1.contact')
