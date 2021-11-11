@@ -9,9 +9,7 @@
     id="parent-dataOrder">
         <div class="card">
             <div class="header">
-                <h2>
-                    {{$title}}
-                </h2>
+                <h2>History Kiriman</h2>
             </div>
             <div class="header">
                 <button type="button" class="btn m-b-10 bg-green waves-effect" data-toggle="collapse" data-target="#myxDIV" aria-expanded="true" aria-controls="myxDIV">
