@@ -96,7 +96,7 @@
                 <label for="edit-first-desc">Deskripsi 1</label>
                 <input type="hidden" name="first_desc"
                 value="{!! $sectionDesc->first_desc_about_us ?? '' !!}" required>
-                <div class="summernote" data-input-attached="our_mission" id="edit-first-desc">
+                <div class="summernote" data-input-attached="first_desc" id="edit-first-desc">
                     {!! $sectionDesc->first_desc_about_us ?? '' !!}
                 </div>
                 @error('first_desc')

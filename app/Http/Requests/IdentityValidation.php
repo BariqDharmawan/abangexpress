@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\TemplateChoosen;
+use App\Rules\AlphanumericSpace;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class IdentityValidation extends FormRequest
 {
@@ -23,12 +26,20 @@ class IdentityValidation extends FormRequest
      */
     public function rules()
     {
+        $templateChoosen = TemplateChoosen::select('version')->where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first()->version;
+
         return [
             'our_name' => ['sometimes', 'string', 'min:3', 'max:50'],
             'our_vision' => ['required', 'string', 'min:3'],
             'our_mission' => ['required', 'string', 'min:3'],
             'sub_slogan' => ['sometimes', 'string', 'min:3', 'max:255'],
-            'cover_vision_mission' => ['sometimes', 'image']
+            'cover_vision_mission' => ['sometimes', 'image'],
+            'first_desc' => ['required', 'string', 'min:3'],
+            'section_name' => ['required', 'string', new AlphanumericSpace],
+            'second_desc' => [Rule::when($templateChoosen == 2, ['required'], ['nullable']), 'string', 'min:3']
         ];
     }
+
 }
