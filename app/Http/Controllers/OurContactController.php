@@ -57,15 +57,17 @@ class OurContactController extends Controller
 
     public function update(UpdateContactValidation $request)
     {
-        $updateContact = OurContact::where(
-            'domain_owner', request()->getSchemeAndHttpHost()
-        )->first();
-        $updateContact->address = $request->address;
-        $updateContact->telephone = $request->telephone;
-        $updateContact->email = $request->email;
-        $updateContact->link_address = $request->link_address;
 
-        $updateContact->save();
+        OurContact::updateOrCreate(
+            ['domain_owner' => request()->getSchemeAndHttpHost()],
+            [
+                'address' => $request->address,
+                'telephone' => $request->telephone,
+                'email' => $request->email,
+                'link_address' => $request->link_address
+            ]
+        );
+
         return Helper::returnSuccess('mengubah kontak');
     }
 }

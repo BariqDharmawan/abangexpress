@@ -61,9 +61,11 @@ class AboutUsController extends Controller
 
     public function updateEmbedMap(UpdateEmbedMapValidation $request)
     {
-        AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())->first()->update([
-                    'address_embed' => $request->address_embed
-                ]);
+        AboutUs::updateOrCreate(
+            ['domain_owner' => request()->getSchemeAndHttpHost()],
+            ['address_embed' => $request->address_embed]
+        );
+
         return Helper::returnSuccess('mengubah embed map');
     }
 
