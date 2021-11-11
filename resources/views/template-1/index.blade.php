@@ -97,8 +97,8 @@
             data-aos="fade-up" data-aos-delay="100">
                 <div class="swiper-wrapper">
                     @foreach ($ourBranch as $branch)
-                    <div class="swiper-slide">
-                        <div class="card">
+                    <div class="swiper-slide h-auto">
+                        <div class="card h-full">
                             <div class="card-body text-center">
                                 <img src="{{ asset($branch->icon) }}" height="70px"
                                 width="70px" alt="{{ $branch->name }}">
@@ -108,6 +108,7 @@
                                     {{ $branch->telephone }}
                                 </p>
                                 <h3 class="card-title fs-5">{{ $branch->name }}</h3>
+                                <p>{{ $branch->address }}</p>
                             </div>
                         </div>
                     </div>

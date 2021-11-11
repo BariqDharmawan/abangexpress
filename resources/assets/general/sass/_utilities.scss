@@ -17,6 +17,15 @@
     }
 }
 
+.h {
+    &-full {
+        height: 100%;
+    }
+    &-auto {
+        height: auto;
+    }
+}
+
 .left-1\/2 {
     left: 50%;
     transform: translateX(-50%);
