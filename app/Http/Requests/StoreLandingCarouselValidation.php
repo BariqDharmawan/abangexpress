@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBranchValidation extends FormRequest
+class StoreLandingCarouselValidation extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,14 @@ class StoreBranchValidation extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'min:3', 'max:255'],
-            'icon' => ['required', 'file', 'image', 'max:1048'],
-            'telephone' => ['required', 'numeric', 'digits_between:8,16'],
-            'address' => ['required'],
+            'img' => ['required', 'image', 'max:5120']
         ];
     }
 
     public function messages()
     {
         return [
-            'icon.max' => ':attribute tidak boleh lebih dari 1mb'
+            'img.max' => 'Gambar tidak boleh lebih dari 5mb',
         ];
     }
 }

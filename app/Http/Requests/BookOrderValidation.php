@@ -29,7 +29,7 @@ class BookOrderValidation extends FormRequest
             'sender_name' => ['required'],
             'sender_telephone' => ['required'],
             'recipient_name' => ['required'],
-            'recipient_telephone' => ['required'],
+            'recipient_telephone' => ['required', 'numeric', 'digits_betwee:8,15'],
             'recipient_nik' => [
                 Rule::requiredIf(
                     $this->recipient_country == 'TAIWAN' or

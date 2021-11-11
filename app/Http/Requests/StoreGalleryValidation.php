@@ -24,7 +24,7 @@ class StoreGalleryValidation extends FormRequest
     public function rules()
     {
         return [
-            'img' => ['sometimes', 'file', 'mimes:jpg,jpeg,png,webp,bmp,svg'],
+            'img' => ['sometimes', 'file', 'image'],
             'youtube' => ['sometimes', 'url'],
         ];
     }
