@@ -10,7 +10,8 @@
     'required' => null,
     'label' => null,
     'inputHidden' => null,
-    'haveNoMargin' => false
+    'haveNoMargin' => false,
+    'isMaterialUi' => true
 ])
 
 
@@ -57,6 +58,8 @@
                     {{ $textAddon }}
                 @endisset
             </span>
+
+
             <div class="form-line">
                 <input {{ $attributes->class(['form-control'])->merge([
                     'type' => $type,
@@ -69,32 +72,58 @@
             </div>
         </div>
         @else
-        <div class="form-line">
-            @if ($type == 'textarea')
-                <textarea
-                {{ $attributes->class(['form-control', 'no-resize'])->merge([
-                    'name' => $name,
-                    'type' => $type,
-                    'rows' => $rows,
-                    'id' => $id ?? Str::slug($label),
-                    'required' => $required
-                ]) }}>{{ old($name) }}</textarea>
-                <label class="form-label mb-0 {{ isset($required) ? 'form-label--required' : '' }}" for="{{ $id ?? Str::slug($label) }}">
-                    {{ $label ?? $placeholder }}
-                </label>
-            @else
-                <input {{ $attributes->class(['form-control'])->merge([
-                    'name' => $name,
-                    'type' => $type,
-                    'id' => $id ?? Str::slug($label),
-                    'required' => $required,
-                    'value' => old($name)
-                ]) }} />
-                <label class="form-label mb-0 {{ isset($required) ? 'form-label--required' : '' }}" for="{{ $id ?? Str::slug($label) }}">
-                    {{ $label ?? $placeholder }}
-                </label>
+            @if(isset($isMaterialUi) and $isMaterialUi)
+            <div class="form-line">
             @endif
-        </div>
+                @if ($type == 'textarea')
+                    @if(isset($isMaterialUi) and !$isMaterialUi)
+                        <label class="form-label {{ isset($required) ? 'form-label--required' : '' }}"
+                        for="{{ $id ?? Str::slug($label) }}">
+                            {{ $label ?? $placeholder }}
+                        </label>
+                    @endif
+
+                    <textarea
+                    {{ $attributes->class(['form-control', 'no-resize'])->merge([
+                        'name' => $name,
+                        'type' => $type,
+                        'rows' => $rows,
+                        'id' => $id ?? Str::slug($label),
+                        'required' => $required
+                    ]) }}>{{ old($name) }}</textarea>
+
+                    @if(isset($isMaterialUi) and $isMaterialUi)
+                        <label class="form-label mb-0 {{ isset($required) ? 'form-label--required' : '' }}" for="{{ $id ?? Str::slug($label) }}">
+                            {{ $label ?? $placeholder }}
+                        </label>
+                    @endif
+                @else
+
+                    @if(isset($isMaterialUi) and !$isMaterialUi)
+                        <label class="form-label {{ isset($required) ? 'form-label--required' : '' }}"
+                        for="{{ $id ?? Str::slug($label) }}">
+                            {{ $label ?? $placeholder }}
+                        </label>
+                    @endif
+
+                    <input {{ $attributes->class(['form-control'])->merge([
+                        'name' => $name,
+                        'type' => $type,
+                        'id' => $id ?? Str::slug($label),
+                        'required' => $required,
+                        'value' => old($name)
+                    ]) }} />
+
+                    @if(isset($isMaterialUi) and $isMaterialUi)
+                    <label class="form-label mb-0 {{ isset($required) ? 'form-label--required' : '' }}" for="{{ $id ?? Str::slug($label) }}">
+                        {{ $label ?? $placeholder }}
+                    </label>
+                    @endif
+
+                @endif
+            @if(isset($isMaterialUi) and $isMaterialUi == true)
+            </div>
+            @endif
         @endif
     @endif
 

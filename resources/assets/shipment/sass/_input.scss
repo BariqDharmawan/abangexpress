@@ -37,6 +37,10 @@ input {
 }
 
 .form-group {
+    .form-control {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
     .input-group {
         .form-line {
             &::after {

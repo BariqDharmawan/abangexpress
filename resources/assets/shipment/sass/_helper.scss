@@ -71,8 +71,13 @@ $sides: ("b": bottom, "t": top, 'l': left, 'r': right);
         align-items: center;
     }
 }
-.justify-center {
-    justify-content: center;
+.justify {
+    &-center {
+        justify-content: center;
+    }
+    &-end {
+        justify-content: flex-end;
+    }
 }
 .flex-column {
     flex-direction: column;

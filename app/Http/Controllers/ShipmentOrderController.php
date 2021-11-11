@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Helper;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -159,35 +160,37 @@ class ShipmentOrderController extends Controller
 
     public function filterOrder(Request $request)
     {
+        $startDate = Carbon::createFromFormat('d M Y', $request->start_date)->toDateString();
+
         $qw = "";
-        if (!empty($request->awal) || !empty($request->akhir) || !empty($request->pengirim) || !empty($request->kodeanak)){
-            $t1=$request->awal;
-            if (!empty($request->akhir)){
-                $t2=$request->akhir;}
-            else{
-                $t2=$request->awal    ;
+        if (!empty($startDate) || !empty($request->end_date) || !empty($request->pengirim) || !empty($request->kodeanak)){
+
+            if ($request->has('akhir')) {
+                $endDate = Carbon::createFromFormat('d M Y', $request->end_date)->toDateString();
             }
-            if (!empty($request->awal) || !empty($request->akhir)){
-                $qw=$qw."and (tglorder between '$t1' and '$t2') ";
+
+            $endDate = $endDate ?? $startDate;
+
+            if (!empty($startDate) || !empty($endDate)){
+                $qw = $qw."and (tglorder between '$startDate' and '$endDate') ";
             }
             if (!empty($request->pengirim)){
-                $qw=$qw."and pengirim like '%".$request->pengirim."%'";
+                $qw = $qw."and pengirim like '%".$request->pengirim."%'";
             }
             if (!empty($request->kodeanak)){
-                $qw=$qw."and kodeagen='".$request->kodeanak."'";
+                $qw = $qw."and kodeagen='".$request->kodeanak."'";
             }
         }
 
-        $qw=str_replace("'","`",$qw);
+        $qw = str_replace("'","`",$qw);
 
-        $postdata = '{
-            "akun": "'.Auth::user()->code_api.'",
-            "key": "'.Auth::user()->token_api.'",
-            "param":"and statustransaksi=`0` '.$qw.'"
+        $postdata = [
+            "akun" => Auth::user()->code_api,
+            "key" => Auth::user()->token_api,
+            "param" => "and statustransaksi=`0`" . $qw
+        ];
 
-        }';
-
-        $res = $this->getDataOrder($postdata);
+        $res = $this->getDataOrder(json_encode($postdata));
         $orderData = Helper::responseDataOrder($res->response);
 
         $statusRes = $res->status;

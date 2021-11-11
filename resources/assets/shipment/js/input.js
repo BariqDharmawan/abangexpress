@@ -1,6 +1,6 @@
-import {
-    previewImgUpload
-} from './helper'
+import {previewImgUpload} from './helper'
+import AirDatepicker from 'air-datepicker'
+import localeEn from 'air-datepicker/locale/en'
 
 if ($(".select2").length > 0) {
     $(".select2").select2({
@@ -8,6 +8,14 @@ if ($(".select2").length > 0) {
         allowClear: true
     })
 }
+
+$(".bootstrap-datepicker").each(function () {
+    const datepicker = $(this).attr('id')
+    new AirDatepicker(`#${datepicker}`, {
+        locale: localeEn,
+        dateFormat: 'dd MMM yyyy'
+    })
+})
 
 function indicatorInputValid(input) {
     if (input[0].checkValidity()) {

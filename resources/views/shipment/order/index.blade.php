@@ -28,43 +28,36 @@
 
                 <div class="collapse" id="filter-order" aria-expanded="true">
                     <div class="well">
-                        <div class="row">
-
-                            <form role="form" method="POST" action="{{ route('shipping.order.filter.order') }}"
-                                autocomplete="off">
+                            <form action="{{ route('shipping.order.filter.order') }}"
+                            method="POST" autocomplete="off">
                                 @csrf
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="disabledSelect">Tanggal Awal</label>
-                                        <input class="form-control" name="awal" type="date">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <x-shipment.input label="Tanggal Awal" class="bootstrap-datepicker"
+                                        name="start_date" id="start-date" :is-material-ui="false" />
+
+                                        <x-shipment.input label="Pengirim"
+                                        name="pengirim" :is-material-ui="false" />
                                     </div>
-                                    <div class="form-group">
-                                        <label for="disabledSelect">Pengirim</label>
-                                        <input class="form-control" name="pengirim" type="text">
+                                    <div class="col-lg-6">
+                                        <x-shipment.input label="Tanggal Akhir" class="bootstrap-datepicker"
+                                        name="end_date" id="end-date" :is-material-ui="false" />
+
+                                        @if (count($underling) > 0)
+                                        <x-shipment.input type="select" placeholder="Sub Cabang" name="kodeanak" required>
+                                            @foreach ($underling as $underling)
+                                                <option value="{{$underling->kodeAgen}}">
+                                                    {{$underling->nama}}
+                                                </option>
+                                            @endforeach
+                                        </x-shipment.input>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-
-                                    <div class="form-group">
-                                        <label for="disabledSelect">Tanggal Akhir</label>
-                                        <input class="form-control" name="akhir" type="date">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <x-shipment.input type="select" placeholder="Sub Cabang" name="kodeanak"
-                                            required>
-                                            @if (count($underling)>1)
-                                            @foreach ($underling as $underling)
-                                            <option value="{{$underling->kodeAgen}}">{{$underling->nama}}</option>
-                                            @endforeach
-                                            @endif
-
-                                        </x-shipment.input>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Cari data</button>
+                                <div class="d-flex justify-end">
+                                    <button type="submit" class="btn btn-lg btn-primary">Cari data</button>
                                 </div>
                             </form>
-                        </div>
                     </div>
                 </div>
             </div>
