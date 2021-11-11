@@ -119,7 +119,7 @@
                     Apakah kamu yakin ingin cancel orderan dengan resi <b>{{ $order['noresi'] }}</b>? <br>
                     <strong>Jika sudah tercancel, tidak bisa di-uncancel</strong>
                 </p>
-                <form method="POST" action="{{ route('shipping.order.cancel.order') }}">
+                <form method="POST" action="{{ route('shipping.order.cancel') }}">
                     @csrf
                     <input type="hidden" name="token" value="{{ $order['token'] }}">
                     <button type="submit" class="btn btn-danger w-100">

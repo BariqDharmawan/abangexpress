@@ -6,7 +6,7 @@
 
 <div class="row clearfix">
     <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" method="POST"
-    action="{{ route('shipping.order.book.step-order') }}"
+    action="{{ route('shipping.order.book.step') }}"
     id="form-book-order" enctype="multipart/form-data">
         @csrf
         <x-shipment.card heading="Detail Pengirim" icon="account_box">
@@ -50,7 +50,8 @@
                 <div class="col-lg-6">
                     <x-shipment.input placeholder="Telepon penerima"
                     name="recipient_telephone" class="only-number"
-                    minlength="8" maxlength="15" required />
+                    minlength="8" maxlength="15" pattern=".{8,15}"
+                    title="Harap gunakan nomor telepon yang valid" required />
                 </div>
             </div>
 

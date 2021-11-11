@@ -18,7 +18,7 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
         Route::post('history', 'ShipmentOrderController@filterHistory')->name(
             'filter.history'
         );
-        Route::post('/cancel', 'ShipmentOrderController@cancelOrder')->name('cancel.order');
+        Route::post('/cancel', 'ShipmentOrderController@cancelOrder')->name('cancel');
 
         Route::get('process', 'ShipmentOrderController@process')->name('process');
         Route::get('pending', 'ShipmentOrderController@pending')->name('pending');
@@ -37,7 +37,7 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
             Route::get('invoice', 'BookingOrderController@invoice')->name('invoice');
             Route::post('invoice', 'BookingOrderController@storeInvoice')->name('save-invoice');
             Route::post('invoice/save', 'BookingOrderController@store')->name('invoice.save');
-            Route::post('step-order', 'BookingOrderController@order')->name('step-order');
+            Route::post('step', 'BookingOrderController@order')->name('step');
         });
     });
 
