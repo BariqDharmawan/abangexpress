@@ -87,9 +87,9 @@ class Helper
         return strpos(strtolower($data), $statusToCheck) !== false;
     }
 
-    public static function removeMenuIfContentEmpty($menus, $dataAttached, $menuToRemove)
+    public static function removeMenuIfContentEmpty($menus, $totalData, $menuToRemove)
     {
-        if ((is_array($dataAttached) and count($dataAttached) == 0) or !$dataAttached) {
+        if ($totalData == 0) {
             $menus = $menus->filter(function ($menu) use ($menuToRemove) {
                 return $menu->url != $menuToRemove;
             });

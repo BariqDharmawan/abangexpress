@@ -16,6 +16,19 @@ use Illuminate\Http\Request;
 
 class TemplateDuaController extends Controller
 {
+
+    private function getCommonContent()
+    {
+        $ourService = OurService::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->orderBy('title', 'asc');
+        $ourTeam = OurTeam::where('domain_owner', request()->getSchemeAndHttpHost());
+        $ourBranch = OurBranch::where('domain_owner', request()->getSchemeAndHttpHost());
+        $faqs = Faq::where('domain_owner', request()->getSchemeAndHttpHost());
+
+        return [$ourService, $ourTeam, $ourBranch, $faqs];
+    }
+
     public function index(Request $request)
     {
         $menus = Helper::getJson('template-2-menu.json');
@@ -29,39 +42,42 @@ class TemplateDuaController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
 
-        $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
-                ->first();
-
-        $ourTeam = OurTeam::where('domain_owner', request()->getSchemeAndHttpHost())
-                ->get();
-
-        $faqs = Faq::where('domain_owner', request()->getSchemeAndHttpHost())->get();
-
-        $ourService = OurService::where(
+        $aboutUs = AboutUs::where(
             'domain_owner', request()->getSchemeAndHttpHost()
-        )->orderBy('title', 'asc')->get();
+        )->first();
 
-        $ourContactList = Helper::getJson('our-contact-list.json');
+        $totalOurTeam = $this->getCommonContent()[1]->count();
+        $ourTeam = $this->getCommonContent()[1]->get();
 
-        $ourBranch = OurBranch::where('domain_owner', request()->getSchemeAndHttpHost())
-                ->get();
+        $totalFaqs = $this->getCommonContent()[3]->count();
+        $faqs = $this->getCommonContent()[3]->get();
 
-        $menus = Helper::removeMenuIfContentEmpty($menus, $ourTeam, '/#our-team');
-        $menus = Helper::removeMenuIfContentEmpty($menus, $ourService, '/#services');
-        $menus = Helper::removeMenuIfContentEmpty($menus, $ourBranch, '/#our-branch');
+        $totalOurService = $this->getCommonContent()[0]->count();
+        $ourService = $this->getCommonContent()[0]->get();
 
-        // dd($aboutUs);
-        $menus = Helper::removeMenuIfContentEmpty($menus, $aboutUs, '/#why-us');
-        //remove menu if content empty
-        // if (!$aboutUs) {
-        //     $menus = $menus->filter(function ($menu) {
-        //         return $menu->url != '/#why-us';
-        //     });
-        // }
+        $ourContact = OurContact::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
+
+        $totalOurBranch = $this->getCommonContent()[2]->count();
+        $ourBranch = $this->getCommonContent()[2]->get();
+
+        $totalGallery = Gallery::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->count();
+
+        // dd($menus);
+        $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurTeam, '/#team');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurService, '/#services');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $totalFaqs, '/#faq');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurBranch, '/#our-branch');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $totalGallery, '/gallery');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $ourContact !== null ? 1 : 0, '/#contact');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $aboutUs !== null ? 1 : 0, '/#why-us');
 
         return view('template-2.index', compact(
-            'sectionTitle', 'aboutUs', 'ourBranch', 'sectionDesc',
-            'ourTeam', 'aboutUs', 'ourService', 'menus', 'ourContactList'
+            'sectionTitle', 'aboutUs', 'ourBranch', 'sectionDesc', 'totalFaqs', 'faqs',
+            'ourTeam', 'aboutUs', 'ourService', 'menus', 'ourContact'
         ));
 
     }
@@ -85,14 +101,31 @@ class TemplateDuaController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->select('our_contact')->first();
 
-        $ourContactList = Helper::getJson('our-contact-list.json');
+        $ourContact = OurContact::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
 
-        $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())
-                ->first();
+        $aboutUs = AboutUs::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->first();
+
+        $totalOurTeam = $this->getCommonContent()[1]->count();
+        $ourTeam = $this->getCommonContent()[1]->get();
+
+        $totalOurService = $this->getCommonContent()[0]->count();
+        $ourService = $this->getCommonContent()[0]->get();
+
+        $totalOurBranch = $this->getCommonContent()[2]->count();
+        $ourBranch = $this->getCommonContent()[2]->get();
+
+        $menus = Helper::removeMenuIfContentEmpty($menus, $ourTeam, '/#our-team');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $ourService, '/#services');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $ourBranch, '/#our-branch');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $aboutUs, '/#why-us');
 
         return view('template-2.gallery', compact(
             'menus', 'galleryYoutube', 'galleryImg', 'sectionTitle',
-            'ourContactList', 'aboutUs'
+            'ourContact', 'aboutUs'
         ));
     }
 }

@@ -171,13 +171,13 @@
 
             <div class="faq-list">
                 <ul id="load-faq">
-                    {{-- get faq using ajax [this is shadow element] --}}
-                    <x-template2.accordion-list class="accordion-faq"
-                    heading="" parent-list="accordion-list"
-                    icon-title="bx-help-circle icon-help" parent-list="faq-list">
-                        <p></p>
-                    </x-template2.accordion-list>
-                    {{-- end of that --}}
+                    @foreach ($faqs as $faq)
+                        <x-template2.accordion-list class="accordion-faq"
+                        heading="{{ $faq->question }}"
+                        icon-title="bx-help-circle icon-help" parent-list="faq-list">
+                            <p>{{ $faq->answer }}</p>
+                        </x-template2.accordion-list>
+                    @endforeach
                 </ul>
             </div>
 

@@ -7,17 +7,24 @@
 
             <div class="col-lg-6 d-flex align-items-stretch">
                 <ul class="info">
-                    @foreach ($ourContactList as $contactList)
-                    <li id="{{ $contactList->id }}">
-                        <i class="bi {{ $contactList->icon }}"></i>
-                        <h4 class="list-group-simple__text">
-                            {{ $contactList->title }}
-                        </h4>
-                        <p class="list-group-simple__subtext">
-                            <a href="" target="__blank"></a>
-                        </p>
-                    </li>
-                    @endforeach
+                    @include('template-2.list-contact', [
+                        'icon' => 'bi-geo-alt',
+                        'title' => 'Location',
+                        'link' => $ourContact->link_address,
+                        'subtext' => $ourContact->address
+                    ])
+                    @include('template-2.list-contact', [
+                        'icon' => 'bi-envelope',
+                        'title' => 'Email',
+                        'link' => 'mailto:' . $ourContact->email,
+                        'subtext' => $ourContact->email
+                    ])
+                    @include('template-2.list-contact', [
+                        'icon' => 'bi-phone',
+                        'title' => 'Call',
+                        'link' => 'tel:' . $ourContact->telephone,
+                        'subtext' => $ourContact->telephone
+                    ])
                 </ul>
             </div>
 
