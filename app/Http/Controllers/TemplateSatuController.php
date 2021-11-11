@@ -27,7 +27,11 @@ class TemplateSatuController extends Controller
         $ourBranch = OurBranch::where('domain_owner', request()->getSchemeAndHttpHost());
         $faqs = Faq::where('domain_owner', request()->getSchemeAndHttpHost());
 
-        return [$ourService, $ourTeam, $ourBranch, $faqs];
+        $galleries = Gallery::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        );
+
+        return [$ourService, $ourTeam, $ourBranch, $faqs, $galleries];
     }
 
     public function index(Request $request)
@@ -51,6 +55,8 @@ class TemplateSatuController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
 
+
+
         $totalOurService = $this->getCommonContent()[0]->count();
         $ourService = $this->getCommonContent()[0]->get();
 
@@ -63,10 +69,13 @@ class TemplateSatuController extends Controller
         $totalFaqs = $this->getCommonContent()[3]->count();
         $faqs = $this->getCommonContent()[3]->get();
 
+        $totalGallery = $this->getCommonContent()[4]->count();
+
         $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurTeam, '/#our-team');
         $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurService, '/#services');
         $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurBranch, '/#our-branch');
         $menus = Helper::removeMenuIfContentEmpty($menus, $totalFaqs, '/#faq');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $totalGallery, '/gallery');
 
         $ourContact = OurContact::where(
             'domain_owner', request()->getSchemeAndHttpHost()
@@ -96,11 +105,13 @@ class TemplateSatuController extends Controller
         $totalOurTeam = $this->getCommonContent()[1]->count();
         $totalOurBranch = $this->getCommonContent()[2]->count();
         $totalFaqs = $this->getCommonContent()[3]->count();
+        $totalGallery = $this->getCommonContent()[4]->count();
 
         $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurService, '/#our-team');
         $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurTeam, '/#services');
         $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurBranch, '/#our-branch');
         $menus = Helper::removeMenuIfContentEmpty($menus, $totalFaqs, '/#faq');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $totalGallery, '/gallery');
 
         return view('template-1.about', compact('menus', 'aboutUs', 'sectionTitle', 'sectionDesc'));
     }
