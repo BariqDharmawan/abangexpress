@@ -13,6 +13,8 @@ return [
     |
     */
 
+    'wa_ax' => env('WA_AX', '6281212328881'),
+
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
