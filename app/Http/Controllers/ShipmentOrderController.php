@@ -36,13 +36,13 @@ class ShipmentOrderController extends Controller
 
     public function index()
     {
-        $postdata = '{
-            "akun": "'.Auth::user()->code_api.'",
-            "key": "'.Auth::user()->token_api.'",
-            "param":"and statustransaksi=`0`"
-        }';
+        $postdata = [
+            "akun" => Auth::user()->code_api,
+            "key" => Auth::user()->token_api,
+            "param" => "and statustransaksi=`0`"
+        ];
 
-        $res = $this->getDataOrder($postdata);
+        $res = $this->getDataOrder(json_encode($postdata));
 
         $orderData = Helper::responseDataOrder($res->response);
 
@@ -65,18 +65,16 @@ class ShipmentOrderController extends Controller
     {
         $title = 'Dalam Proses';
 
-        $postdata = '{
-            "akun": "'.Auth::user()->code_api.'",
-            "key": "'.Auth::user()->token_api.'",
-            "param":"and statustransaksi=`2`"
+        $postdata = [
+            "akun" => Auth::user()->code_api,
+            "key" => Auth::user()->token_api,
+            "param" => "and statustransaksi=`2`"
+        ];
 
-        }';
-
-        $res = $this->getDataOrder($postdata);
+        $res = $this->getDataOrder(json_encode($postdata));
         $orderData = $res->response;
-
         $statusRes = $res->status;
-        // dd($orderData);
+
         return view('shipment.order.process', compact('title','orderData','statusRes'));
     }
 
@@ -84,14 +82,13 @@ class ShipmentOrderController extends Controller
     {
         $title = 'Pending Proses';
 
-        $postdata = '{
-            "akun": "'.Auth::user()->code_api.'",
-            "key": "'.Auth::user()->token_api.'",
-            "param":"and statustransaksi=`1`"
+        $postdata = [
+            "akun" => Auth::user()->code_api,
+            "key" => Auth::user()->token_api,
+            "param" => "and statustransaksi=`1`"
+        ];
 
-        }';
-
-        $res = $this->getDataOrder($postdata);
+        $res = $this->getDataOrder(json_encode($postdata));
         $orderData = Helper::responseDataOrder($res->response);
 
         $statusRes = $res->status;
@@ -101,60 +98,34 @@ class ShipmentOrderController extends Controller
 
     public function history()
     {
-        $title = 'History Kiriman';
+        $postdata = [
+            "akun" => Auth::user()->code_api,
+            "key" => Auth::user()->token_api,
+            "param" => "and statustransaksi=`3`"
+        ];
 
-        $postdata = '{
-            "akun": "'.Auth::user()->code_api.'",
-            "key": "'.Auth::user()->token_api.'",
-            "param":"and statustransaksi=`3`"
+        $res = $this->getDataOrder(json_encode($postdata));
 
-        }';
-
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://res.abangexpress.id/shipments/pull/dataorder/',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $postdata,
-            CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json'
-            ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-
-        $res = json_decode($response);
         $orderData = $res->response;
-
         $statusRes = $res->status;
         $underling = $res->underling;
         // dd($orderData);
-        return view('shipment.order.history', compact('title','orderData','statusRes','underling'));
+        return view('shipment.order.history', compact('orderData','statusRes','underling'));
     }
 
     public function receipt()
     {
-        $title = 'Cetak Ulang Resi';
+        $postdata = [
+            "akun" => Auth::user()->code_api,
+            "key" => Auth::user()->token_api,
+            "param" => "and not(statustransaksi=`C`)"
+        ];
 
-        $postdata = '{
-            "akun": "'.Auth::user()->code_api.'",
-            "key": "'.Auth::user()->token_api.'",
-            "param":"and not(statustransaksi=`C`)"
-
-        }';
-
-        $res = $this->getDataOrder($postdata);
+        $res = $this->getDataOrder(json_encode($postdata));
         $orderData = $res->response;
         $statusRes = $res->status;
 
-        return view('shipment.order.receipt', compact('title','orderData','statusRes'));
+        return view('shipment.order.receipt', compact('orderData','statusRes'));
     }
 
 
