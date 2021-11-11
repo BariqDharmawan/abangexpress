@@ -101,7 +101,7 @@
                             href="{{ route('shipping.invoice.bill') }}" text="Tagihan" />
                             <x-shipment.dropdown-item
                             href="{{ route('shipping.invoice.verifying') }}"
-                            text="Dalam Prose Verifikasi" />
+                            text="Dalam Proses Verifikasi" />
                             <x-shipment.dropdown-item
                             href="{{ route('shipping.invoice.settled') }}" text="Lunas" />
                         </x-shipment.dropdown-item>
