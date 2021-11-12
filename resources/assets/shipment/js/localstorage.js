@@ -8,6 +8,10 @@ $(document).ready(function() {
         window.location.href = '/shipping/order/book'
     }
 
+    if (window.location.pathname !== '/shipping/order/book/invoice') {
+        localStorage.clear()
+    }
+
     fillCommercialInvoice()
 
     //cancel submit form book and save data to localstorage
