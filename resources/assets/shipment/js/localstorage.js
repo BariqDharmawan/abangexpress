@@ -77,22 +77,34 @@ $(document).ready(function() {
     $("#print-invoice").submit(function(e) {
         e.preventDefault()
 
-        const getBookOrder = getBookOrderOnPrevRequest($(this)[0])
+        let formBookOrder = new FormData($(this)[0])
+        formBookOrder.delete('_token')
+
+        const getBookOrderOnPrevRequest = new FormData()
+        for (let key = 0; key < localStorage.length; key++) {
+            const inputNameBookingOrder = localStorage.key(key)
+
+            //form data booking order
+            getBookOrderOnPrevRequest.append(
+                inputNameBookingOrder,
+                localStorage.getItem(inputNameBookingOrder)
+            )
+        }
 
         $.ajax({
             url: "/shipping/order/book/invoice/save",
-            data: getBookOrder,
+            data: getBookOrderOnPrevRequest,
             cache: false,
             processData: false,
             contentType: false,
             type: 'POST',
             complete: function (response) {
-                console.log(response.responseJSON)
+                console.log(response)
                 if (response.responseJSON.message == 'failed') {
                     alert(`${response.responseJSON.data}, silahkan hubungi admin`)
                 }
                 else {
-                    window.open('/shipping/order/print?key=' + response.data.token_resi, '_blank');
+                    window.open('/shipping/order/print?key=' + response.responseJSON.data.token_resi, '_blank');
                     localStorage.clear()
                     window.location.href = '/shipping/order/receipt'
                 }
