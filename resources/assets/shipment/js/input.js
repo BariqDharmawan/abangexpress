@@ -156,7 +156,7 @@ $(document).ready(function () {
                         let packWidth = $('#package-width').val()
                         let packLength = $('#package-length').val()
                         let packWeight = $("#package-weight").val()
-                        let isValueAlreadyInRange = packWeight > 4 && packWeight < 23
+                        let isValueAlreadyInRange = packWeight >= 4 && packWeight < 23
 
                         let totalDimension = Number(packHeight) + Number(packLength) + Number(packWidth)
                         console.log(`totalDimension: ${totalDimension}`)
