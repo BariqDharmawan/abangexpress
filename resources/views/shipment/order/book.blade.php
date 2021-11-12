@@ -88,7 +88,7 @@
                 <div class="col-lg-6">
                     <x-shipment.input placeholder="Kode pos"
                     name="recipient_zipcode" id="recipient-zipcode" inputmode="numeric"
-                    class="only-number" data-akun="coloader" data-key="f03e563b71454776e2cb1e7b5f5ea5c4" data-country="TAIWAN" required />
+                    class="only-number" data-akun="{{ auth()->user()->code_api }}" data-key="{{ auth()->user()->token_api }}" data-country="TAIWAN" required />
                 </div>
             </div>
             <div class="col-12">
@@ -108,6 +108,7 @@
                 name="recipient_idcard" maxlength="8" minlength="3"
                 small-text="Gambar hanya boleh berekstensi .jpg, .jpeg, .png, .svg"
                 data-img-preview="#idcard-preview" />
+
                 <input type="hidden" name="idcard_input_hidden"
                 id="idcard_input_hidden" />
             </div>
