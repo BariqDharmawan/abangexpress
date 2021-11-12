@@ -124,7 +124,7 @@ class BookingOrderController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function saveInvoice(Request $request)
     {
         $uid=Auth::user()->username;
         $users = User::where([
@@ -210,13 +210,19 @@ class BookingOrderController extends Controller
         curl_close($curl);
         $response = json_decode($response);
         $response = $response->response;
-        // print_r($response);
+
+        if ($response == 'Akun dan Key tidak valid.') {
+            $message = 'failed';
+        }
+        else {
+            $message = 'success';
+        }
 
 
         return response()->json([
             'data' => $response,
-            'xPD'=>$postdata,
-            'message' => 'success'
+            'xPD'=> $postdata,
+            'message' => $message
         ]);
     }
 

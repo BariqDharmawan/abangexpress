@@ -36,7 +36,7 @@ Route::prefix('shipping')->name('shipping.')->middleware('auth')->group(function
             Route::get('/', 'BookingOrderController@index')->name('index');
             Route::get('invoice', 'BookingOrderController@invoice')->name('invoice');
             Route::post('invoice', 'BookingOrderController@storeInvoice')->name('save-invoice');
-            Route::post('invoice/save', 'BookingOrderController@store')->name('invoice.save');
+            Route::post('invoice/save', 'BookingOrderController@saveInvoice')->name('invoice.save');
             Route::post('step', 'BookingOrderController@order')->name('step');
         });
     });

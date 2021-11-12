@@ -56,4 +56,10 @@ window.addEventListener('load', () => {
     }
 });
 
-export { select, onscroll, on, scrollto }
+const showAjaxError = (responseError) => {
+    for (var key in responseError) {
+        $(`.error-ajax-${key}`).text(responseError[key]).removeClass('d-none')
+    }
+}
+
+export { select, onscroll, on, scrollto, showAjaxError }

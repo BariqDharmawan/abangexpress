@@ -1,5 +1,10 @@
-import { csrfToken, regenerateDatatableAjax } from "./helper";
-import { appendModal } from "./modal";
+import {
+    csrfToken,
+    regenerateDatatableAjax
+} from "./helper";
+import {
+    appendModal
+} from "./modal";
 
 function getCommercialInvoice() {
     const commercialInvoice = JSON.parse(
@@ -24,13 +29,24 @@ function getCommercialInvoice() {
 
 function showInvoiceResult() {
     // refresh dataTable
-    regenerateDatatableAjax('#commercialInvoice', getCommercialInvoice(), [
-        { "data": "no" },
-        { "data": "desc" },
-        { "data": "quantity_pcs" },
-        { "data": "value_unit" },
-        { "data": "total_value" },
-        { "data": "action" }
+    regenerateDatatableAjax('#commercialInvoice', getCommercialInvoice(), [{
+            "data": "no"
+        },
+        {
+            "data": "desc"
+        },
+        {
+            "data": "quantity_pcs"
+        },
+        {
+            "data": "value_unit"
+        },
+        {
+            "data": "total_value"
+        },
+        {
+            "data": "action"
+        }
     ])
 
     $("#btn-generate-pdf").removeAttr("disabled");
@@ -147,4 +163,43 @@ function appendInvoiceToBookOrder(bookOrder, form) {
     }
 }
 
-export {fillCommercialInvoice, getCommercialInvoice, showInvoiceResult, removeCommercialInvoice, getBookOrderOnPrevRequest, getLocalstorageBookOrder, appendInvoiceToBookOrder}
+function storeBookOrderToLocal(form) {
+    let bookOrder = new FormData(form)
+
+    bookOrder.delete('_token')
+    bookOrder.delete('recipient_idcard')
+
+    for (const [key, value] of bookOrder) {
+        localStorage.setItem(key, value)
+    }
+
+
+    form.submit()
+}
+
+function storeCommercialInvoiceToLocal(form) {
+    let ciform = new FormData(form),
+        commercialInvoice = {};
+
+    ciform.delete('_token')
+
+    for (const entry of ciform.entries()) {
+        commercialInvoice[entry[0]] = entry[1]
+    }
+
+    commercialInvoice = JSON.stringify(commercialInvoice)
+
+    return commercialInvoice;
+}
+
+export {
+    fillCommercialInvoice,
+    getCommercialInvoice,
+    showInvoiceResult,
+    removeCommercialInvoice,
+    getBookOrderOnPrevRequest,
+    getLocalstorageBookOrder,
+    appendInvoiceToBookOrder,
+    storeBookOrderToLocal,
+    storeCommercialInvoiceToLocal
+}

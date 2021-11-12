@@ -1,4 +1,5 @@
-import { appendInvoiceToBookOrder, fillCommercialInvoice, getBookOrderOnPrevRequest, getLocalstorageBookOrder, removeCommercialInvoice, showInvoiceResult } from "./function-task"
+import { showAjaxError } from "../../general/js/helper"
+import { appendInvoiceToBookOrder, fillCommercialInvoice, getBookOrderOnPrevRequest, getLocalstorageBookOrder, removeCommercialInvoice, showInvoiceResult, storeBookOrderToLocal } from "./function-task"
 import { isAlreadyFillFormBook, isOnFormBookInvoicePage } from "./helper"
 
 $(document).ready(function() {
@@ -12,16 +13,7 @@ $(document).ready(function() {
     //cancel submit form book and save data to localstorage
     $("#form-book-order").submit(function(e) {
         e.preventDefault()
-        let bookOrder = new FormData($(this)[0])
-
-        bookOrder.delete('_token')
-        bookOrder.delete('recipient_idcard')
-
-        for (const [key, value] of bookOrder) {
-            localStorage.setItem(key, value)
-        }
-
-        $(this)[0].submit()
+        storeBookOrderToLocal($(this)[0])
     })
 
     //submit form invoice and form booking order that saved on localstorage as well
@@ -33,10 +25,10 @@ $(document).ready(function() {
         const getBookOrder = getLocalstorageBookOrder(true)
 
         appendInvoiceToBookOrder(getBookOrder, formDataInvoice)
-        // create json format to store commercialInvoice data on localStorage
 
-        var ciform = new FormData(thisForm),
-        ciresult = {};
+        // create json format to store commercialInvoice data on localStorage
+        let ciform = new FormData(thisForm),
+            ciresult = {};
 
         ciform.delete('_token')
 
@@ -60,7 +52,7 @@ $(document).ready(function() {
                 thisForm.reset()
 
                 $("#form-invoice-order .form-line").removeClass('focused')
-                $(".select2").val('').trigger('change')
+                $("#form-invoice-order .select2").val('').trigger('change')
 
                 $('[class*="error-ajax-"]').text("").addClass('d-none')
 
@@ -75,10 +67,7 @@ $(document).ready(function() {
 
             },
             error: function(response) {
-                const responseError = response.responseJSON.errors
-                for (var key in responseError) {
-                    $(`.error-ajax-${key}`).text(responseError[key]).removeClass('d-none')
-                }
+                showAjaxError(response.responseJSON.errors)
             }
         })
 
@@ -97,17 +86,21 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             type: 'POST',
-            success: function(response) {
-                console.log(response.xPD)
-
-                window.open('/shipping/order/print?key=' + response.data.token_resi, '_blank');
-                localStorage.clear()
-                window.location.href = '/shipping/order/receipt'
-
+            complete: function (response) {
+                console.log(response.responseJSON)
+                if (response.responseJSON.message == 'failed') {
+                    alert(`${response.responseJSON.data}, silahkan hubungi admin`)
+                }
+                else {
+                    window.open('/shipping/order/print?key=' + response.data.token_resi, '_blank');
+                    localStorage.clear()
+                    window.location.href = '/shipping/order/receipt'
+                }
             },
             error: function(error) {
-                alert(error)
-            }
+                alert('something when wrong, check console')
+                console.error(error)
+            },
         })
 
     })
@@ -115,7 +108,6 @@ $(document).ready(function() {
     // delete commercial invoice content
     $("body").on('click', ".btn-delete-value-attr", function() {
         $(this).parents('.modal').modal('hide')
-        console.log(`val: ${Number($(this).val()) - 1}`)
         removeCommercialInvoice($(this))
     });
 
