@@ -35,7 +35,7 @@ class IdentityValidation extends FormRequest
             'our_vision' => ['required', 'string', 'min:3'],
             'our_mission' => ['required', 'string', 'min:3'],
             'sub_slogan' => ['sometimes', 'string', 'min:3', 'max:255'],
-            'cover_vision_mission' => ['sometimes', 'image'],
+            'cover_vision_mission' => ['sometimes', 'image', 'max:2000'],
             'first_desc' => ['required', 'string', 'min:3'],
             'section_name' => ['required', 'string', new AlphanumericSpace],
             'second_desc' => [Rule::when($templateChoosen == 2, ['required'], ['nullable']), 'string', 'min:3']

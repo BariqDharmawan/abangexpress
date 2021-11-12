@@ -24,14 +24,14 @@ class StoreLandingCarouselValidation extends FormRequest
     public function rules()
     {
         return [
-            'img' => ['required', 'image', 'max:5120']
+            'img' => ['required', 'image', 'max:2000']
         ];
     }
 
     public function messages()
     {
         return [
-            'img.max' => 'Gambar tidak boleh lebih dari 5mb',
+            'img.max' => 'Gambar tidak boleh lebih dari 2mb',
         ];
     }
 }

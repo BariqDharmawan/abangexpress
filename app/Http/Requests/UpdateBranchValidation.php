@@ -25,7 +25,7 @@ class UpdateBranchValidation extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:255'],
-            'icon' => ['sometimes', 'file', 'image', 'max:2048'],
+            'icon' => ['sometimes', 'file', 'image', 'max:2000'],
             'telephone' => ['required', 'numeric', 'digits_between:8,16'],
             'address' => ['required'],
         ];
