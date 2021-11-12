@@ -113,7 +113,7 @@
 
                 @foreach ($ourService as $service)
                 <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-5"
-                data-aos="zoom-in" data-aos-delay="{{ $loop->iteration * 100 }}">
+                data-aos="zoom-in" data-aos-delay="{{ $service->id * 100 }}">
                     <div class="icon-box w-100">
                         <i class="{{ $service->icon }} h1"></i>
                         <h4 class="card__name text-capitalize mt-2">{{ $service->title }}</h4>
@@ -140,7 +140,7 @@
                 @foreach ($ourTeam as $team)
                 <div class="col-lg-6 mb-4 member-item">
                     <div class="member d-flex align-items-start"
-                    data-aos="zoom-in" data-aos-delay="{{ 100 * $loop->iteration }}">
+                    data-aos="zoom-in" data-aos-delay="{{ 100 * $team->id }}">
                         <div class="pic">
                             <img height="180px" width="180px"
                             src="{{ asset($team->avatar) }}" alt=""

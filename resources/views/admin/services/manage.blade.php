@@ -34,11 +34,11 @@
                 <div class="ml-auto">
                     <x-admin.modal.trigger :is-default-style="false"
                     class="btn-link text-primary" text="Ubah"
-                    modal-target="edit-service-{{ $loop->iteration }}" />
+                    modal-target="edit-service-{{ $service->id }}" />
 
                     <x-admin.modal.trigger :is-default-style="false"
                     class="btn-link text-danger" text="Hapus"
-                    modal-target="remove-service-{{ $loop->iteration }}" />
+                    modal-target="remove-service-{{ $service->id }}" />
                 </div>
             </li>
             @endforeach
@@ -65,7 +65,7 @@
         @include('admin.services.form', ['action' => route('admin.services.store')])
     </x-admin.modal>
     @foreach ($ourService as $service)
-        <x-admin.modal id="edit-service-{{ $loop->iteration }}"
+        <x-admin.modal id="edit-service-{{ $service->id }}"
             heading="Ubah service {{ $service->title }}">
             @include('admin.services.form', [
                 'action' => route('admin.services.update', $service->id),
@@ -74,7 +74,7 @@
         </x-admin.modal>
 
         @include('admin.partials.popup-delete', [
-            'id' => 'remove-service-' . $loop->iteration,
+            'id' => 'remove-service-' . $service->id,
             'heading' => 'Hapus service',
             'warningMesssage' =>
                 'Apakah kamu yakin ingin menghapus layanan <b>'

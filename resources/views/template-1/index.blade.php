@@ -134,11 +134,11 @@
                 <div class="accordion-item accordion-faq">
                     <a class="accordion-button accordion__heading collapsed toggler-accordion"
                     type="button" data-bs-toggle="collapse"
-                    data-bs-target="#accordion-list-faq-{{ $loop->iteration }}"
-                    aria-expanded="false" aria-controls="accordion-list-faq-{{ $loop->iteration }}">
+                    data-bs-target="#accordion-list-faq-{{ $faq->id }}"
+                    aria-expanded="false" aria-controls="accordion-list-faq-{{ $faq->id }}">
                         {{ $faq->question }}
                     </a>
-                    <div id="accordion-list-faq-{{ $loop->iteration }}"
+                    <div id="accordion-list-faq-{{ $faq->id }}"
                         class="collapse accordion__text"
                         aria-labelledby="flush-faq"
                         data-bs-parent="#load-faq">

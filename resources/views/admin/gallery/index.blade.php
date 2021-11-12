@@ -41,7 +41,7 @@
 
     @foreach ($galleryImg as $gallery)
         @include('admin.partials.popup-delete', [
-            'id' => 'remove-image-' . $loop->iteration,
+            'id' => 'remove-image-' . $gallery->id,
             'heading' => "Hapus Gallery",
             'warningMesssage' => "Apakah kamu yakin ingin menghapus gambar ini?",
             'action' => route('admin.gallery.destroy', $gallery->id)
@@ -50,7 +50,7 @@
 
     @foreach ($galleryYoutube as $gallery)
         @include('admin.partials.popup-delete', [
-            'id' => 'remove-youtube-' . $loop->iteration,
+            'id' => 'remove-youtube-' . $gallery->id,
             'heading' => "Hapus Video",
             'warningMesssage' => "Apakah kamu yakin ingin menghapus video ini?",
             'action' => route('admin.gallery.destroy', $gallery->id)

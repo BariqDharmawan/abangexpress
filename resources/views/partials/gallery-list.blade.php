@@ -15,7 +15,7 @@
             </a>
             @if (isset($hasBtnDelete) and $hasBtnDelete)
                 <x-admin.modal.trigger text="Hapus"
-                    modal-target="remove-image-{{ $loop->iteration }}"
+                    modal-target="remove-image-{{ $gallery->id }}"
                     class="d-block w-100 mt-2 btn-danger" />
             @endif
         </div>
@@ -42,7 +42,7 @@
 
             @if (isset($hasBtnDelete) and $hasBtnDelete)
             <x-admin.modal.trigger text="Hapus"
-            modal-target="remove-youtube-{{ $loop->iteration }}"
+            modal-target="remove-youtube-{{ $gallery->id }}"
             class="d-block w-100 mt-2 btn-danger" />
             @endif
         </div>

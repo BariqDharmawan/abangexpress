@@ -21,14 +21,14 @@
             @foreach ($faqs as $faq)
                 <div class="card mb-3 border-bottom">
                     <div class="card-header bg-light"
-                    id="heading-faq-{{ $loop->iteration }}">
+                    id="heading-faq-{{ $faq->id }}">
                         <h2 class="mb-0">
                             <button class="btn btn-link btn-block text-left d-flex justify-content-between hover-no-underline"
                             type="button" data-toggle="collapse"
-                            data-target="#faq-{{ $loop->iteration }}"
+                            data-target="#faq-{{ $faq->id }}"
                             @if($loop->first)aria-expanded="true"
                             @else aria-expanded="false" @endif
-                            aria-controls="faq-{{ $loop->iteration }}">
+                            aria-controls="faq-{{ $faq->id }}">
                                 {{ $faq->question }}
                                 <i class="fas fa-chevron-down
                                 collapse-icon transition-default @if($loop->first) rotate-180deg @endif"></i>
@@ -36,9 +36,9 @@
                         </h2>
                     </div>
 
-                    <div id="faq-{{ $loop->iteration }}"
+                    <div id="faq-{{ $faq->id }}"
                         class="collapse @if($loop->first) show @endif"
-                        aria-labelledby="heading-faq-{{ $loop->iteration }}"
+                        aria-labelledby="heading-faq-{{ $faq->id }}"
                         data-parent="#accordion-faq">
                         <div class="card-body">
                             {{ nl2br($faq->answer) }}
@@ -47,12 +47,12 @@
                             <x-admin.modal.trigger text="Ubah detail"
                             :is-default-style="false"
                             class="btn-link text-primary px-0 mr-2"
-                            modal-target="edit-faq-{{ $loop->iteration }}" />
+                            modal-target="edit-faq-{{ $faq->id }}" />
 
                             <x-admin.modal.trigger text="Hapus pertanyaan"
                             :is-default-style="false"
                             class="btn-link text-danger px-0"
-                            modal-target="remove-faq-{{ $loop->iteration }}" />
+                            modal-target="remove-faq-{{ $faq->id }}" />
 
                         </div>
                     </div>
@@ -84,7 +84,7 @@
     </x-admin.modal>
 
     @foreach ($faqs as $faq)
-        <x-admin.modal id="edit-faq-{{ $loop->iteration }}" heading="Ubah pertanyaan">
+        <x-admin.modal id="edit-faq-{{ $faq->id }}" heading="Ubah pertanyaan">
             @include('admin.faq.form', [
                 'action' => route('admin.faq.update', $faq->id),
                 'data' => $faq
@@ -92,7 +92,7 @@
         </x-admin.modal>
 
         @include('admin.partials.popup-delete', [
-            'id' => 'remove-faq-' . $loop->iteration,
+            'id' => 'remove-faq-' . $faq->id,
             'heading' => 'Hapus pertanyaan ' . $faq->question,
             'warningMesssage' =>
                 'Apakah kamu yakin ingin menghapus pertanyaa <b>'

@@ -40,10 +40,10 @@
                         <td>
                             <x-admin.modal.trigger text="Edit" :is-default-style="false"
                             class="btn-warning"
-                            modal-target="edit-branch-{{ $loop->iteration }}" />
+                            modal-target="edit-branch-{{ $branch->id }}" />
                             <x-admin.modal.trigger text="Hapus" :is-default-style="false"
                             class="btn-danger"
-                            modal-target="delete-branch-{{ $loop->iteration }}" />
+                            modal-target="delete-branch-{{ $branch->id }}" />
                         </td>
                     </tr>
                     @endforeach
@@ -62,18 +62,13 @@
             <x-admin.input name="name" label="Nama Mitra" required />
             <x-admin.input name="telephone" class="only-number" type="tel" inputmode="numeric" label="Nomor Telepon" required />
             <x-admin.input name="address" type="textarea" label="Alamat" required />
-            <x-admin.input name="icon" type="file" accept="image/*"
-            label="Pilih Logo" required>
-                <small class="text-dark">
-                    atau kosongkan, jika ingin menggunakan logo default
-                </small>
-            </x-admin.input>
+            <x-admin.input name="icon" type="file" accept="image/*" label="Pilih Logo" required />
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </x-admin.modal>
 
     @foreach ($ourBranch as $branch)
-        <x-admin.modal id="edit-branch-{{ $loop->iteration }}"
+        <x-admin.modal id="edit-branch-{{ $branch->id }}"
         heading="Edit cabang {{ $branch->name }}">
             <form action="{{ route('admin.branch.update', $branch->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf @method('PUT')
@@ -97,7 +92,7 @@
         </x-admin.modal>
 
         @include('admin.partials.popup-delete', [
-            'id' => 'delete-branch-' . $loop->iteration,
+            'id' => 'delete-branch-' . $branch->id,
             'heading' => "Hapus cabang $branch->name",
             'warningMesssage' =>
                 "Apakah anda yakin akan menghapus cabang <b>$branch->name</b>",

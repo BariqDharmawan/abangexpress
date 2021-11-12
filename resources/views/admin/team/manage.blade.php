@@ -44,12 +44,12 @@
 
                     <x-slot name="footer">
                         <x-admin.modal.trigger text="Ubah info"
-                        modal-target="edit-person-{{ $loop->iteration }}"
+                        modal-target="edit-person-{{ $person->id }}"
                         :is-default-style="false"
                         class="btn-link text-primary px-0" />
 
                         <x-admin.modal.trigger text="Hapus person"
-                        modal-target="remove-person-{{ $loop->iteration }}"
+                        modal-target="remove-person-{{ $person->id }}"
                         :is-default-style="false"
                         class="btn-link text-danger px-0" />
                     </x-slot>
@@ -90,7 +90,7 @@
     </x-admin.modal>
 
     @foreach ($teams as $person)
-        <x-admin.modal id="edit-person-{{ $loop->iteration }}"
+        <x-admin.modal id="edit-person-{{ $person->id }}"
             heading="Ubah info {{ $person->name }}">
             @include('admin.team.form', [
                 'action' => route('admin.team.update', $person->id),
@@ -99,7 +99,7 @@
         </x-admin.modal>
 
         @include('admin.partials.popup-delete', [
-            'id' => 'remove-person-' . $loop->iteration,
+            'id' => 'remove-person-' . $person->id,
             'heading' => 'Hapus member ' . $person->name,
             'warningMesssage' =>
                 'Apakah kamu yakin ingin menghapus member <b>'

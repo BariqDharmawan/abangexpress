@@ -95,7 +95,7 @@
                                         <td>
                                             <x-shipment.modal-trigger text="Cancel"
                                             class="btn-danger btn-small" icon="clear"
-                                            target="modal-cancel-order-{{ $loop->iteration }}" />
+                                            target="modal-cancel-order-{{ $order->id }}" />
                                         </td>
                                     </tr>
                                 @endforeach
@@ -114,7 +114,7 @@
 @section('components')
     @if ($statusRes =='success')
         @foreach ($orderData as $order)
-            <x-shipment.modal id="modal-cancel-order-{{ $loop->iteration }}" title="Cancel Orderan {{ $order['noresi'] }}">
+            <x-shipment.modal id="modal-cancel-order-{{ $order->id }}" title="Cancel Orderan {{ $order['noresi'] }}">
                 <p class="mt-5 mb-5">
                     Apakah kamu yakin ingin cancel orderan dengan resi <b>{{ $order['noresi'] }}</b>? <br>
                     <strong>Jika sudah tercancel, tidak bisa di-uncancel</strong>

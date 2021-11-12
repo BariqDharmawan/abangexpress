@@ -17,11 +17,11 @@
                 <div class="ml-auto">
                     <x-admin.modal.trigger :is-default-style="false"
                     class="btn-link text-primary" text="Ubah"
-                    modal-target="edit-unit-{{ $loop->iteration }}" />
+                    modal-target="edit-unit-{{ $unit->id }}" />
 
                     <x-admin.modal.trigger :is-default-style="false"
                     class="btn-link text-danger" text="Hapus"
-                    modal-target="remove-unit-{{ $loop->iteration }}" />
+                    modal-target="remove-unit-{{ $unit->id }}" />
                 </div>
             </li>
             @endforeach
@@ -36,12 +36,12 @@
     </x-admin.modal>
 
     @foreach ($units as $unit)
-        <x-admin.modal id="edit-unit-{{ $loop->iteration }}" heading="Ubah unit {{ $unit->name }}">
+        <x-admin.modal id="edit-unit-{{ $unit->id }}" heading="Ubah unit {{ $unit->name }}">
             @include('admin.unit.form', ['action' => route('admin.item-unit.update', $unit->id), 'data' => $unit])
         </x-admin.modal>
 
         @include('admin.partials.popup-delete', [
-            'id' => 'remove-unit-' . $loop->iteration,
+            'id' => 'remove-unit-' . $unit->id,
             'heading' => "Hapus unit $unit->name",
             'warningMesssage' => "Apakah kamu yakin ingin menghapus unit <b>$unit->name</b>",
             'action' => route('admin.item-unit.destroy', $unit->id)

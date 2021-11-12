@@ -39,7 +39,7 @@
                             </a>
 
                             <x-admin.modal.trigger text="Hapus"
-                            modal-target="remove-social-{{ $loop->iteration }}"
+                            modal-target="remove-social-{{ $social->id }}"
                             :is-default-style="false"
                             class="btn-link text-danger" />
 
@@ -93,7 +93,7 @@
 
     @foreach ($ourSocial as $social)
         @include('admin.partials.popup-delete', [
-            'id' => 'remove-social-' . $loop->iteration,
+            'id' => 'remove-social-' . $social->id,
             'heading' => "Remove our $social->platform",
             'warningMesssage' => "Are you sure wana remove our $social->platform",
             'action' => route('admin.our-social.destroy', $social->id)
