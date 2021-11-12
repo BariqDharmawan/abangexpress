@@ -26,9 +26,10 @@ class StoreItemUnitValidation extends FormRequest
      */
     public function rules()
     {
-        $isUnitExistOnThisDomain = ItemUnit::where(
-            'domain_owner', request()->getSchemeAndHttpHost()
-        )->select('name')->get()->contains('name', $this->name);
+        $isUnitExistOnThisDomain = ItemUnit::where([
+            ['domain_owner', request()->getSchemeAndHttpHost()],
+            ['name', $this->name],
+        ])->select('name')->count() > 0;
 
         return [
             'name' => [

@@ -18,11 +18,11 @@
         <p class="d-block w-100">Choose icon</p>
         @foreach ($listIcon as $icon)
             <div class="form-check mr-4 h2">
-                <input type="radio" id="pick-icon-{{ Str::slug($icon->icon) }}"
-                name="icon" class="form-check-input mr-0" value="{{ $icon->icon }}"
-                @if(isset($data) and $data->icon == $icon->icon) checked @endif>
-                <label class="form-check-label" for="pick-icon-{{ Str::slug($icon->icon) }}">
-                    <i class="{{ $icon->icon }}"></i>
+                <input type="radio" id="pick-icon-{{ Str::slug($icon) }}"
+                name="icon" class="form-check-input mr-0" value="{{ $icon }}"
+                @if(isset($data) and $data == $icon) checked @endif>
+                <label class="form-check-label" for="pick-icon-{{ Str::slug($icon) }}">
+                    <i class="{{ $icon }}"></i>
                 </label>
             </div>
         @endforeach

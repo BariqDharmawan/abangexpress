@@ -14,9 +14,10 @@ class OurServiceController extends Controller
 
     public function manage()
     {
-        $ourService = OurService::orderBy('title', 'asc')
-                    ->where('domain_owner', request()->getSchemeAndHttpHost())->get();
-        $listIcon = IconList::where('content', 'service')->get();
+        $ourService = OurService::orderBy('title', 'asc')->where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->get();
+        $listIcon = IconList::where('content', 'service')->select('icon')->get()->pluck('icon');
 
         $sectionTitle = LandingSectionTitle::where(
             'domain_owner', request()->getSchemeAndHttpHost()
@@ -27,11 +28,6 @@ class OurServiceController extends Controller
         ));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $ourService = OurService::where(
@@ -40,12 +36,6 @@ class OurServiceController extends Controller
         return response()->json($ourService);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreServiceValidation $request)
     {
         OurService::create([
@@ -81,12 +71,6 @@ class OurServiceController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $serviceToDelete = OurService::where([

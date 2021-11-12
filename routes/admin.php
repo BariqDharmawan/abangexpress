@@ -23,10 +23,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin', 'checkDom
             );
         });
 
-        Route::get('our-social', 'OurSocialController@manage')->name(
-            'our-social.manage'
-        );
-        Route::resource('our-social', 'OurSocialController')->except('index');
+        Route::resource('our-social', 'OurSocialController');
 
         Route::get('contacts/manage', 'OurContactController@manage')->name(
             'contact.manage'
