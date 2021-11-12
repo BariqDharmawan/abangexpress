@@ -32,3 +32,4 @@ public/shipment/**
 **/**/*.yml
 **/**/LICENSE
 **/**/*.html
+public/mix-manifest.json
