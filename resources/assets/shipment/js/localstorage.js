@@ -77,23 +77,11 @@ $(document).ready(function() {
     $("#print-invoice").submit(function(e) {
         e.preventDefault()
 
-        let formBookOrder = new FormData($(this)[0])
-        formBookOrder.delete('_token')
-
-        const getBookOrderOnPrevRequest = new FormData()
-        for (let key = 0; key < localStorage.length; key++) {
-            const inputNameBookingOrder = localStorage.key(key)
-
-            //form data booking order
-            getBookOrderOnPrevRequest.append(
-                inputNameBookingOrder,
-                localStorage.getItem(inputNameBookingOrder)
-            )
-        }
+        const getBookOrder = getBookOrderOnPrevRequest($(this)[0])
 
         $.ajax({
             url: "/shipping/order/book/invoice/save",
-            data: getBookOrderOnPrevRequest,
+            data: getBookOrder,
             cache: false,
             processData: false,
             contentType: false,

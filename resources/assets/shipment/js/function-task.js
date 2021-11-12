@@ -147,11 +147,7 @@ function getBookOrderOnPrevRequest(form) {
     let formBookOrder = new FormData(form)
     formBookOrder.delete('_token')
 
-    const getBookOrderOnPrevRequest = new FormData()
-
-    getLocalstorageBookOrder()
-
-    return getBookOrderOnPrevRequest
+    return getLocalstorageBookOrder(true)
 }
 
 function appendInvoiceToBookOrder(bookOrder, form) {
