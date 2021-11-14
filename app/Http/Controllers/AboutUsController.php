@@ -73,11 +73,7 @@ class AboutUsController extends Controller
     {
 
         if ($request->hasFile('cover_vision_mission')) {
-            $coverVisionMission = $request->file('cover_vision_mission');
-            $pathcoverVisionMission = $coverVisionMission->store(
-                'public/cover-vision-mission'
-            );
-
+            $pathcoverVisionMission = Helper::uploadFile('cover_vision_mission', 'cover-vision-mission');
             AboutUs::updateOrCreate(
                 ['domain_owner' => request()->getSchemeAndHttpHost()],
                 [
@@ -86,17 +82,6 @@ class AboutUsController extends Controller
                     'cover_vision_mission' => $pathcoverVisionMission
                 ]
             );
-
-            $xfiles = Str::replaceFirst('public/', 'storage/', $pathcoverVisionMission);
-
-            define('UPLOAD_DIR', 'storage/cover-vision-mission/');
-
-            if (!is_dir(UPLOAD_DIR)) {
-                mkdir(UPLOAD_DIR);
-            }
-
-            $file_tmp = $_FILES['cover_vision_mission']['tmp_name'];
-            move_uploaded_file($file_tmp,$xfiles);
         }
         else {
             AboutUs::updateOrCreate(

@@ -40,7 +40,7 @@
                 <td>
                     @isset($identity->cover_vision_mission)
                     <img alt="" height="100px"
-                    src="{{ Storage::url($identity->cover_vision_mission) }}">
+                    src="{{ asset($identity->cover_vision_mission) }}">
                     @endisset
                 </td>
             </tr>

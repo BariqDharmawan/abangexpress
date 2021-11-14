@@ -43,17 +43,7 @@ class GalleryController extends Controller
         $addGallery = new Gallery;
 
         if ($request->hasFile('img')) {
-            $gallery = $request->file('img');
-            $fileGallery = $gallery->store('public/branch');
-            $pathGallery = Str::replaceFirst('public/', 'storage/', $fileGallery);
-
-            if (!is_dir('storage/gallery/')) {
-                mkdir('storage/gallery/');
-            }
-
-            $file_tmp = $_FILES['img']['tmp_name'];
-            move_uploaded_file($file_tmp, $pathGallery);
-
+            $pathGallery = Helper::uploadFile('img', 'gallery');
             $addGallery->img = $pathGallery;
         }
         else if ($request->has('youtube')) {

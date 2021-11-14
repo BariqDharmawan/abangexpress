@@ -3,8 +3,10 @@
 namespace App\Helper;
 
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class Helper
 {
@@ -117,6 +119,23 @@ class Helper
         }
 
         return $menus;
+    }
+
+    public static function uploadFile($inputName, $folderName)
+    {
+        $fileUpload = request()->file($inputName);
+        $pathFile = $fileUpload->store('public/' . $folderName);
+        $pathFile = Str::replaceFirst('public/', 'storage/', $pathFile);
+
+        define('UPLOAD_DIR', 'storage/' . $folderName . '/');
+        if (!is_dir(UPLOAD_DIR)) {
+            mkdir(UPLOAD_DIR);
+        }
+
+        $file_tmp = $_FILES[$inputName]['tmp_name'];
+        move_uploaded_file($file_tmp, $pathFile);
+
+        return $pathFile;
     }
 
 }

@@ -13,19 +13,7 @@ class OurBranchController extends Controller
 {
     private function uploadIcon(Request $request)
     {
-        $icon = $request->file('icon');
-        $fileIcon = $icon->store('public/branch');
-
-        $pathIcon = Str::replaceFirst('public/', 'storage/', $fileIcon);
-
-        if (!is_dir('storage/branch/')) {
-            mkdir('storage/branch/');
-        }
-
-        $file_tmp = $_FILES['icon']['tmp_name'];
-
-        move_uploaded_file($file_tmp, $pathIcon);
-
+        $pathIcon = Helper::uploadFile('icon', 'branch');
         return $pathIcon;
     }
 

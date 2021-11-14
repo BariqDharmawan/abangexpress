@@ -6,7 +6,7 @@
 
 <div class="form-group">
     @if ($type != 'file')
-    <label for="{{ Str::slug($name) }}">{{ $label }}</label>
+    <label for="{{ $id ?? Str::slug($name) }}">{{ $label }}</label>
     @endif
 
     @if ($type == 'textarea')

@@ -14,19 +14,7 @@ class LandingHeroCarouselController extends Controller
 
     public function store(StoreLandingCarouselValidation $request)
     {
-        $heroCarousel = $request->file('img');
-        $pathHeroCarousel = Storage::putFile('public/hero-carousel', $heroCarousel);
-
-        $xfiles = Str::replaceFirst('public/', 'storage/', $pathHeroCarousel);
-
-            define('UPLOAD_DIR', 'storage/hero-carousel/');
-
-            if (!is_dir(UPLOAD_DIR)) {
-                mkdir(UPLOAD_DIR);
-            }
-
-            $file_tmp = $_FILES['img']['tmp_name'];
-            move_uploaded_file($file_tmp,$xfiles);
+        $pathHeroCarousel = Helper::uploadFile('img', 'hero-carousel');
 
         FirstHeroCarouselLanding::create([
             'img' => Str::replaceFirst('public/', '/storage/', $pathHeroCarousel),
