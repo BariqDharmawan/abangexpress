@@ -15,10 +15,13 @@
 
     <div class="hero-slider swiper-container">
         <div class="swiper-wrapper">
-            @foreach ($heroCarousel as $carousel)
+            @forelse ($heroCarousel as $carousel)
                 <div class="swiper-slide"
                 style="background-image: url('{{ asset($carousel->img) }}"></div>
-            @endforeach
+            @empty
+            <div class="swiper-slide bg-contain"
+                style="background-image: url('{{ asset('template1/img/no-data.jpg') }}"></div>
+            @endforelse
         </div>
     </div>
 </section>

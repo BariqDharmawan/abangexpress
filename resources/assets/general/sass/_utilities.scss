@@ -17,6 +17,10 @@
     }
 }
 
+.bg-contain {
+    background-size: contain !important;
+}
+
 .h {
     &-full {
         height: 100%;
