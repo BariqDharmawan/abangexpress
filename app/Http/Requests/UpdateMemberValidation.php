@@ -17,7 +17,7 @@ class UpdateMemberValidation extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:150', new AlphaSpaceRule],
-            'avatar_edit' => ['sometimes','image'],
+            'avatar_edit' => ['sometimes','image', 'max:2000'],
             'position_id_edit' => ['required', 'integer' ,'exists:position_list,id'],
             'short_desc' => ['required', 'string', 'min:3', 'max:50']
         ];

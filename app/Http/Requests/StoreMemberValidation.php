@@ -18,7 +18,7 @@ class StoreMemberValidation extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:60', new AlphaSpaceRule],
-            'avatar' => ['required', 'image'],
+            'avatar' => ['required', 'image', 'max:2000'],
             'position_id' => ['required', 'integer' ,'exists:position_list,id'],
             'short_desc' => ['required', 'string', 'min:8', 'max:50']
         ];
