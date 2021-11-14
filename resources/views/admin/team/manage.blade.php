@@ -26,7 +26,7 @@
             @forelse ($teams as $person)
             <div class="col-lg-3 mb-4">
                 <x-admin.card title="{{ Str::words($person->name, 3, '...') }}"
-                :reverse-header="true"
+                :reverse-header="true" :is-on-right="false"
                 footer-class="d-flex justify-content-between bg-transparent">
                     <x-slot name="header">
                         <img src="{{ asset($person->avatar) }}"
@@ -81,8 +81,6 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </x-admin.modal>
-
-    {{-- @include('admin.partials.change-heading-desc') --}}
 
     <x-admin.modal id="add-new-person"
         heading="Tambah member baru">

@@ -8,7 +8,7 @@
             {{ $title }}
         </h6>
         @isset($header)
-        <div class="ml-auto">
+        <div class="@if($isOnRight)ml-auto @endif">
             {{ $header }}
         </div>
         @endisset

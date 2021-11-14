@@ -6,13 +6,13 @@ use Illuminate\View\Component;
 
 class Card extends Component
 {
-    public $title, $header, $footer, $hasShadow, $isHeaderTransparent, $reverseHeader, $footerClass;
+    public $title, $header, $footer, $hasShadow, $isHeaderTransparent, $reverseHeader, $footerClass, $isOnRight;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title = null, $header = null, $hasShadow = true, $isHeaderTransparent = false, $footer = null, $reverseHeader = false, $footerClass = null)
+    public function __construct($title = null, $header = null, $hasShadow = true, $isHeaderTransparent = false, $footer = null, $reverseHeader = false, $footerClass = null, $isOnRight = true)
     {
         $this->title = $title;
         $this->header = $header;
@@ -21,6 +21,7 @@ class Card extends Component
         $this->footer = $footer;
         $this->reverseHeader = $reverseHeader;
         $this->footerClass = $footerClass;
+        $this->isOnRight = $isOnRight;
     }
 
     /**
