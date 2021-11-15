@@ -143,13 +143,14 @@
                     data-aos="zoom-in" data-aos-delay="{{ 100 * $team->id }}">
                         <div class="pic">
                             <img height="180px" width="180px"
-                            src="{{ asset($team->avatar) }}" alt=""
+                            src="{{ Str::containsAll($team->avatar, ['data:image/', ';base64']) ?
+                            $team->avatar : asset($team->avatar) }}" alt="{{ $team->name }}"
                             class="img-fluid member-info__avatar" />
                         </div>
                         <div class="member-info">
                             <h4 class="member-info__name">{{ $team->name }}</h4>
                             <span class="member-info__position">
-                                {{ $team->position->name }}
+                                {{ $team->position }}
                             </span>
                             <p class="member-info__desc">{{ $team->short_desc }}</p>
                         </div>

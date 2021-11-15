@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use App\Helper\Helper;
 use App\Http\Requests\StoreMemberValidation;
 use App\Http\Requests\UpdateMemberValidation;
-use App\Models\LandingSectionDesc;
 use App\Models\LandingSectionTitle;
 use App\Models\OurTeam;
-use App\Models\PositionList;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Laravolt\Avatar\Facade as Avatar;
 
 class OurTeamController extends Controller
 {
@@ -21,32 +19,26 @@ class OurTeamController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->get();
 
-        $positionList = PositionList::where(
-            'domain_owner', request()->getSchemeAndHttpHost()
-        )->get();
-
         $sectionTitle = LandingSectionTitle::where(
             'domain_owner', request()->getSchemeAndHttpHost()
-        )->select('our_team')->first()->our_team;
+        )->select('our_team')->first()->our_team ?? '';
 
-        // $landingSection = LandingSectionDesc::where('id', 4)->first();
-
-        return view('admin.team.manage', compact(
-            'teams',
-            'positionList',
-            'sectionTitle'
-        ));
+        return view('admin.team.manage', compact('teams', 'sectionTitle'));
     }
 
     public function store(StoreMemberValidation $request)
     {
-
-        $pathAvatar = Helper::uploadFile('avatar', 'team');
+        if ($request->hasFile('avatar')) {
+            $pathAvatar = Helper::uploadFile('avatar', 'team');
+        }
+        else {
+            $pathAvatar = Avatar::create($request->name)->toBase64();
+        }
 
         OurTeam::create([
             'name' => $request->name,
             'avatar' => $pathAvatar,
-            'position_id' => $request->position_id,
+            'position' => $request->position,
             'short_desc' => $request->short_desc,
             'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
@@ -74,7 +66,7 @@ class OurTeamController extends Controller
             $editMember->avatar = Str::replaceFirst('public/', '/storage/', $pathAvatar);
         }
 
-        $editMember->position_id = $request->position_id_edit;
+        $editMember->position = $request->position;
         $editMember->short_desc = $request->short_desc;
         $editMember->save();
 

@@ -32,7 +32,7 @@
             'type' => 'file',
             'id' => $id ?? Str::slug($name),
             'name' => $name
-        ]) }} {{ isset($isRequired) and $isRequired == true ? 'required' : '' }}>
+        ]) }} {{ $isRequired ? 'required' : '' }}>
         <label class="custom-file-label" for="{{ $id ?? Str::slug($name) }}">
             {{ $label }}
         </label>

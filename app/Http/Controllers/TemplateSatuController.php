@@ -55,8 +55,6 @@ class TemplateSatuController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
 
-
-
         $totalOurService = $this->getCommonContent()[0]->count();
         $ourService = $this->getCommonContent()[0]->get();
 

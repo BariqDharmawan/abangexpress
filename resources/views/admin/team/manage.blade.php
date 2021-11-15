@@ -29,14 +29,15 @@
                 :reverse-header="true" :is-on-right="false"
                 footer-class="d-flex justify-content-between bg-transparent">
                     <x-slot name="header">
-                        <img src="{{ asset($person->avatar) }}"
+                        <img src="{{ Str::containsAll($person->avatar, ['data:image/', ';base64']) ?
+                        $person->avatar : asset($person->avatar) }}"
                         height="90px" width="90px"
                         class="rounded-circle mx-auto d-block object-cover mb-3"
                         alt="{{ $person->name }}">
                     </x-slot>
 
                     <p class="card-text font-weight-bold text-info">
-                        {{ $person->position->name }}
+                        {{ $person->position }}
                     </p>
                     <small>
                         Deskripsi singkat <br> {{ $person->short_desc }}
@@ -92,7 +93,7 @@
             heading="Ubah info {{ $person->name }}">
             @include('admin.team.form', [
                 'action' => route('admin.team.update', $person->id),
-                'data' => $person
+                'data' => $person,
             ])
         </x-admin.modal>
 

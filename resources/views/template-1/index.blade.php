@@ -77,10 +77,11 @@
                                     'template1/img/quote-sign-right.png'
                                 ) }}" class="quote-sign-right" alt="">
                             </p>
-                            <img src="{{ asset($team->avatar) }}"
-                            class="testimonial-img" alt="">
+                            <img src="{{ Str::containsAll($team->avatar, ['data:image/', ';base64']) ?
+                            $team->avatar : asset($team->avatar) }}"
+                            class="testimonial-img" alt="{{ $team->name }}" height="90px" width="90px">
                             <h3>{{ $team->name }}</h3>
-                            <h4>{{ $team->position->name }}</h4>
+                            <h4>{{ $team->position }}</h4>
                         </div>
                     </div>
                     @endforeach

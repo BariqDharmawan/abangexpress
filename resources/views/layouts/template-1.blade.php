@@ -31,7 +31,7 @@
 
             <div id="logo">
                 <h1 class="fs-3">
-                    @isset($aboutUs)
+                    @isset($aboutUs->our_name)
                     <a href="{{ url('/') }}">
                         {{ strtok($aboutUs->our_name, ' ') }}
                         <span>
