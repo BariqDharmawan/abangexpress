@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Helper\Helper;
 use App\Models\OurTeam;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Storage;
 
 class OurTeamFactory extends Factory
 {
@@ -32,12 +32,9 @@ class OurTeamFactory extends Factory
                 $avatarPath . '3.jpg',
                 $avatarPath . '4.jpg'
             ]),
-            'position_id' => $this->faker->numberBetween(1, 4),
+            'position' => $this->faker->randomElement(['CTO', 'CEO', 'Freelancer', 'Designer']),
             'short_desc' => $this->faker->sentence(3),
-            'domain_owner' => $this->faker->unique(true)->randomElement([
-                'http://127.0.0.1:8000',
-                'http://127.0.0.1:9000'
-            ])
+            'domain_owner' => $this->faker->unique(true)->randomElement(Helper::DUMMY_DOMAINS)
         ];
     }
 }

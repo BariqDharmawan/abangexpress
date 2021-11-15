@@ -12,13 +12,8 @@ class OurTeam extends Model
     protected $fillable = [
         'name',
         'avatar',
-        'position_id',
+        'position',
         'short_desc',
         'domain_owner'
     ];
-
-    public function position()
-    {
-        return $this->belongsTo('App\Models\PositionList', 'position_id');
-    }
 }

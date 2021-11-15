@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Rules\AlphaSpaceRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreMemberValidation extends FormRequest
 {
@@ -18,8 +17,8 @@ class StoreMemberValidation extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:60', new AlphaSpaceRule],
-            'avatar' => ['required', 'image', 'max:2000'],
-            'position_id' => ['required', 'integer' ,'exists:position_list,id'],
+            'avatar' => ['sometimes', 'image', 'max:2000'],
+            'position' => ['required', 'string', 'max:15'],
             'short_desc' => ['required', 'string', 'min:8', 'max:50']
         ];
     }

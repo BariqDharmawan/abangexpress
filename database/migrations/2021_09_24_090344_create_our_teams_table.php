@@ -16,8 +16,8 @@ class CreateOurTeamsTable extends Migration
         Schema::create('our_teams', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('avatar');
-            $table->unsignedInteger('position_id');
+            $table->text('avatar');
+            $table->string('position', 15);
             $table->string('short_desc');
             $table->string('domain_owner');
             $table->timestamps();
