@@ -3,10 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Helper\Helper;
-use App\Models\OurSocial;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Arr;
-use Illuminate\Validation\Rule;
 
 class UpdateSocialMediaValidation extends FormRequest
 {
