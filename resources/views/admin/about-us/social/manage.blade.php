@@ -69,6 +69,9 @@
             <x-admin.input label="Username" name="username" id="add-social-username"
             placeholder="Example: @bariqdharmawans" required />
 
+            <x-admin.input label="Link" name="link" type="url" id="link"
+            placeholder="Example: https://www.youtube.com/c/BenFosterTheCyclingGK" required />
+
             <div class="d-flex flex-wrap mb-3">
                 <p class="d-block w-100">Pilih icon</p>
                 @foreach ($listIcon as $icon)

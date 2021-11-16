@@ -35,6 +35,7 @@ class StoreSocialMediaValidation extends FormRequest
 
         return [
             'icon' => ['required', 'string', 'starts_with:fa', 'min:4'],
+            'link' => ['required', 'url'],
             'platform' => [
                 'required',
                 'in:' . implode(',', Helper::getListSocialPlatform()),

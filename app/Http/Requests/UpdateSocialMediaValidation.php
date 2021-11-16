@@ -26,9 +26,10 @@ class UpdateSocialMediaValidation extends FormRequest
      * @return array
      */
     public function rules()
-    {   
+    {
         return [
             'icon' => ['sometimes', 'string', 'starts_with:fa', 'min:4'],
+            'link' => ['required', 'url'],
             'platform' => [
                 'required',
                 'in:' . implode(',', Helper::getListSocialPlatform())

@@ -37,7 +37,7 @@ class OurSocialController extends Controller
             'icon' => $request->icon,
             'platform' => $platform,
             'username' => $username,
-            'link' => Helper::generateSocialLink($username, $platform),
+            'link' => $request->link,
             'domain_owner' => request()->getSchemeAndHttpHost()
         ]);
 
@@ -67,7 +67,7 @@ class OurSocialController extends Controller
         $updateSocial->icon = $request->icon;
         $updateSocial->platform = $platform;
         $updateSocial->username = $username;
-        $updateSocial->link = Helper::generateSocialLink($username, $platform);
+        $updateSocial->link = $request->link;
         $updateSocial->save();
 
         //todo: remove old icon after update

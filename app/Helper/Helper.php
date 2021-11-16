@@ -21,27 +21,6 @@ class Helper
         return $platforms;
     }
 
-    public static function generateSocialLink(string $username, $platform)
-    {
-        $linkPlatform = '';
-
-        $socialMedias = self::getJson('social-media.json', true);
-        $pickedPlatform = Arr::first(
-            self::getListSocialPlatform(), function ($value, $key) use($platform) {
-                return $value === $platform;
-            }
-        );
-
-        //get link platform based on platform name
-        $linkPlatform = Arr::first(
-            $socialMedias, function ($socialMedia, $key) use ($pickedPlatform) {
-                return $socialMedia['platform'] === $pickedPlatform;
-            }
-        );
-
-        return $linkPlatform['link'] . '/' . $username;
-    }
-
     public static function getListSocialLink()
     {
         $socialMedia = self::getJson('social-media.json', true);
