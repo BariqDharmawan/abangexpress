@@ -72,8 +72,8 @@ class Helper
     public static function getKeyApiArray()
     {
         return [
-            'akun' => 'AAX0113',
-            'key' => 'e0b57e0405cf98a46ee1e7acfeceaca6'
+            'akun' => auth()->user()->code_api,
+            'key' => auth()->user()->token_api
         ];
     }
 
