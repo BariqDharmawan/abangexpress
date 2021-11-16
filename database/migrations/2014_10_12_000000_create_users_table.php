@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('code_api')->nullable();
             $table->string('token_api')->nullable();
             $table->string('lt', 30)->nullable();
+            $table->boolean('is_locked')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -102,6 +102,20 @@
                     </ul>
                 </nav>
                 <main class="px-2">
+                    @if (session('error'))
+                    <div class="col-12">
+                        <x-admin.alert-danger class="is-not-dismissable">
+                            <a href="https://web.whatsapp.com/send?phone={{ config('app.wa_ax') }}"
+                            target="_blank" class="d-none d-lg-inline">
+                                klik untuk menghubungi admin
+                            </a>
+                            <a href="https://api.whatsapp.com/send?phone={{ config('app.wa_ax') }}"
+                            target="_blank" class="d-inline d-lg-none">
+                                klik untuk menghubungi admin
+                            </a>
+                        </x-admin.alert-danger>
+                    </div>
+                    @endif
                     @yield('content')
                 </main>
             </div>

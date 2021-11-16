@@ -27,7 +27,8 @@ class User extends Authenticatable
         'domain_owner',
         'code_api',
         'token_api',
-        'lt'
+        'lt',
+        'is_locked'
     ];
 
     /**
@@ -49,6 +50,15 @@ class User extends Authenticatable
     public function templateChoosen()
     {
         return $this->hasOne(TemplateChoosen::class);
+    }
+
+    public static function lockUser()
+    {
+        if (!auth()->user()->is_locked) {
+            auth()->user()->update([
+                'is_locked' => true
+            ]);
+        }
     }
 
 }

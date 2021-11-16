@@ -5,7 +5,7 @@ $(document).ready(function () {
     $("select").parents('.form-group').find('> label').removeClass('form-label--required')
     $("select[required]").parents('.form-group').find('> label').addClass('form-label--required')
 
-    $(".alert").delay(2000).fadeOut('slow')
+    $(".alert:not(.is-not-dismissable)").delay(3500).fadeOut('slow')
 
     $(".not-allow-space").on('input', function(e) {
         this.value = this.value.replace(/ /g, '')
