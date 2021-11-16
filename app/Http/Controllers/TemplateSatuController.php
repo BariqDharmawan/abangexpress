@@ -27,18 +27,29 @@ class TemplateSatuController extends Controller
         $ourBranch = OurBranch::where('domain_owner', request()->getSchemeAndHttpHost());
         $faqs = Faq::where('domain_owner', request()->getSchemeAndHttpHost());
 
-        $galleries = Gallery::where(
+        $totalGalleries = Gallery::where(
             'domain_owner', request()->getSchemeAndHttpHost()
-        );
+        )->count();
 
-        return [$ourService, $ourTeam, $ourBranch, $faqs, $galleries];
+        $totalOurContact = OurContact::where(
+            'domain_owner', request()->getSchemeAndHttpHost()
+        )->count();
+
+        $menus = Helper::getJson('template-1-menu.json');
+        $menus = collect($menus);
+
+        $menus = Helper::removeMenuIfContentEmpty($menus, $ourTeam->count(), '/#our-team');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $ourService->count(), '/#services');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $ourBranch->count(), '/#our-branch');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $faqs->count(), '/#faq');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $totalGalleries, '/gallery');
+        $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurContact, '/#contact');
+
+        return [$ourService, $ourTeam, $ourBranch, $faqs, $menus];
     }
 
     public function index(Request $request)
     {
-        $menus = Helper::getJson('template-1-menu.json');
-        $menus = collect($menus);
-
         $sectionTitle = LandingSectionTitle::where(
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
@@ -55,41 +66,21 @@ class TemplateSatuController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->first();
 
-        $totalOurService = $this->getCommonContent()[0]->count();
         $ourService = $this->getCommonContent()[0]->get();
-
-        $totalOurTeam = $this->getCommonContent()[1]->count();
         $ourTeam = $this->getCommonContent()[1]->get();
-
-        $totalOurBranch = $this->getCommonContent()[2]->count();
         $ourBranch = $this->getCommonContent()[2]->get();
-
-        $totalFaqs = $this->getCommonContent()[3]->count();
         $faqs = $this->getCommonContent()[3]->get();
 
-        $totalGallery = $this->getCommonContent()[4]->count();
-
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurTeam, '/#our-team');
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurService, '/#services');
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurBranch, '/#our-branch');
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalFaqs, '/#faq');
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalGallery, '/gallery');
-
-        $ourContact = OurContact::where(
-            'domain_owner', request()->getSchemeAndHttpHost()
-        )->first();
+        $menus = $this->getCommonContent()[4];
 
         return view('template-1.index', compact(
             'heroCarousel', 'menus', 'aboutUs', 'sectionDesc', 'faqs',
-            'ourService', 'ourTeam', 'ourContact', 'sectionTitle', 'ourBranch'
+            'ourService', 'ourTeam', 'sectionTitle', 'ourBranch'
         ));
     }
 
     public function aboutUs()
     {
-        $menus = Helper::getJson('template-1-menu.json');
-        $menus = collect($menus);
-
         $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())->first();
 
         $sectionTitle = LandingSectionTitle::where(
@@ -99,26 +90,13 @@ class TemplateSatuController extends Controller
             'domain_owner', request()->getSchemeAndHttpHost()
         )->select('first_desc_about_us')->first()->first_desc_about_us;
 
-        $totalOurService = $this->getCommonContent()[0]->count();
-        $totalOurTeam = $this->getCommonContent()[1]->count();
-        $totalOurBranch = $this->getCommonContent()[2]->count();
-        $totalFaqs = $this->getCommonContent()[3]->count();
-        $totalGallery = $this->getCommonContent()[4]->count();
-
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurService, '/#our-team');
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurTeam, '/#services');
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurBranch, '/#our-branch');
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalFaqs, '/#faq');
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalGallery, '/gallery');
+        $menus = $this->getCommonContent()[4];
 
         return view('template-1.about', compact('menus', 'aboutUs', 'sectionTitle', 'sectionDesc'));
     }
 
     public function gallery()
     {
-        $menus = Helper::getJson('template-1-menu.json');
-        $menus = collect($menus);
-
         $galleryImg = Gallery::where([
             ['domain_owner', request()->getSchemeAndHttpHost()],
             ['img', '!=', null]
@@ -135,15 +113,7 @@ class TemplateSatuController extends Controller
 
         $aboutUs = AboutUs::where('domain_owner', request()->getSchemeAndHttpHost())->select('our_name')->first();
 
-        $totalOurService = $this->getCommonContent()[0]->count();
-        $totalOurTeam = $this->getCommonContent()[1]->count();
-        $totalOurBranch = $this->getCommonContent()[2]->count();
-        $totalFaqs = $this->getCommonContent()[3]->count();
-
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurService, '/#our-team');
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurTeam, '/#services');
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalOurBranch, '/#our-branch');
-        $menus = Helper::removeMenuIfContentEmpty($menus, $totalFaqs, '/#faq');
+        $menus = $this->getCommonContent()[4];
 
         return view('template-1.gallery', compact(
             'menus', 'galleryYoutube', 'galleryImg', 'sectionTitle', 'aboutUs'

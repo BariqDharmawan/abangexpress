@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\AboutUs;
+use App\Models\OurContact;
 use App\Models\OurSocial;
 use App\Models\TemplateChoosen;
 use Illuminate\Support\Facades\View;
@@ -39,9 +40,14 @@ class AppServiceProvider extends ServiceProvider
                 'domain_owner', request()->getSchemeAndHttpHost()
             )->first();
 
+            $ourContact = OurContact::where(
+                'domain_owner', request()->getSchemeAndHttpHost()
+            )->first();
+
             View::share('ourName', $ourName);
             View::share('ourSocial', $ourSocial);
             View::share('templateChoosen', $templateChoosen);
+            View::share('ourContact', $ourContact);
         } catch (\Throwable $th) {}
     }
 }

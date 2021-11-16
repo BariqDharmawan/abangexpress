@@ -6,20 +6,18 @@ use Illuminate\View\Component;
 
 class ListGroupSimple extends Component
 {
-    public $icon, $text, $link, $subtext, $subtextClass;
-    
+    public $icon, $text, $link;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($icon, $text, $link, $subtext, $subtextClass)
+    public function __construct($icon, $text, $link)
     {
         $this->icon = $icon;
         $this->text = $text;
         $this->link = $link;
-        $this->subtext = $subtext;
-        $this->subtextClass = $subtextClass;
     }
 
     /**

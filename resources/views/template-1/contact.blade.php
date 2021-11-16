@@ -6,18 +6,18 @@
 
             {{-- get contact using ajax --}}
             <div class="col-md-4">
-                <x-template1.list-group-simple icon="bi-geo-alt" id="location" text="" subtext="" link=""
-                    class="contact-address" subtext-class="contact-value" />
+                <x-template1.list-group-simple icon="bi-geo-alt" id="location"
+                text="{{ $ourContact->address }}" link="{{ $ourContact->link_address }}" />
             </div>
 
             <div class="col-md-4">
-                <x-template1.list-group-simple icon="bi-phone" id="phone" text="" subtext="" link=""
-                    class="contact-phone" subtext-class="contact-value" />
+                <x-template1.list-group-simple icon="bi-phone" id="phone" text="{{ $ourContact->telephone }}"
+                link="tel:{{ $ourContact->telephone }}" />
             </div>
 
             <div class="col-md-4">
-                <x-template1.list-group-simple icon="bi-envelope" id="email" text="" subtext="" link=""
-                    class="contact-email" subtext-class="contact-value" />
+                <x-template1.list-group-simple icon="bi-envelope" id="email" text="{{ $ourContact->email }}"
+                link="mailto:{{ $ourContact->email }}" />
             </div>
             {{-- end of that --}}
 
