@@ -31,7 +31,7 @@ class OurBranchController extends Controller
         OurBranch::create([
             'name' => $request->name,
             'icon' => $this->uploadIcon($request),
-            'telephone' => $request->telephone,
+            'telephone' => $request->telephone ?? null,
             'address' => $request->address,
             'domain_owner' => request()->getSchemeAndHttpHost()
         ]);

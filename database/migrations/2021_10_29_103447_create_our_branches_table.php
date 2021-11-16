@@ -17,7 +17,7 @@ class CreateOurBranchesTable extends Migration
             $table->increments('id');
             $table->string('name', 100);
             $table->string('icon');
-            $table->string('telephone', 36);
+            $table->string('telephone', 36)->nullable();
             $table->mediumText('address');
             $table->string('domain_owner', 45);
             $table->timestamps();

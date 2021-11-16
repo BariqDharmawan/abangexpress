@@ -59,8 +59,14 @@
         <form action="{{ route('admin.branch.store') }}" method="POST"
         enctype="multipart/form-data">
             @csrf
-            <x-admin.input name="name" label="Nama Mitra" required />
-            <x-admin.input name="telephone" class="only-number" type="tel" inputmode="numeric" label="Nomor Telepon" required />
+            <x-admin.input name="name" label="Nama Mitra" minlength="2" maxlength="100" required />
+            <x-admin.input name="telephone" class="only-number" type="tel"
+            label="Nomor Telepon" pattern=".{8,15}" maxlength="15" inputmode="numeric"
+            title="Nomor telephone harus valid (minimal 8 - 15 karakter)" text-addon="+62">
+                <small class="text-black-50">
+                    Mohon gunakan nomor telepon valid, dengan jumlah karakter 8-15 dan hanya mengandung angka
+                </small>
+            </x-admin.input>
             <x-admin.input name="address" type="textarea" label="Alamat" required />
             <x-admin.input name="icon" type="file" accept="image/*" label="Pilih Logo" required />
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -77,15 +83,20 @@
 
                 <x-admin.input name="name" value="{{ $branch->name }}"
                 label="Nama Mitra" required />
+
                 <x-admin.input name="telephone" class="only-number" type="tel"
-                value="{{ $branch->telephone }}" label="Nomor Telepon" required />
-                <x-admin.input name="address" type="textarea"
-                value="{{ $branch->address }}" label="Alamat" required />
-                <x-admin.input name="icon" type="file" label="Ganti Logo">
-                    <small class="text-dark">
-                        atau kosongkan, jika ingin menggunakan logo default
+                label="Nomor Telepon" pattern=".{8,15}" maxlength="15"
+                value="{{ $branch->telephone }}" inputmode="numeric"
+                title="Nomor telephone harus valid (minimal 8 - 15 karakter)" text-addon="+62">
+                    <small class="text-black-50">
+                        Mohon gunakan nomor telepon valid, dengan jumlah karakter 8-15 dan hanya mengandung angka
                     </small>
                 </x-admin.input>
+
+                <x-admin.input name="address" type="textarea"
+                value="{{ $branch->address }}" label="Alamat" required />
+
+                <x-admin.input name="icon" type="file" label="Ganti Logo" accept="image/*" />
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

@@ -71,7 +71,6 @@ class AboutUsController extends Controller
 
     public function update(IdentityValidation $request)
     {
-
         if ($request->hasFile('cover_vision_mission')) {
             $pathcoverVisionMission = Helper::uploadFile('cover_vision_mission', 'cover-vision-mission');
             AboutUs::updateOrCreate(

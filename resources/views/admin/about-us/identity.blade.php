@@ -120,8 +120,7 @@
 
             <div class="form-group">
                 @isset($identity->cover_vision_mission)
-                <img src="{{ asset('storage/' .
-                    str_replace('public/', '', $identity->cover_vision_mission)) }}"
+                <img src="{{ asset($identity->cover_vision_mission) }}"
                     height="100px" alt="" class="mb-3">
                 @endisset
                     <div class="custom-file">
