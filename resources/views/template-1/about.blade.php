@@ -8,8 +8,7 @@
         <div class="row">
             <div class="col-12 about-img justify-content-center d-flex">
                 @isset($aboutUs)
-                <img height="350px" src="{{ asset('storage/' .
-                str_replace('public/', '', $aboutUs->cover_vision_mission)) }}" alt="">
+                <img height="350px" src="{{ asset(str_replace('public/', '', $aboutUs->cover_vision_mission)) }}" alt="">
                 @endisset
             </div>
 
