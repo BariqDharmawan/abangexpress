@@ -189,26 +189,20 @@
                     name="package_weight" id="package-weight" required />
                 </div>
             </div>
-            {{-- @if(strpos(strtolower($akun),'arm') !== false) --}}
+
             <div class="col-12 @if(old('recipient_country') == 'TAIWAN') d-block @else d-none @endif" id="select-courier">
                 <x-shipment.input type="select"
                 placeholder="Pilih kurir" class="form-control"
                 name="courier" id="courier">
                     @if (old('recipient_country') == 'TAIWAN')
-                        <option value="default" @if(old('courier') == 'default') @endif>
-                            Default
+                        @foreach ($listCourierTaiwan as $courier)
+                        <option value="default" @if(old('courier') == $courier) selected @endif>
+                            {{ $courier }}
                         </option>
-                        <option value="hct" @if(old('courier') == 'hct') @endif>
-                            HCT
-                        </option>
-                        <option value="heimao" @if(old('courier') == 'heimao') @endif>
-                            Heimao
-                        </option>
+                        @endforeach
                     @endif
                 </x-shipment.input>
             </div>
-            {{-- @else
-            @endif --}}
 
             <div class="col-12">
                 <x-shipment.input type="select"

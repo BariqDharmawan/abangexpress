@@ -53,8 +53,21 @@ class BookingOrderController extends Controller
 
         $akun=$user->code_api;
 
+        $listCourierTaiwan = null;
+        if (old('recipient_country') == 'TAIWAN') {
+            $listCourierTaiwan = Http::retry(10, 0)->withOptions(['CURLOPT_RETURNTRANSFER' => true])->acceptJson()->post(
+                'https://res.abangexpress.id/shipments/pull/zipcode/', [
+                    'akun' => auth()->user()->code_api,
+                    'key' => auth()->user()->token_api,
+                    'country' => 'TAIWAN',
+                    'zipcode' => old('recipient_zipcode')
+                ]
+            );
+            $listCourierTaiwan = json_decode($listCourierTaiwan)->response[0]->courier;
+        }
+
         return view('shipment.order.book', compact(
-            'title', 'prevRecipient','countryList','commodityList','akun'
+            'title', 'prevRecipient','countryList','commodityList','akun','listCourierTaiwan'
         ));
     }
 
