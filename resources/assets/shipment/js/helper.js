@@ -28,6 +28,8 @@ const isOnFormBookInvoicePage = (window.location.pathname == '/shipping/order/bo
 
 const isAlreadyFillFormBook = localStorage.getItem('sender_name') ? true : false
 
+const hasNoValidationError = $(".error-backend").length == 0
+
 export {
     removePath,
     previewImgUpload,
@@ -35,5 +37,6 @@ export {
     isOnFormBookInvoicePage,
     isAlreadyFillFormBook,
     regenerateDatatableAjax,
-    isOnFormBookPage
+    isOnFormBookPage,
+    hasNoValidationError
 }

@@ -62,7 +62,9 @@
                 data-value-to-check="TAIWAN" data-url-api="/shipping/check-zipcode"
                 data-input-related="#recipient-zipcode"
                 name="recipient_country" required>
-                    <option value="TAIWAN">TAIWAN</option>
+                    <option value="TAIWAN" @if(old('recipient_country') == "TAIWAN") selected @endif>
+                        TAIWAN
+                    </option>
                 </x-shipment.input>
             </div>
             @else
@@ -73,7 +75,8 @@
                 data-input-related="#recipient-zipcode"
                 name="recipient_country" required>
                     @foreach ($countryList as $country)
-                        <option value="{{ $country->tujuan }}">
+                        <option value="{{ $country->tujuan }}"
+                        @if(old('recipient_country') == $country->tujuan) selected @endif>
                             {{ $country->alias }}
                         </option>
                     @endforeach
@@ -128,11 +131,15 @@
                                 min="1"
                                 name="package_length"
                                 class="form-control"
+                                value="{{ old('package_length') }}"
                                 id="package-length" required />
                                 <label class="form-label mb-0" for="package-length">
                                     Panjang
                                 </label>
                             </div>
+                            @error('package_length')
+                                <small class="text-danger d-block mt-2">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -143,11 +150,15 @@
                                 min="1"
                                 name="package_width"
                                 class="form-control"
+                                value="{{ old('package_width') }}"
                                 id="package-width" required />
                                 <label class="form-label mb-0" for="package-width">
                                     Lebar
                                 </label>
                             </div>
+                            @error('package_width')
+                                <small class="text-danger d-block mt-2">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -158,11 +169,15 @@
                                 min="1"
                                 name="package_height"
                                 class="form-control"
+                                value="{{ old('package_height') }}"
                                 id="package-height" required />
                                 <label class="form-label mb-0" for="package-height">
                                     Tinggi
                                 </label>
                             </div>
+                            @error('package_height')
+                                <small class="text-danger d-block mt-2">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -175,10 +190,22 @@
                 </div>
             </div>
             {{-- @if(strpos(strtolower($akun),'arm') !== false) --}}
-            <div class="col-12 d-none" id="select-courier">
+            <div class="col-12 @if(old('recipient_country') == 'TAIWAN') d-block @else d-none @endif" id="select-courier">
                 <x-shipment.input type="select"
                 placeholder="Pilih kurir" class="form-control"
-                name="courier" id="courier"></x-shipment.input>
+                name="courier" id="courier">
+                    @if (old('recipient_country') == 'TAIWAN')
+                        <option value="default" @if(old('courier') == 'default') @endif>
+                            Default
+                        </option>
+                        <option value="hct" @if(old('courier') == 'hct') @endif>
+                            HCT
+                        </option>
+                        <option value="heimao" @if(old('courier') == 'heimao') @endif>
+                            Heimao
+                        </option>
+                    @endif
+                </x-shipment.input>
             </div>
             {{-- @else
             @endif --}}
@@ -188,7 +215,8 @@
                 placeholder="Pilh jenis paket"
                 name="package_type" required>
                     @foreach ($commodityList as $commodity)
-                        <option value="{{ $commodity->commodity }}">
+                        <option value="{{ $commodity->commodity }}"
+                        @if(old('package_type') == $commodity->commodity) selected @endif>
                             {{ $commodity->commodity }}
                         </option>
                     @endforeach

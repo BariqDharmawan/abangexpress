@@ -69,6 +69,7 @@ class Helper
     {
         return collect($res)->map(function ($item, $key){
             return [
+                'id' => $item->id,
                 'noresi' => $item->noresi,
                 'pengirim' => $item->pengirim,
                 'telepon' => $item->telepon,

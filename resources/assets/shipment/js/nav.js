@@ -1,4 +1,4 @@
-import { isAlreadyFillFormBook, isOnFormBookPage } from "./helper";
+import { isAlreadyFillFormBook, isOnFormBookPage, hasNoValidationError } from "./helper";
 
 const goToInvoicePage = '/shipping/order/book/invoice';
 
@@ -6,6 +6,7 @@ if (isAlreadyFillFormBook) {
     $("#menu-add-new-order").attr('href', goToInvoicePage)
 }
 
-if (isOnFormBookPage && isAlreadyFillFormBook) {
+console.log(`hasNoValidationError: ${hasNoValidationError}`)
+if (hasNoValidationError && isOnFormBookPage && isAlreadyFillFormBook) {
     window.location.href = goToInvoicePage
 }

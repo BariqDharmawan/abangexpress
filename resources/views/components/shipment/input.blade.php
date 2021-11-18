@@ -129,7 +129,7 @@
 
     @if ($type == 'file' and $inputHidden != null)
         @error($inputHidden)
-            <small class="text-danger d-block mt-2">
+            <small class="text-danger d-block mt-2 error-backend">
                 {{ $message }}
             </small>
         @else
@@ -142,7 +142,7 @@
         @enderror
     @else
         @error($name)
-            <small class="text-danger d-block mt-2">{{ $message }}</small>
+            <small class="text-danger d-block mt-2 error-backend">{{ $message }}</small>
         @else
             @isset($smallText)
             <small class="text-black-50 helper-input" data-default-helper="{{ $smallText }}">{{ $smallText }}</small>
