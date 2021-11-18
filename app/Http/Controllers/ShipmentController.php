@@ -26,8 +26,8 @@ class ShipmentController extends Controller
 
         $res = json_decode($response);
 
-        $isAccountResponseLocked = isset($res->response->nama) and Str::startsWith($res->response->nama, '(LOCK)');
-        if ($isAccountResponseLocked) {
+        $isAccountResponseLocked = Str::startsWith($res->response->nama, '(LOCK)');
+        if (isset($res->response->nama) and $isAccountResponseLocked) {
             User::lockUser();
             return redirect()->back()->with('error', 'Akun kamu terkunci, silahkan hubungi admin. ');
         }
