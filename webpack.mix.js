@@ -1,16 +1,5 @@
 const mix = require('laravel-mix');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
-
 const template1Path = 'resources/assets/template1'
 const template2Path = 'resources/assets/template2'
 const templateAdminPath = 'resources/assets/admin'
@@ -19,7 +8,6 @@ const templateShipmentPath = 'resources/assets/shipment'
 //asset for admin
 mix.scripts([
         `${templateAdminPath}/template/vendor/jquery-easing/jquery.easing.min.js`,
-        `${templateAdminPath}/template/vendor/bootstrap/js/bootstrap.bundle.min.js`,
         `${templateAdminPath}/template/vendor/chart.js/Chart.min.js`,
         `${templateAdminPath}/template/vendor/datatables/jquery.dataTables.min.js`,
         `${templateAdminPath}/template/vendor/datatables/dataTables.bootstrap4.min.js`,

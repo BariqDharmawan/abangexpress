@@ -8,7 +8,7 @@
 @import '~glightbox/dist/css/glightbox.min.css';
 
 @import './../template/css/sb-admin-2.min.css';
-@import './../template/vendor/bootstrap/css/bootstrap.min.css';
+@import url(https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css);
 @import './../template/vendor/datatables/dataTables.bootstrap4.min.css';
 @import './card';
 @import './helper';
