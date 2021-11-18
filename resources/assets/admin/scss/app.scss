@@ -4,11 +4,12 @@
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/brands';
 @import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~quill/dist/quill.snow.css';
+@import '~glightbox/dist/css/glightbox.min.css';
 
 @import './../template/css/sb-admin-2.min.css';
 @import './../template/vendor/bootstrap/css/bootstrap.min.css';
 @import './../template/vendor/datatables/dataTables.bootstrap4.min.css';
-@import '~quill/dist/quill.snow.css';
-@import '~glightbox/dist/css/glightbox.min.css';
+@import './card';
 @import './helper';
 @import './reset';

@@ -1,0 +1,11 @@
+.card {
+    .card-header > div {
+        margin-left: auto;
+    }
+    &--action-header-center .card-header > div {
+        margin: {
+            left: auto;
+            right: auto;
+        }
+    }
+}

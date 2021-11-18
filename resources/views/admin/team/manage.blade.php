@@ -26,7 +26,7 @@
             @forelse ($teams as $person)
             <div class="col-lg-3 mb-4">
                 <x-admin.card title="{{ Str::words($person->name, 3, '...') }}"
-                :reverse-header="true" :is-on-right="false"
+                :reverse-header="true" class="card--action-header-center"
                 footer-class="d-flex justify-content-between bg-transparent">
                     <x-slot name="header">
                         <img src="{{ Str::containsAll($person->avatar, ['data:image/', ';base64']) ?
